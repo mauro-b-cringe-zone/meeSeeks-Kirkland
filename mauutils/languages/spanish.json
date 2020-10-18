@@ -1,0 +1,11 @@
+{
+	"fun.respects":"`{0}` pago sus respetos. Respetos pagados: {1}",
+	"fun.rate_author":"Te daria un {0}",
+	"fun.rate_self":"Me daria un -1/10",
+	"fun.rate_user":"Le daria a {0} un {1}/10",
+	"fun.plzmsgme":":ok_hand: mira tus mensajes privados.",
+	"fun.nothing":"{0} vaya, te diste cuenta, aunque ni siquiera era tan difícil de encontrar porque pudiste haber visto el código en Github.",
+	"fun.no_emote_found":"No estoy en ningún servidor que tenga ese emoji",
+	"fun.no_reaction_perms":"No tengo el permiso de `Add Reactions`",
+	"fun.invalid_emote":"El emoji especificado es inválido."
+}
