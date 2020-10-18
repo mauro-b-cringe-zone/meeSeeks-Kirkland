@@ -22,7 +22,7 @@ from dataclasses import dataclass
 from discord import Colour
 
 AUTH_HEADER = 'X-RapidAPI-Key'
-AUTH_KEY = 'e30c059be6msh2d5339fdb95e0d6p150aeejsn0b06b619cecb'
+AUTH_KEY = env['COMP_KEY'] # Llave
 BASE_URL = 'https://judge0.p.rapidapi.com'
 PREFIX = '$'
 IDE_LINK = "https://ide.judge0.com/"
@@ -180,7 +180,7 @@ LANGUAGES = {
         'emoji': '<:typescript:662723857643208716>',
         }
    },
-   #TODO make this dictionary based on "array"
+
     "ids": {
         'assembly': 45, 'bash': 46, 'sh': 46,
         'c': 50, 'cpp': 54, 'c++': 54, 'csharp': 51,
@@ -198,12 +198,12 @@ LANGUAGES = {
 @dataclass
 class Emoji:
     """
-    Represents storage for custom and external emojis.
+    Representa el almacenamiento de emojis personalizados y externos.
     """
     class Workers:
         """
-        Represents emojis for workers health check.
-        (command in bot.cogs.information)
+        Representa emojis para el control de salud de los trabajadores.
+        (comando en bot.cogs.information)
         """
         total= "<:total:620744869429641236>"
         available = "<:available:620705066604560405>"
@@ -226,7 +226,7 @@ class Color:
 
 class Execution(commands.Cog):
     """
-    Represents a Cog for executing source codes.
+    Representa un Cog para ejecutar códigos fuente.
     """
 
     def __init__(self, bot):
@@ -249,16 +249,16 @@ class Execution(commands.Cog):
         author_icon: str,
     ):
         """
-        Creates a Discord embed for the submission execution.
+        Crea una incrustación de Discord para la ejecución del envío.
         
-        Includes:
-            Author of the submission.
-            Green or red color of the embed depending on the description.
-            Output (stdout, stderr, compile output)
-            Link for full output (if any)
-            Time and memeroy usage
-            Language name, icon and version.
-            Datetime of the execution.
+        Incluye:
+            Autor de la presentación.
+            Color verde o rojo del incrustado según descripción.
+            Salida (stdout, stderr, compilar salida)
+            Enlace para salida completa (si corresponde)
+            Uso de tiempo y memeroy
+            Nombre, icono y versión del idioma.
+            Fecha y hora de la ejecución.
         """
         color = Colour.green() if description == "Accepted" else Colour.red()
 
@@ -270,47 +270,47 @@ class Execution(commands.Cog):
         embed = Execution.resize_output_for_embed(output, embed, token)
 
         if time:
-            embed.add_field(name="Time", value=f"{time} s")
+            embed.add_field(name="Tiempo", value=f"{time} s")
         if memory:
-            embed.add_field(name="Memory", value=f"{round(memory / 1000, 2)} MB")
+            embed.add_field(name="Memoria", value=f"{round(memory / 1000, 2)} MB")
         embed.set_footer(text=f"{language} | {description}", icon_url=language_icon)
 
         return embed
 
     def __create_how_to_pass_embed(self, lang):
         """
-        Creates a Discord embed guide for passing code.
-        Includes the 3 methods of passing source code.
+        Crea una guía de incrustación de Discord para pasar el código.
+        Incluye los 3 métodos para pasar el código fuente.
         """
-        embed = Embed(title=f"How to pass {lang['version'].split('(')[0]}source code?")
+        embed = Embed(title=f"¿Cómo pasar {lang['version'].split('(')[0]}código fuente?")
 
         embed.set_thumbnail(url=lang['icon'])
         embed.add_field(
-            name="Method 1 (Plain)",
-            value=(f"{PREFIX}{lang['command']}\n" "code"),
+            name="Método 1 (Plain)",
+            value=(f"{PREFIX}{lang['command']}\n" "Codigo"),
             inline=False,
         )
         embed.add_field(
-            name="Method 2 (Code block)",
-            value=(f"{PREFIX}{lang['command']}\n" "\`\`\`code\`\`\`"),
+            name="Método 2 (Code block)",
+            value=(f"{PREFIX}{lang['command']}\n" "\`\`\`Codigo\`\`\`"),
             inline=False,
         )
         embed.add_field(
-            name="Method 3 (Syntax Highlighting)",
-            value=(f"{PREFIX}{lang['command']}\n" f"\`\`\`{lang['command']}\n" "code\`\`\`"),
+            name="Método 3 (Syntax Highlighting)",
+            value=(f"{PREFIX}{lang['command']}\n" f"\`\`\`{lang['command']}\n" "Codigo\`\`\`"),
             inline=False,
         )
         return embed
 
     async def __execute_code(self, ctx, lang, code: Optional[str]):
         """
-        The main method for executing source code from a message.
-        If version check is passed for arg - it sends language version only.
-        The steps for executing code:
-            strips the source code
-            creates and waits for sumbission output
-            if is error it sends the error
-            otherwise it creates an embed for the output and sends it in the same chat
+        El método principal para ejecutar el código fuente de un mensaje.  
+        Si se pasa la verificación de versión para arg, envía solo la versión de idioma.
+        Los pasos para ejecutar el código:
+            quita el código fuente
+            crea y espera la salida de sumbisión
+            si hay error envía el error
+            de lo contrario, crea una inserción para la salida y la envía en el mismo chat
         """
 
         if code == None:
@@ -363,7 +363,7 @@ class Execution(commands.Cog):
     @commands.group(pass_context=True, aliases=list(LANGUAGES['ids'].keys()))
     async def run(self, ctx, *, code: Optional[str]):
         """
-        The main command which handles the code execution process.
+        El comando principal que maneja el proceso de ejecución del código.
         """
         lang_id = LANGUAGES['ids'][str(ctx.invoked_with)]
         lang = LANGUAGES['array'][lang_id]
@@ -371,7 +371,7 @@ class Execution(commands.Cog):
 
         await self.__execute_code(ctx, lang, code)
         # if ctx.invoked_subcommand is None:
-        #     await ctx.wait('Invalid sub command passed...')
+        #     await ctx.wait('Se pasó un subcomando no válido...')
 
     @staticmethod
     def prepare_paylad(source_code: Optional[str],
@@ -392,7 +392,7 @@ class Execution(commands.Cog):
     @staticmethod
     def concat_output(stdout: str, stderr: str, compile_output: str):
         """
-        Concats the output parameters in one output value.
+        Concate los parámetros de salida en un valor de salida.
         """
         output = str()
         for each in (stdout, stderr, compile_output):
@@ -405,21 +405,21 @@ class Execution(commands.Cog):
     @staticmethod
     def resize_output_for_embed(output, embed, token):
         """
-        Resizes the output for the embed if it is too large.
-        Too large if it contains a lot of characters or a lot of new lines.
-        This prevents abuse of large output which annoying for the users in the chat.
+        Cambia el tamaño de la salida para la inserción si es demasiado grande.
+        Demasiado grande si contiene muchos caracteres o muchas líneas nuevas.
+        Esto evita el abuso de salida grande que molesta a los usuarios en el chat.
         """
         if len(output) > 300 or output.count("\n") > 10:
-            embed.description = f"Output too large - [Full output]({IDE_LINK}?{token})"
+            embed.description = f"Salida demasiado grande - [Salida completa](http://maubot.mooo.com/maucompilador/?{token})"
 
             if output.count("\n") > 10:
                 output = "\n".join(output.split("\n")[:10]) + "\n(...)"
             else:
                 output = output[:300] + "\n(...)"
         else:
-            embed.description = f"Edit this code in an online IDE - [here]({IDE_LINK}?{token})"
+            embed.description = f"Edite este código en un IDE en línea - [Aqui](http://maubot.mooo.com/maucompilador/?{token})"
 
-        embed.add_field(name="Output", value=f"```yaml\n{output}```", inline=False)
+        embed.add_field(name="Salida", value=f"```yaml\n{output}```", inline=False)
         return embed
     
     @staticmethod
@@ -467,13 +467,13 @@ class Execution(commands.Cog):
     @staticmethod
     def strip_source_code(code: Optional[str]):
         """
-        Strips the source code from a Discord message.
+        Elimina el código fuente de un mensaje de Discord.
         
-        It strips:
-            code wrapped in backticks ` (one line code)
-            code wrapped in triple backtick ``` (multiline code)
-            code wrapped in triple backticks and
-                 language keyword ```python (syntax highlighting)
+        Despoja:
+            código envuelto en comillas invertidas `(código de una línea)
+            código envuelto en triple backtick `` `(código multilínea)
+            código envuelto en comillas triples y
+                 palabra clave del lenguaje `` python (resaltado de sintaxis)
         """
         code = code.strip("`")
         if re.match(r"\w*\n", code):
