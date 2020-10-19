@@ -42,7 +42,7 @@ class Supreme(commands.Cog):
 
         args, valid_check = parser.parse_args(text)
         if not valid_check:
-            return print(args)
+            return print("[Log] un error: " + args)
 
         inputText = urllib.parse.quote(' '.join(args.input))
         if len(inputText) > 75:

@@ -43,7 +43,7 @@ initial_extensions = [
     'cogs.help',
     'cogs.AFK',
     'cogs.fun.social.nuke',
-    'cogs.moderation',
+    'cogs.moderacion',
     'cogs.lang.execucion'
 ]           
 
@@ -52,13 +52,13 @@ if __name__ == "__main__":
     for extension in initial_extensions:
         try:
             bot.load_extension(extension)
-            print(extension+' ...Si')
+            print("[Cog] " + extension+' ...Hecho')
         except Exception as e:
-            print(f'Se a fallado al cargar todas las extensiones {extension}.', file=sys.stderr)
+            print(f'[Log] Se a fallado al cargar todas las extensiones {extension}.', file=sys.stderr)
             traceback.print_exc()
 
 
 try:
     bot.run(TOKEN)
 except Exception as e:
-    print(f"Error en el login: {e}")
+    print(f"[Log] Error en el login: {e}")

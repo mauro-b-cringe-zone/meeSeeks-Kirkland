@@ -260,10 +260,10 @@ class Execution(commands.Cog):
             Nombre, icono y versión del idioma.
             Fecha y hora de la ejecución.
         """
-        color = Colour.green() if description == "Accepted" else Colour.red()
+        color = Colour.green() if description == "Aceptado" else Colour.red()
 
         embed = Embed(colour=color, timestamp=datetime.utcnow())
-        embed.set_author(name=f"{author_name}'s code execution", icon_url=author_icon)
+        embed.set_author(name=f"Codigo de ejecucion de {author_name}", icon_url=author_icon)
 
 
         output = Execution.concat_output(stdout, stderr, compile_output)
@@ -352,7 +352,7 @@ class Execution(commands.Cog):
                 author_icon=ctx.message.author.avatar_url,
             )
         )
-        if submission["status"]["description"] == "Accepted":
+        if submission["status"]["description"] == "Aceptado":
             await ctx.message.add_reaction(Emoji.Execution.successful)
         else:
             await ctx.message.add_reaction(Emoji.Execution.error)

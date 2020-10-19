@@ -1104,7 +1104,7 @@ def main():
         while run_l1:  
             if dice_a1 != 0:
                 dice_roll = random.randint(1, sides)  # roll
-                print(dice_a1)
+                print("[Log]" + dice_a1)
                 dice_track.append(dice_roll) 
                 dice_a1 -= 1
             else:

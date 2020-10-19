@@ -1,1 +1,36 @@
-{"700812754855919667": {"wallet": 1370, "bank": 98018, "bag": [{"item": "reloj", "amount": 3}, {"item": "teclado", "amount": 1}, {"item": "sarten", "amount": 1}]}, "706825355809259530": {"wallet": 70, "bank": 110}, "540827207468056587": {"wallet": 6, "bank": 0, "bag": [{"item": "sarten", "amount": 1}]}, "653187761414864896": {"wallet": 0, "bank": 0}, "538705464297259009": {"wallet": 0, "bank": 0}}
+{
+    "700812754855919667": {
+        "wallet": 1370,
+        "bank": 98018,
+        "bag": [{
+            "item": "reloj",
+            "amount": 3
+        }, {
+            "item": "teclado",
+            "amount": 1
+        }, {
+            "item": "sarten",
+            "amount": 1
+        }]
+    },
+    "706825355809259530": {
+        "wallet": 70,
+        "bank": 110
+    },
+    "540827207468056587": {
+        "wallet": 6,
+        "bank": 0,
+        "bag": [{
+            "item": "sarten",
+            "amount": 1
+        }]
+    },
+    "653187761414864896": {
+        "wallet": 0,
+        "bank": 0
+    },
+    "538705464297259009": {
+        "wallet": 0,
+        "bank": 0
+    }
+}

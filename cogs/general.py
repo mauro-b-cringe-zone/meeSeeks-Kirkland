@@ -749,7 +749,7 @@ class General(commands.Cog):
                 pass
             await ctx.send(embed=embed)
         except Exception as e:
-            print(e)
+            print("[Log] un error: " + e)
             return await ctx.send(" | ¡No se encontro un pockemon!")
 
     def html2discord(self, text):
@@ -786,7 +786,7 @@ class General(commands.Cog):
             em.set_image(url=data['image']['original'])
             await ctx.send(embed=em)
         except Exception as e:
-            print(e)
+            print("[Log] un error: " + e)
             await ctx.send(' | ¡Oops! Un error...')
 
     def insp(self, url):
@@ -854,7 +854,7 @@ class General(commands.Cog):
                 await ctx.send(embed=discord.Embed(title=f"Letra de {Song}", description=f"**1... 2... 3... 4...**\n\n{data['lyrics']}", colour=color))
             except Exception as e:
                 await ctx.send("Upss... un error. Intenta poner una cancion/artista valido")
-                print(e)
+                print("[Log] un error: " + e)
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)

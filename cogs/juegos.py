@@ -211,7 +211,7 @@ class Games(commands.Cog):
                             board[y][x+1]=":diamonds:"
                             board[y][x+2]=":diamonds:"
                             board[y][x+3]=":diamonds:"
-                        print("winner")
+                        print("[Log] ganador")
                         winner=otherPlayer
                         winningComment = f"{otherPlayer} conectado 4 en una fila horizontal"
                         break

@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import time
 import json
+from discord import guild
 
 color = 0x75aef5 
 
@@ -55,18 +56,32 @@ class Moderation(commands.Cog):
     async def warn(self, ctx, member: discord.Member, *, razon="Sin especificar"):
         with open('./json/warnings.json', 'r') as f:
             warns = json.load(f)
-        if str(member.id) in warns:
-            warns[str(member.id)]["warns"] += 1
-        else:
-            warns[str(member.id)] = {}
-            warns[str(member.id)]["warns"] = 1
-        if warns[str(member.id)]["warns"] == 5:
-            await member.kick(reason="Mas de 5 warniciones")
-            embed = discord.Embed(title="Expulsado", description=f"{member.mention} ha sido expulsado  Razon: Mas de 5 warniciones", colour=color)   
-            return await ctx.send(embed=embed)
+        # print(warns)
+        try:
+            if not str(ctx.guild.id) in warns:
+                warns[str(ctx.guild.id)] = {}
+            if str(member.id) in warns[str(ctx.guild.id)]:
+                warns[str(ctx.guild.id)][str(member.id)]["warns"] += 1
+                warns[str(ctx.guild.id)][str(member.id)]["razones"].append(razon)          
+            else:
+                warns[str(ctx.guild.id)][str(member.id)] = {}
+                warns[str(ctx.guild.id)][str(member.id)]["warns"] = 1
+                warns[str(ctx.guild.id)][str(member.id)]["razones"] = []
+                warns[str(ctx.guild.id)][str(member.id)]["razones"].append(razon)
+        except Exception as e:
+            print(f"[log] Un problema:  {e}")
+        if warns[str(ctx.guild.id)][str(member.id)]["warns"] >= 5:
+            try:
+                await member.kick(reason="Mas de 5 warniciones")
+                embed = discord.Embed(title="Expulsado", description=f"{member.mention} ha sido expulsado  Razon: Mas de 5 warniciones", colour=color)   
+                del warns[str(ctx.guild.id)][str(member.id)]
+                return await ctx.send(embed=embed)
+            except:
+                print('[Log] Un error intentando eliminar a alguien por 5 warniciones')
+                return await ctx.send(f"En error intentando eliminar a {member.mention}, Razon: Mas de 5 warniciones")
         with open("./json/warnings.json","w") as f:
             json.dump(warns,f)    
-        embed = discord.Embed(title="Warnicion", description=f"{member.mention}  Razon: {razon}\n\nLe quedan {5-warns[str(member.id)]['warns']} warniciones", colour=color)   
+        embed = discord.Embed(title="Warnicion", description=f"{member.mention}  Razon: {razon}\n\nLe quedan {5-warns[str(ctx.guild.id)][str(member.id)]['warns']} warniciones", colour=color)   
         await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
@@ -75,11 +90,16 @@ class Moderation(commands.Cog):
     async def unwarn(self, ctx, member: discord.Member):
         with open('./json/warnings.json', 'r') as f:
             warns = json.load(f)
-        if str(member.id) in warns:
-            warns[str(member.id)]["warns"] -= 1
+        if str(member.id) in warns[str(ctx.guild.id)]:
+            warns[str(ctx.guild.id)][str(member.id)]["warns"] -= 1
+            warns[str(ctx.guild.id)][str(member.id)]["razones"].remove(warns[str(ctx.guild.id)][str(member.id)]["razones"][warns[str(ctx.guild.id)][str(member.id)]["warns"]])
+        if warns[str(ctx.guild.id)][str(member.id)]["warns"] == 0:
+            del warns[str(ctx.guild.id)][str(member.id)]
+        if warns[str(ctx.guild.id)] == {}:
+            del warns[str(ctx.guild.id)]
         with open("./json/warnings.json","w") as f:
             json.dump(warns,f)    
-        embed = discord.Embed(title="Warnicion quitado", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan {5-warns[str(member.id)]['warns']} warniciones", colour=color)   
+        embed = discord.Embed(title="Warnicion quitada", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan {5-warns[str(ctx.guild.id)][str(member.id)]['warns']} warniciones, ({ctx.prefix}warnlist @usuario para ver la lista)", colour=color)   
         await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
@@ -90,14 +110,14 @@ class Moderation(commands.Cog):
             member = ctx.author
         with open('./json/warnings.json', 'r') as f:
             warns = json.load(f)
-        embed = discord.Embed(title="Lista de warniciones", description=f"{member.mention}  Tiene", colour=color) 
-        if warns[str(member.id)]["warns"] == 0:
-            return await ctx.send("Este usuario to tiene guarniciones")
-        print(warns[str(member.id)]["warns"])
-        embed.add_field(name="Warniciones", value=f"{warns[str(member.id)]['warns']}", inline=False)
+        embed = discord.Embed(title="Lista de warniciones", description=f"{member.mention}  Tiene:", colour=color) 
+        if not warns[str(ctx.guild.id)][str(member.id)]:
+            return await ctx.send("Este usuario no tiene warniciones")
+        for index in range(0, warns[str(ctx.guild.id)][str(member.id)]["warns"]):
+            embed.add_field(name=index + 1, value="Razon: " + warns[str(ctx.guild.id)][str(member.id)]["razones"][index], inline=False)
         with open("./json/warnings.json","w") as f:
             json.dump(warns,f)    
-        embed.add_field(name="\uFEFF", value="Si tiene 5 warniciones sera expulsado")
+        embed.add_field(name="\uFEFF", value=f"Si tiene 5 warniciones {member.mention} sera expulsado")
         await ctx.send(embed=embed)
 
     @commands.command()
