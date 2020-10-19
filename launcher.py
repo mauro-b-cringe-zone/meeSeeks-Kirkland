@@ -44,7 +44,8 @@ initial_extensions = [
     'cogs.AFK',
     'cogs.fun.social.nuke',
     'cogs.moderacion',
-    'cogs.lang.execucion'
+    'cogs.lang.execucion',
+    'cogs.tags.__main__'
 ]           
 
 if __name__ == "__main__":
