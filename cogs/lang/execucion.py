@@ -262,7 +262,7 @@ class Execution(commands.Cog):
         """
         color = Colour.green() if description == "Aceptado" else Colour.red()
 
-        embed = Embed(colour=color, timestamp=datetime.utcnow())
+        embed = Embed(color=0x75aef5, timestamp=datetime.utcnow())
         embed.set_author(name=f"Codigo de ejecucion de {author_name}", icon_url=author_icon)
 
 
@@ -283,6 +283,7 @@ class Execution(commands.Cog):
         Incluye los 3 métodos para pasar el código fuente.
         """
         embed = Embed(title=f"¿Cómo pasar {lang['version'].split('(')[0]}código fuente?")
+        embed.color = 0x75aef5
 
         embed.set_thumbnail(url=lang['icon'])
         embed.add_field(
