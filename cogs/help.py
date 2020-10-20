@@ -667,6 +667,7 @@ class Help(commands.Cog):
             embed = discord.Embed(title="AYUDA", description=f"Hola, mi prefijo actualmente es `{ctx.prefix}`. Si quieres contactar a mi creador siempre puedes unirte a [mi servidor](https://discord.gg/4gfUZtB), o escribe <@730124969132163093> para conocerme.", timestamp=datetime.datetime.utcnow(), colour=color)
             embed.set_author(name="Ayuda para los comandos", icon_url="https://img.icons8.com/color/48/000000/help--v1.png")
             embed.add_field(name='argumentos', value='> `<>` » Requerido\n> `[]` » opcional\n> `{}` » Se requiere en base a uso', inline=False)
+            embed.add_field(name=f'👩‍💻  | {ctx.prefix}tag', value='Mira los tags que la gente ha creado.', inline=False)
             embed.add_field(name=f'💰  | {ctx.prefix}help currency', value='Con este comando podrás ver todos los comandos de currency.', inline=False)
             embed.add_field(name=f'🌏  | {ctx.prefix}help general', value='Mira los comandos comunes para el robot.', inline=False)
             embed.add_field(name=f'🔢  | {ctx.prefix}help mates', value='Por si necesitas ayuda con las mates 😉', inline=False)
