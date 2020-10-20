@@ -95,6 +95,7 @@ from aiohttp import request
 import asyncio
 import hashlib
 import shutil
+from termcolor import cprint
 import utils
 import json
 import time
@@ -1104,7 +1105,7 @@ def main():
         while run_l1:  
             if dice_a1 != 0:
                 dice_roll = random.randint(1, sides)  # roll
-                print("[Log]" + dice_a1)
+                cprint("[Log]" + dice_a1, 'red')
                 dice_track.append(dice_roll) 
                 dice_a1 -= 1
             else:

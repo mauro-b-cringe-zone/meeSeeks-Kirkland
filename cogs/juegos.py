@@ -9,6 +9,7 @@ from googletrans import Translator
 from json import loads as jsonify
 from urllib.request import urlopen as getapi
 import requests
+from termcolor import cprint
 
 class Games(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -99,7 +100,7 @@ class Games(commands.Cog):
         board = []
         for column in range(height):
             rowArr = []
-            for row in width:
+            for row in range(width):
                 rowArr.append(s)
             board.append(rowArr)
         def getDisplay():
@@ -211,7 +212,7 @@ class Games(commands.Cog):
                             board[y][x+1]=":diamonds:"
                             board[y][x+2]=":diamonds:"
                             board[y][x+3]=":diamonds:"
-                        print("[Log] ganador")
+                        cprint("[Log] ganador", 'yellow')
                         winner=otherPlayer
                         winningComment = f"{otherPlayer} conectado 4 en una fila horizontal"
                         break

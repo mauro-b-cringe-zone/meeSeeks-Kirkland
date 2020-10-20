@@ -3,6 +3,7 @@ from discord.ext import commands
 import time
 import json
 from discord import guild
+from termcolor import cprint
 
 color = 0x75aef5 
 
@@ -69,7 +70,7 @@ class Moderation(commands.Cog):
                 warns[str(ctx.guild.id)][str(member.id)]["razones"] = []
                 warns[str(ctx.guild.id)][str(member.id)]["razones"].append(razon)
         except Exception as e:
-            print(f"[log] Un problema:  {e}")
+            cprint(f"[log] Un problema:  {e}", 'red')
         if warns[str(ctx.guild.id)][str(member.id)]["warns"] >= 5:
             try:
                 await member.kick(reason="Mas de 5 warniciones")
@@ -77,7 +78,7 @@ class Moderation(commands.Cog):
                 del warns[str(ctx.guild.id)][str(member.id)]
                 return await ctx.send(embed=embed)
             except:
-                print('[Log] Un error intentando eliminar a alguien por 5 warniciones')
+                cprint('[Log] Un error intentando eliminar a alguien por 5 warniciones', 'red')
                 return await ctx.send(f"En error intentando eliminar a {member.mention}, Razon: Mas de 5 warniciones")
         with open("./json/warnings.json","w") as f:
             json.dump(warns,f)    

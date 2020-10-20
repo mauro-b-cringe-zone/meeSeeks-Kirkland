@@ -6,6 +6,7 @@ import secrets
 import asyncio
 import aiohttp
 import re
+from termcolor import cprint
 
 from io import BytesIO
 from discord.ext import commands
@@ -42,7 +43,7 @@ class Supreme(commands.Cog):
 
         args, valid_check = parser.parse_args(text)
         if not valid_check:
-            return print("[Log] un error: " + args)
+            return cprint(str("[Log] un error: " + args), 'red')
 
         inputText = urllib.parse.quote(' '.join(args.input))
         if len(inputText) > 75:

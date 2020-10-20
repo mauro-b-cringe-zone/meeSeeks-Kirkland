@@ -1,6 +1,7 @@
 from maubot import bot, main
 from mauutils.secrete import TOKEN
 import traceback, sys
+from termcolor import cprint
 
 
 initial_extensions = [
@@ -48,18 +49,20 @@ initial_extensions = [
     'cogs.tags.__main__'
 ]           
 
+"""Para actualizar los requirements `pip freeze > requirements.txt`"""
+
 if __name__ == "__main__":
     main()
     for extension in initial_extensions:
         try:
             bot.load_extension(extension)
-            print("[Cog] " + extension+' ...Hecho')
+            cprint("[Cog] " + extension+' ...Hecho', 'green')
         except Exception as e:
-            print(f'[Log] Se a fallado al cargar todas las extensiones {extension}.', file=sys.stderr)
+            cprint(str(f'[Log] Se a fallado al cargar todas las extensiones {extension}.', file=sys.stderr), 'red')
             traceback.print_exc()
 
 
 try:
     bot.run(TOKEN)
 except Exception as e:
-    print(f"[Log] Error en el login: {e}")
+    cprint(f"[Log] Error en el login: {e}", 'red')

@@ -3,6 +3,7 @@ from discord.ext import commands
 import time
 import datetime
 import asyncio
+from termcolor import cprint
 color = 0x75aef5 
 
 LANGUAGES = {
@@ -179,7 +180,7 @@ class Help(commands.Cog):
 
         if sec=="fun":
 
-            print("[Log] Ayuda fun enviada")
+            cprint("[Log] Ayuda fun enviada", 'green')
 
             emos_fun = {'1️⃣': 1, '2️⃣': 2, '3️⃣': 3, '4️⃣': 4, '🎮': 4, '🔴': 'stop'}
 
@@ -329,7 +330,7 @@ class Help(commands.Cog):
                 try:
                     reaction, user = await self.bot.wait_for("reaction_add", check=check_f)
                 except Exception as e:
-                    print("[Log] un error: " + e)
+                    cprint(str("[Log] un error: " + e), 'red')
                 else:
                     em = None
                     if reaction.emoji == '🔴':
@@ -474,7 +475,7 @@ class Help(commands.Cog):
                     await embedimg.remove_reaction(reaction, user)
             
         if sec == "ban":
-            print("[Log] Ayuda de banear enviada")
+            cprint("[Log] Ayuda de banear enviada", 'green')
 
             embed = discord.Embed(title="COMANDOS DE BANEAR", description=f"Hola, mi prefijo actualmente es `{ctx.prefix}`. Si quieres contactar a mi creador siempre puedes unirte a [mi servidor](https://discord.gg/4gfUZtB), o escribe <@730124969132163093> para conocerme.", timestamp=datetime.datetime.utcnow(), colour=color)
             embed.set_author(name="Ayuda para comandos de banear", icon_url="https://img.icons8.com/color/48/000000/help--v1.png")
@@ -662,7 +663,7 @@ class Help(commands.Cog):
 
 
         if sec!="creador" and sec!="lang" and sec!="animals" and sec!="img" and sec!="mates" and sec!="mute" and sec!="musica" and sec!="ban" and sec!="fun" and sec!="currency" and sec!="channel" and sec!="general":
-            print("[Log] Ayuda enviada")
+            cprint("[Log] Ayuda enviada", 'green')
 
             embed = discord.Embed(title="AYUDA", description=f"Hola, mi prefijo actualmente es `{ctx.prefix}`. Si quieres contactar a mi creador siempre puedes unirte a [mi servidor](https://discord.gg/4gfUZtB), o escribe <@730124969132163093> para conocerme.", timestamp=datetime.datetime.utcnow(), colour=color)
             embed.set_author(name="Ayuda para los comandos", icon_url="https://img.icons8.com/color/48/000000/help--v1.png")

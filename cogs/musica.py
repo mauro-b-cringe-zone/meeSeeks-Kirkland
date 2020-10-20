@@ -4,7 +4,7 @@ import itertools
 import math
 import random
 import os
-
+from termcolor import cprint
 import discord
 import youtube_dl
 from async_timeout import timeout
@@ -389,7 +389,7 @@ class Music(commands.Cog):
         try:
             ctx.voice_state.volume = volume / 100
         except Exception as e:
-            print("[Log] un error: " + e)
+            cprint(str("[Log] un error: " + e), 'red')
             
         embed = discord.Embed(colour=color)
         embed.set_author(name=' |  Volumen del jugador configurado en {}%'.format(volume), icon_url="https://img.icons8.com/color/48/000000/speaker.png")
@@ -575,11 +575,11 @@ class Music(commands.Cog):
                 if not ctx.voice_state.is_playing:
                     try:
                         song = Song(source)
-                        print('[Log] poniendo cancion')
+                        cprint('[Log] poniendo cancion', 'yellow')
                         await ctx.voice_state.songs.put(song)
-                        print('[Log] reproduciendo')
+                        cprint('[Log] reproduciendo', 'green')
                     except Exception as e:
-                        print('[Log] un error\n\n{e}')
+                        cprint('[Log] un error\n\n{e}', 'red')
                 if ctx.voice_state.is_playing:
                     try:
                         song = Song(source)
@@ -587,7 +587,7 @@ class Music(commands.Cog):
                         embed_queue = discord.Embed(title='Añadiendo a la cola', desciption=f"{str(source)}", colour=color)
                         await ctx.send(embed=embed_queue)      
                     except Exception as e:
-                        print("[Log] un error: " + e) 
+                        cprint(str("[Log] un error: " + e), 'red') 
 
     @_join.before_invoke
     @_play.before_invoke
