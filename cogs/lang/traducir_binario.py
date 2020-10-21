@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 import binascii
 import asyncio
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 
 def int2bytes(i):
     hex_string = '%x' % i

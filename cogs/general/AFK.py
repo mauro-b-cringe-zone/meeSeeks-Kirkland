@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
 import json
-
-color = 0x75aef5 
+from os import environ as env
+color = int(env["COLOR"])
 
 class AfkCmd(commands.Cog):
     def __init__(self, bot):

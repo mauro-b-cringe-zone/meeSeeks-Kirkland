@@ -1,4 +1,5 @@
-color = 0x75aef5 
+from os import environ as env
+color = int(env["COLOR"])
 from discord import Embed, Color
 from discord.ext import commands
 from discord.utils import get

@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-color = 0x75aef5 
+from os import environ as env
+color = int(env["COLOR"])
 
 class Nuke(commands.Cog):
     

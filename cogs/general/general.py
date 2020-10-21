@@ -34,7 +34,9 @@ import urllib
 from collections import Counter
 from googletrans import Translator, LANGUAGES
 
-color = 0x75aef5
+from os import environ as env
+
+color = int(env["COLOR"])
 gtr = Translator()
 
 def getSecrets():

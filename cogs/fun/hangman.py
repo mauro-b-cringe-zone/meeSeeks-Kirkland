@@ -4,7 +4,8 @@ from typing import Dict, List
 
 import discord
 from discord.ext import commands
-color = 0x75aef5
+from os import environ as env
+color = int(0x75aef5)
 
 hangman_embed = discord.Embed(title="Juego 'Hangman' con reacciones", color=color).set_footer(text='Consejo: Busca "regional" en la barra de reacciones.')
 

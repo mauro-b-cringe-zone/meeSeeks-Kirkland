@@ -4,7 +4,8 @@ from discord.ext.commands import MissingRequiredArgument, BadArgument
 import aiohttp
 from discord import Embed
 from discord.ext import commands
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 
 @dataclass
 class Meaning:

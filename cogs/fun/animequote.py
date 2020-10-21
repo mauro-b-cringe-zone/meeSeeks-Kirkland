@@ -2,7 +2,8 @@ from discord import Embed
 from discord.ext import commands
 from random import choice
 import aiohttp
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 async def fetch(session, url):
     async with session.get(url) as response:
         return await response.json()

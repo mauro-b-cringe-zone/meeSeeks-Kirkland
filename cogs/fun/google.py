@@ -14,7 +14,8 @@ from requests import get as decodeurl
 from PIL import Image, ImageFont, ImageDraw, GifImagePlugin, ImageOps, ImageFilter
 from io import BytesIO
 from datetime import datetime as t
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 
 class Google(commands.Cog):
 

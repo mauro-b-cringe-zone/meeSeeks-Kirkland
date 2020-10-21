@@ -9,7 +9,8 @@ from urllib.parse import quote_plus as urlencode
 from PIL import Image, ImageFont, ImageDraw, GifImagePlugin, ImageOps, ImageFilter
 import re
 import random
-color = 0x75aef5 
+from os import environ as env
+color =   int(env["COLOR"]) 
 
 def randomhash():
     hashh = ''

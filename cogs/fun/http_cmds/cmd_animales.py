@@ -9,7 +9,7 @@ import re
 from io import BytesIO
 from discord.ext import commands 
 from . import http
-color = 0x75aef5
+color =   0x75aef5
 class Animales(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

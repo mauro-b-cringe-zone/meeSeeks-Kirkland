@@ -4,8 +4,8 @@ import time
 import json
 from discord import guild
 from termcolor import cprint
-
-color = 0x75aef5 
+from os import environ as env
+color =  int(env["COLOR"])
 
 class Moderation(commands.Cog):
 

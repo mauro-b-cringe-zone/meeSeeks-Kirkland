@@ -3,7 +3,8 @@ from discord.ext import commands
 import random
 
 import aiohttp
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 
 async def fetch(session, url):
     async with session.get(url) as response:

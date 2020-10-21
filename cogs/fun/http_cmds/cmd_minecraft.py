@@ -4,8 +4,8 @@ import discord
 from discord.ext import commands
 from . import http
 import aiohttp
-
-color = 0x75aef5 
+from os import environ as env
+color = int(env["COLOR"])
 
 async def GetUuid(name):
     u = await http.get(f'https://api.minetools.eu/uuid/{name}', res_method="json", no_cache=True)

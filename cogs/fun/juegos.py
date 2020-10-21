@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 import asyncio
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 import random
 import time
 import json

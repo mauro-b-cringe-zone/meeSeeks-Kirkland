@@ -2,8 +2,9 @@ import discord
 from discord.ext import commands
 import json
 import os
+from os import environ as env
 import random
-color = 0x75aef5 
+color = int(env["COLOR"])
 C_NAMES = "diamantes"
 
 

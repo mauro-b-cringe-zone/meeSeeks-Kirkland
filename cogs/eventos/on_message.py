@@ -2,7 +2,8 @@ import discord
 from discord.ext import commands
 import json
 import time
-color = 0x75aef5 
+from os import environ as env
+color = int(env["COLOR"])
 
 class MessageListener(commands.Cog):
     def __init__(self, bot):

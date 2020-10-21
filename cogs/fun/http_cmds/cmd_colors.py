@@ -9,7 +9,8 @@ import re
 from io import BytesIO
 from discord.ext import commands
 from . import http
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 
 
 

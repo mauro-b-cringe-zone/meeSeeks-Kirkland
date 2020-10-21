@@ -3,7 +3,8 @@ import asyncio
 import datetime as dt  
 from discord.ext import commands        
 from datetime import datetime
-color = 0x75aef5 
+from os import environ as env
+color = 7712501
 import discord
 from discord.ext import commands
 import sys
@@ -15,14 +16,14 @@ import os
 class Creador(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    embed = discord.Embed(colour=color)
+    embed = discord.Embed(color=color)
 
 
     @commands.command()
     @commands.is_owner()
     async def logout(self, ctx):
         # await ctx.send('Hasta luego!')
-        embed = discord.Embed(colour=color)
+        embed = discord.Embed(color=color)
         embed.set_author(name=" |  !Hasta luego!", icon_url="https://img.icons8.com/color/48/000000/shutdown--v1.png")
         await ctx.send(embed=embed)
         await self.bot.logout()
@@ -30,7 +31,7 @@ class Creador(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def cerrar(self, ctx):
-        embed = discord.Embed(colour=color)
+        embed = discord.Embed(color=color)
         embed.set_author(name=" |  Cerrando...", icon_url="https://img.icons8.com/color/48/000000/shutdown--v1.png")
         await ctx.send(embed=embed)
         await self.bot.close()
@@ -50,7 +51,7 @@ class Creador(commands.Cog):
     async def rp(self, ctx, *args):
         try:
             user_to_send = self.bot.get_user(int(args[0]))
-            em = discord.Embed(title="Hola,   ¡"+user_to_send.name+"!   el propietario del bot envió una respuesta para sus comentarios.", description='**Mensaje de respuesta:**\n'+' '.join(list(args)[1:len(list(args))]), colour=color)
+            em = discord.Embed(title="Hola,   ¡"+user_to_send.name+"!   el propietario del bot envió una respuesta para sus comentarios.", description='**Mensaje de respuesta:**\n'+' '.join(list(args)[1:len(list(args))]), color=color)
             await user_to_send.send(embed=em)
             await ctx.message.add_reaction('✅')
         except Exception as e:

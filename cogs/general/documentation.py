@@ -7,7 +7,7 @@ import aiohttp
 import discord
 from discord.ext import commands
 
-
+from os import environ as env
 
 class Documentation(commands.Cog):
     def __init__(self, bot):
@@ -104,7 +104,7 @@ class Documentation(commands.Cog):
             await ctx.send("No se encontro nada")
             return
 
-        color = 0x75aef5
+        color = int(env["COLOR"])
         embed_msg = discord.Embed(title="Links", description="\n".join(f"[{key}]({url})" for key, url in matches) + f"\n\nToda la informacion es sacada de  **{page_types[key]}**  por si quereis ver mas informacion. En esa web te dara informacion de lo que hace y ejemplo con outputs de ejemplo." , colour=color)
 
         await ctx.send(embed=embed_msg)

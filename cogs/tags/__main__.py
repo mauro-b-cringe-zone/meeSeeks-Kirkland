@@ -4,7 +4,9 @@ import json
 
 from termcolor import cprint
 
-color = 0x75aef5 
+from os import environ as env
+
+color = int(env["COLOR"])
 
 class Tags(commands.Cog):
     def __init__(self, bot):

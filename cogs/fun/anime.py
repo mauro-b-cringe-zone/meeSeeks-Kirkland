@@ -5,7 +5,8 @@ from discord.ext.commands import MissingRequiredArgument, BadArgument, CommandOn
 from discord.ext import commands
 from discord import Embed
 
-color = 0x75aef5
+from os import environ as env
+color = int(env["COLOR"])
 
 @dataclass
 class AnimeInfo:

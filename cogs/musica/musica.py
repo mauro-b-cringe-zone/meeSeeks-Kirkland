@@ -13,7 +13,9 @@ from discord.ext import commands
 from flask import Flask
 from threading import Thread
 
-color = 0x75aef5 
+from os import environ as env
+
+color =  int(env["COLOR"])
 
 app = Flask('')
 
