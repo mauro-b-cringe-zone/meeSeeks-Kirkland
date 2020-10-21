@@ -81,7 +81,7 @@ class Tags(commands.Cog):
                 # print(desc)
                 tags = self.abrir_json()
 
-                if str(nombre) in str(tags[nombre]):
+                if nombre in tags:
                     return await ctx.send(f"Esa tag ya existe **{ctx.prefix}tag {nombre}**")
                 tags[nombre] = {}
                 tags[nombre]["titulo"] = titulo
@@ -89,6 +89,7 @@ class Tags(commands.Cog):
                 tags[nombre]["creador"] = creador
 
                 self.cerrar_json(tags)
+                await ctx.send(embed=discord.Embed(title="Tag creada", description="{ctx.author.mention} se ha creado tu tag **{nombre}** correctamente" ,color=color))
             else:
                 return await ctx.send(f"Porfavor escribe tu numbre de tag y separado por un | **Ej: {ctx.prefix}tag crear hola|¿Què tal?**")
 
@@ -116,21 +117,25 @@ class Tags(commands.Cog):
                 return await ctx.send(f"{ctx.author.mention} ¡¡¡Esa tag no existe!!!")
             self.cerrar_json(tags)
             
-    @tag.command()
+    @tag.command(enabled=False)
     async def editar(self, ctx, *, args: str=""):
         if len(str(args)) <= 2:
-            return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)**")
+            return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)** | **EJ: {ctx.prefix}tag editar nombre de la tag | [nombre]hola**")
         else:
             tags = self.abrir_json()
 
             eliminador = ctx.author.name
-            if str(args) in tags:
+            args = args.split("|")
+            print(args[0])
+            if str(args[0]) in str(tags):
                 if not eliminador in tags[str(args)]['creador']:
                     return await ctx.send("¡¡¡TU NO ERES EL CREADOR DE ESTE TAG!!!") 
                 else:
                     try:
-                        ### CONTINUAR
-                        await ctx.send(embed=discord.Embed(title="Editadp", description=f"{ctx.author.mention} Se ha editado {args} correctamente", color=color))
+                        if "[nombre]" in args:
+                            print(args.split("[nombre]")[1])
+                            tags[args]["nombre"] = args.split("[nombre]")[1]
+                        await ctx.send(embed=discord.Embed(title="Editado", description=f"{ctx.author.mention} Se ha editado {args} correctamente", color=color))
                         self.cerrar_json(tags)
                     except Exception as e:
                         cprint(str("[Log] Un error ha ocurrido:  " + e), 'red')

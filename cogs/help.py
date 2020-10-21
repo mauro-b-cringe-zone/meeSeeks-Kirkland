@@ -179,7 +179,7 @@ class Help(commands.Cog):
 
 
         if sec=="fun":
-
+    
             cprint("[Log] Ayuda fun enviada", 'green')
 
             emos_fun = {'1️⃣': 1, '2️⃣': 2, '3️⃣': 3, '4️⃣': 4, '🎮': 4, '🔴': 'stop'}
