@@ -25,7 +25,7 @@ class Sleep(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='sleep')
+    @commands.command(name='sleep', description="Duermete niño... duermete ya...")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sleep(self, ctx):
         await ctx.send(embed=Embed(description=f"[(－－)]..zzZ **{ctx.author.name}** esta durmiendo...",

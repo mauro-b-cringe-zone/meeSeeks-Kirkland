@@ -109,12 +109,12 @@ class Documentation(commands.Cog):
 
         await ctx.send(embed=embed_msg)
 
-    @commands.command(aliases=['dpy'])
+    @commands.command(aliases=['dpy'], description="Busca en la documentacion de discord.py")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def discordpy(self, ctx, *, obj: str = None):
         await self.fetch_doc_links(ctx, 'latest', obj)
 
-    @commands.command(aliases=['pydoc'])
+    @commands.command(aliases=['pydoc'], description="Busca en la documentacion de python")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def pythondocs(self, ctx, *, obj: str = None):
         await self.fetch_doc_links(ctx, 'python', obj)

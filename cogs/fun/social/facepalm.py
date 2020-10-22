@@ -23,7 +23,7 @@ class Facepalm(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='facepalm')
+    @commands.command(name='facepalm', description="Inutil...")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def facepalm(self, ctx):
         await ctx.send(embed=Embed(description=f"(－‸ლ) {ctx.message.author.name}",

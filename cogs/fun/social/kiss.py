@@ -28,7 +28,7 @@ class Kiss(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='kiss', aliases=['smack'])
+    @commands.command(name='kiss', aliases=['smack'], description="Un besito...")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def kiss(self, ctx, target: User):
         if ctx.message.author != target:

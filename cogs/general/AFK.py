@@ -8,7 +8,7 @@ class AfkCmd(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True, aliases=['AFK', 'away'])
+    @commands.command(pass_context=True, aliases=['AFK', 'afuera'], description="Dile a la gente que no estas disponible")
     async def afk(self, ctx: commands.Context, *, razon: str = "AFK"):
 
         user = ctx.author

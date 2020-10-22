@@ -66,7 +66,7 @@ class Trigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='trigger')
+    @commands.command(name='trigger', description="TRIGERRRRR")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def trigger(self, ctx, target: User):
         if ctx.message.author != target:
@@ -76,7 +76,7 @@ class Trigger(commands.Cog):
             await ctx.send(file=File(await trigger_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"trigger_{ctx.message.author}.gif"))
 
-    @commands.command()
+    @commands.command(description="Pon ha alguien gris")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def gray(self, ctx, target: User):
         if ctx.message.author != target:
@@ -86,7 +86,7 @@ class Trigger(commands.Cog):
             await ctx.send(file=File(await gray_scale_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"gray_scale_{ctx.message.author}.gif"))
 
-    @commands.command()
+    @commands.command(description="Pinchas jaja lol")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def glass(self, ctx, target: User):
         if ctx.message.author != target:
@@ -96,7 +96,7 @@ class Trigger(commands.Cog):
             await ctx.send(file=File(await glass_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"glass_{ctx.message.author}.gif"))
 
-    @commands.command()
+    @commands.command(description="Convierte un usuario en sepia")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sepia(self, ctx, target: User):
         if ctx.message.author != target:
@@ -106,7 +106,7 @@ class Trigger(commands.Cog):
             await ctx.send(file=File(await sepia_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"sepia_{ctx.message.author}.gif"))
 
-    @commands.command()
+    @commands.command(description=".....................")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def gay(self, ctx, target: User):
         if ctx.message.author != target:
@@ -116,7 +116,7 @@ class Trigger(commands.Cog):
             await ctx.send(file=File(await gay_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"gay_{ctx.message.author}.gif"))
 
-    @commands.command()
+    @commands.command(description="Invierte los colores del usuario")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def invert(self, ctx, target: User):
         if ctx.message.author != target:
@@ -127,7 +127,7 @@ class Trigger(commands.Cog):
             f"invert_{ctx.message.author}.gif"))
 
 
-    @commands.command(aliases=['truthscroll', 'truth-scroll'])
+    @commands.command(aliases=['truthscroll', 'truth-scroll'], description="Una legenda dijo")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def scroll(self, ctx, *, text):
         text = urllib.parse.quote(text)
@@ -136,7 +136,7 @@ class Trigger(commands.Cog):
         embed.set_image(url=f'https://api.alexflipnote.dev/scroll?text={text}')
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Interesante...")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def facts(self, ctx, *, text):
         text = urllib.parse.quote(text)

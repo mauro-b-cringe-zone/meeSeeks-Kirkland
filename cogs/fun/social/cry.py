@@ -22,7 +22,7 @@ class Cry(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='cry')
+    @commands.command(name='cry', description="LLora")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def cry(self, ctx):
         await ctx.send(embed=Embed(description=f"｡:ﾟ(;´∩`;)ﾟ:｡ **{ctx.author.name}** llora...",

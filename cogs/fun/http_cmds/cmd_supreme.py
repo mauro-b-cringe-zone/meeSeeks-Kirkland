@@ -28,7 +28,7 @@ class Supreme(commands.Cog):
             bio.seek(0)
             await ctx.send(content=content, file=discord.File(bio, filename=filename))    
 
-    @commands.command()
+    @commands.command(description="Puedes hacer el texto grande (Mas argumentos (--dark | --light))")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def supreme(self, ctx, *, text: commands.clean_content(fix_channel_mentions=True)):
         """ 

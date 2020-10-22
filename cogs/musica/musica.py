@@ -331,7 +331,7 @@ class Music(commands.Cog):
     # async def cog_command_error(self, ctx: commands.Context, error: commands.CommandError):
     #     await ctx.send('Ups.. un error: {}'.format(str(error)))
 
-    @commands.command(name='join', invoke_without_subcommand=True)
+    @commands.command(name='join', invoke_without_subcommand=True, description="Unirse ha un canal")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _join(self, ctx: commands.Context):
         ctx.voice_state.songs.clear()
@@ -344,7 +344,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title=f"Me he unido a {ctx.author.voice.channel}", colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name='summon')
+    @commands.command(name='summon', description="Cambiarse de canal")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_guild=True)
     async def _summon(self, ctx: commands.Context, *, channel: discord.VoiceChannel = None):
@@ -362,7 +362,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title=f"Me he movido a {ctx.author.voice.channel}", colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name='leave', aliases=['disconnect'])
+    @commands.command(name='leave', aliases=['disconnect'], description="Irse del canal")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_guild=True)
     async def _leave(self, ctx: commands.Context):
@@ -378,7 +378,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title=f"Me he ido de {ctx.author.voice.channel}", colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name='volume')
+    @commands.command(name='volume', description="Cambia el volumen de la cancion")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _volume(self, ctx: commands.Context, *, volume: int):
 
@@ -397,7 +397,7 @@ class Music(commands.Cog):
         embed.set_author(name=' |  Volumen del jugador configurado en {}%'.format(volume), icon_url="https://img.icons8.com/color/48/000000/speaker.png")
         await ctx.send(embed=embed)
 
-    @commands.command(name='now', aliases=['current', 'playing'])
+    @commands.command(name='now', aliases=['current', 'playing'], description="¿Que estas escuchando?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _now(self, ctx: commands.Context):
         # te dice la cancion actual
@@ -408,7 +408,7 @@ class Music(commands.Cog):
         # embed = discord.Embed(title="Reproduciendo ahora", description=ctx.voice_state.current, colour=color)
         # await ctx.send(embed=embed)
 
-    @commands.command(name='pause')
+    @commands.command(name='pause', description="Pausa la musica")
     @commands.has_permissions(manage_guild=True)
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _pause(self, ctx: commands.Context):
@@ -421,7 +421,7 @@ class Music(commands.Cog):
             embed.set_author(name=" |  Pausando...", icon_url="https://img.icons8.com/color/48/000000/circled-pause.png")
             await ctx.send(embed=embed)
 
-    @commands.command(name='resume')
+    @commands.command(name='resume', description="Continua con la musica")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_guild=True)
     async def _resume(self, ctx: commands.Context):
@@ -434,7 +434,7 @@ class Music(commands.Cog):
             embed.set_author(name=" |  Resumiendo...", icon_url="https://img.icons8.com/color/48/000000/circled-play--v1.png")
             await ctx.send(embed=embed)
 
-    @commands.command(name='stop')
+    @commands.command(name='stop', description="Para la musica y limpia la cola")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_guild=True)
     async def _stop(self, ctx: commands.Context):
@@ -452,7 +452,7 @@ class Music(commands.Cog):
         if not ctx.voice_state.is_playing:
             await ctx.send("**NO**")
 
-    @commands.command(name='next', aliases=['skip'])
+    @commands.command(name='next', aliases=['skip'], description="Siguiente porfavor")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _skip(self, ctx: commands.Context):
         """
@@ -490,7 +490,7 @@ class Music(commands.Cog):
         else:
             await ctx.send('Ya votaste para omitir esta canción.')
 
-    @commands.command(name='queue')
+    @commands.command(name='queue', description="Mira la cola de canciones")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _queue(self, ctx: commands.Context, *, page: int = 1):
         """
@@ -517,7 +517,7 @@ class Music(commands.Cog):
                  .set_footer(text='Viendo la pagina {}/{}'.format(page, pages)))
         await ctx.send(embed=embed)
 
-    @commands.command(name='shuffle')
+    @commands.command(name='shuffle', description="Varajea las canciones en la cola")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _shuffle(self, ctx: commands.Context):
 
@@ -531,7 +531,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title='Varajeando la cola', colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name='remove')
+    @commands.command(name='remove', description="Quita una cancion de la cola")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _remove(self, ctx: commands.Context, index: int):
         # Elimina una canción de la cola en un índice determinado.
@@ -547,7 +547,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title='Quitando cvancion de la cola', colour=color)
         await ctx.send(embed=embed)        
 
-    @commands.command(name='loop')
+    @commands.command(name='loop', description="Haz que se repita la musica (Verdadero : Falso)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _loop(self, ctx: commands.Context):
 
@@ -561,7 +561,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title=f'cambiando loop a ({ctx.voice_state.loop})', colour=color)
         await ctx.send(embed=embed)           
 
-    @commands.command(name='play')
+    @commands.command(name='play', description="Pon una musica o añade una cancion a la cola")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _play(self, ctx: commands.Context, *, search: str):
 

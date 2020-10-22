@@ -17,7 +17,7 @@ class Games(commands.Cog):
         self.bot = bot
 
 
-    @commands.command()
+    @commands.command(description="Piedra, Papel o tijera...")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def rps(self, ctx, respuesta: str = ""):
         
@@ -63,7 +63,7 @@ class Games(commands.Cog):
 
     
 
-    @commands.command(name='connect4')
+    @commands.command(name='connect4', description="Juega al conecta 4")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def connect4(self,ctx, opponent="", width=7, height=6):
         #-------------- ayuda ------------------#
@@ -384,7 +384,7 @@ class Games(commands.Cog):
         return(toDelete)
 
 
-    @commands.command()
+    @commands.command(description="Es como una ruleta Russa (SI TE TOCA PISTOLA SERAS EXPULSADO)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def roulette(self, ctx):
         responses = [
@@ -403,7 +403,7 @@ class Games(commands.Cog):
             await ctx.send(f'{response}! {ctx.author.display_name} Esta bien... por ahora')
 
 
-    @commands.command()
+    @commands.command(description="Questionario de matematicas")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def mathquiz(self, ctx):
         arrayId, num1, num2, symArray = random.randint(0, 4), random.randint(1, 100), random.randint(1, 100), ['+', '-', 'x', ':', '^']
@@ -433,7 +433,7 @@ class Games(commands.Cog):
     def api(self, url):
         return jsonify(getapi(url).read())
 
-    @commands.command()
+    @commands.command(description="Te preguntare una pregunta que hara que te preguntes la pregunta :v")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def trivia(self, ctx):
         al = None
@@ -485,7 +485,7 @@ class Games(commands.Cog):
             await wait.edit(content="", embed=discord.Embed(title="Incorrecto", description=' | <@'+str(guy.id)+'>, Estas incorrecto. La respuesta es   |   '+str(translated_corr.text)+'.', colour=color))
 
 
-    @commands.command()
+    @commands.command(description="Adivina el numero")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def guessnum(self, ctx):
         num = random.randint(5, 100)
@@ -533,8 +533,7 @@ class Games(commands.Cog):
                     gameplay = False
                     break
 
-
-    @commands.command(aliases=['guessav','avatarguess','avguess','avatargame','avgame'])
+    @commands.command(aliases=['guessav','avatarguess','avguess','avatargame','avgame'], description="Advivina el avatar (DEVE HAVER ALMENOS 5 MIEMBRO EN EL SERVIDOR)")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def guessavatar(self, ctx):
         if len(ctx.message.guild.members)>500:
@@ -596,7 +595,7 @@ class Games(commands.Cog):
     def jsonisp(self, url):
         return requests.get(url).json()
 
-    @commands.command()
+    @commands.command(description="¿Saves sobre geografia?")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def geoquiz(self, ctx):
         wait = await ctx.send(' | Porfavor espera... se te esta generando el test...')
@@ -649,7 +648,7 @@ class Games(commands.Cog):
 
 
 
-    @commands.command()
+    @commands.command(description="DESACTIVA LA BOMBA CORRE")
     @commands.cooldown(1, 20, commands.BucketType.user)
     async def bomb(self, ctx):
         def embedType(a):
@@ -686,7 +685,7 @@ class Games(commands.Cog):
 
 
 
-    @commands.command()
+    @commands.command(description="Un busca minas (NO VALE HACER TRAMPAS)")
     async def minesweeper(self, ctx, columns = None, rows = None, bombs = None):
         if columns is None or rows is None and bombs is None:
             if columns is not None or rows is not None or bombs is not None:

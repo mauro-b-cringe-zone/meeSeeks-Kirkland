@@ -19,7 +19,7 @@ class Creador(commands.Cog):
     embed = discord.Embed(color=color)
 
 
-    @commands.command()
+    @commands.command(description="Logout")
     @commands.is_owner()
     async def logout(self, ctx):
         # await ctx.send('Hasta luego!')
@@ -28,7 +28,7 @@ class Creador(commands.Cog):
         await ctx.send(embed=embed)
         await self.bot.logout()
 
-    @commands.command()
+    @commands.command(description="Cerrar la cuenta")
     @commands.is_owner()
     async def cerrar(self, ctx):
         embed = discord.Embed(color=color)
@@ -37,7 +37,7 @@ class Creador(commands.Cog):
         await self.bot.close()
 
 
-    @commands.command()
+    @commands.command(description="Recargar un cog")
     @commands.is_owner()
     async def reload(self, ctx, name: str):
         try:
@@ -46,7 +46,7 @@ class Creador(commands.Cog):
             return await ctx.send(e)
         await ctx.send(f"Se ha reiniciado **{name}.py**")
 
-    @commands.command()
+    @commands.command(description="Responde una reseña")
     @commands.is_owner()
     async def rp(self, ctx, *args):
         try:
@@ -89,7 +89,7 @@ class Creador(commands.Cog):
     def report(self, auth):
         return 'lol'
 
-    @commands.command(aliases=['ex','eval'])
+    @commands.command(aliases=['ex','eval'], description="Evalua lo que quieras")
     async def evaluate(self, ctx, *args):
         unprefixed = ' '.join(list(args))
         if int(ctx.message.author.id)==700812754855919667:
@@ -107,7 +107,7 @@ class Creador(commands.Cog):
             self.report(ctx.message.author) # reports to the owner
             await ctx.send(f'{self.bot.get_emoji(585885410257928194)} | ¿Estás buscando el token de Maubot? Bueno aqui esta: `daowihdawasdawpdua.dawd.awdawdd`')
 
-    @commands.command(aliases=['bots'])
+    @commands.command(aliases=['bots'], description="Mira los bots")
     async def botmembers(self, ctx):
         botmembers, off, on, warning = "", 0, 0, 'Triángulos hacia abajo significa que el bot está caído. Y los triángulos arriba significan que el bot está bien'
         for i in range(0, int(len(ctx.message.guild.members))):

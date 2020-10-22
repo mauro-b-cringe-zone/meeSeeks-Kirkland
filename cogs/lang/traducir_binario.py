@@ -24,7 +24,7 @@ class Binario(commands.Cog):
         self.bot = bot
 
 
-    @commands.command()
+    @commands.command(description="0010010101010 0101010 1010010101")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def binario(self, ctx, *, texto = "PON TEXTO IDIOTA"):
         

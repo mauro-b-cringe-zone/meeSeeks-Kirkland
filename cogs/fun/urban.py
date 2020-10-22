@@ -30,7 +30,7 @@ class Urban(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='urban')
+    @commands.command(name='urban', description="Busca algo en el diccionario de 'urban'")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def urban(self, ctx, term: str):
         terms_mean = await search_meaning_of(term, 0)

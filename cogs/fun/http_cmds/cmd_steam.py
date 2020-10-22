@@ -18,7 +18,7 @@ class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=['steam_profile'])
+    @commands.command(aliases=['steam_profile'], description="Busca un usuario de steam")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def steam(self, ctx, user: str): 
         async with ctx.channel.typing():

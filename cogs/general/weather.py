@@ -37,7 +37,7 @@ class Weather(commands.Cog):
         }
         return cleared_data
 
-    @commands.command()
+    @commands.command(description="Busca el tiempo en tu cioudad")
     async def weather(self, ctx,  *, city):
         data = Weather.get_cast(city)
         embed = Embed(title=f":white_sun_small_cloud: Clima en {data['City']}:", colour=color)

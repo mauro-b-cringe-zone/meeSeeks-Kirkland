@@ -19,7 +19,7 @@ class AnimeQuote(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='animequote', aliases=["aq"])
+    @commands.command(name='animequote', aliases=["aq"], description="Mira una frase de anime")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def animequote(self, ctx):
         # await safe_delete(ctx)

@@ -28,7 +28,7 @@ class Wink(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='wink')
+    @commands.command(name='wink', description=";v")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def wink(self, ctx, target: User):
         await ctx.send(embed=Embed(description=f"(✿-◡•̀) **{ctx.author.name}** giña a **{target.name}**",

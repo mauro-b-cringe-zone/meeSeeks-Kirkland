@@ -18,7 +18,7 @@ class GeneralExtra(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command()
+    @commands.command(description="Busca lago en Youtube")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def youtube(self, ctx, *search):
         import urllib.parse
@@ -35,7 +35,7 @@ class GeneralExtra(commands.Cog):
     # SYSTEMA DE NIVELES | no palabrotas |spam #
     ############################################
 
-    @commands.command()
+    @commands.command(description="Cambia el nombre del robot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
     async def rename_bot(self, ctx, *, text='Maubot'):
@@ -52,12 +52,12 @@ class GeneralExtra(commands.Cog):
 
     # RE = NECESITA REPARACION
 
-    @commands.command(aliases=["honk"])
+    @commands.command(aliases=["honk"], description="Honk?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def honkhonk(self, ctx):
         await ctx.send(random.choice(honkhonkfgt))
 
-    @commands.command()
+    @commands.command(description="Di algo")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def say(self, ctx, *, message:str):
         try:
@@ -89,7 +89,7 @@ class GeneralExtra(commands.Cog):
 
     #                 await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Imagenes random de zorros")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def fox(self, ctx):
         async with ctx.channel.typing():
@@ -104,13 +104,13 @@ class GeneralExtra(commands.Cog):
                     await ctx.send(embed=embed)
 
 
-    @commands.command()
+    @commands.command(description="OOOOOOOOOOOOOOOOOOOOOOOOOO")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def infinite(self, ctx):
 
         await ctx.send("https://media1.tenor.com/images/1c50bdbc44d5433fa3c67758dde775d2/tenor.gif")
 
-    @commands.command()
+    @commands.command(description="Chiste de padres")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def dad(self, ctx):
 
@@ -152,19 +152,19 @@ class GeneralExtra(commands.Cog):
 
 
 
-    @commands.command()
+    @commands.command(description="F en el chat")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def f(self, ctx):
         with open('./mauutils/languages/spanish.json', 'r') as f:
             Language = json.load(f)
         await ctx.send(Language.get("fun.respects", ctx).format(ctx.author, random.randint(1, 10000)))
 
-    @commands.command()
+    @commands.command(description="Buen meme")
     @commands.cooldown(1, 25, commands.BucketType.user)
     async def nicememe(self, ctx):
         await ctx.send("http://niceme.me")
 
-    @commands.command()
+    @commands.command(description="Espamea el server")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def spam(self, ctx):
         await ctx.channel.trigger_typing()
@@ -198,7 +198,7 @@ class GeneralExtra(commands.Cog):
     #             await ctx.send("Esto no funciona contacta al administrador o creador")
 
 
-    @commands.command()
+    @commands.command(description="Hackea ha alguien")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def hack(self, ctx, *args):
         foundArgs, tohack = False, None
@@ -212,7 +212,7 @@ class GeneralExtra(commands.Cog):
             await ctx.send(f'Porfavor pon a alguien!\nejemplo: {ctx.prefix}hack <@'+str(ctx.message.author.id)+'>')
         if tohack==None: 
             tohack = ctx.message.mentions[0]
-        console = 'nombredeusuario601@HACKERMAN:/$ '
+        console = 'maubot@HACKERMAN:/$ '
         if len(ctx.message.mentions)>0 or foundArgs:
             main = await ctx.send('Abriendo consola...\n```bash\nCargando...```')
             flow = hackflow(tohack)
@@ -225,7 +225,7 @@ class GeneralExtra(commands.Cog):
             await ctx.send(f'```bash\n{console}```')
 
 
-    @commands.command()
+    @commands.command(description="¿Cara o cruz?")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def coin(self, ctx):
         n = random.randint(0, 1)
@@ -235,44 +235,44 @@ class GeneralExtra(commands.Cog):
             msg = "Cruz"
         await ctx.send(f"Ha tocado: **{msg}**")
 
-    @commands.command()
+    @commands.command(description="¿Un gato?")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def b1nzy(self, ctx):
         await ctx.channel.trigger_typing()
         await ctx.send(file=discord.File("assets/imgs/b1nzy_with_banhammer.png"))
 
-    @commands.command()
+    @commands.command(description="Russia")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def cykablyat(self, ctx):
         await ctx.channel.trigger_typing()
         await ctx.send(file=discord.File("assets/imgs/cykablyat.jpg"))
 
-    @commands.command()
+    @commands.command(description="¿A que da miedo?")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def sombra(self, ctx):
         await ctx.send("```\n                       :PB@Bk:                         \n                   ,jB@@B@B@B@BBL.                     \n                7G@B@B@BMMMMMB@B@B@Nr                  \n            :kB@B@@@MMOMOMOMOMMMM@B@B@B1,              \n        :5@B@B@B@BBMMOMOMOMOMOMOMM@@@B@B@BBu.          \n     70@@@B@B@B@BXBBOMOMOMOMOMOMMBMPB@B@B@B@B@Nr       \n   G@@@BJ iB@B@@  OBMOMOMOMOMOMOM@2  B@B@B. EB@B@S     \n   @@BM@GJBU.  iSuB@OMOMOMOMOMOMM@OU1:  .kBLM@M@B@     \n   B@MMB@B       7@BBMMOMOMOMOMOBB@:       B@BMM@B     \n   @@@B@B         7@@@MMOMOMOMM@B@:         @@B@B@     \n   @@OLB.          BNB@MMOMOMM@BEB          rBjM@B     \n   @@  @           M  OBOMOMM@q  M          .@  @@     \n   @@OvB           B:u@MMOMOMMBJiB          .BvM@B     \n   @B@B@J         0@B@MMOMOMOMB@B@u         q@@@B@     \n   B@MBB@v       G@@BMMMMMMMMMMMBB@5       F@BMM@B     \n   @BBM@BPNi   LMEB@OMMMM@B@MMOMM@BZM7   rEqB@MBB@     \n   B@@@BM  B@B@B  qBMOMB@B@B@BMOMBL  B@B@B  @B@B@M     \n    J@@@@PB@B@B@B7G@OMBB.   ,@MMM@qLB@B@@@BqB@BBv      \n       iGB@,i0@M@B@MMO@E  :  M@OMM@@@B@Pii@@N:         \n          .   B@M@B@MMM@B@B@B@MMM@@@M@B                \n              @B@B.i@MBB@B@B@@BM@::B@B@                \n              B@@@ .B@B.:@B@ :B@B  @B@O                \n                :0 r@B@  B@@ .@B@: P:                  \n                    vMB :@B@ :BO7                      \n                        ,B@B                           ```")
 
-    @commands.command()
+    @commands.command(description="( ͡° ͜ʖ ͡° )")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def lenny(self, ctx):
         await ctx.send("( ͡° ͜ʖ ͡° )")
         
-    @commands.command()
+    @commands.command(description="(╯°□°）╯︵ ┻━┻")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def tableflip(self, ctx):
         await ctx.send("(╯°□°）╯︵ ┻━┻")
 
-    @commands.command()
+    @commands.command(description="┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def doubleflip(self, ctx):
         await ctx.send("┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻")
 
-    @commands.command()
+    @commands.command(description="(・`ω´・)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def misc_weeb_face(self, ctx):
         await ctx.send("(・`ω´・)")
 
-    @commands.command()
+    @commands.command(description="︻芫═───")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def gun(self, ctx):
         await ctx.send("︻芫═───")
@@ -282,17 +282,17 @@ class GeneralExtra(commands.Cog):
     # async def ball(ctx, *, question:str):
     #     await ctx.send("{}: {}".format(ctx.author.name, random.choice(magic_conch_shell)))
 
-    @commands.command()
+    @commands.command(description="Insulta ha alguien")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def insult(self, ctx, *, user:str):
         await ctx.send("{} {}".format(user, random.choice(insults)))
 
-    @commands.command()
+    @commands.command(description="AUUUUUUUUUUUUUEEEEEEEUAUUAE")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def actdrunk(self, ctx):
         await ctx.send(random.choice(drunkaf))
 
-    @commands.command()
+    @commands.command(description="Tedoy un -10 de 20")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def rate(self, ctx, user:discord.User=None):
         with open('mauutils/languages/spanish.json', 'r') as f:
@@ -304,7 +304,7 @@ class GeneralExtra(commands.Cog):
         else:
             await ctx.send(Language.get("fun.rate_user", ctx).format(user.name, random.randint(0, 10)))
 
-    @commands.command()
+    @commands.command(description="Mandame un mensage")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def plzmsgme(self, ctx, *, message:str):
 
@@ -314,24 +314,24 @@ class GeneralExtra(commands.Cog):
         await ctx.author.send(message)
         await ctx.send(Language.get("fun.plzmsgme", ctx))
 
-    @commands.command()
+    @commands.command(description="Høla ¿unø que remplaze las øs y 0s?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def twentyoneify(self, ctx, *, input:str):
         await ctx.send(input.replace("O", "Ø").replace("o", "ø"))
 
-    @commands.command()
+    @commands.command(description="Spell RED, LIAHWDIOAHWDOAWHDOAIWHDOAIWHDN")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def spellout(self, ctx, *, msg:str):
 
         await ctx.send(" ".join(list(msg.upper())))
 
 
-    @commands.command()
+    @commands.command(description="egasnem nu")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def reverse(self, ctx, *, msg:str):
         await ctx.send("🔁 " + msg[::-1])
 
-    @commands.command()
+    @commands.command(description="awldkhjAWOLIHDWOAIHDalkwjdKjdaldj")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def intellect(self, ctx, *, msg:str):
         await ctx.channel.trigger_typing()
@@ -340,81 +340,8 @@ class GeneralExtra(commands.Cog):
             intellectify += random.choice([char.upper(), char.lower()])
         await ctx.send(intellectify)
 
-    encode_morse ={
-        "1":".----",
-        "2":"..---",
-        "3":"...--",
-        "4":"....-",
-        "5":".....",
-        "6":"-....",
-        "7":"--...",
-        "8":"---..",
-        "9":"----.",
-        "0":"-----",
-        "A":".-",
-        "B":"-...",
-        "C":"-.-.",
-        "D":"-..",
-        "E":".",
-        "F":"..-.",
-        "G":"--.",
-        "H":"....",
-        "I":"..",
-        "J":".---",
-        "K":"-.-",
-        "L":".-..",
-        "M":"--",
-        "N":"-.",
-        "O":"---",
-        "P":".--.",
-        "Q":"--.-",
-        "R":".-.",
-        "S":"...",
-        "T":"-",
-        "U":"..-",
-        "V":"...-",
-        "W":".--",
-        "X":"-..-",
-        "Y":"-.--",
-        "Z":"--..",
-        ".":".-.-.-",
-        ",":"--..--",
-        ":":"---...",
-        "?":"..--..",
-        "'":".----.",
-        "-":"-....-",
-        "/":"-..-.",
-        "@":".--.-.",
-        "=":"-...-",
-        " ":"/"
-    }
 
-    decode_morse = dict((morse_char, char) for (char, morse_char) in encode_morse.items())
-
-
-    # @commands.command()
-    # @commands.cooldown(1, 5, commands.BucketType.user)
-    # async def encodemorse(ctx, *, msg:str):
-
-    #     # RE
-
-    #     encoded_message = ""
-    #     for char in list(msg.upper()):
-    #         encoded_message += encode_morse + " "
-    #     await ctx.send(encoded_message)
-
-    # @commands.command()
-    # @commands.cooldown(1, 5, commands.BucketType.user)
-    # async def decodemorse(ctx, *, msg:str):
-    #     # RE
-    #     decoded_message = ""
-    #     for char in msg.split():
-    #         if char == " ":
-    #             continue
-    #         decoded_message += decode_morse[char]
-    #     await ctx.send(decoded_message)
-
-    @commands.command()
+    @commands.command(description="Numero random (PUEDES PONER CUANTOS DIGITOS)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def randomnumber(self, ctx, *, digits:int=1):
 
@@ -425,7 +352,7 @@ class GeneralExtra(commands.Cog):
         embed.set_footer(text=f"Numero random | {ctx.prefix}help para mas informacion")
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=True, description="Gira el dado")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def roll(self, ctx, dice_amount: int, sides: int):
 
@@ -464,50 +391,39 @@ class GeneralExtra(commands.Cog):
         except:
             await ctx.send("Soy una computadora que conozco, ¡pero eso es mucho incluso para mí!")
 
-    @commands.command()
+    @commands.command(description="9cdfb439c7876e703e307864c9167a15")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def md5(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.md5(bytes(msg.encode("utf-8"))).hexdigest()))\
 
 
-    @commands.command()
+    @commands.command(description="Pega ha alguien")
     async def pegar(self, ctx, member: discord.Member, *, reason: str = "ninguna razon"):
         await ctx.send(f"{ctx.author.display_name} a pegado a {member.mention} por {reason}!")
 
 
-    @commands.command()
+    @commands.command(description="07123e1f482356c415f684407a3b8723e10b2cbbc0b8fcd6282c49d37c9c1abc")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sha256(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.sha256(bytes(msg.encode("utf-8"))).hexdigest()))
 
-    @commands.command()
+    @commands.command(description="3dd28c5a23f780659d83dd99981e2dcb82bd4c4bdc8d97a7da50ae84c7a7229a6dc0ae8ae4748640a4cc07ccc2d55dbdc023a99b3ef72bc6ce49e30b84253dae")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sha512(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.sha512(bytes(msg.encode("utf-8"))).hexdigest()))
 
-    @commands.command()
+    @commands.command(description="HOLA")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def uppercase(self, ctx, *, msg:str):
         await ctx.send(msg.upper())
 
-    @commands.command()
+    @commands.command(description="hola")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def lowercase(self, ctx, *, msg:str):
         await ctx.send(msg.lower())
 
-    @commands.command()
-    @commands.cooldown(1, 10, commands.BucketType.user)
-    async def fight(self, ctx, user:str=None, *, weapon:str=None):
 
-        if user is None or user.lower() == ctx.author.mention or user == ctx.author.name.lower() or ctx.guild is not None and ctx.author.nick is not None and user == ctx.author.nick.lower():
-            await ctx.send("{} ¡Acabo en un hospital para locos!".format(ctx.author.mention))
-            return
-        if weapon is None:
-            await ctx.send("{0} a intentado combatir contra {1} sin nada asique... {1} lo consigue matar!".format(ctx.author.mention, user))
-            return
-        await ctx.send("{} a usado un(a) **{}** a **{}** {}".format(ctx.author.mention, weapon, user, random.choice(fight_results).replace("%user%", user).replace("%attacker%", ctx.author.mention)))
-
-    @commands.command()
+    @commands.command(description="NO TU")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def notu(self, ctx):
         await ctx.message.delete()
@@ -527,11 +443,11 @@ class GeneralExtra(commands.Cog):
 
 
 
-    @commands.command()
+    @commands.command(description="(PRAISE INTENSE)")
     async def praise(self, ctx):
         await ctx.send('https://i.imgur.com/K8ySn3e.gif')
 
-    @commands.command()
+    @commands.command(description="Que lio")
     async def css(self, ctx):
         await ctx.send('http://i.imgur.com/TgPKFTz.gif')
 

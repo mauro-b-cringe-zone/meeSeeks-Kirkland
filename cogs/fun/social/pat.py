@@ -28,7 +28,7 @@ class Pat(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='pat', aliases=["patpat"])
+    @commands.command(name='pat', aliases=["patpat"], description="Dale una palmada a alguien")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def pat(self, ctx, target: User):
         if ctx.message.author != target:

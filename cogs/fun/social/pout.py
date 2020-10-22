@@ -23,11 +23,11 @@ class Pout(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='pout')
+    @commands.command(name='pout', description="Gritale ha alguien")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def pout(self, ctx):
         await ctx.send(embed=Embed(description=f"(￣ε(#￣) **{ctx.author.name}** poutea !",
-                                   color=0x2F3136)
+                                   color=color)
                        .set_image(url=f"{await get_random_gif_by_theme('anime pout')}"))
 
 

@@ -5,7 +5,11 @@ from typing import Dict, List
 import discord
 from discord.ext import commands
 from os import environ as env
-color = int(0x75aef5)
+color = int(env["COLOR"])
+
+from googletrans import Translator
+
+trans = Translator()
 
 hangman_embed = discord.Embed(title="Juego 'Hangman' con reacciones", color=color).set_footer(text='Consejo: Busca "regional" en la barra de reacciones.')
 
@@ -58,7 +62,7 @@ class Hangman(commands.Cog):
 
             self.words = [s.lower() for s in dictionary.read().splitlines() if len(s) >= 6]
 
-    @commands.command(pass_context=True, name="hangman")
+    @commands.command(pass_context=True, name="hangman", description="Haver si adivinas la palabra")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def hangman_command(self, ctx):
         hangman = HangmanGame(random.choice(self.words))

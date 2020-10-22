@@ -14,7 +14,7 @@ class Password(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Te enviare una contraseña (CON LA LONGUITUD QUE TU QUIERAS)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def password(self, ctx, nbytes: int = 18):
         if nbytes not in range(3, 1401):

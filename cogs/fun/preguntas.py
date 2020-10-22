@@ -10,7 +10,7 @@ class Polls(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Haz una pregunta a la gente (LUEGO ENVIA MENSAJES CON LAS OPCIONES)")
     @commands.cooldown(1, 15, commands.BucketType.guild)
     @commands.has_permissions(manage_messages=True)
     async def poll(self, ctx, *, question):
@@ -51,7 +51,7 @@ class Polls(commands.Cog):
         if isinstance(error, commands.CommandNotFound):
             return
 
-    @commands.command()
+    @commands.command(description="Ej: Nombre_de_la_pregunta opcion1 opcion2")
     @commands.cooldown(1, 15, commands.BucketType.guild)
     @commands.has_permissions(manage_messages=True)
     async def quickpoll(self, ctx, *questions_and_choices: str):

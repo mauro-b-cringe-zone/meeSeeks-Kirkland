@@ -12,7 +12,7 @@ class Tts(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=['talk','gtts','texttospeech','text-to-speech'])
+    @commands.command(aliases=['talk','gtts','texttospeech','text-to-speech'], description="Convierte texto ha audio")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def tts(self, ctx, *args):
         if len(list(args))==0: 

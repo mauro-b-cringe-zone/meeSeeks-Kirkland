@@ -76,7 +76,7 @@ import json
 import time
 import re
 import os
-
+from termcolor import cprint
 
 def get_prefix(bot, message):
     with open('./json/prefix.json', 'r') as f:
@@ -93,13 +93,13 @@ def main():
     @bot.event
     async def on_ready():
 
-        print("""
+        cprint("""
              __    __     ______     __  __     ______     ______     ______  
             /\ "-./  \   /\  __ \   /\ \/\ \   /\  == \   /\  __ \   /\__  _\ 
             \ \ \-./\ \  \ \  __ \  \ \ \_\ \  \ \  __<   \ \ \/\ \  \/_/\ \/ 
              \ \_\ \ \_\  \ \_\ \_\  \ \_____\  \ \_____\  \ \_____\    \ \_\ 
               \/_/  \/_/   \/_/\/_/   \/_____/   \/_____/   \/_____/     \/_/                                                             
-        """)
+        """, 'blue')
 
         # change_status.start()
         DEVMODE = True
@@ -112,9 +112,13 @@ def main():
             f"Estado: Actualizado\n"
             "------------------------------------->\n")
 
+        cprint(f"\nTOKEN:  {TOKEN}\n", 'blue')
+
         print("\n------------------------------------->\n"
             f"COGS\n"
             f"Secrete.py a reyenado al token y los colores\n")
+        
+        cprint("-----------------------> [LOG]\n", 'red')
 
         # TODOS LOS ESTADOS: online, offline, idle, dnd, invisible
 
@@ -143,7 +147,7 @@ def main():
         msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa", description=f""":tada: ¡¡¡Hola!!!Mi nombre e **{bot.user.name}**, Y soy el responsable que te ayudara 
             a ganar partidas en el destini `hacer tu server mejor` porque tu eres 
             uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.\n\n
-            **El prefijo del comando es: `$`**\n\n
+            **El prefijo del comando es: `$`, `!`, `?`, `m.`**\n\n
             Ese es mi prefijo, siempre puedes hacerme menciones con **@{bot.user.name}**. 
             Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
             para cambiar de prefijo tienes que poner **$server** y luego **$prefix <nuevo prefijo>** (NO USES LOS BRACKETS).\n\n
@@ -177,7 +181,7 @@ def main():
         msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://discord.gg/4gfUZtB)**", embed=embed1)
 
 
-    @bot.command()
+    @bot.command(description="Verifica que eres humano")
     async def verify(ctx):
         embed5 = discord.Embed(title="Verifica que eres humano", description="En estos tiempos Discord cadavez tiene mas atackes de bots por lo que para mas seguridad verificar que no soy robots. \n\n porfavor dale al ✅ para comfirmar que no eres un robot", colour=0x1cce52)
         embed5.set_footer(text='Maubot | Verifica que eres humano')
@@ -219,7 +223,7 @@ def main():
         with open('./json/prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
-    @bot.command()
+    @bot.command(description="Mira las reglas del server")
     @commands.cooldown(1, 25, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def reglas(ctx):
@@ -247,7 +251,7 @@ def main():
 
 
 
-    @bot.command()
+    @bot.command(description="Cambia el prefijo")
     @commands.cooldown(1, 25, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
     async def prefix(ctx, prefix):
@@ -400,7 +404,7 @@ def main():
     # COMANDOS #
     ############
 
-    @bot.command()
+    @bot.command(description="Mira la info del bot o la config ($_bot info | $_bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _bot(ctx, inf_con):
         if inf_con == 'info':
@@ -447,7 +451,7 @@ def main():
             await ctx.send(embed=em) 
 
 
-    @bot.command(aliases=['permisos_visu'])
+    @bot.command(aliases=['permisos_visu'], description="Mira los permisos de alguien")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def permisos(ctx, *, member: discord.Member=None):
 
@@ -465,7 +469,7 @@ def main():
 
         await ctx.send(content=None, embed=embed)
 
-    @bot.command()
+    @bot.command(description="Haz una reseña a el robot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def rate_bot(ctx, *, texto):
         NUMBERS = {
@@ -513,7 +517,7 @@ def main():
             await feedbackCh.send('<@700812754855919667>, Usuario con ID: '+str(ctx.message.author.id)+f' Ha enviado una reseña', embed=embed_feed_CH)
 
 
-    @bot.command()
+    @bot.command(description="Mira la info de un usuario")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def userinfo(ctx, member:discord.Member = None):
         member = ctx.author if not member else member
@@ -552,7 +556,7 @@ def main():
     #fin de ayuda
 
 
-    @bot.command()
+    @bot.command(description="Hola 👏 Gente 👏 ¿Què 👏 Tal 👏 ?")
     @commands.cooldown(1, 15, commands.BucketType.guild)
     async def palmadas(ctx, *, message):
         msg = message.replace(" ", " 👏 ")
@@ -560,7 +564,7 @@ def main():
         await ctx.send(msg)
 
 
-    @bot.command()
+    @bot.command(description="Mira el avatar de alguien")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def avatar(ctx, member: discord.Member = None):
         member = ctx.author if member == None else member
@@ -568,13 +572,13 @@ def main():
         embed.set_image(url=f"{member.avatar_url}")
         await ctx.send(embed=embed)
 
-    @bot.command()
+    @bot.command(description="Mira el token del bot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def token(ctx):
         embed = discord.Embed(title="".join([random.choice(list('abcdefghijklmnopqrstuvwxyz._=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.')) for i in range(59)]), colour=color)
         await ctx.send(embed=embed)
 
-    @bot.command(asliases=['link', 'links'])
+    @bot.command(asliases=['link', 'links'], description="Los links del bot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def invite(ctx):
 
@@ -584,7 +588,7 @@ def main():
         # embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
 
-    @bot.command()
+    @bot.command(description="¿Quien es el jefe del servidor?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def owner(ctx):
 
@@ -594,41 +598,3 @@ def main():
         embed.set_footer(text=f"Puesto por | {ctx.author}")
         embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
-
-    # MATES
-
-    @bot.command()
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def sum(ctx, numOne: int, numTwo: int):
-        embed = discord.Embed(title=f"{numOne} + {numTwo} = {numOne + numTwo}", colour=color)
-        await ctx.send(embed=embed)
-        
-    @bot.command()
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def mul(ctx, numOne: int, numTwo: int):
-        embed = discord.Embed(title=f"{numOne} x {numTwo} = {numOne * numTwo}", colour=color)
-        await ctx.send(embed=embed)
-
-    @bot.command()
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def div(ctx, numOne: int, numTwo: int):
-        embed = discord.Embed(title=f"{numOne} / {numTwo} = {numOne / numTwo}", colour=color)
-        await ctx.send(embed=embed)
-
-
-    @bot.command()
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def restar(ctx, numOne: int, numTwo: int):
-        embed = discord.Embed(title=f"{numOne} - {numTwo} = {numOne - numTwo}", colour=color)
-        await ctx.send(embed=embed)
-
-    @bot.command()
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def rz(ctx, numOne: int):
-        embed = discord.Embed(title=f"La raiz cuadrda de {numOne} es:    {numOne ** (1/2)}", colour=color)
-        await ctx.send(embed=embed)
-
-
-
-
-    # FINAL DE MATES

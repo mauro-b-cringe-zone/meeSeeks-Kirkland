@@ -23,7 +23,7 @@ class Shrug(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='shrug')
+    @commands.command(name='shrug', description="¿Y yo que se?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def shrug(self, ctx):
         await ctx.send(embed=Embed(description=f"¯\_( ツ )_/¯ **{ctx.author.name}** shrugs",

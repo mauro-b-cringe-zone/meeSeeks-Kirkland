@@ -22,7 +22,7 @@ class Pikachu(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='pikachu', aliases=['pika'])
+    @commands.command(name='pikachu', aliases=['pika'], description="Gif'f de pikachu")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def pikachu(self, ctx):
         embed = discord.Embed(title="Pika Pika.. CHUUUUU", colour=color)

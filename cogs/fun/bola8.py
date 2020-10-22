@@ -34,7 +34,7 @@ class Ball(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="¿Qué tocaraa...?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def ball(self, ctx, *, question: str):
         trans = Translator()

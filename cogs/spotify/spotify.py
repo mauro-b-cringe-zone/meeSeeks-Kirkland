@@ -95,7 +95,7 @@ class Spotify(commands.Cog):
     def dearray(self, arr):
         return str(', '.join(arr))+'.'
 
-    @commands.command()
+    @commands.command(description="¿Que estas escuchando? (TIENES QUE TENER EL ESTADO DE DISCORD EN SPOTIFY)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def spotify(self, ctx, *args):
         source = getUser(ctx, args)

@@ -50,11 +50,7 @@ class MessageListener(commands.Cog):
             await channel.send(embed=discord.Embed(title=f':tada: ¡felicidades!', description=f'{user.mention}, has subido al nivel {lvl_end}! :champagne_glass: ', colour=color))
             users[str(user.id)]['level'] = lvl_end
 
-    def nivel(self, nivel):
-        exp = int(nivel - (1/4))
-        return exp
-
-    @commands.command()
+    @commands.command(description="Mira tu nivel de mensajes")
     async def rank(self, ctx, user: discord.Member = None):
         with open("./json/userslvl.json", "r") as f:
             users = json.load(f)
@@ -71,7 +67,7 @@ class MessageListener(commands.Cog):
         if not str(user.id) in users:
             await ctx.send(f"El usuarion {user} aun no tiene un rango.")
         else:
-            embed = discord.Embed(description=f"{user.mention} te quedan `{exp_res}` de experiencia para suvir de nivel", colour=color)
+            embed = discord.Embed(colour=color)
             embed.set_author(name=f"nivel - {user.name}", icon_url=user.avatar_url)
             embed.add_field(name="nivel", value=users[str(user.id)]["level"], inline=True)
             embed.add_field(name="exp", value=users[str(user.id)]["experience"], inline=True)

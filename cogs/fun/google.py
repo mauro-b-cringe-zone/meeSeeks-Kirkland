@@ -22,7 +22,7 @@ class Google(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Busca algo en google")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def google(self, ctx, *, term: str):
         embed= discord.Embed(title="Busqueda de google", url=f"https://lmgtfy.com/?q={term.replace(' ', '+')}", colour=color)

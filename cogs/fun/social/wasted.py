@@ -31,7 +31,7 @@ class Wasted(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='wasted')
+    @commands.command(name='wasted', description="Bruhh...")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def wasted(self, ctx, target: User):
         if ctx.message.author != target:

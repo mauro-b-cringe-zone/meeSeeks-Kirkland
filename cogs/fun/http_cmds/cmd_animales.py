@@ -27,27 +27,27 @@ class Animales(commands.Cog):
         embed.set_image(url=r[endpoint])
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Imagenes de gatos")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def cat(self, ctx):
         await self.randomimageapi(ctx, 'https://api.alexflipnote.dev/cats', 'file')
 
-    @commands.command()
+    @commands.command(description="Imagenes de perros")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def dog(self, ctx):
         await self.randomimageapi(ctx, 'https://api.alexflipnote.dev/dogs', 'file')
 
-    @commands.command(aliases=["bird"])
+    @commands.command(aliases=["bird"], description="Imagenes de pajaros")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def birb(self, ctx):
         await self.randomimageapi(ctx, 'https://api.alexflipnote.dev/birb', 'file')
 
-    @commands.command()
+    @commands.command(description="Imagenes random de patitos")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def duck(self, ctx):
         await self.randomimageapi(ctx, 'https://random-d.uk/api/v1/random', 'url')
 
-    @commands.command()
+    @commands.command(description="¿Cafes?")
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
     async def coffee(self, ctx):
         await self.randomimageapi(ctx, 'https://coffee.alexflipnote.dev/random.json', 'file')

@@ -74,7 +74,7 @@ class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Mira la tardanza de respuesta")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def ping(self, ctx):
         msg = await ctx.send("`Tardanza del bot...`")
@@ -145,7 +145,7 @@ class General(commands.Cog):
         channel_type_list = sorted(channel_type_list)
         return "\n".join(channel_type_list)
 
-    @commands.command()
+    @commands.command(description="Mira la info del servidor")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def infoserver(self, ctx):
 
@@ -172,7 +172,7 @@ class General(commands.Cog):
 
         await ctx.send(embed=embed, file=discord.File("../infoserver.png"))
 
-    @commands.command()
+    @commands.command(description="¿Ha cuantos has invitado?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def invites(self, ctx):
         totalInvites = 0
@@ -182,7 +182,7 @@ class General(commands.Cog):
         embed = discord.Embed(title="Invitaciones", description=f"{ctx.author.mention} has invitado a {totalInvites} persona{'' if totalInvites == 1 else 's'}", colour=color)        
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=True, description="Adivinare tu contraseña")
     @commands.cooldown(1, 7, commands.BucketType.user)
     async def pass_guess(self, ctx, *, password):
         # print(user_pass)
@@ -196,7 +196,7 @@ class General(commands.Cog):
         embed.add_field(name="Intentos", value=f"{random.randrange(3, 100000)} intentos")
         await msg.edit(content="", embed=embed)
 
-    @commands.command()
+    @commands.command(description="¿Una cerbeza?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def beer(self, ctx, user: discord.Member = None, *, reason: commands.clean_content = ""):
         if not user or user.id == ctx.author.id:
@@ -228,7 +228,7 @@ class General(commands.Cog):
             beer_offer = beer_offer + f"\n\n**razon:** {reason}" if reason else beer_offer
             await msg.edit(content=beer_offer)
 
-    @commands.command(aliases=['guapocal', 'guapocl'])
+    @commands.command(aliases=['guapocal', 'guapocl'], description="¿Eres guapo? Nah")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def guapo(self, ctx, *, user: discord.Member = None):
         user = user or ctx.author
@@ -249,14 +249,14 @@ class General(commands.Cog):
 
         await ctx.send(f"**{user.name}** es **{hot:.2f}%** guapo {emoji}")
 
-    @commands.command()
+    @commands.command(description="Desaparece del server (SE TE EXPULSA)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def vanish(self, ctx):
         await ctx.message.add_reaction('✅')
         time.sleep(0.5)
         await ctx.author.kick(reason='Su-propio-kick')
 
-    @commands.command(name='djenerate')
+    @commands.command(name='djenerate', description="¿Puedes tocar esta pieza?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def generateDjent(self, ctx):
         import random
@@ -308,7 +308,7 @@ class General(commands.Cog):
         embed.add_field(name=f"{bpm}bpm, {randomTuning}", value=output, inline=True)
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Traduze a el idioma que quieras (Ej: m.translate es helllo ($translate --lista para ver los idiomas disponibles))")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def translate(self, ctx, *args):
         wait = await ctx.send(' | Porfavor espera...') ; args = list(args)
@@ -370,7 +370,7 @@ class General(commands.Cog):
 
 	# 	await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Historias de mi dia a dia")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def fml(self, ctx):
         response = requests.get('https://api.alexflipnote.dev/fml')
@@ -379,7 +379,7 @@ class General(commands.Cog):
         translated_response = trans.translate(json_data['text'], src='en', dest='es')
         await ctx.send(translated_response.text)
 
-    @commands.command()
+    @commands.command(description="Busca algo en google")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def gl(self, ctx, *, query):
         from googlesearch import search
@@ -416,7 +416,7 @@ class General(commands.Cog):
     #         await ctx.send(ytasync)
 
 
-    @commands.command(aliases=["cpr", "copy"])
+    @commands.command(aliases=["cpr", "copy"], description="NO COPIES")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def copyright(self, ctx):
         embed = discord.Embed(colour=color)
@@ -450,7 +450,7 @@ class General(commands.Cog):
         await ctx.send(embed=embed)
 
 
-    @commands.command(aliases=["ltr", "letra", "repetida"])
+    @commands.command(aliases=["ltr", "letra", "repetida"], description="Mira haver si hay una letra repetida en tu texto")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def letra_repetida(self, ctx, palabra):
 
@@ -463,7 +463,7 @@ class General(commands.Cog):
                 await ctx.send(embed=embed)
 
 
-    @commands.command()
+    @commands.command(aliases=["edit", "editar"], description="Pon | Donde quieras que este la marca de (editado)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def edited(self, ctx, *args):
         msg = await ctx.send('...')
@@ -481,7 +481,7 @@ class General(commands.Cog):
     def dearray(self, arr):
         return str(', '.join(arr))+'.'
 
-    @commands.command()
+    @commands.command(description="Cuantas palabras riman con \"Palabra\"")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def rhyme(self, ctx, *args):
         if len(list(args))==0: await ctx.send('Por favor ingrese una palabra. E intentaremos encontrar la palabra que mejor rime con ella.')
@@ -504,9 +504,9 @@ class General(commands.Cog):
         from requests import get as decodeurl
         return decodeurl(url).json()
 
-    @commands.command()
+    @commands.command(description="Te dare la rezeta de lo que quieras")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def recipe(self, ctx, *args):
+    async def receta(self, ctx, *args):
 
         trans = Translator()
 
@@ -531,7 +531,7 @@ class General(commands.Cog):
                 embed.set_image(url=total['thumbnail'])
                 await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Mira si una web esta abajo")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def isitdown(self, ctx, *args):
         from datetime import datetime as t
@@ -545,7 +545,7 @@ class General(commands.Cog):
             a = t.now()
             ping = get(web, timeout=5)
             pingtime = round((t.now()-a).total_seconds()*1000)
-            await wait.edit(embed=discord.Embed(title=' | Ese sitio web está activo.', description='Ping: {} ms\nCódigo de estado: {}'.format(pingtime, ping.status_code), colour=color))
+            await wait.edit(content="", embed=discord.Embed(title=' | Ese sitio web está activo.', description='Ping: {} ms\nCódigo de estado: {}'.format(pingtime, ping.status_code), colour=color))
         except:
             await wait.edit(content=' | Si. ese sitio web está caído.')
 
@@ -567,7 +567,7 @@ class General(commands.Cog):
         return urlencode(word).replace('+', '%20')
 
 
-    @commands.command(aliases=["qr"])
+    @commands.command(aliases=["qr"], description="Crea un codigo QR o de barras poniendo $barcode")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def barcode(self, ctx, *args):
         if len(list(args))==0:
@@ -584,7 +584,7 @@ class General(commands.Cog):
                     await ctx.send(embed=discord.Embed(title="Codigo de barras creado", url=f"{url}", colour=color).set_image(url=url))
 
 
-    @commands.command()
+    @commands.command(description="Te dire un secreto increible")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def secret(self, ctx):
         secretlist = getSecrets()
@@ -593,7 +593,7 @@ class General(commands.Cog):
         await ctx.message.author.send(embed=embed)
         await ctx.send('Compartí el secreto a través de DM. ¡No se lo muestres a nadie más! :wink::ok_hand:')
 
-    @command(aliases=['fact-core', 'fact-sphere', 'factsphere'])
+    @command(aliases=['fact-core', 'fact-sphere', 'factsphere'], description="Te dire una anecdota")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def factcore(self, ctx):
         data = self.jsonisp('https://raw.githubusercontent.com/dragonfire535/xiao/master/assets/json/fact-core.json')
@@ -603,7 +603,7 @@ class General(commands.Cog):
         embed.set_thumbnail(url='https://i1.theportalwiki.net/img/thumb/5/55/FactCore.png/300px-FactCore.png')
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="ME ABURROOOOOO")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def bored(self, ctx):
         data = self.api("https://www.boredapi.com/api/activity?participants=1")
@@ -611,7 +611,7 @@ class General(commands.Cog):
         traducted_data =  trans.translate(data['activity'], src='en', dest='es')
         await ctx.send('**¿Aburrido?**\n'+str(traducted_data.text))
 
-    @commands.command()
+    @commands.command(description="Busca canciones en itunes")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def itunes(self, ctx, *args):
         if len(list(args))==0: 
@@ -627,7 +627,7 @@ class General(commands.Cog):
         em.set_author(name='iTunes', icon_url='https://i.imgur.com/PR29ow0.jpg', url='https://www.apple.com/itunes/')
         await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(description="JAJAJA DON COMEDIAS")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def joke(self, ctx):
         data = self.api("https://official-joke-api.appspot.com/jokes/general/random")
@@ -672,7 +672,7 @@ class General(commands.Cog):
             return ctx.guild.get_member(int(list(args)[0]))
         return ctx.author
 
-    @commands.command()
+    @commands.command(description="Mira tu posicion en la que te unistes")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def joinposition(self, ctx, *args):
         from datetime import datetime as t
@@ -700,7 +700,7 @@ class General(commands.Cog):
         ]), color=color)
         await wait.edit(content='', embed=em)
 
-    @commands.command()
+    @commands.command(description="Un uo")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def ufo(self, ctx):
         num = str(random.randint(50, 100))
@@ -732,7 +732,7 @@ class General(commands.Cog):
         return a
 
 
-    @commands.command(aliases=['pokedex','dex','bulbapedia','pokemoninfo','poke-info','poke-dex','pokepedia'])
+    @commands.command(aliases=['pokedex','dex','bulbapedia','pokemoninfo','poke-info','poke-dex','pokepedia'], description="Info sobre un pockemon")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def pokeinfo(self, ctx, *args):
         query = 'Missingno' if (len(list(args))==0) else self.urlify(' '.join(list(args)))
@@ -759,7 +759,7 @@ class General(commands.Cog):
         res = text.replace('<p>', '').replace('</p>', '').replace('<b>', '**').replace('</b>', '**').replace('<i>', '*').replace('</i>', '*').replace('<br />', '\n')
         return res
 
-    @commands.command()
+    @commands.command(description="Mira una serie de television")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def tv(self, ctx, *args):
         if len(list(args))==0: 
@@ -795,7 +795,7 @@ class General(commands.Cog):
     def insp(self, url):
         return requests.get(url).text
 
-    @commands.command()
+    @commands.command(description="Pon el texto en grande")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def ascii(self, ctx, *args):
         text = '+'.join(list(args)) if len(list(args))>0 else 'ascii%20texto'
@@ -806,7 +806,7 @@ class General(commands.Cog):
         except:
             await ctx.send('d | ¡Tu texto es muy largo!')
 
-    @commands.command()
+    @commands.command(description="Mira info de la nasa")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def nasa(self, ctx, *args):
         query = 'earth' if len(list(args))==0 else urlify(' '.join(list(args)))
@@ -823,7 +823,7 @@ class General(commands.Cog):
         em.set_image(url=img['links'][0]['href'])
         await ctx.send(embed=em)
 
-    @commands.command()
+    @commands.command(description="Una frase de alguien random")
     @commands.cooldown(1, 7, commands.BucketType.user)
     async def quote(self, ctx):
         async with ctx.channel.typing():
@@ -833,7 +833,7 @@ class General(commands.Cog):
             await ctx.send(embed=discord.Embed(description=f'***{translated_quote.text}***\n\n-- {quoter} --', color=color))
 
 
-    @commands.command()
+    @commands.command(description="Letra de una cancion (PRIMERO SOLO PONES LA BANDA O AUTOR LUEGO EN OTRO MENSAJE SEPARADO PONES EL TITULO DE LA CANCION)")
     @commands.cooldown(1, 7, commands.BucketType.user)
     async def lyrics(self, ctx: commands.Context, *, Comp: str):
         if len(Comp) == 0:
@@ -842,7 +842,7 @@ class General(commands.Cog):
         def check(m):
             return m.author == ctx.author
         try:    
-            msg = await self.bot.wait_for('message', check=check, timeout=60.0)
+            msg = await self.bot.wait_for('message', check=check, timeout=30.0)
         except TimeoutError:
             await now.delete()
             return await ctx.send("Tiempo agotado intenta ser mas rapido la siguiente vez", delete_after=10.0)
@@ -859,7 +859,7 @@ class General(commands.Cog):
                 await ctx.send("Upss... un error. Intenta poner una cancion/artista valido")
                 cprint(str("[Log] un error: " + e), 'red')
 
-    @commands.command()
+    @commands.command(description="Busca algo en wiki")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def wikipedia(self, ctx, *args):
         wait = await ctx.send(' | Porfavor espera...')

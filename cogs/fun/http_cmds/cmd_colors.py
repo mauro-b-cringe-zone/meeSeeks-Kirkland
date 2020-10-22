@@ -18,7 +18,7 @@ class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=['color'])
+    @commands.command(aliases=['color'], description="Busca un color con Nombre|Hex|rgb")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def colour(self, ctx, colour: str): 
         async with ctx.channel.typing():

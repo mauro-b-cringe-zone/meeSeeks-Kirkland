@@ -84,19 +84,18 @@ class Img(commands.Cog):
         image = self.imagefromURL(url)
         return self.buffer(image)
 
-
-    @commands.command(aliases=['dym'])
+    @commands.command(aliases=['dym'], description="$didyoumean [hola][adios]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def didyoumean(self, ctx, *args):
         async with ctx.message.channel.typing():
-            txt1, txt2 = self.urlify(str(ctx.message.content).split('[')[1][:-2]), self.urlify(str(ctx.message.content).split('[')[2][:-1])
+            txt1, txt2 = self.urlify(str(ctx.message.content).split('[')[1][:-1]), self.urlify(str(ctx.message.content).split('[')[2][:-1])
             url='https://api.alexflipnote.dev/didyoumean?top='+str(txt1)+'&bottom='+str(txt2)
             await ctx.send(file=discord.File(self.urltoimage(url), 'didyoumean.png'))
                 
 
 
 
-    @commands.command()
+    @commands.command(description="TU ERES {texto}")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def nichijou(self, ctx, arg):
         async with ctx.message.channel.typing():
@@ -108,7 +107,7 @@ class Img(commands.Cog):
         image = self.imagefromURL(url)
         return self.buffer(image)
 
-    @commands.command()
+    @commands.command(description="Esta es tu casa")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def trash(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -118,14 +117,14 @@ class Img(commands.Cog):
             data = self.urltoimage(url)
             await ctx.send(file=discord.File(data, 'trashed.png'))
 
-    @commands.command()
+    @commands.command(description="¿Soy una broma para ti?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def amiajoke(self, ctx, *args):
         source = getUserAvatar(ctx, args)
         url = 'https://api.alexflipnote.dev/amiajoke?image='+str(source)
         await ctx.send(file=discord.File(self.urltoimage(url), 'maymays.png'))
 
-    @commands.command()
+    @commands.command(description="El bot te dice algo")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def clyde(self, ctx, *args):
         if len(list(args))==0: 
@@ -136,7 +135,7 @@ class Img(commands.Cog):
                 await ctx.send(file=discord.File(self.urltoimage(url), 'lawl.png'))
 
 
-    @commands.command()
+    @commands.command(description="FELICIDADES HAS CONSEGUIDO UN LOGRO")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def challenge(self, ctx, *args):
         if len(list(args))==0: 
@@ -147,7 +146,7 @@ class Img(commands.Cog):
                 url='https://api.alexflipnote.dev/achievement?text='+str(txt)
                 await ctx.send(file=discord.File(self.urltoimage(url), 'minecraft_notice.png'))
 
-    @commands.command()
+    @commands.command(description="Llama ha alguien")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def call(self, ctx, *args):
         if len(list(args))==0: 
@@ -161,7 +160,7 @@ class Img(commands.Cog):
     def urlify(self, word):
         return urlencode(word).replace('+', '%20')
 
-    @commands.command()
+    @commands.command(description="$drake [hola][ola]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def drake(self, ctx, *args):
         unprefixed = ' '.join(list(args))
@@ -174,14 +173,14 @@ class Img(commands.Cog):
             await ctx.send(embed=embed)
         else:
             async with ctx.message.channel.typing():
-                txt1 = self.urlify(unprefixed.split('[')[1][:-2])
+                txt1 = self.urlify(unprefixed.split('[')[1][:-1])
                 txt2 = self.urlify(unprefixed.split('[')[2][:-1])
                 url='https://api.alexflipnote.dev/drake?top='+str(txt1)+'&bottom='+str(txt2)
                 data = self.urltoimage(url)
                 await ctx.send(file=discord.File(data, 'drake.png'))
 
 
-    @commands.command()
+    @commands.command(description="Salero")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def salty(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -190,7 +189,7 @@ class Img(commands.Cog):
             data = self.urltoimage(url)
             await ctx.send(file=discord.File(data, 'salty.png'))
 
-    @commands.command()
+    @commands.command(description="Don comendias")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def jokeoverhead(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -199,7 +198,7 @@ class Img(commands.Cog):
             data = self.urltoimage(url)
             await ctx.send(file=discord.File(data, 'salty.png'))
 
-    @commands.command()
+    @commands.command(description="NIÑO MALO")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def bad(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -209,7 +208,7 @@ class Img(commands.Cog):
             await ctx.send(file=discord.File(data, 'salty.png'))
 
 
-    @commands.command()
+    @commands.command(description="Suelo es lava LOL")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def floor(self, ctx, *args):
         if len(list(args))==0: text = 'Lo siento no he puesto argumentos'
@@ -226,7 +225,7 @@ class Img(commands.Cog):
             await ctx.send(file=discord.File(self.urltoimage('https://api.alexflipnote.dev/floor?image='+auth+'&text='+self.urlify(text)), 'floor.png'))
 
 
-    @commands.command()
+    @commands.command(description="¿Quieres ha alguien?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def ship(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -240,7 +239,7 @@ class Img(commands.Cog):
         from requests import get as decodeurl
         return decodeurl(url).json()
 
-    @commands.command(aliases=['programmerhumor','programmermeme','programming','programmer'])
+    @commands.command(aliases=['programmerhumor','programmermeme','programming','programmer'], description="Solo los programadores lo entienden")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def programmingmeme(self, ctx):
         data = self.jsonisp('https://useless-api.vierofernando.repl.co/programmermeme')['url']
@@ -253,7 +252,7 @@ class Img(commands.Cog):
         data = self.buffer(cropped_img)
         return data
 
-    @commands.command()
+    @commands.command(description="$philosoraptor [lol][xd]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def philosoraptor(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -264,10 +263,10 @@ class Img(commands.Cog):
                 url='https://memegen.link/'+str(name)+'/'+str(top)+'/'+str(bott)+'.jpg?watermark=none'
                 await ctx.send(file=discord.File(self.memegen(url), args[0][1:]+'.png'))
             except Exception as e:
-                await ctx.send(' | Error!\n```{e}```Parametro invalido.')
+                await ctx.send(f' | Error!\n```{e}```Parametro invalido.')
 
 
-    @commands.command()
+    @commands.command(description="Un avatar random")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def randomavatar(self, ctx, *args):
         if len(list(args))<1: 
@@ -281,14 +280,14 @@ class Img(commands.Cog):
         from requests import get as decodeurl
         return decodeurl(url).text
 
-    @commands.command(aliases=['inspiringquotes', 'lolquote', 'aiquote', 'imagequote', 'imgquote'])
+    @commands.command(aliases=['inspiringquotes', 'lolquote', 'aiquote', 'imagequote', 'imgquote'], description="Te inspirare")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def inspirobot(self, ctx):
         async with ctx.message.channel.typing():
             img = self.insp('https://inspirobot.me/api?generate=true')
             await ctx.send(file=discord.File(self.urltoimage(img), 'inspirobot.png'))
 
-    @commands.command()
+    @commands.command(description="DOODLY GOOGLY")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def googledoodle(self, ctx):
         from datetime import datetime as t
@@ -321,7 +320,7 @@ class Img(commands.Cog):
             total_str += '\n'
         return total_str
 
-    @commands.command(aliases=['img2ascii','imagetoascii','avascii','avatarascii','avatar2ascii','av2ascii'])
+    @commands.command(aliases=['img2ascii','imagetoascii','avascii','avatarascii','avatar2ascii','av2ascii'], description="Mira el avatar de alguien en caracteres")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def imgascii(self, ctx, *args):
         from requests import post
@@ -331,9 +330,9 @@ class Img(commands.Cog):
         data = post("https://hastebin.com/documents", data=text)
         if data.status_code != 200: 
             return await wait.edit(content=" | Uups... un error")
-        return await wait.edit(content='Echo | Puedes ver los rewsultados en **https://hastebin.com/{}**!'.format(data.json()['key']))
+        return await wait.edit(content='Echo | Puedes ver los resultados en **https://hastebin.com/{}**!'.format(data.json()['key']))
     
-    @commands.command(aliases=['httpduck'])
+    @commands.command(aliases=['httpduck'], description="httpdog o httpduck (Estado del servido)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def httpdog(self, ctx, *args):
         code = list(args)[0] if (len(list(args))!=0) else '404'
@@ -343,11 +342,11 @@ class Img(commands.Cog):
                 self.urltoimage(url.replace('ABC', code)), 'httpdogduck.png'
             ))
         except:
-            await ctx.send(' | 404')
+            await ctx.send('> 404')
 
 
 
-    @commands.command(asliases=['imageoftheday'])
+    @commands.command(asliases=['imageoftheday'], description="Mira la imagen del dia")
     @commands.cooldown(1, 21600, commands.BucketType.user)
     async def iotd(self, ctx):
         data = self.jsonisp('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US')['images'][0]
@@ -355,7 +354,7 @@ class Img(commands.Cog):
         embed.set_image(url='https://bing.com'+data['url'])
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Mira el avatar de alguien descontrolarse")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def magik(self, ctx, *args):
         source = getUserAvatar(ctx, args)
@@ -367,25 +366,8 @@ class Img(commands.Cog):
         img = self.imagefromURL(url)
         img.seek(0)
         return self.buffer(img)
-
-    @commands.command()
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def garfield(self, ctx):
-        try:
-            year, month, day = str(random.randint(1979, 2019)), str(random.randint(1, 12)), str(random.randint(1, 28))
-            month = month if (len(month)==2) else "0"+month
-            day = day if (len(day)==2) else "0"+day
-            await ctx.send(file=discord.File(
-                self.gif2png(
-                    "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/{}/{}-{}-{}.gif".format(
-                        year, year, month, day
-                    )
-                ), "garfield.png"
-            ))
-        except:
-            await ctx.send(" | Ooops! No hemos conseguido encontrar ningun comic")
-
-    @commands.command()
+        
+    @commands.command(description="Crea un meme con alguien")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def avmeme(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -402,7 +384,7 @@ class Img(commands.Cog):
                 await ctx.send(f' | ¡Error!\n```{e}```Parametros invalidos. Ejemplo: `{ctx.prefix}avmeme <@Alguien> [Texto de arriba] [Texto de abajo]`')
 
 
-    @commands.command()
+    @commands.command(description="Cambia mis opiniones")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def changemymind(self, ctx, *args):
         if len(list(args))==0:
@@ -415,7 +397,7 @@ class Img(commands.Cog):
                 except Exception as e:
                     await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
-    @commands.command()
+    @commands.command(description="Pon un tweet como si fueras trump")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def trumptweet(self, ctx, *args):
         if len(list(args))==0:
@@ -428,64 +410,52 @@ class Img(commands.Cog):
                 except Exception as e:
                     await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
-    @commands.command()
+    @commands.command(description="")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def iphonex(self, ctx, *args):
-        if len(list(args))==0:
-             await ctx.send(" | Necesitas un texto...")
-        else:
-            source = getUserAvatar(ctx, args)
-            async with ctx.channel.typing():
-                try:
-                    data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=iphonex&url='+source)['message']
-                    return await ctx.send(data)
-                except Exception as e:
-                    await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
+        source = getUserAvatar(ctx, args)
+        async with ctx.channel.typing():
+            try:
+                data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=iphonex&url='+source)['message']
+                return await ctx.send(data)
+            except Exception as e:
+                await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
 
-    @commands.command()
+    @commands.command(description="QUE MONOOO @usuario")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def awooify(self, ctx, *args):
-        if len(list(args))==0:
-             await ctx.send(" | Necesitas un texto...")
-        else:
-            source = getUserAvatar(ctx, args)
-            async with ctx.channel.typing():
-                try:
-                    data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=awooify&url='+source)["message"]
-                    return await ctx.send(embed=discord.Embed(title='QUE MONO/A', color=color).set_image(url=data))
-                except Exception as e:
-                    await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
+        source = getUserAvatar(ctx, args)
+        async with ctx.channel.typing():
+            try:
+                data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=awooify&url='+source)["message"]
+                return await ctx.send(embed=discord.Embed(title='QUE MONO/A', color=color).set_image(url=data))
+            except Exception as e:
+                await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
-    @commands.command()
+    @commands.command(description="Los mallores peligros de la humanidad")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def threats(self, ctx, *args):
-        if len(list(args))==0:
-             await ctx.send(" | Necesitas un texto...")
-        else:
-            source = getUserAvatar(ctx, args)
-            async with ctx.channel.typing():
-                try:
-                    data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=threats&url='+source)["message"]
-                    return await ctx.send(embed=discord.Embed(title='Salvense quien pueda...', color=color).set_image(url=data))
-                except Exception as e:
-                    await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
+        source = getUserAvatar(ctx, args)
+        async with ctx.channel.typing():
+            try:
+                data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=threats&url='+source)["message"]
+                return await ctx.send(embed=discord.Embed(title='Salvense quien pueda...', color=color).set_image(url=data))
+            except Exception as e:
+                await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
-    @commands.command()
+    @commands.command(description="COME COME COME @usuario")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def baguette(self, ctx, *args):
-        if len(list(args))==0:
-             await ctx.send(" | Necesitas un texto...")
-        else:
-            source = getUserAvatar(ctx, args)
-            async with ctx.channel.typing():
-                try:
-                    data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=baguette&url='+source)["message"]
-                    return await ctx.send(embed=discord.Embed(title='Que hambre...', color=color).set_image(url=data))
-                except Exception as e:
-                    await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
+        source = getUserAvatar(ctx, args)
+        async with ctx.channel.typing():
+            try:
+                data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=baguette&url='+source)["message"]
+                return await ctx.send(embed=discord.Embed(title='Que hambre...', color=color).set_image(url=data))
+            except Exception as e:
+                await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
-    @commands.command()
+    @commands.command(description="No se la diferencia")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def captcha_user(self, ctx, member):
         source = getUserAvatar(ctx, member)
@@ -497,7 +467,7 @@ class Img(commands.Cog):
             except Exception as e:
                 await ctx.send(" | ¡Oops! Un error generando tu captcha; `"+str(e)+"`")
 
-    @commands.command()
+    @commands.command(description="Policia del lol ¿Què quiere?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def lolice(self, ctx, member):
         source = getUserAvatar(ctx, member)
@@ -508,7 +478,7 @@ class Img(commands.Cog):
             except Exception as e:
                 await ctx.send(" | ¡Oops! Un error generando tu captcha; `"+str(e)+"`")
 
-    @commands.command()
+    @commands.command(description="GG")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def img_girl(self, ctx, member):
         source = getUserAvatar(ctx, member)
@@ -520,7 +490,7 @@ class Img(commands.Cog):
                 await ctx.send(" | ¡Oops! Un error generando tu captcha; `"+str(e)+"`")
 
 
-    @commands.command()
+    @commands.command(description="Haver si lo lees bien")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def captcha(self, ctx, *args):
         async with ctx.channel.typing():
@@ -528,7 +498,7 @@ class Img(commands.Cog):
             await ctx.send(embed=discord.Embed(title="Captcha",).set_image(url='https://useless-api.vierofernando.repl.co/captcha?text={}'.format(capt)))
 
 
-    @commands.command()
+    @commands.command(description="Memes random para pasar el tiempo")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def meme(self, ctx):
         data = self.jsonisp("https://meme-api.herokuapp.com/gimme")

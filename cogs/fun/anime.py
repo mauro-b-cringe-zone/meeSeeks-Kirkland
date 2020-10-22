@@ -45,7 +45,7 @@ class Anime(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='anime', aliases=['animeinfo', 'ai', 'mal', 'myanimelist'])
+    @commands.command(name='anime', aliases=['animeinfo', 'ai', 'mal', 'myanimelist'], description="Mira informacion sobre el anime")
     @commands.cooldown(1, 3)
     async def anime(self, ctx, *, term: str):
         query = await get_anime_info_by_name(term)

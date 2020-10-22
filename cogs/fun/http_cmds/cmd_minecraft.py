@@ -12,7 +12,7 @@ async def GetUuid(name):
     return u["id"]
 
 class Mc(commands.Cog):
-    @commands.command()
+    @commands.command(description="Informacion de un usuario en minecraft")
     async def mc(self, ctx: commands.Context, *, user: str):
 
         async with ctx.channel.typing():
