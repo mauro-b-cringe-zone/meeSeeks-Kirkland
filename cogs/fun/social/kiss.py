@@ -23,7 +23,7 @@ async def get_random_gif_by_theme(theme: str):
 
 
 
-class Kiss(commands.Cog):
+class Beso(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -40,4 +40,4 @@ class Kiss(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Kiss(bot))
+    bot.add_cog(Beso(bot))

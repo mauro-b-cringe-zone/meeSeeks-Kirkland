@@ -5,7 +5,7 @@ import time
 from os import environ as env
 color = int(env["COLOR"])
 
-class MessageListener(commands.Cog):
+class Mensajes(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
@@ -61,11 +61,10 @@ class MessageListener(commands.Cog):
         experience = users[str(user.id)]["experience"]
         lvl_end = int(experience ** (1/4))
 
-        exp_res = self.nivel(lvl_end)
         # print(exp_res)
         
         if not str(user.id) in users:
-            await ctx.send(f"El usuarion {user} aun no tiene un rango.")
+            await ctx.send(f"El usuario {user} aun no tiene un rango.")
         else:
             embed = discord.Embed(colour=color)
             embed.set_author(name=f"nivel - {user.name}", icon_url=user.avatar_url)
@@ -75,4 +74,4 @@ class MessageListener(commands.Cog):
     
 
 def setup(bot):
-    bot.add_cog(MessageListener(bot))
+    bot.add_cog(Mensajes(bot))

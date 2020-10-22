@@ -17,7 +17,7 @@ async def get_random_gif_by_theme(theme: str):
         return response["results"][random.randint(0, len(response["results"]) - 1)]["media"][0]["gif"]["url"]
 
 
-class Cry(commands.Cog):
+class Llorar(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -32,4 +32,4 @@ class Cry(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Cry(bot))
+    bot.add_cog(Llorar(bot))

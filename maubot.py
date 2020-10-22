@@ -598,3 +598,7 @@ def main():
         embed.set_footer(text=f"Puesto por | {ctx.author}")
         embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
+
+
+if __name__ == "__main__":
+    cprint("[ESTUPIDO] Ve a launcher.py", 'red')

@@ -5,7 +5,7 @@ def to_emoji(c):
     base = 0x1f1e6
     return chr(base + c)
 
-class Polls(commands.Cog):
+class Preguntas(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -80,4 +80,4 @@ class Polls(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Polls(bot))
+    bot.add_cog(Preguntas(bot))

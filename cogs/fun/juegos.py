@@ -12,7 +12,7 @@ from urllib.request import urlopen as getapi
 import requests
 from termcolor import cprint
 
-class Games(commands.Cog):
+class Juegos(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
@@ -800,4 +800,4 @@ class Games(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Games(bot))
+    bot.add_cog(Juegos(bot))

@@ -20,7 +20,7 @@ async def get_random_gif_by_theme(theme: str):
 
 
 
-class Sleep(commands.Cog):
+class Dormir(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -34,4 +34,4 @@ class Sleep(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Sleep(bot))
+    bot.add_cog(Dormir(bot))

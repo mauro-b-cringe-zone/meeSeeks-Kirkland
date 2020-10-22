@@ -182,20 +182,6 @@ class General(commands.Cog):
         embed = discord.Embed(title="Invitaciones", description=f"{ctx.author.mention} has invitado a {totalInvites} persona{'' if totalInvites == 1 else 's'}", colour=color)        
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True, description="Adivinare tu contraseña")
-    @commands.cooldown(1, 7, commands.BucketType.user)
-    async def pass_guess(self, ctx, *, password):
-        # print(user_pass)
-        if len(list(password)) > 10:
-            return await ctx.send("No mas de 10")
-        msg = await ctx.send("Porfavor espera esto puede tardar un rato **Sobre todo si las contraseñas son largas**")
-
-        embed = discord.Embed(colour=color)
-        embed.title = f"Tu contraseña es {password}"
-        embed.add_field(name="Tardanza", value=f"{random.random()} segundos")
-        embed.add_field(name="Intentos", value=f"{random.randrange(3, 100000)} intentos")
-        await msg.edit(content="", embed=embed)
-
     @commands.command(description="¿Una cerbeza?")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def beer(self, ctx, user: discord.Member = None, *, reason: commands.clean_content = ""):
@@ -379,21 +365,6 @@ class General(commands.Cog):
         translated_response = trans.translate(json_data['text'], src='en', dest='es')
         await ctx.send(translated_response.text)
 
-    @commands.command(description="Busca algo en google")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def gl(self, ctx, *, query):
-        from googlesearch import search
-        from concurrent.futures import ThreadPoolExecutor
-
-        def gsync(query=query):
-            name = str(ctx.message.author)
-            for j in search(query, tld="com", num=1, stop=1):
-                return j
-
-        async with ctx.typing():
-            gasync = await self.bot.loop.run_in_executor(ThreadPoolExecutor(), gsync)
-            await ctx.send(gasync)
-
     # @commands.command()
     # async def youtube(self, ctx, *, query):
     #     from concurrent.futures import ThreadPoolExecutor
@@ -565,6 +536,10 @@ class General(commands.Cog):
     def urlify(self, word):
         from urllib.parse import quote_plus as urlencode
         return urlencode(word).replace('+', '%20')
+
+class GeneralSecundario(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
 
     @commands.command(aliases=["qr"], description="Crea un codigo QR o de barras poniendo $barcode")
@@ -899,3 +874,4 @@ class General(commands.Cog):
 
 def setup(bot):
     bot.add_cog(General(bot))
+    bot.add_cog(GeneralSecundario(bot))

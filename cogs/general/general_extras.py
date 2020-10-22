@@ -13,6 +13,7 @@ from mauutils.fun.lists import drunkaf, fight_results, insults, honkhonkfgt
 import hashlib
 from os import environ as env
 color = int(env["COLOR"])
+
 class GeneralExtra(commands.Cog):
 
     def __init__(self, bot):
@@ -256,7 +257,12 @@ class GeneralExtra(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def lenny(self, ctx):
         await ctx.send("( ͡° ͜ʖ ͡° )")
-        
+
+class GeneralSecExtra(commands.Cog):
+    
+    def __init__(self, bot):
+        self.bot = bot
+
     @commands.command(description="(╯°□°）╯︵ ┻━┻")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def tableflip(self, ctx):
@@ -412,6 +418,11 @@ class GeneralExtra(commands.Cog):
     async def sha512(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.sha512(bytes(msg.encode("utf-8"))).hexdigest()))
 
+class GeneralMasExtras(commands.Cog):
+    
+    def __init__(self, bot):
+        self.bot = bot
+
     @commands.command(description="HOLA")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def uppercase(self, ctx, *, msg:str):
@@ -454,3 +465,5 @@ class GeneralExtra(commands.Cog):
 
 def setup(bot):
     bot.add_cog(GeneralExtra(bot))
+    bot.add_cog(GeneralMasExtras(bot))
+    bot.add_cog(GeneralSecExtra(bot))

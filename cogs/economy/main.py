@@ -162,7 +162,7 @@ async def update_bank(user, change=0, mode="wallet"):
 
 
 
-class Economy(commands.Cog):
+class Economia(commands.Cog):
     
     def __init__(self, bot):
         self.bot = bot
@@ -444,4 +444,4 @@ class Economy(commands.Cog):
         await ctx.send(embed=embed)
 
 def setup(bot):
-    bot.add_cog(Economy(bot))
+    bot.add_cog(Economia(bot))

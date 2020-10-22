@@ -266,6 +266,7 @@ class Img(commands.Cog):
                 await ctx.send(f' | Error!\n```{e}```Parametro invalido.')
 
 
+
     @commands.command(description="Un avatar random")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def randomavatar(self, ctx, *args):
@@ -344,7 +345,9 @@ class Img(commands.Cog):
         except:
             await ctx.send('> 404')
 
-
+class ImgSecundario(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
 
     @commands.command(asliases=['imageoftheday'], description="Mira la imagen del dia")
     @commands.cooldown(1, 21600, commands.BucketType.user)
@@ -410,7 +413,7 @@ class Img(commands.Cog):
                 except Exception as e:
                     await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
-    @commands.command(description="")
+    @commands.command(description="¡Mirate en un iphone!")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def iphonex(self, ctx, *args):
         source = getUserAvatar(ctx, args)
@@ -514,3 +517,4 @@ class Img(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Img(bot))
+    bot.add_cog(ImgSecundario(bot))

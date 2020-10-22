@@ -23,7 +23,7 @@ async def get_random_gif_by_theme(theme: str):
 
 
 
-class Wink(commands.Cog):
+class Giño(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -38,4 +38,4 @@ class Wink(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Wink(bot))
+    bot.add_cog(Giño(bot))
