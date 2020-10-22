@@ -65,7 +65,8 @@ if __name__ == "__main__":
         traceback.print_exc()
 
 try:
+    main()
     cprint(f"\n\nTOKEN:  {TOKEN}", 'yellow')
-    bot.run(TOKEN)
+    bot.run(f"{TOKEN}")
 except Exception as e:
     cprint(f"[Log] Error en el login: {e}", 'red')

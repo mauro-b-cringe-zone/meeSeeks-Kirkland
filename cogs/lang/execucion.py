@@ -273,7 +273,7 @@ class Execution(commands.Cog):
             embed.add_field(name="Tiempo", value=f"{time} s")
         if memory:
             embed.add_field(name="Memoria", value=f"{round(memory / 1000, 2)} MB")
-        embed.set_footer(text=f"{language} | {description}", icon_url=language_icon)
+        embed.set_footer(text=f"{language} | Aceptado", icon_url=language_icon)
 
         return embed
 

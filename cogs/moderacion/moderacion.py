@@ -100,7 +100,7 @@ class Moderation(commands.Cog):
             del warns[str(ctx.guild.id)]
         with open("./json/warnings.json","w") as f:
             json.dump(warns,f)    
-        embed = discord.Embed(title="Warnicion quitada", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan {5-warns[str(ctx.guild.id)][str(member.id)]['warns']} warniciones, ({ctx.prefix}warnlist @usuario para ver la lista)", colour=color)   
+        embed = discord.Embed(title="Warnicion quitada", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan warniciones, ({ctx.prefix}warnlist @usuario para ver la lista)", colour=color)   
         await ctx.send(embed=embed)
 
     @commands.command(pass_context=True)
@@ -111,9 +111,9 @@ class Moderation(commands.Cog):
             member = ctx.author
         with open('./json/warnings.json', 'r') as f:
             warns = json.load(f)
-        embed = discord.Embed(title="Lista de warniciones", description=f"{member.mention}  Tiene:", colour=color) 
-        if not warns[str(ctx.guild.id)][str(member.id)]:
+        if not str(ctx.member.id) in warns[str(ctx.guild.id)]:
             return await ctx.send("Este usuario no tiene warniciones")
+        embed = discord.Embed(title="Lista de warniciones", description=f"{member.mention}  Tiene:", colour=color) 
         for index in range(0, warns[str(ctx.guild.id)][str(member.id)]["warns"]):
             embed.add_field(name=index + 1, value="Razon: " + warns[str(ctx.guild.id)][str(member.id)]["razones"][index], inline=False)
         with open("./json/warnings.json","w") as f:

@@ -90,7 +90,6 @@ bot.remove_command('help')
 
 def main():
 
-
     @bot.event
     async def on_ready():
 
