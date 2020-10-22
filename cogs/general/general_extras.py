@@ -273,7 +273,7 @@ class GeneralSecExtra(commands.Cog):
     async def doubleflip(self, ctx):
         await ctx.send("┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻")
 
-    @commands.command(description="(・`ω´・)")
+    @commands.command(description="¡¡¡Que careto!!!")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def misc_weeb_face(self, ctx):
         await ctx.send("(・`ω´・)")
