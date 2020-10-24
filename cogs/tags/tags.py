@@ -63,10 +63,11 @@ class Tags(commands.Cog):
                 desc = tags[nombre_de_tag]['desc']
                 creador = tags[nombre_de_tag]['creador']
                 vis = tags[nombre_de_tag]["visitas"]
-                embed = discord.Embed(title=f"Tag: {nombre}", description=f"**Descripcion:**\n\n {desc}", color=color)
+                embed = discord.Embed(title=f"Tag: {nombre}", color=color)
                 embed.add_field(name="Id del creador:", value=creador, inline=True)
                 embed.add_field(name="Visitas:", value=vis+1, inline=True)
                 await ctx.send(embed=embed)
+                await ctx.send(f"**Descripcion de la tag**\n\n{desc}")
                 tags[nombre_de_tag]["visitas"] += 1
                 self.cerrar_json(tags)
             else:
@@ -85,7 +86,7 @@ class Tags(commands.Cog):
                 nombre = titulo
                 # print(titulo)
                 # print(desc)
-                if len(desc) >= 1100:
+                if len(desc) >= 2000:
                     return await ctx.send("La descripcion es muy larga **sry**")
                 tags = self.abrir_json()
 
@@ -112,7 +113,7 @@ class Tags(commands.Cog):
 
             eliminador = ctx.author.id
             if str(args) in tags:
-                if not eliminador in tags[str(args)]['creador']:
+                if not eliminador == tags[str(args)]['creador']:
                     return await ctx.send("¡¡¡TU NO ERES EL CREADOR DE ESTE TAG!!!") 
                 else:
                     try:
@@ -139,7 +140,7 @@ class Tags(commands.Cog):
             # print(args[0])
             # print(tags[args[0]])
             if str(args[0]) in str(tags):
-                if not eliminador in tags[str(args[0])]['creador']:
+                if not eliminador == tags[str(args[0])]['creador']:
                     return await ctx.send("¡TU NO ERES EL CREADOR DE ESTE TAG!") 
                 else:
                     try:
@@ -154,40 +155,62 @@ class Tags(commands.Cog):
             self.cerrar_json(tags)
    
 
-    # @tag.command(description="Renombrar una tag") # enabled=False
-    # async def renombrar(self, ctx: commands.Context, *, args: str=""):
-    #     if len(str(args)) <= 2:
-    #         return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)** | **EJ: {ctx.prefix}tag editar `nombre de la tag`|Descripcion que quieras editar**")
-    #     else:
-    #         tags = self.abrir_json()
+    @tag.command(description="Renombrar una tag") # enabled=False
+    async def renombrar(self, ctx: commands.Context, *, args: str=""):
+        if len(str(args)) <= 2:
+            return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)** \n **EJ: {ctx.prefix}tag renombrar nombre|nombre2**")
+        else:
+            tags = self.abrir_json()
 
-    #         eliminador = ctx.author.id
-    #         args = args.split("|")
-    #         # print(args[0])
-    #         # print(tags[args[0]])
-    #         try:
-    #             if str(args[0]) in str(tags):
-    #                 if not eliminador in tags[str(args[0])]['creador']:
-    #                     return await ctx.send("¡TU NO ERES EL CREADOR DE ESTE TAG!") 
-    #                 else:
-    #                     try:
-    #                         # tags[args[1]] = {}
-    #                         # tags[args[1]]["titulo"] = args[1]
-    #                         # tags[args[1]]["desc"] = tags[args[0]]["desc"]
-    #                         # tags[args[1]]["creador"] = tags[args[0]]["creador"]
-    #                         # tags[args[0]]["visitas"] = int(tags[args[0]]["visitas"])
-    #                         await ctx.send(embed=discord.Embed(title="Renombrado", description=f"{ctx.author.mention} Se ha renombrado la tag **{args[0]}** correctamente", color=color))
-    #                         self.cerrar_json(tags)
-    #                     except Exception as e:
-    #                         cprint(str("[Log] Un error ha ocurrido:  " + e), 'red')
-    #                         return await ctx.send("Ups.. Un error renombrando tu tag")
-    #             else:
-    #                 return await ctx.send(f"{ctx.author.mention} ¡Esa tag no existe!")
-    #         except Exception as e:
-    #             cprint(str("[Log] Un error ha ocurrido en \"cogs.tags.__main__.py\""), 'red')
-    #             return await ctx.send("Ups.. Un error renombrando tu tag")
-    #         self.cerrar_json(tags)
+            eliminador = ctx.author.id
+            args = args.split("|")
+            # print(args[0])
+            # print(tags[args[0]])
+            try:
+                if str(args[0]) in str(tags):
+                    if not eliminador == tags[str(args[0])]['creador']:
+                        return await ctx.send("¡TU NO ERES EL CREADOR DE ESTE TAG!") 
+                    else:
+                        try:
+                            tags[args[1]] = {}
+                            tags[args[1]]["titulo"] = args[1]
+                            tags[args[1]]["desc"] = tags[args[0]]["desc"]
+                            tags[args[1]]["creador"] = tags[args[0]]["creador"]
+                            tags[args[1]]["visitas"] = int(tags[args[0]]["visitas"])
+                            del tags[args[0]]
+                            await ctx.send(embed=discord.Embed(title="Renombrado", description=f"{ctx.author.mention} Se ha renombrado la tag **{args[0]}** correctamente a **{args[1]}**", color=color))
+                            self.cerrar_json(tags)
+                        except Exception as e:
+                            cprint(str("[Log] Un error ha ocurrido:  " + e), 'red')
+                            return await ctx.send("Ups.. Un error renombrando tu tag")
+                else:
+                    return await ctx.send(f"{ctx.author.mention} ¡Esa tag no existe!")
+            except Exception as e:
+                cprint(str("[Log] Un error ha ocurrido en \"cogs.tags.__main__.py\""), 'red')
+                return await ctx.send("Ups.. Un error renombrando tu tag")
+            self.cerrar_json(tags)
 
+    @tag.command(description="Renombrar una tag") # enabled=False
+    async def listar(self, ctx, num: int = 5):
+        if not num:
+            return await ctx.send(f"Puedes ver las tags mas vistas ponuendo **{ctx.prefix}tag listar [num]**")
+        else:
+            tags = self.abrir_json()
+            try:
+                # print(len(tags))
+                if num > len(tags):
+                    return await ctx.send("No hay tantas tags")
+                if not num >= 50:                
+                    for i, t in enumerate(sorted(tags.items(), key=lambda x: x[1], reverse=True), 1):
+                        # print('{}. {} - {}'.format(i, t[0], t[1]))
+                        embed = discord.Embed(title=f"Top {num} tags", description='{}. {} - {}'.format(i, t[0], t[1]), color=color)
+                else:
+                    return await ctx.send("No se pueden tantos")
+
+            except Exception as e:
+                cprint(str("[Log] Un error ha ocurrido en \"cogs.tags.__main__.py\""), 'red')
+                return await ctx.send("Ups.. Un error renombrando tu tag")
+            self.cerrar_json(tags)
 
 def setup(bot):
     bot.add_cog(Tags(bot))
