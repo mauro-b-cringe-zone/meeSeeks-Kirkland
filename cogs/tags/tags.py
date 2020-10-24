@@ -200,10 +200,18 @@ class Tags(commands.Cog):
                 # print(len(tags))
                 if num > len(tags):
                     return await ctx.send("No hay tantas tags")
-                if not num >= 50:                
+                if not num >= 50:    
+                    ListaDeTags = ''            
                     for i, t in enumerate(sorted(tags.items(), key=lambda x: x[1], reverse=True), 1):
                         # print('{}. {} - {}'.format(i, t[0], t[1]))
-                        embed = discord.Embed(title=f"Top {num} tags", description='{}. {} - {}'.format(i, t[0], t[1]), color=color)
+                        # print(i)
+                        # print(t[0])
+                        creador = f"<!@{tags[t[0]]['creador']}>"
+                        ListaDeTags += '**{}.** {} - {}'.format(i, t[0], creador)
+                        if i == num:
+                            break
+                    embed = discord.Embed(title=f"Top {num} tags", description=ListaDeTags, color=color)
+                    await ctx.send(embed=embed)
                 else:
                     return await ctx.send("No se pueden tantos")
 

@@ -5,7 +5,7 @@
   <br />
 
 
-  <kbd align="center"><img align="center" src="./Maubot_web/static/images/logo-light.jpg" /></kbd>
+  <kbd align="center"><img align="center" src="https://github.com/maubg-debug/Maubot_web/blob/main/Maubot_web/static/images/logo-light.jpg" /></kbd>
 
 
   <p align="center">
@@ -36,7 +36,7 @@
 ## Sobre
 
   <a href="#">
-    <kbd><img align="center" src="./Maubot_web/static/images/hero-media-dark.png" alt="Logo" /></kbd>
+    <kbd><img align="center" src="https://github.com/maubg-debug/Maubot_web/blob/main/Maubot_web/static/images/logo-light.jpg" alt="Logo" /></kbd>
   </a>
 
 [**Maubot**](http://maubot.mooo.com/maubot) Maubot es un robot para discord capaz de hacer mil funciones y con un compilador online. Algunas caracteristicas de Maubot son que <strong>no</strong> hay que pagar para tener todo al disfruto. Tiene incluido; Musica, Juegos, Manipulacion de imagenes, Systema de economia, AFK, compilador, LO TIENE TODO.
@@ -73,7 +73,7 @@ Las contribuciones son lo que hacen que la comunidad de código abierto sea un l
 Creador: [maubg](https://github.com/maubg-debug/).
 
 # MauCompilador
-<kbd><img src="./Maubot_web/static/images/maucompilador_prin.png" align="center"/></kbd>
+<kbd><img src="https://github.com/maubg-debug/Maubot_web/blob/main/Maubot_web/static/images/maucompilador_prin.png" align="center"/></kbd>
 Un <a href="https://maubot.mooo.com/maucompilador/">compilador online</a> 
 es un editor de código en línea gratuito y de código abierto que le permite escribir y ejecutar código desde un amplio conjunto de lenguajes. Es perfecto para cualquiera que solo quiera escribir y ejecutar código rápidamente sin abrir un IDE con todas las funciones en su computadora. Además, también es útil para enseñar y aprender o simplemente probar un nuevo idioma.
 
