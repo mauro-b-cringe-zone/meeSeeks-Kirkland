@@ -15,8 +15,14 @@ class Mensajes(commands.Cog):
         if message.content == "<@!730124969132163093>":
             # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
             await message.channel.send(embed=discord.Embed(title="Deja que me presente", 
-                                                           description="Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mi prefijo es (**$**) Y para ver mis commandos solo pon **$help**", 
+                                                           description="Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **$help**", 
                                                            colour=color).set_image(url="https://i.gyazo.com/f38490f1ddd304169f60fb1581b53eda.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `$help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `$rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**"))
+                        
+        if message.content == "<@!730124969132163093> prefijos":
+                    # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
+                    await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
+                                                description="Mis prefijos son `$ (O custom $prefix [prefijo])`, `!`, `?`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
+                                                colour=color))
 
 
         with open("./json/userslvl.json", "r") as f:

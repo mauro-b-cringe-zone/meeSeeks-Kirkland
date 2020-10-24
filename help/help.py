@@ -26,7 +26,7 @@ class Help(commands.Cog):
                     return await ctx.send(f"Numero invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]")
 
                 embed.set_footer(
-                    text=f"<> - Requirido & [] - Opcional | Pagina {cog} de {paginasTotales}"
+                    text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
                 )
 
                 CogsNecesitados = []
@@ -47,7 +47,7 @@ class Help(commands.Cog):
                         ListaDeComandos += f"`{ctx.prefix}{comando.name}`, "
                     ListaDeComandos = ListaDeComandos[:-2]
                     ListaDeComandos += "\n"
-                    embed.add_field(name=f"|---------{cog}---------|\n", value=ListaDeComandos, inline=False)
+                    embed.add_field(name=f"║━━━━ {cog} ━━━━║\n", value=ListaDeComandos, inline=False)
 
                 cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
@@ -57,7 +57,7 @@ class Help(commands.Cog):
                     return await ctx.send(f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]")
 
                 embed.set_footer(
-                    text=f"<> - Requirido &  [] - Opcional | Cog {congMinusculas.index(cog.lower())+1} de {len(congMinusculas)}"
+                    text=f"Puedes poner @Maubot#6247 para mas info | Cog {congMinusculas.index(cog.lower())+1} de {len(congMinusculas)}"
                 )
 
                 textoDeAyuda = ""
@@ -66,10 +66,10 @@ class Help(commands.Cog):
                     if comando.hidden:
                         continue
                 
-                    textoDeAyuda += f"** {comando.name} ----|** {comando.description}\n"
+                    textoDeAyuda += f"** {comando.name} ━━━━║** {comando.description}\n"
                 
                     if len(comando.aliases) > 0:
-                        textoDeAyuda += f"**Aliados ----|** {', '.join(comando.aliases)}"
+                        textoDeAyuda += f"**Aliados ━║** {', '.join(comando.aliases)}\n"
                     textoDeAyuda += ''
                 
 
