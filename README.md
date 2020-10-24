@@ -35,9 +35,9 @@
 
 ## Sobre
 
-  <a href="#">
+  <!-- <a href="#">
     <kbd><img align="center" src="https://github.com/maubg-debug/Maubot_web/blob/main/Maubot_web/static/images/logo-light.jpg" alt="Logo" /></kbd>
-  </a>
+  </a> -->
 
 [**Maubot**](http://maubot.mooo.com/maubot) Maubot es un robot para discord capaz de hacer mil funciones y con un compilador online. Algunas caracteristicas de Maubot son que <strong>no</strong> hay que pagar para tener todo al disfruto. Tiene incluido; Musica, Juegos, Manipulacion de imagenes, Systema de economia, AFK, compilador, LO TIENE TODO.
 

@@ -196,28 +196,32 @@ class Tags(commands.Cog):
             return await ctx.send(f"Puedes ver las tags mas vistas ponuendo **{ctx.prefix}tag listar [num]**")
         else:
             tags = self.abrir_json()
+            # print(len(tags))
+            if num > len(tags):
+                return await ctx.send("No hay tantas tags")
             try:
-                # print(len(tags))
-                if num > len(tags):
-                    return await ctx.send("No hay tantas tags")
                 if not num >= 50:    
                     ListaDeTags = ''            
-                    for i, t in enumerate(sorted(tags.items(), key=lambda x: x[1], reverse=True), 1):
+                    contador = 1
+                    for i in tags:
                         # print('{}. {} - {}'.format(i, t[0], t[1]))
                         # print(i)
                         # print(t[0])
-                        creador = f"<!@{tags[t[0]]['creador']}>"
-                        ListaDeTags += '**{}.** {} - {}'.format(i, t[0], creador)
-                        if i == num:
+                        # sorted_x = sorted(x.items(), key=operator.itemgetter(1), reverse=True)
+                        # print(i)
+                        creador = f"<@{tags[i]['creador']}>"
+                        ListaDeTags += f'**{contador}.** {i} - {creador}\n'
+                        if contador == num:
                             break
+                        contador += 1
+                            
                     embed = discord.Embed(title=f"Top {num} tags", description=ListaDeTags, color=color)
                     await ctx.send(embed=embed)
                 else:
                     return await ctx.send("No se pueden tantos")
-
             except Exception as e:
-                cprint(str("[Log] Un error ha ocurrido en \"cogs.tags.__main__.py\""), 'red')
-                return await ctx.send("Ups.. Un error renombrando tu tag")
+                cprint(f"[Log] Un error: {e}", 'red')
+                return await ctx.send("Lo setimos pero ha havido un *error*")
             self.cerrar_json(tags)
 
 def setup(bot):
