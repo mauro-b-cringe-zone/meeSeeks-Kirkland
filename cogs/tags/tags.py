@@ -4,6 +4,7 @@ import json
 
 from termcolor import cprint
 
+import operator
 from os import environ as env
 
 color = int(env["COLOR"])
