@@ -34,22 +34,29 @@ class Moderation(commands.Cog):
     @commands.command(description="Banea ha alguien")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx, member : discord.Member, *, reason=None):
+    async def ban(self, ctx, member : discord.Member, *, razon=None):
 
-        
-        await member.ban(reason=reason)
-        embed = discord.Embed(title=f"Baneado", description=f"Se a baneado a {member.mention} del servidor",colour=color)
+        if razon is None:
+            await member.ban(reason=razon)
+            embed = discord.Embed(title=f"Baneado", description=f"Se a baneado a {member.mention} del servidor",colour=color)
+            return await ctx.send(embed=embed)
+        await member.ban(reason=razon)
+        embed = discord.Embed(title=f"Baneado", description=f"Se a baneado a {member.mention} del servidor\n\n**Razon** {razon}",colour=color)
         await ctx.send(embed=embed)
         
 
-    @commands.command(description="Desbanea a un baneado")
+    @commands.command(description="Desbanea a un baneado **uso: $unban <id del usuario>**")
     @commands.has_permissions(manage_messages=True)
     @commands.has_permissions(ban_members=True)
-    async def unban(self, ctx, member):
-        member = await self.bot.fetch_user(int(member))
-        await ctx.guild.unban(user=member, reason="Se le a quitado el baneo")
-        embed = discord.Embed(title=f"Desbaneado", description=f"Se a desbaneado a {member.mention} del servidor",colour=color)
-        await ctx.send(embed=embed)
+    async def unban(self, ctx, member=None):
+        if not member is None:
+            member = await self.bot.fetch_user(int(member))
+            await ctx.guild.unban(user=member, reason="Se le a quitado el baneo")
+            embed = discord.Embed(title=f"Desbaneado", description=f"Se a desbaneado a {member.mention} del servidor",colour=color)
+            return await ctx.send(embed=embed)
+        else:
+            return await ctx.send("**uso: $unban <id del usuario>**")
+        
 
     @commands.command(pass_context=True, description="Haz un haviso ha alguien")
     @commands.cooldown(1, 5, commands.BucketType.user)
