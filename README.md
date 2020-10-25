@@ -74,7 +74,7 @@ Creador: [maubg](https://github.com/maubg-debug/).
 
 # MauCompilador
 <kbd><img src="https://github.com/maubg-debug/Maubot_web/blob/main/Maubot_web/static/images/maucompilador_prin.png" align="center"/></kbd>
-Un <a href="https://maubot.mooo.com/maucompilador/">compilador online</a> 
+Un <a href="http://maubot.mooo.com/maucompilador/">compilador online</a> 
 es un editor de código en línea gratuito y de código abierto que le permite escribir y ejecutar código desde un amplio conjunto de lenguajes. Es perfecto para cualquiera que solo quiera escribir y ejecutar código rápidamente sin abrir un IDE con todas las funciones en su computadora. Además, también es útil para enseñar y aprender o simplemente probar un nuevo idioma.
 
 ## Licencia
