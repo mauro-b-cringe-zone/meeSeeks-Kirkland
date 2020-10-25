@@ -580,12 +580,19 @@ def main():
 
     @bot.command(asliases=['link', 'links'], description="Los links del bot")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def invite(ctx):
+    async def links(ctx):
 
-        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/4gfUZtB)\n**Web**: [Link](http://maubot.mooo.com/maubot/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)", colour=color)
+        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/4gfUZtB)\n**Web**: [Link](http://maubot.mooo.com/maubot/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)**Github del creador**: [linkG](https://github.com/maubg-debug/)", colour=color)
         embed.set_author(name="INVITACIONES", icon_url="https://img.icons8.com/color/48/000000/share.png")
         embed.set_image(url="https://top.gg/api/widget/730124969132163093svg?usernamecolor=FFFFFF&topcolor=000000")
         # embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
+        await ctx.send(embed=embed)
+
+    @bot.command(description="Los links del bot")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def invite(ctx):
+
+        embed = discord.Embed(description=f"**https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot**", colour=color)
         await ctx.send(embed=embed)
 
     @bot.command(description="¿Quien es el jefe del servidor?")
