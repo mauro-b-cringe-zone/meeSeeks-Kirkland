@@ -588,7 +588,7 @@ def main():
         # embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
 
-    @bot.command(description="Los links del bot")
+    @bot.command(description="Invitacion")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def invite(ctx):
 
