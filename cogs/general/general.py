@@ -90,10 +90,13 @@ class General(commands.Cog):
             times.append(speed)
             if speed < 160:
                 embed.add_field(name=f"Ping {counter}:", value=f"🟢 | {speed}ms", inline=True)
+                cprint(f"[Log] Ping: {speed}ms en el sevidor | {ctx.guild.name}", "green")
             elif speed > 170:
                 embed.add_field(name=f"Ping {counter}:", value=f"🟡 | {speed}ms", inline=True)
+                cprint(f"[Log] Ping: {speed}ms en el sevidor | {ctx.guild.name}", "yellow")
             else:
                 embed.add_field(name=f"Ping {counter}:", value=f"🔴 | {speed}ms", inline=True)
+                cprint(f"[Log] Ping: {speed}ms en el sevidor | {ctx.guild.name}", "red")
 
 
         embed.set_author(name="🏓    **PONG**    🏓", icon_url="https://img.icons8.com/ultraviolet/40/000000/table-tennis.png")

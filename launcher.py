@@ -79,8 +79,9 @@ def preparar():
 
 class Consola():
     def __init__(self, comando):
-        self.comando = comando
+        self.comando = comando.lower()
         self.preparar = preparar
+        self.comandos = [["empezar", "run"], ["cls", "clear"], "pip", ["exit", "salir", "exit()"], "instalar", "python", ["help", "ayuda"]]
 
     def pip(self, pack):
         os.system(f"pip install {pack}")
@@ -91,30 +92,41 @@ class Consola():
     def procesar_comandos(self):
         if self.comando == "":
             return True
-        elif self.comando == "empezar" or self.comando == "run":
+        
+        elif self.comando == self.comandos[0][0] or self.comando == self.comandos[0][1]:
             cprint("\nCTRL + C para parar el programa e iniciar la consola\n", "red")
             sleep(2)
             self.preparar()
-        elif self.comando == "cls" or self.comando == "clear":
-            for i in range(10):
-                print("\n")
+        
+        elif self.comando == self.comandos[1][0] or self.comando == self.comandos[1][1]:
+            os.system("cls" or "clear")
+        
         elif self.comando.startswith("pip"):
             mod = comando.split("pip")
             self.pip(mod[1])
-        elif self.comando == "exit" or self.comando == "salir":
-            print("\nSi quieres salir del programa deverias de poner \"exit()\"\n")
-        elif self.comando == "instalar":
+        
+        elif self.comando == self.comandos[3][0] or self.comando == self.comandos[3][1]:
+            cprint("\nSi quieres salir del programa deverias de poner \"exit()\"\n", "yellow")
+
+        elif self.comando == self.comandos[4]:
             os.system("pip install -r requirements.txt")
             cprint("\n\nAHORA VE HA '.example.env' Y RELLENA TODO LO NECESARIO Y YA DE PASO CAMBIA EL .example.env A .env \n\n", "green")
-        elif self.comando == "python":
+        
+        elif self.comando == self.comandos[5]:
             self.python()
-        elif self.comando == "exit()":
+        
+        elif self.comando == self.comandos[3][2]:
             exit(0)
+
+        elif self.comando == self.comandos[6][1] or self.comando == self.comandos[6][0]:
+            cprint("\nAyuda:\n-> exit() - Se sale del programa\n-> pip <modulo> - Instalar un modulo con pip\n-> cls (clear) - Limpiar la consola\n-> run (empezar) - Correr maubot\n-> instalar - Instalar lo necesario para maubot (RECOMENDABLE SI ES LA PRIMERA VEZ QUE USAS MAUBOT)\n-> help (ayuda) - Enseña este mensage\n", "green")
+        
         else:
-            cprint("\nAyuda:\n-> exit()\n-> pip <modulo>\n-> cls (clear)\n-> run (empezar)\n-> instalar\n", "green")
+            cprint(f"\n{self.comando} no existe:\n-> Prueva a poner \"ayuda\" o \"help\"\n", "red")
 
 if __name__ == "__main__":
+    cprint("\nPon \"help\" para ver la lista de ayudas\n", "yellow")
     while True:
-        comando = input("Maubot> ")
+        comando = input("Maubot -> ")
 
         Consola(comando).procesar_comandos()

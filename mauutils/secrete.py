@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
+
 from os import environ as env
 
 TOKEN = env['TOKEN']

@@ -55,7 +55,8 @@ __copyright__ = "Copyright (C) 2020 Maubg"
 __license__ = "Public Domain"
 __version__ = "1.4.1"
 
-
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
 
 
 from discord.ext.commands import (CommandNotFound, BadArgument, MissingRequiredArgument, CommandOnCooldown)
@@ -85,7 +86,7 @@ def get_prefix(bot, message):
     base = [prefixes[str(message.guild.id)], '?', '!', 'm.']
     return base
 
-bot = commands.Bot(command_prefix = get_prefix, description="Maubot | El mejor bot para divertirse")
+bot = commands.Bot(command_prefix=get_prefix, description="Maubot | El mejor bot para divertirse")
 
 bot.remove_command('help')
 
@@ -104,6 +105,8 @@ def main():
               \/_/  \/_/   \/_/\/_/   \/_____/   \/_____/   \/_____/     \/_/                                                             
         """, 'blue')
 
+        time.sleep(1)
+
         # change_status.start()
         DEVMODE = True
         print("\n------------------------------------->\n"
@@ -115,13 +118,21 @@ def main():
             f"Estado: Actualizado\n"
             "------------------------------------->\n")
 
+        time.sleep(1)
+
         cprint(f"\nTOKEN:  {TOKEN}\n", 'blue')
+
+        time.sleep(1)
 
         print("\n------------------------------------->\n"
             f"COGS\n"
             f"Secrete.py a reyenado al token y los colores\n")
+
+        time.sleep(1)
         
         cprint("-----------------------> [LOG]\n", 'red')
+
+        time.sleep(1)
 
         
 
