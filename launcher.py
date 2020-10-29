@@ -85,10 +85,15 @@ class Consola():
     def pip(self, pack):
         os.system(f"pip install {pack}")
 
+    def python(self):
+        os.system("python")
+
     def procesar_comandos(self):
         if self.comando == "":
             return True
         elif self.comando == "empezar" or self.comando == "run":
+            cprint("\nCTRL + C para parar el programa e iniciar la consola\n", "red")
+            sleep(2)
             self.preparar()
         elif self.comando == "cls" or self.comando == "clear":
             for i in range(10):
@@ -101,6 +106,8 @@ class Consola():
         elif self.comando == "instalar":
             os.system("pip install -r requirements.txt")
             cprint("\n\nAHORA VE HA '.example.env' Y RELLENA TODO LO NECESARIO Y YA DE PASO CAMBIA EL .example.env A .env \n\n", "green")
+        elif self.comando == "python":
+            self.python()
         elif self.comando == "exit()":
             exit(0)
         else:
