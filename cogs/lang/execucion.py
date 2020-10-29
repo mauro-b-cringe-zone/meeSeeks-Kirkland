@@ -321,8 +321,8 @@ class Execution(commands.Cog):
             return
 
         if code.startswith("-v") or code.startswith("--version"):
-            await ctx.send(embed=discord.Embed(title=f"Version para {lang['command']}", description=f"> {lang['version']}", color=env["COLOR"]))
-            cprint(f"[Log] Se ha pedido la version de {lang['command']}, Version: {{lang['version']}}", "green")
+            await ctx.send(embed=Embed(title=f"Version para {lang['command']}", color=int(env["COLOR"])).set_thumbnail(url=lang["icon"]).add_field(name="\uFEFF", value="> {lang['version']}"))
+            cprint(f"[Log] Se ha pedido la version de {lang['command']}, Version: {lang['version']}", "green")
             await ctx.author.message.add_reaction(Emoji.Execution.idle)
             return
 

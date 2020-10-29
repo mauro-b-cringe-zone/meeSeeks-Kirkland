@@ -12,6 +12,7 @@ from subprocess import run, PIPE
 from inspect import isawaitable
 from asyncio import sleep
 import os
+from termcolor import cprint
 
 class Creador(commands.Cog):
     def __init__(self, bot):
@@ -42,6 +43,7 @@ class Creador(commands.Cog):
     async def reload(self, ctx, name: str):
         try:
             self.bot.reload_extension(f'cogs.{name}')
+            cprint(f"[Cog] Se ha recargado {name}", "cyan")
         except Exception as e:
             return await ctx.send(e)
         await ctx.send(f"Se ha reiniciado **{name}.py**")
