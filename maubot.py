@@ -67,6 +67,7 @@ from mauutils.secrete import *
 from mauutils.fun.lists import *
 from mauutils.hack import *
 from googletrans import Translator
+import sys
 import datetime
 import discord
 import random
@@ -88,7 +89,9 @@ bot = commands.Bot(command_prefix = get_prefix, description="Maubot | El mejor b
 
 bot.remove_command('help')
 
+
 def main():
+    
 
     @bot.event
     async def on_ready():
@@ -119,6 +122,8 @@ def main():
             f"Secrete.py a reyenado al token y los colores\n")
         
         cprint("-----------------------> [LOG]\n", 'red')
+
+        
 
         # TODOS LOS ESTADOS: online, offline, idle, dnd, invisible
 

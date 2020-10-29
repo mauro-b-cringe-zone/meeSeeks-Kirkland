@@ -10,7 +10,8 @@ from time import sleep
 
 """Para actualizar los requirements `pip freeze > requirements.txt`"""
 
-if __name__ == "__main__":
+
+def preparar():
     try:
         for filename in os.listdir('./cogs/economy'):
             if filename.endswith('.py'):
@@ -66,11 +67,46 @@ if __name__ == "__main__":
         cprint(str(f'[Log] Se a fallado al cargar todas las extensiones cogs.+{filename[:-3]}.', file=sys.stderr), 'red')
         traceback.print_exc()
 
-try:
-    sleep(1)
-    os.system("cls")
-    main()
-    # cprint(f"\n\nTOKEN:  {TOKEN}", 'blue')
-    bot.run(f"{TOKEN}")
-except Exception as e:
-    cprint(f"[Log] Error en el login: {e}", 'red')
+    try:
+        sleep(1)
+        os.system("cls")
+        main()
+        # cprint(f"\n\nTOKEN:  {TOKEN}", 'blue')
+        bot.run(f"{TOKEN}")
+        # "Maubot>  "
+    except Exception as e:
+        cprint(f"[Log] Error en el login: {e}", 'red')
+
+class Consola():
+    def __init__(self, comando):
+        self.comando = comando
+        self.preparar = preparar
+
+    def pip(self, pack):
+        os.system(f"pip install {pack}")
+
+    def procesar_comandos(self):
+        if self.comando == "":
+            return True
+        elif self.comando == "empezar" or self.comando == "run":
+            self.preparar()
+        elif self.comando == "cls" or self.comando == "clear":
+            for i in range(10):
+                print("\n")
+        elif self.comando.startswith("pip"):
+            mod = comando.split("pip")
+            self.pip(mod[1])
+        elif self.comando == "exit" or self.comando == "salir":
+            print("\nSi quieres salir del programa deverias de poner \"exit()\"\n")
+        elif self.comando == "instalar":
+            os.system("pip install -r requirements.txt")
+        elif self.comando == "exit()":
+            exit(0)
+        else:
+            cprint("\nAyuda:\n-> exit()\n-> pip <modulo>\n-> cls (clear)\n-> run (empezar)\n-> instalar\n", "green")
+
+if __name__ == "__main__":
+    while True:
+        comando = input("Maubot> ")
+
+        Consola(comando).procesar_comandos()
