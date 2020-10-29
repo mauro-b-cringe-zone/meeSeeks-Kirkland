@@ -321,7 +321,7 @@ class Execution(commands.Cog):
             return
 
         if code.startswith("-v") or code.startswith("--version"):
-            await ctx.send(embed=Embed(title=f"Version para {lang['command']}", color=int(env["COLOR"])).set_thumbnail(url=lang["icon"]).add_field(name="\uFEFF", value="> {lang['version']}"))
+            await ctx.send(embed=Embed(title=f"Version para {lang['command']}", color=int(env["COLOR"])).set_thumbnail(url=lang["icon"]).add_field(name="\uFEFF", value=f"> {lang['version']}"))
             cprint(f"[Log] Se ha pedido la version de {lang['command']}, Version: {lang['version']}", "green")
             await ctx.author.message.add_reaction(Emoji.Execution.idle)
             return
@@ -368,6 +368,23 @@ class Execution(commands.Cog):
         """
         El comando principal que maneja el proceso de ejecución del código.
         """
+
+        if str(ctx.invoked_with) == "run" and code is None:
+            return await ctx.send(f"Pon **{ctx.prefix}run --list** para ver la lista de lenguages")
+
+        if str(ctx.invoked_with) == "run" and code == "list" or code == "--list":
+            embed = Embed(title="Lista de lenguages", color=int(env["COLOR"]))
+            listaDeLenguages = ""
+            c = 0
+            for i in LANGUAGES["array"]:
+                c += 1
+                # print(i)
+                lang_id = LANGUAGES["array"][i]
+                # print(lang_id)
+                listaDeLenguages += f"**{c}. {lang_id['command']}** | {lang_id['version']}\n"
+            embed.description = listaDeLenguages
+            await ctx.send(embed=embed)
+
         lang_id = LANGUAGES['ids'][str(ctx.invoked_with)]
         lang = LANGUAGES['array'][lang_id]
         lang.update({'id': lang_id})

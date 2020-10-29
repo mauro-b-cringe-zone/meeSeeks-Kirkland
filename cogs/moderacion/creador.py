@@ -43,10 +43,10 @@ class Creador(commands.Cog):
     async def reload(self, ctx, name: str):
         try:
             self.bot.reload_extension(f'cogs.{name}')
-            cprint(f"[Cog] Se ha recargado {name}", "cyan")
+            cprint(f"[Cog] Se ha recargado cogs.{name}", "cyan")
         except Exception as e:
             return await ctx.send(e)
-        await ctx.send(f"Se ha reiniciado **{name}.py**")
+        await ctx.send(f"Se ha reiniciado **cosg.{name}.py**")
 
     @commands.command(description="Responde una reseña")
     @commands.is_owner()
