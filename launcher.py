@@ -1,8 +1,6 @@
 from dotenv import load_dotenv
 load_dotenv(verbose=True)
 
-from maubot import bot, main
-from mauutils.secrete import TOKEN
 import traceback, sys
 from termcolor import cprint
 import os       
@@ -12,6 +10,8 @@ from time import sleep
 
 
 def preparar():
+    from maubot import bot, main
+    from mauutils.secrete import TOKEN
     try:
         for filename in os.listdir('./cogs/economy'):
             if filename.endswith('.py'):
