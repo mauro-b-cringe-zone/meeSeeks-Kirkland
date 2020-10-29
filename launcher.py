@@ -100,6 +100,7 @@ class Consola():
             print("\nSi quieres salir del programa deverias de poner \"exit()\"\n")
         elif self.comando == "instalar":
             os.system("pip install -r requirements.txt")
+            cprint("\n\nAHORA VE HA '.example.env' Y RELLENA TODO LO NECESARIO Y YA DE PASO CAMBIA EL .example.env A .env \n\n", "green")
         elif self.comando == "exit()":
             exit(0)
         else:
