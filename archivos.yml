@@ -1,21 +1,21 @@
 Maubot:
-    assets:
-        imagenes, etx
+    assets: 
+        imagenes
+        etx
     cogs:
         commandos
         Carpetas  de commandos:
             mass commandos
-    json:
-        todos los json
-    mauutils:
-        Los recursos de Maubot
-    .env(.example.env):
-        Llaves secretas
+    json: todos los json
+
+    mauutils: Los recursos de Maubot
+
+    .env(.example.env): Llaves secretas
+
     launcher.py:
         Iniciar desde hay
-    LICENSE:
-        LIcencia
-    maubot.py:
-        __main__
-    README.md:
-        Cosas que saver
+    LICENSE:  LIcencia
+
+    maubot.py: __main__
+
+    README.md:  Cosas que saver

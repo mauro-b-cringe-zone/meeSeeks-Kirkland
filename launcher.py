@@ -67,21 +67,22 @@ def preparar():
         cprint(str(f'[Log] Se a fallado al cargar todas las extensiones cogs.+{filename[:-3]}.', file=sys.stderr), 'red')
         traceback.print_exc()
 
-    try:
-        sleep(1)
-        os.system("cls")
-        main()
-        # cprint(f"\n\nTOKEN:  {TOKEN}", 'blue')
-        bot.run(f"{TOKEN}")
-        # "Maubot>  "
-    except Exception as e:
-        cprint(f"[Log] Error en el login: {e}", 'red')
+    finally:
+        try:
+            sleep(1)
+            os.system("cls")
+            main()
+            # cprint(f"\n\nTOKEN:  {TOKEN}", 'blue')
+            bot.run(f"{TOKEN}")
+            # "Maubot>  "
+        except Exception as e:
+            cprint(f"[Log] Error en el login: {e}", 'red')
 
 class Consola():
     def __init__(self, comando):
         self.comando = comando.lower()
         self.preparar = preparar
-        self.comandos = [["empezar", "run"], ["cls", "clear"], "pip", ["exit", "salir", "exit()"], "instalar", "python", ["help", "ayuda"]]
+        self.comandos = [["empezar", "run"], ["cls", "clear"], "pip", ["exit", "salir", "exit()"], "instalar", "python", ["help", "ayuda"], "instrucciones"]
 
     def pip(self, pack):
         os.system(f"pip install {pack}")
@@ -89,7 +90,10 @@ class Consola():
     def python(self):
         os.system("python")
 
-    def procesar_comandos(self):
+    def instrucciones(self, dir):
+        cprint(f"\nTutorial de como usar Maubot\n\n1. Ve ha 'https://asciinema.org/a/P8nJyagpVvdjVmj1nPnKHCyHy' y sigue las instrucciones\n2. Rellena todo lo que necesites en {dir}.example.env rellenalo y camviale el nombre a .env\n3. ve ha {dir}\launcher.py \n4. Pon en la consola python launcher.py y despues pon 'run' \n", "green")
+
+    def procesar_comandos(self, directorio):
         if self.comando == "":
             return True
         
@@ -110,7 +114,7 @@ class Consola():
 
         elif self.comando == self.comandos[4]:
             os.system("pip install -r requirements.txt")
-            cprint("\n\nAHORA VE HA '.example.env' Y RELLENA TODO LO NECESARIO Y YA DE PASO CAMBIA EL .example.env A .env \n\n", "green")
+            cprint(f"\n\n1. AHORA VE HA '{directorio}\.example.env' \n2. RELLENA TODO LO NECESARIO Y YA DE PASO CAMBIA EL '{directorio}\.example.env' A '{directorio}\.env' \n\n", "green")
         
         elif self.comando == self.comandos[5]:
             self.python()
@@ -118,15 +122,18 @@ class Consola():
         elif self.comando == self.comandos[3][2]:
             exit(0)
 
+        elif self.comando == self.comandos[7]:
+            self.instrucciones(directorio)
+
         elif self.comando == self.comandos[6][1] or self.comando == self.comandos[6][0]:
-            cprint("\nAyuda:\n-> exit() - Se sale del programa\n-> pip <modulo> - Instalar un modulo con pip\n-> cls (clear) - Limpiar la consola\n-> run (empezar) - Correr maubot\n-> instalar - Instalar lo necesario para maubot (RECOMENDABLE SI ES LA PRIMERA VEZ QUE USAS MAUBOT)\n-> help (ayuda) - Enseña este mensage\n", "green")
+            cprint("\nAyuda:\n-> exit() - Se sale del programa\n-> pip <modulo> - Instalar un modulo con pip\n-> cls (clear) - Limpiar la consola\n-> run (empezar) - Correr maubot\n-> instalar - Instalar lo necesario para maubot (RECOMENDABLE SI ES LA PRIMERA VEZ QUE USAS MAUBOT)\n-> help (ayuda) - Enseña este mensage\n-> instrucciones - Te esñara como utilizar maubot\n", "green")
         
         else:
             cprint(f"\n{self.comando} no existe:\n-> Prueva a poner \"ayuda\" o \"help\"\n", "red")
 
 if __name__ == "__main__":
-    cprint("\nPon \"help\" para ver la lista de ayudas\n", "yellow")
+    from pathlib import Path
+    cprint("\nPon \"instrucciones\" Si es la primera vesz que usas maubot <- o -> \"help\" para ver la lista de ayudas\n", "yellow")
     while True:
         comando = input("Maubot -> ")
-
-        Consola(comando).procesar_comandos()
+        Consola(comando).procesar_comandos(directorio=Path(__file__).parent)
