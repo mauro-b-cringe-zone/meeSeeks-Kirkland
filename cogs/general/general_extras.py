@@ -19,16 +19,16 @@ class GeneralExtra(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(description="Busca lago en Youtube")
-    @commands.cooldown(1, 15, commands.BucketType.user)
-    async def youtube(self, ctx, *search):
-        import urllib.parse
-        import urllib.request
-        query_string = urllib.parse.urlencode({'search_query': search})
-        html_content = urllib.request.urlopen('http://www.youtube.com/results?'+str(query_string))
-        search_results = re.findall('href=\"\\/watch\\?v=(.{11})', html_content.read().decode())
-        print(search_results)
-        await ctx.send('https://www.youtube.com/watch?v='+str(search_results[0]))
+    # @commands.command(description="Busca lago en Youtube", usage="")
+    # @commands.cooldown(1, 15, commands.BucketType.user)
+    # async def youtube(self, ctx, *search):
+    #     import urllib.parse
+    #     import urllib.request
+    #     query_string = urllib.parse.urlencode({'search_query': search})
+    #     html_content = urllib.request.urlopen('http://www.youtube.com/results?'+str(query_string))
+    #     search_results = re.findall('href=\"\\/watch\\?v=(.{11})', html_content.read().decode())
+    #     print(search_results)
+    #     await ctx.send('https://www.youtube.com/watch?v='+str(search_results[0]))
 
     # BUSCADOR DE IMAGENES
 
@@ -36,7 +36,7 @@ class GeneralExtra(commands.Cog):
     # SYSTEMA DE NIVELES | no palabrotas |spam #
     ############################################
 
-    @commands.command(description="Cambia el nombre del robot")
+    @commands.command(description="Cambia el nombre del robot", usage="[nombre]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
     async def rename_bot(self, ctx, *, text='Maubot'):
@@ -58,7 +58,7 @@ class GeneralExtra(commands.Cog):
     async def honkhonk(self, ctx):
         await ctx.send(random.choice(honkhonkfgt))
 
-    @commands.command(description="Di algo")
+    @commands.command(description="Di algo", usage="[Mensage]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def say(self, ctx, *, message:str):
         try:
@@ -199,7 +199,7 @@ class GeneralExtra(commands.Cog):
     #             await ctx.send("Esto no funciona contacta al administrador o creador")
 
 
-    @commands.command(description="Hackea ha alguien")
+    @commands.command(description="Hackea ha alguien", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def hack(self, ctx, *args):
         foundArgs, tohack = False, None
@@ -288,7 +288,7 @@ class GeneralSecExtra(commands.Cog):
     # async def ball(ctx, *, question:str):
     #     await ctx.send("{}: {}".format(ctx.author.name, random.choice(magic_conch_shell)))
 
-    @commands.command(description="Insulta ha alguien")
+    @commands.command(description="Insulta ha alguien", usage="[usuario]")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def insult(self, ctx, *, user:str):
         await ctx.send("{} {}".format(user, random.choice(insults)))
@@ -298,7 +298,7 @@ class GeneralSecExtra(commands.Cog):
     async def actdrunk(self, ctx):
         await ctx.send(random.choice(drunkaf))
 
-    @commands.command(description="Tedoy un -10 de 20")
+    @commands.command(description="Tedoy un -10 de 20", usage="[usuario]")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def rate(self, ctx, user:discord.User=None):
         with open('mauutils/languages/spanish.json', 'r') as f:
@@ -310,7 +310,7 @@ class GeneralSecExtra(commands.Cog):
         else:
             await ctx.send(Language.get("fun.rate_user", ctx).format(user.name, random.randint(0, 10)))
 
-    @commands.command(description="Mandame un mensage")
+    @commands.command(description="Mandame un mensage", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def plzmsgme(self, ctx, *, message:str):
 
@@ -320,24 +320,24 @@ class GeneralSecExtra(commands.Cog):
         await ctx.author.send(message)
         await ctx.send(Language.get("fun.plzmsgme", ctx))
 
-    @commands.command(description="Høla ¿unø que remplaze las øs y 0s?")
+    @commands.command(description="Høla ¿unø que remplaze las øs y 0s?", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def twentyoneify(self, ctx, *, input:str):
         await ctx.send(input.replace("O", "Ø").replace("o", "ø"))
 
-    @commands.command(description="Spell RED, LIAHWDIOAHWDOAWHDOAIWHDOAIWHDN")
+    @commands.command(description="Spell RED, LIAHWDIOAHWDOAWHDOAIWHDOAIWHDN", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def spellout(self, ctx, *, msg:str):
 
         await ctx.send(" ".join(list(msg.upper())))
 
 
-    @commands.command(description="egasnem nu")
+    @commands.command(description="egasnem nu", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def reverse(self, ctx, *, msg:str):
         await ctx.send("🔁 " + msg[::-1])
 
-    @commands.command(description="awldkhjAWOLIHDWOAIHDalkwjdKjdaldj")
+    @commands.command(description="awldkhjAWOLIHDWOAIHDalkwjdKjdaldj", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def intellect(self, ctx, *, msg:str):
         await ctx.channel.trigger_typing()
@@ -347,7 +347,7 @@ class GeneralSecExtra(commands.Cog):
         await ctx.send(intellectify)
 
 
-    @commands.command(description="Numero random (PUEDES PONER CUANTOS DIGITOS)")
+    @commands.command(description="Numero random (PUEDES PONER CUANTOS DIGITOS)", usage="[digito]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def randomnumber(self, ctx, *, digits:int=1):
 
@@ -358,7 +358,7 @@ class GeneralSecExtra(commands.Cog):
         embed.set_footer(text=f"Numero random | {ctx.prefix}help para mas informacion")
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True, description="Gira el dado")
+    @commands.command(pass_context=True, description="Gira el dado", usage="<dados><lados>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def roll(self, ctx, dice_amount: int, sides: int):
 
@@ -370,6 +370,7 @@ class GeneralSecExtra(commands.Cog):
             return
         if sides == 1: 
             await ctx.send(f"{ctx.message.author.mention}, No apunta a tirar un dado de 1 cara")
+            return
 
 
 
@@ -397,23 +398,23 @@ class GeneralSecExtra(commands.Cog):
         except:
             await ctx.send("Soy una computadora que conozco, ¡pero eso es mucho incluso para mí!")
 
-    @commands.command(description="9cdfb439c7876e703e307864c9167a15")
+    @commands.command(description="9cdfb439c7876e703e307864c9167a15", usage="<mensage>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def md5(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.md5(bytes(msg.encode("utf-8"))).hexdigest()))\
 
 
-    @commands.command(description="Pega ha alguien")
+    @commands.command(description="Pega ha alguien", usage="<usuario>[razon]")
     async def pegar(self, ctx, member: discord.Member, *, reason: str = "ninguna razon"):
         await ctx.send(f"{ctx.author.display_name} a pegado a {member.mention} por {reason}!")
 
 
-    @commands.command(description="07123e1f482356c415f684407a3b8723e10b2cbbc0b8fcd6282c49d37c9c1abc")
+    @commands.command(description="07123e1f482356c415f684407a3b8723e10b2cbbc0b8fcd6282c49d37c9c1abc", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sha256(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.sha256(bytes(msg.encode("utf-8"))).hexdigest()))
 
-    @commands.command(description="3dd28c5a23f780659d83dd99981e2dcb82bd4c4bdc8d97a7da50ae84c7a7229a6dc0ae8ae4748640a4cc07ccc2d55dbdc023a99b3ef72bc6ce49e30b84253dae")
+    @commands.command(description="3dd28c5a23f780659d83dd99981e2dcb82bd4c4bdc8d97a7da50ae84c7a7229a6dc0ae8ae4748640a4cc07ccc2d55dbdc023a99b3ef72bc6ce49e30b84253dae", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sha512(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.sha512(bytes(msg.encode("utf-8"))).hexdigest()))
@@ -423,12 +424,12 @@ class GeneralMasExtras(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description="HOLA")
+    @commands.command(description="HOLA", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def uppercase(self, ctx, *, msg:str):
         await ctx.send(msg.upper())
 
-    @commands.command(description="hola")
+    @commands.command(description="hola", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def lowercase(self, ctx, *, msg:str):
         await ctx.send(msg.lower())

@@ -50,7 +50,7 @@ class Tags(commands.Cog):
         with open('./json/tags.json', "w") as f:
             json.dump(tags, f)
 
-    @commands.group(invoke_without_command=True, description="Buscar una tag")
+    @commands.group(invoke_without_command=True, description="Buscar una tag", usage="[nombre]")
     async def tag(self, ctx, *, nombre_de_tag=None):
         if nombre_de_tag is None:
             embed=discord.Embed(title="Ayuda con los tags", description="Aqui tienes unos comandos para los tags", color=color)
@@ -75,7 +75,7 @@ class Tags(commands.Cog):
                 return await ctx.send(embed=discord.Embed(title="404", description=f"{ctx.author.mention} No se encontro nada\n\n(Igual quieres crear una poniendo **{ctx.prefix}tag crear nombre|descripcion)**", color=color))
             self.cerrar_json(tags)
 
-    @tag.command(description="Crear una tag")
+    @tag.command(description="Crear una tag", usage="<nombre>|<descripcion (Max 2000 car)>")
     async def crear(self, ctx: commands.Context, *, args: str=""):
         if len(args) <= 2:
             return await ctx.send(f"Porfavor escribe tu numbre de tag y separado por un | **Ej: {ctx.prefix}tag crear nombre|descripcion**")
@@ -105,7 +105,7 @@ class Tags(commands.Cog):
                 return await ctx.send(f"Porfavor escribe tu numbre de tag y separado por un | **Ej: {ctx.prefix}tag crear hola|¿Què tal?**")
 
 
-    @tag.command(description="Eliminar una tag")
+    @tag.command(description="Eliminar una tag", usage="<nombre>")
     async def eliminar(self, ctx, *, args: str=""):
         if len(str(args)) <= 2:
             return await ctx.send(f"Escribe tu tag que quieras eliminar **(Tienes que haverla creado tu)**")
@@ -128,7 +128,7 @@ class Tags(commands.Cog):
                 return await ctx.send(f"{ctx.author.mention} ¡¡¡Esa tag no existe!!!")
             self.cerrar_json(tags)
             
-    @tag.command(description="Editar una tag") # enabled=False
+    @tag.command(description="Editar una tag", usage="<nombre de la tag>|<descripcion nueva>") # enabled=False
     async def editar(self, ctx: commands.Context, *, args: str=""):
         if len(str(args)) <= 2:
             return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)** | **EJ: {ctx.prefix}tag editar `nombre de la tag`|Descripcion que quieras editar**")
@@ -156,7 +156,7 @@ class Tags(commands.Cog):
             self.cerrar_json(tags)
    
 
-    @tag.command(description="Renombrar una tag") # enabled=False
+    @tag.command(description="Renombrar una tag", usage="<nombre>|<nombre cambiado>") # enabled=False
     async def renombrar(self, ctx: commands.Context, *, args: str=""):
         if len(str(args)) <= 2:
             return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)** \n **EJ: {ctx.prefix}tag renombrar nombre|nombre2**")
@@ -191,7 +191,7 @@ class Tags(commands.Cog):
                 return await ctx.send("Ups.. Un error renombrando tu tag")
             self.cerrar_json(tags)
 
-    @tag.command(description="Renombrar una tag") # enabled=False
+    @tag.command(description="Renombrar una tag", usage="[num]") # enabled=False
     async def listar(self, ctx, num: int = 5):
         if not num:
             return await ctx.send(f"Puedes ver las tags mas vistas ponuendo **{ctx.prefix}tag listar [num]**")

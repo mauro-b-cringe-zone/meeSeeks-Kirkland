@@ -363,7 +363,7 @@ class Execution(commands.Cog):
             Emoji.Execution.loading, self.bot.user
         )
 
-    @commands.group(pass_context=True, aliases=list(LANGUAGES['ids'].keys()))
+    @commands.group(pass_context=True, aliases=list(LANGUAGES['ids'].keys()), usage="[codigo]")
     async def run(self, ctx, *, code: Optional[str]):
         """
         El comando principal que maneja el proceso de ejecución del código.

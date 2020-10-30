@@ -167,7 +167,7 @@ class Economia(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=["bal"], description="Enseña el dinero de tu cuenta")
+    @commands.command(aliases=["bal"], description="Enseña el dinero de tu cuenta", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def balance(self, ctx, member: discord.Member=None):
         if member is None:
@@ -203,7 +203,7 @@ class Economia(commands.Cog):
         with open("./json/mainbank.json", "w") as f:
             json.dump(users, f)         
 
-    @commands.command(description="Deposita tu dinero al banko (Tienes que tener dinero en la cartera)")
+    @commands.command(description="Deposita tu dinero al banko (Tienes que tener dinero en la cartera)", usage="[cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def deposit(self, ctx, amount=None):
         await open_acount(ctx.author)
@@ -230,7 +230,7 @@ class Economia(commands.Cog):
 
         await ctx.send(embed=discord.Embed(title="Conseguido", description=f"Se han metido {amount} {C_NAMES} en tu cuenta bancaria", colour=color))
 
-    @commands.command(description="Poner dinero en la cartera (Tienes que tener dinero en el banko)")
+    @commands.command(description="Poner dinero en la cartera (Tienes que tener dinero en el banko)", usage="[cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def withdraw(self, ctx, amount=None):
         await open_acount(ctx.author)
@@ -259,7 +259,7 @@ class Economia(commands.Cog):
 
         await ctx.send(embed=discord.Embed(title="Conseguido", description=f"Se han metido {amount} {C_NAMES} en tu cartera", colour=color))
 
-    @commands.command(aliases=["give"], description="Transfiere dinero a un @usuario")
+    @commands.command(aliases=["give"], description="Transfiere dinero a un @usuario", usage="<usuario> [cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def transfere(self, ctx, member: discord.Member,amount=None):
         await open_acount(ctx.author)
@@ -287,7 +287,7 @@ class Economia(commands.Cog):
 
         await ctx.send(embed=discord.Embed(title="Conseguido", description=f"Se han metido {amount} {C_NAMES} en su cuenta bancaria", colour=color))
 
-    @commands.command(aliases=["slot"], description="Haver si ganas un premio")
+    @commands.command(aliases=["slot"], description="Haver si ganas un premio", usage="[cantidad]")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def slots(self, ctx, amount=None):
         await open_acount(ctx.author)
@@ -323,7 +323,7 @@ class Economia(commands.Cog):
             await ctx.send(f"{slotmachine} Nada, has perdido 😢")
             await update_bank(ctx.author,-1*amount)
 
-    @commands.command(aliases=["rob"], description="Roba ha alguien")
+    @commands.command(aliases=["rob"], description="Roba ha alguien", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def steal(self, ctx, member: discord.Member):
         await open_acount(ctx.author)
@@ -356,7 +356,7 @@ class Economia(commands.Cog):
         embed.set_footer(text=f"Puedes poner {ctx.prefix}buy para comprar algo", icon_url="https://img.icons8.com/ultraviolet/48/000000/amazon.png")
         await ctx.send(embed=embed)
 
-    @commands.command(description="Compra algo en la tienda")
+    @commands.command(description="Compra algo en la tienda", usage="<objeto> [cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def buy(self, ctx, item, amount = 1):
         await open_acount(ctx.author)
@@ -398,7 +398,7 @@ class Economia(commands.Cog):
 
         await ctx.send(embed=em)    
 
-    @commands.command(description="Vende un objeto de tu inventario")
+    @commands.command(description="Vende un objeto de tu inventario", usage="<objeto> [cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sell(self, ctx, item, amount=1):
         await open_acount(ctx.author)

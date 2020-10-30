@@ -185,7 +185,7 @@ class General(commands.Cog):
         embed = discord.Embed(title="Invitaciones", description=f"{ctx.author.mention} has invitado a {totalInvites} persona{'' if totalInvites == 1 else 's'}", colour=color)        
         await ctx.send(embed=embed)
 
-    @commands.command(description="¿Una cerbeza?")
+    @commands.command(description="¿Una cerbeza?", usage="[usuario] [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def beer(self, ctx, user: discord.Member = None, *, reason: commands.clean_content = ""):
         if not user or user.id == ctx.author.id:
@@ -217,7 +217,7 @@ class General(commands.Cog):
             beer_offer = beer_offer + f"\n\n**razon:** {reason}" if reason else beer_offer
             await msg.edit(content=beer_offer)
 
-    @commands.command(aliases=['guapocal', 'guapocl'], description="¿Eres guapo? Nah")
+    @commands.command(aliases=['guapocal', 'guapocl'], description="¿Eres guapo? Nah", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def guapo(self, ctx, *, user: discord.Member = None):
         user = user or ctx.author
@@ -297,7 +297,7 @@ class General(commands.Cog):
         embed.add_field(name=f"{bpm}bpm, {randomTuning}", value=output, inline=True)
         await ctx.send(embed=embed)
 
-    @commands.command(description="Traduze a el idioma que quieras (Ej: m.translate es helllo ($translate --lista para ver los idiomas disponibles))")
+    @commands.command(description="Traduze a el idioma que quieras (Ej: m.translate es helllo ($translate --lista para ver los idiomas disponibles))", usage="<lang><texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def translate(self, ctx, *args):
         wait = await ctx.send(' | Porfavor espera...') ; args = list(args)
@@ -395,36 +395,12 @@ class General(commands.Cog):
     async def copyright(self, ctx):
         embed = discord.Embed(colour=color)
         embed.set_author(name="Copyright", icon_url="https://img.icons8.com/color/48/000000/creative-commons--v1.png")
-        embed.description = """
-        
-            La licencia del MIT (MIT)
-
-            Copyright (c) 2020 Maubg
-
-            Por la presente se otorga permiso, sin cargo, a cualquier persona que obtenga una
-            copia de este software y los archivos de documentación asociados (el "Software"),
-            para negociar con el Software sin restricciones, incluidas, entre otras,
-            los derechos de uso, copia, modificación, fusión, publicación, distribución, sublicencia,
-            y / o vender copias del Software, y permitir a las personas a quienes el
-            El software se proporciona para ello, sujeto a las siguientes condiciones:
-
-            El aviso de copyright anterior y este aviso de permiso se incluirán en
-            todas las copias o partes sustanciales del Software.
-
-            EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA
-            O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A LAS GARANTÍAS DE COMERCIABILIDAD,
-            APTITUD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO
-            LOS AUTORES O TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE CUALQUIER RECLAMO, DAÑOS U OTROS
-            RESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRO MODO, QUE SURJA
-            DESDE, FUERA DE O EN RELACIÓN CON EL SOFTWARE O EL USO U OTROS
-            NEGOCIACIONES EN EL SOFTWARE.
-        
-        """
+        embed.description = "> Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE#L19)"
 
         await ctx.send(embed=embed)
 
 
-    @commands.command(aliases=["ltr", "letra", "repetida"], description="Mira haver si hay una letra repetida en tu texto")
+    @commands.command(aliases=["ltr", "letra", "repetida"], description="Mira haver si hay una letra repetida en tu texto", usage="<palabra>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def letra_repetida(self, ctx, palabra):
 
@@ -437,7 +413,7 @@ class General(commands.Cog):
                 await ctx.send(embed=embed)
 
 
-    @commands.command(aliases=["edit", "editar"], description="Pon | Donde quieras que este la marca de (editado)")
+    @commands.command(aliases=["edit", "editar"], description="Pon | Donde quieras que este la marca de (editado)", usage="<texto> <Pon una \"|\" donde quieras que este el \"editado\">")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def edited(self, ctx, *args):
         msg = await ctx.send('...')
@@ -449,13 +425,11 @@ class General(commands.Cog):
         from urllib.parse import quote_plus as urlencode
         return urlencode(word).replace('+', '%20')
     def api(self, url):
-        from json import loads as jsonify
-        from urllib.request import urlopen as getapi
-        return jsonify(getapi(url).read())
+        return get(url).json()
     def dearray(self, arr):
         return str(', '.join(arr))+'.'
 
-    @commands.command(description="Cuantas palabras riman con \"Palabra\"")
+    @commands.command(description="Cuantas palabras riman con \"Palabra\"", usage="<Palabra>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def rhyme(self, ctx, *args):
         if len(list(args))==0: await ctx.send('Por favor ingrese una palabra. E intentaremos encontrar la palabra que mejor rime con ella.')
@@ -478,7 +452,7 @@ class General(commands.Cog):
         from requests import get as decodeurl
         return decodeurl(url).json()
 
-    @commands.command(description="Te dare la rezeta de lo que quieras")
+    @commands.command(description="Te dare la rezeta de lo que quieras", usage="<comida>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def receta(self, ctx, *args):
 
@@ -505,7 +479,7 @@ class General(commands.Cog):
                 embed.set_image(url=total['thumbnail'])
                 await ctx.send(embed=embed)
 
-    @commands.command(description="Mira si una web esta abajo")
+    @commands.command(description="Mira si una web esta abajo", usage="<website>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def isitdown(self, ctx, *args):
         from datetime import datetime as t
@@ -545,7 +519,7 @@ class GeneralSecundario(commands.Cog):
         self.bot = bot
 
 
-    @commands.command(aliases=["qr"], description="Crea un codigo QR o de barras poniendo $barcode")
+    @commands.command(aliases=["qr"], description="Crea un codigo QR o de barras poniendo $barcode", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def barcode(self, ctx, *args):
         if len(list(args))==0:
@@ -589,7 +563,7 @@ class GeneralSecundario(commands.Cog):
         traducted_data =  trans.translate(data['activity'], src='en', dest='es')
         await ctx.send('**¿Aburrido?**\n'+str(traducted_data.text))
 
-    @commands.command(description="Busca canciones en itunes")
+    @commands.command(description="Busca canciones en itunes", usage="<cancion>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def itunes(self, ctx, *args):
         if len(list(args))==0: 
@@ -609,9 +583,8 @@ class GeneralSecundario(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def joke(self, ctx):
         data = self.api("https://official-joke-api.appspot.com/jokes/general/random")
-        trans = Translator()
-        translated_setup = trans.translate(data[0]["setup"], src='en', dest='es')
-        translated_punch = trans.translate(data[0]["punchline"], src='en', dest='es')
+        translated_setup = gtr.translate(data[0]["setup"], src='en', dest='es')
+        translated_punch = gtr.translate(data[0]["punchline"], src='en', dest='es')
         embed = discord.Embed(
             title = str(translated_setup.text),
             description = '||'+str(translated_punch.text)+'||',
@@ -650,33 +623,35 @@ class GeneralSecundario(commands.Cog):
             return ctx.guild.get_member(int(list(args)[0]))
         return ctx.author
 
-    @commands.command(description="Mira tu posicion en la que te unistes")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def joinposition(self, ctx, *args):
-        from datetime import datetime as t
-        current_time = t.now().timestamp()
-        user = self.getUser(ctx, args)
-        wait = await ctx.send(' | Iterating through {} members...'.format(len(ctx.guild.members)))
-        sortedJoins = sorted([current_time-i.joined_at.timestamp() for i in ctx.guild.members])[::-1]
-        num, users = [i for i in range(len(sortedJoins)) if (current_time-user.joined_at.timestamp())==sortedJoins[i]][0], []
-        for i in range(-10, 11):
-            try:
-                placement = (num + i) + 1
-                if placement < 1: continue
-                locate = sortedJoins[num + i]
-                username = [str(i) for i in ctx.guild.members if (current_time-i.joined_at.timestamp())==locate][0]
-                if i == 0: username = f'**{username}**'
-                users.append({
-                    'user': username,
-                    'time': locate,
-                    'order': str(placement)
-                })
-            except IndexError:
-                pass
-        em = discord.Embed(title='Tu posicion al unirte', description='\n'.join([
-            '{}. {} ({})'.format(i['order'], i['user'], self.time_encode(round(i['time']))) for i in users
-        ]), color=color)
-        await wait.edit(content='', embed=em)
+    # @commands.command(description="Mira tu posicion en la que te unistes", usage="[usuario]")
+    # @commands.cooldown(1, 5, commands.BucketType.user)
+    # async def joinposition(self, ctx, *args):
+    #     from datetime import datetime as t
+    #     try:
+    #         wait = await ctx.send(" | Hang tight... collecting data...")
+    #         current_time, members, user_index, desc = t.now().timestamp(), ctx.guild.members, None, ""
+    #         full_arr = [{'ja': i.joined_at.timestamp(), 'da': i} for i in members]
+    #         raw_unsorted_arr = [i['ja'] for i in full_arr]
+    #         sorted_arr = sorted(raw_unsorted_arr)
+    #         if len(args) > 0 and args[0].isnumeric() and ((int(args[0])-1) in range(len(members))):
+    #             user_index, title = int(args[0]) - 1, f'User join position for order: #{args[0]}'
+    #         else:
+    #             user = self.getUser(ctx, args)
+    #             user_join_date = user.joined_at.timestamp()
+    #             user_index, title = sorted_arr.index(user_join_date), str(user)+'\'s join position for '+ctx.guild.name
+    #         for i in range(user_index - 10, user_index + 11):
+    #             if i < 0: continue
+    #             try: key = sorted_arr[i]
+    #             except: continue
+    #             index = raw_unsorted_arr.index(key)
+    #             name = str(full_arr[index]['da']).replace('_', '\_').replace('*', '\*').replace('`', '\`')
+    #             string = "{}. {} ({} ago)\n" if i != user_index else "**__{}. {} ({} ago)__**\n"
+    #             desc += string.format(
+    #                 i + 1, name, self.client.utils.lapsed_time_from_seconds(current_time - full_arr[index]['ja'])
+    #             )
+    #         return await wait.edit(content='', embed=discord.Embed(title=title, description=desc, color=ctx.guild.me.roles[::-1][0].color))
+    #     except Exception as e:
+    #         cprint(f"[Log] Un error con el $joinposition {e}", "red")
 
     @commands.command(description="Un uo")
     @commands.cooldown(1, 10, commands.BucketType.user)
@@ -737,7 +712,7 @@ class GeneralSecundario(commands.Cog):
         res = text.replace('<p>', '').replace('</p>', '').replace('<b>', '**').replace('</b>', '**').replace('<i>', '*').replace('</i>', '*').replace('<br />', '\n')
         return res
 
-    @commands.command(description="Mira una serie de television")
+    @commands.command(description="Mira una serie de television", usage="[serie de tv]")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def tv(self, ctx, *args):
         if len(list(args))==0: 
@@ -773,7 +748,7 @@ class GeneralSecundario(commands.Cog):
     def insp(self, url):
         return requests.get(url).text
 
-    @commands.command(description="Pon el texto en grande")
+    @commands.command(description="Pon el texto en grande", usage="<texto>")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def ascii(self, ctx, *args):
         text = '+'.join(list(args)) if len(list(args))>0 else 'ascii%20texto'
@@ -787,7 +762,7 @@ class GeneralSecundario(commands.Cog):
     @commands.command(description="Mira info de la nasa")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def nasa(self, ctx, *args):
-        query = 'earth' if len(list(args))==0 else urlify(' '.join(list(args)))
+        query = 'earth' if len(list(args))==0 else self.urlify(' '.join(list(args)))
         data = self.jsonisp(f'https://images-api.nasa.gov/search?q={query}&media_type=image')
         await ctx.channel.trigger_typing()
         if len(data['collection']['items'])==0: 
@@ -837,7 +812,7 @@ class GeneralSecundario(commands.Cog):
                 await ctx.send("Upss... un error. Intenta poner una cancion/artista valido")
                 cprint(str("[Log] un error: " + e), 'red')
 
-    @commands.command(description="Busca algo en wiki")
+    @commands.command(description="Busca algo en wiki", usage="[pagina]")
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def wikipedia(self, ctx, *args):
         wait = await ctx.send(' | Porfavor espera...')

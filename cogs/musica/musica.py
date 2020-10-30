@@ -331,7 +331,7 @@ class Music(commands.Cog):
     # async def cog_command_error(self, ctx: commands.Context, error: commands.CommandError):
     #     await ctx.send('Ups.. un error: {}'.format(str(error)))
 
-    @commands.command(name='join', invoke_without_subcommand=True, description="Unirse ha un canal")
+    @commands.command(name='join', invoke_without_subcommand=True, description="Unirse ha un canal", usage="<cancion>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _join(self, ctx: commands.Context):
         ctx.voice_state.songs.clear()
@@ -344,7 +344,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title=f"Me he unido a {ctx.author.voice.channel}", colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name='summon', description="Cambiarse de canal")
+    @commands.command(name='summon', description="Cambiarse de canal", usage="[canal]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_guild=True)
     async def _summon(self, ctx: commands.Context, *, channel: discord.VoiceChannel = None):
@@ -378,7 +378,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title=f"Me he ido de {ctx.author.voice.channel}", colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name='volume', description="Cambia el volumen de la cancion")
+    @commands.command(name='volume', description="Cambia el volumen de la cancion", usage="<volumen>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _volume(self, ctx: commands.Context, *, volume: int):
 
@@ -490,7 +490,7 @@ class Music(commands.Cog):
         else:
             await ctx.send('Ya votaste para omitir esta canción.')
 
-    @commands.command(name='queue', description="Mira la cola de canciones")
+    @commands.command(name='queue', description="Mira la cola de canciones", usage="[pagina]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _queue(self, ctx: commands.Context, *, page: int = 1):
         """
@@ -531,7 +531,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title='Varajeando la cola', colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name='remove', description="Quita una cancion de la cola")
+    @commands.command(name='remove', description="Quita una cancion de la cola", usage="<index>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _remove(self, ctx: commands.Context, index: int):
         # Elimina una canción de la cola en un índice determinado.
@@ -561,7 +561,7 @@ class Music(commands.Cog):
         embed = discord.Embed(title=f'cambiando loop a ({ctx.voice_state.loop})', colour=color)
         await ctx.send(embed=embed)           
 
-    @commands.command(name='play', description="Pon una musica o añade una cancion a la cola")
+    @commands.command(name='play', description="Pon una musica o añade una cancion a la cola", usage="<cancion>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _play(self, ctx: commands.Context, *, search: str):
 

@@ -40,7 +40,7 @@ class Creador(commands.Cog):
 
     @commands.command(description="Recargar un cog")
     @commands.is_owner()
-    async def reload(self, ctx, name: str):
+    async def reload(self, ctx, name: str, usage="<nombre>"):
         try:
             self.bot.reload_extension(f'cogs.{name}')
             cprint(f"[Cog] Se ha recargado cogs.{name}", "cyan")
@@ -48,7 +48,7 @@ class Creador(commands.Cog):
             return await ctx.send(e)
         await ctx.send(f"Se ha reiniciado **cosg.{name}.py**")
 
-    @commands.command(description="Responde una reseña")
+    @commands.command(description="Responde una reseña", usage="<id del usuario> <respuesta>")
     @commands.is_owner()
     async def rp(self, ctx, *args):
         try:
@@ -91,7 +91,7 @@ class Creador(commands.Cog):
     def report(self, auth):
         return 'lol'
 
-    @commands.command(aliases=['ex','eval'], description="Evalua lo que quieras")
+    @commands.command(aliases=['ex','eval'], description="Evalua lo que quieras", usage="<texto>")
     async def evaluate(self, ctx, *args):
         unprefixed = ' '.join(list(args))
         if int(ctx.message.author.id)==700812754855919667:

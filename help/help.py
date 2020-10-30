@@ -11,7 +11,7 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description="Ayuda para los comandos")
+    @commands.command(description="Ayuda para los comandos", usage="[cog]")
     async def help(self, ctx, cog="1"):
         try:
             embed = discord.Embed(title="Ayuda con los comandos", color=int(env["COLOR"]))

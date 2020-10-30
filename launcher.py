@@ -135,5 +135,5 @@ if __name__ == "__main__":
     from pathlib import Path
     cprint("\nPon \"instrucciones\" Si es la primera vesz que usas maubot <- o -> \"help\" para ver la lista de ayudas\n", "yellow")
     while True:
-        comando = input("Maubot -> ")
+        comando = input(f"{Path(__file__).parent} -> ")
         Consola(comando).procesar_comandos(directorio=Path(__file__).parent)

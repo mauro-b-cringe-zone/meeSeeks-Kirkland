@@ -12,7 +12,7 @@ class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description="Quita mensajes de el chat")
+    @commands.command(description="Quita mensajes de el chat", usage="[num]")
     @commands.cooldown(1, 5, commands.BucketType.guild)
     @commands.has_permissions(manage_messages=True)
     async def clear(self, ctx, amount=10):
@@ -22,7 +22,7 @@ class Moderation(commands.Cog):
         time.sleep(1.2)
         await msg.delete()
 
-    @commands.command(description="Expulsa ha alguien")
+    @commands.command(description="Expulsa ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)    
     async def kick(self, ctx, member : discord.Member, *, reason=None):
@@ -31,7 +31,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(title=f"Eliminado", description=f"Se a eliminado a {member.mention} del servidor",colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(description="Banea ha alguien")
+    @commands.command(description="Banea ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member : discord.Member, *, razon=None):
@@ -45,7 +45,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
         
 
-    @commands.command(description="Desbanea a un baneado **uso: $unban <id del usuario>**")
+    @commands.command(description="Desbanea a un baneado **uso: $unban <id del usuario>**", usage="<id del usuario>")
     @commands.has_permissions(manage_messages=True)
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, member=None):
@@ -58,7 +58,7 @@ class Moderation(commands.Cog):
             return await ctx.send("**uso: $unban <id del usuario>**")
         
 
-    @commands.command(pass_context=True, description="Haz un haviso ha alguien")
+    @commands.command(pass_context=True, description="Haz un haviso ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def warn(self, ctx, member: discord.Member, *, razon="Sin especificar"):
@@ -92,7 +92,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(title="Warnicion", description=f"{member.mention}  Razon: {razon}\n\nLe quedan {5-warns[str(ctx.guild.id)][str(member.id)]['warns']} warniciones", colour=color)   
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True, description="Quitale el aviso ha alguien")
+    @commands.command(pass_context=True, description="Quitale el aviso ha alguien", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def unwarn(self, ctx, member: discord.Member):
@@ -110,7 +110,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(title="Warnicion quitada", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan warniciones, ({ctx.prefix}warnlist @usuario para ver la lista)", colour=color)   
         await ctx.send(embed=embed)
 
-    @commands.command(pass_context=True, description="La lista de warniciones que alguien tendra")
+    @commands.command(pass_context=True, description="La lista de warniciones que alguien tendra", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def warnlist(self, ctx, member: discord.Member=None):
@@ -128,7 +128,7 @@ class Moderation(commands.Cog):
         embed.add_field(name="\uFEFF", value=f"Si tiene 5 warniciones {member.mention} sera expulsado")
         await ctx.send(embed=embed)
 
-    @commands.command(description="Mutea ha alguien")
+    @commands.command(description="Mutea ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(ban_members=True)
     async def mute(self, ctx, member : discord.Member, *, reason=None):
@@ -138,7 +138,7 @@ class Moderation(commands.Cog):
 
 
 
-    @commands.command(description="Crea una nueba categoria")
+    @commands.command(description="Crea una nueba categoria", usage="<nombre>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def new_category(self, ctx, *, cat):
@@ -146,7 +146,7 @@ class Moderation(commands.Cog):
         embed = discord.Embed(title="Categoria echa", description=f"Hola, acabo de crear una nueva categoria --- **({category.name})**", colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(description="Nuevo canal de texto")
+    @commands.command(description="Nuevo canal de texto", usage="<nombre>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def new_textchannel(self, ctx, *, cha):
@@ -155,7 +155,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
 
 
-    @commands.command(description="Crea un canal de voz")
+    @commands.command(description="Crea un canal de voz", usage="<nombre>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def new_voicechannel(self, ctx, *, vc):

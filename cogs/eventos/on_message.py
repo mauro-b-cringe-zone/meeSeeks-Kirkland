@@ -56,7 +56,7 @@ class Mensajes(commands.Cog):
             await channel.send(embed=discord.Embed(title=f':tada: ¡felicidades!', description=f'{user.mention}, has subido al nivel {lvl_end}! :champagne_glass: ', colour=color))
             users[str(user.id)]['level'] = lvl_end
 
-    @commands.command(description="Mira tu nivel de mensajes")
+    @commands.command(description="Mira tu nivel de mensajes", usage="[usuario]")
     async def rank(self, ctx, user: discord.Member = None):
         with open("./json/userslvl.json", "r") as f:
             users = json.load(f)
