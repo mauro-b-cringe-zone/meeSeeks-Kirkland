@@ -120,7 +120,7 @@ def hackflow(tohack):
         '4\nEMAIL: '+email(tohack.name)+'@hackeado.com\nCONTRASEÑA: "'+password(tohack.name)+'"',
         '1\n[hack.exe] DIVULGANDO INFORMACIÓN A '+randomhash()+'.onion... ',
         '1"hecho".',
-        '1\n[hack.exe] GETTING SENSITIVE PERSONAL INFORMATION...',
+        '1\n[hack.exe] COJIENDO INFORMACION PERSONAL DEL USUARIO...',
         '4"hecho".\nULTIMO MENSAJE: "'+lastmsg(tohack.name)+'"\nÚLTIMA HISTORIA DE NAVEGACIÓN: "'+history(tohack.name)+'"\n[hack.exe] DISTRIBUCIÓN DE INFORMACIÓN AL FBI Y NSA... ',
         '3"hecho".',
         '0\n[hack.exe] HACK COMPLETADO.',
