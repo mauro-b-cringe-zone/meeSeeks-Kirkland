@@ -142,7 +142,7 @@ class App(commands.Bot):
             await context.send(
                 'Como saves los robots no son perfectos,\n'
                 'Se ha producido un error, Visita:'
-                ' **https://github.com/maubg-debug/maubot/issues**'
+                ' **[Nuestro github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)**'
                 ' para mencionarnos el error y enviarnos una captura de pantalla con el comando'
                 f'\nError: \n```{str(exception)}```'
             )
