@@ -66,6 +66,8 @@ Luego en la consola de python pondreis
 C:\> python
 Python 3.8.1 (tags/v3.8.1:1b293b6, Dec 18 2019, 23:11:46) [MSC v.1916 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>>
 >>> print(int(0xffffff)) # Enved de "0xffffff" poner buestro color
 16777215
 >>> # Si no cogeremos el "COLOR" del .env como un str() y lo queremos en int() para el embed
