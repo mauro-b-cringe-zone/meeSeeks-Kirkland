@@ -61,7 +61,7 @@ async def invert_pic(pic: str):
         await session.close()
         return invert
 
-class Trigger(commands.Cog):
+class ImgAvatarUser(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -150,4 +150,4 @@ class Trigger(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Trigger(bot))
+    bot.add_cog(ImgAvatarUser(bot))

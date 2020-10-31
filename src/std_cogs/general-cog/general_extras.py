@@ -41,7 +41,7 @@ class GeneralExtra(commands.Cog):
     @commands.has_permissions(kick_members=True)
     async def rename_bot(self, ctx, *, text='Maubot'):
         await ctx.message.guild.me.edit(nick=text)
-        await ctx.send(f'Apodo establecido a {text}')
+        await ctx.send(f'Apodo establecido a **{text}**')
 
 
 
@@ -240,7 +240,7 @@ class GeneralExtra(commands.Cog):
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def b1nzy(self, ctx):
         await ctx.channel.trigger_typing()
-        await ctx.send(file=discord.File("assets/imgs/b1nzy_with_banhammer.png"))
+        await ctx.send(file=discord.File("./docs/images/b1nzy_with_banhammer.png"))
 
     @commands.command(description="Russia")
     @commands.cooldown(1, 15, commands.BucketType.user)
