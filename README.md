@@ -35,7 +35,7 @@ pip install -r requirements.txt
 - [centOS (yum)](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-8/)  
 (haga clic en el enlace para ver la documentación)
 
-- [rpm (everything else)](https://rpmfind.net/linux/rpm2html/search.php?query=ffmpeg)  
+- [rpm (Todo lo demas)](https://rpmfind.net/linux/rpm2html/search.php?query=ffmpeg)  
 (haga clic en el enlace para ver la página de descarga)
 
 #### 3. Editar el entorno
@@ -46,3 +46,15 @@ b) Completa los valores
 ```
 python ./src/main.py
 ```
+
+#### 4. archivo.env
+```
+TOKEN = El token del robot
+WEATHER_KEY = https://openweathermap.org/api (LLave de la api para este bot)
+COMP_KEY = Visitar (https://judge0.p.rapidapi.com)
+COLOR = Ver Las instrucciones ()
+USER_STATISTICS_THROTTLE_DURATION = 5 - Esto da igual
+USER_STATISTICS_INCREMENT = 10 - Esto da igual
+DEBUG = True|False
+```
+##### Instrucciones para el color del .env

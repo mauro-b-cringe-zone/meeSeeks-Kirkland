@@ -26,7 +26,6 @@ AUTH_HEADER = 'X-RapidAPI-Key'
 AUTH_KEY = env['COMP_KEY'] # Llave
 BASE_URL = 'https://judge0.p.rapidapi.com'
 PREFIX = '$'
-IDE_LINK = "https://ide.judge0.com/"
 NEWLINES_LIMIT = 10 
 CHARACTERS_LIMIT = 300
 
