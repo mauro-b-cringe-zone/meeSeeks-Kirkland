@@ -75,12 +75,12 @@ class Help(commands.Cog):
                     else:
                         try:
                             if reaction.emoji == emos[0]:
-                                await msg.edit(embed=None)
-                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                                await msg.edit(embed=discord.Embed())
+                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales+1, embed))
                                 await msg.clear_reactions()
                             if reaction.emoji == emos[1]:
-                                await msg.edit(embed=None)
-                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                                await msg.edit(embed=discord.Embed())
+                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales-1, embed))
                                 await msg.clear_reactions()
                             if reaction.emoji == emos[2]:
                                 await msg.delete()
