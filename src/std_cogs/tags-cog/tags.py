@@ -42,12 +42,12 @@ class Tags(commands.Cog):
         }
 
     def abrir_json(self):
-        with open('./json/tags.json', "r") as f:
+        with open('./src/json/tags.json', "r") as f:
             tags = json.load(f)
         return tags
 
     def cerrar_json(self, tags):
-        with open('./json/tags.json', "w") as f:
+        with open('./src/json/tags.json', "w") as f:
             json.dump(tags, f)
 
     @commands.group(invoke_without_command=True, description="Buscar una tag", usage="[nombre]")
@@ -193,30 +193,32 @@ class Tags(commands.Cog):
 
     @tag.command(description="Renombrar una tag", usage="[num]") # enabled=False
     async def listar(self, ctx, num: int = 5):
+        tabla_lista = {}
+        total = []
         if not num:
             return await ctx.send(f"Puedes ver las tags mas vistas ponuendo **{ctx.prefix}tag listar [num]**")
         else:
             tags = self.abrir_json()
-            # print(len(tags))
-            if num > len(tags):
-                return await ctx.send("No hay tantas tags")
             try:
                 if not num >= 50:    
-                    ListaDeTags = ''            
-                    contador = 1
-                    for i in tags:
-                        # print('{}. {} - {}'.format(i, t[0], t[1]))
-                        # print(i)
-                        # print(t[0])
-                        # sorted_x = sorted(x.items(), key=operator.itemgetter(1), reverse=True)
-                        # print(i)
-                        creador = f"<@{tags[i]['creador']}>"
-                        ListaDeTags += f'**{contador}.** {i} - {creador}\n'
-                        if contador == num:
+                    for tag in tags:
+
+                        visitas_totales = tags[tag]['visitas']
+                        tabla_lista[visitas_totales] = tags[tag]
+                        total.append(visitas_totales)
+                    total = sorted(total, reverse=True)
+
+                    index = 1
+                    embed = discord.Embed(title=f"Top {num} tags", color=color)
+
+                    for i in total:
+                        creador = self.bot.get_user(tabla_lista[i]['creador'])
+                        embed.add_field(name=f"{index}. {tabla_lista[i]['titulo']} | Visitas: {tabla_lista[i]['visitas']}", value=f"> Creador: {creador.mention}\n> Invocacion: {ctx.prefix}{tabla_lista[i]['titulo']}", inline=False)
+
+                        if index == num:
                             break
-                        contador += 1
-                            
-                    embed = discord.Embed(title=f"Top {num} tags", description=ListaDeTags, color=color)
+                        else:
+                            index += 1
                     await ctx.send(embed=embed)
                 else:
                     return await ctx.send("No se pueden tantos")

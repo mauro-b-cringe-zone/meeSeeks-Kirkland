@@ -6,7 +6,7 @@ import asyncio
 from discord.ext import commands
 from os import environ as env
 
-color = env["COLOR"]
+color = int(env["COLOR"])
 
 
 class Contraseñas(commands.Cog):
@@ -31,7 +31,7 @@ class Contraseñas(commands.Cog):
         msg = await ctx.send("Porfavor espera esto puede tardar un rato **Sobre todo si las contraseñas son largas**")
 
         embed = discord.Embed(colour=color)
-        embed.title = f"Tu contraseña es {password}"
+        embed.title = f"Tu contraseña es | {password}"
         embed.add_field(name="Tardanza", value=f"{random.random()} segundos")
         embed.add_field(name="Intentos", value=f"{random.randrange(3, 100000)} intentos")
         await msg.edit(content="", embed=embed)

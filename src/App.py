@@ -22,7 +22,6 @@ class App(commands.Bot):
         self.__cogs = cogs
         self.color = int(env.get("COLOR"))
 
-        # Try to load cogs
         try:
             self.__load_cogs()
         except (commands.ExtensionNotLoaded,
@@ -63,10 +62,10 @@ class App(commands.Bot):
                 and reaction.message.id == msg_error.id
             )
         try:
-            reaction, user = await self.app.wait_for("reaction_add", check=_check)
-        except:
+            reaction, user = await self.wait_for("reaction_add", timeout=9999999, check=_check)
+        except  asyncio.TimeoutError:
             await msg_error.delete()
-        finally:
+        else:
             await msg_error.delete()
 
     async def on_command_error(self, context, exception):
@@ -76,23 +75,24 @@ class App(commands.Bot):
 
         exception_type = exception.__class__
         if exception_type:
+
             if isinstance(exception, CommandOnCooldown):
-                embed = discord.Embed(title="Tranquilo...", description=f"{context.author.mention} Este comando esta en reposo\n Ahora tienes que esperar **{exception.retry_after:,.2f}** segundos", colour=color)
+                embed = discord.Embed(title="Tranquilo...", description=f"{context.author.mention} Este comando esta en reposo\n Ahora tienes que esperar **{exception.retry_after:,.2f}** segundos", color=self.color)
                 await context.send(embed=embed)
 
-            if isinstance(exception, commands.DisabledCommand):
-                embed = discord.Embed(title="404", description=f"{context.author.mention} Este comando esta **desactivado** intentalo mas tarde", colour=color)
+            elif isinstance(exception, commands.DisabledCommand):
+                embed = discord.Embed(title="404", description=f"{context.author.mention} Este comando esta **desactivado** intentalo mas tarde", color=self.color)
                 await context.send(embed=embed)
 
-            if isinstance(exception, commands.NotOwner):
-                embed = discord.Embed(title="....", description=f"{context.author.mention} Este comando es para mi creador\n\nVete y consigue una vida.", colour=color)
+            elif isinstance(exception, commands.NotOwner):
+                embed = discord.Embed(title="....", description=f"{context.author.mention} Este comando es para mi creador\n\nVete y consigue una vida.", color=self.color)
                 await context.send(embed=embed)
 
-            if isinstance(exception, commands.NoPrivateMessage):
-                embed = discord.Embed(title="NO", description=f"{context.author.mention} Este comando no es para canale de DM", colour=color)
+            elif isinstance(exception, commands.NoPrivateMessage):
+                embed = discord.Embed(title="NO", description=f"{context.author.mention} Este comando no es para canale de DM", color=self.color)
                 await context.send(embed=embed)
 
-            if isinstance(exception, commands.TooManyArguments):
+            elif isinstance(exception, commands.TooManyArguments):
                 embed = discord.Embed(description=f"{context.author.mention} Escribe menos argumentos por favor.", colour=0xc42323)
                 embed.set_author(name="Demasiado", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.set_footer(text='\n-- ERROR')
@@ -100,7 +100,7 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-            if isinstance(exception, commands.BadArgument):
+            elif isinstance(exception, commands.BadArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xc42323)
                 embed.set_author(name="Escribe un argumento valido", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.set_footer(text='\n-- ERROR')
@@ -108,7 +108,7 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-            if isinstance(exception, commands.MissingRequiredArgument):
+            elif isinstance(exception, commands.MissingRequiredArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xc42323)
                 embed.set_author(name="Escribe todos los argumentos requeridos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.set_footer(text='\n-- ERROR')
@@ -117,7 +117,7 @@ class App(commands.Bot):
                 await self.reaction(context, msg_error)
 
 
-            if isinstance(exception, commands.MissingPermissions):
+            elif isinstance(exception, commands.MissingPermissions):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xc42323)
                 embed.set_author(name=f"Necesitas permisos para hacer esto", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.add_field(name="\uFEFF", value=f"Permisos necesarios: `{Translator().translate(str([perm.replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]), src='en', dest='es').text}`")
@@ -126,7 +126,7 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-            if isinstance(exception, commands.MissingRole):
+            elif isinstance(exception, commands.MissingRole):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xc42323)
                 embed.set_author(name="Tienes que tener los roles correctos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.set_footer(text='\n-- ERROR')
@@ -134,17 +134,24 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-        elif env.get('DEBUG'):
+        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.']
+
+        if env.get('DEBUG'):
+            if str(exception) in excepciones or str(exception).startswith(excepciones[1]):
+                return
             await context.send(
+                'Como saves los robots no son perfectos,\n'
                 'Se ha producido un error, Visita:'
                 ' **https://github.com/maubg-debug/maubot/issues**'
-                ' para mencionarnos el error'
+                ' para mencionarnos el error y enviarnos una captura de pantalla con el comando'
+                f'\nError: \n```{str(exception)}```'
             )
             Logger.error(f'ERROR: {str(exception)}')
 
+
     def __load_cogs(self):
         """
-        Load all cogs into bot.
+        Carga todos los engranajes en bot.
         :return:
         """
         for cog in self.__cogs.get():
@@ -155,13 +162,12 @@ class App(commands.Bot):
     @commands.is_owner()
     async def __reload_cogs(ctx: commands.Context):
         """
-        Command to reload all cogs.
+        Un comando para recargar todos los cogs
         :param ctx: Command context.
         :return:
         """
-        # Inform user that reload began
-        Logger.info(f'{ctx.author} triggered a reload of cogs.')
-        await ctx.send(f'{ctx.message.author.mention} triggered a reload.')
+        Logger.info(f'{ctx.author} desencadenó una recarga de engranajes.')
+        await ctx.send(f'{ctx.message.author.mention} desencadenó una recarga.')
 
         try:
             for cog in ctx.bot.__cogs.get():
@@ -170,15 +176,13 @@ class App(commands.Bot):
                 commands.ExtensionNotFound,
                 commands.NoEntryPointError,
                 commands.ExtensionFailed):
-            # Inform User that reload was not successful
-            message_error = 'Error on reloading cogs.'
+            message_error = 'Error al recargar piñones.'
             Logger.error(message_error)
             await ctx.send(message_error)
 
             return
 
-        # Inform User that reload was successful
-        message_success = 'Cogs reloaded.'
+        message_success = 'Cogs recargados.'
         Logger.success(message_success)
         await ctx.send(message_success)
 
@@ -198,6 +202,6 @@ class App(commands.Bot):
         with open('./src/json/prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
-        e = discord.Embed(title="**__Se a cambiado el prefijo correctamente__**", description=f'Se a cambiado el prefijo a:     `{prefix}`', colour=color)
+        e = discord.Embed(title="**__Se a cambiado el prefijo correctamente__**", description=f'Se a cambiado el prefijo a:      `{prefix}`', colour=self.color)
         e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/4gfUZtB)**")
         await ctx.send(embed=e)

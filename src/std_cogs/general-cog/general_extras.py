@@ -156,7 +156,7 @@ class GeneralExtra(commands.Cog):
     @commands.command(description="F en el chat")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def f(self, ctx):
-        with open('./mauutils/languages/spanish.json', 'r') as f:
+        with open('./src/utils/languages/spanish.json', 'r') as f:
             Language = json.load(f)
         await ctx.send(Language.get("fun.respects", ctx).format(ctx.author, random.randint(1, 10000)))
 
@@ -169,7 +169,7 @@ class GeneralExtra(commands.Cog):
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def spam(self, ctx):
         await ctx.channel.trigger_typing()
-        await ctx.send(file=discord.File("assets/imgs/spam.png"))
+        await ctx.send(file=discord.File("./docs/images/spam.png"))
 
     # @commands.command()
     # async def random(ctx, subreddit: str=""):
@@ -246,7 +246,7 @@ class GeneralExtra(commands.Cog):
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def cykablyat(self, ctx):
         await ctx.channel.trigger_typing()
-        await ctx.send(file=discord.File("assets/imgs/cykablyat.jpg"))
+        await ctx.send(file=discord.File("./docs/images/cykablyat.jpg"))
 
     @commands.command(description="¿A que da miedo?")
     @commands.cooldown(1, 15, commands.BucketType.user)
@@ -314,7 +314,7 @@ class GeneralSecExtra(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def plzmsgme(self, ctx, *, message:str):
 
-        with open('./mauutils/languages/spanish.json', 'r') as f:
+        with open('./src/utils/languages/spanish.json', 'r') as f:
             Language = json.load(f)
 
         await ctx.author.send(message)

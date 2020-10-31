@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 from utils.Environment import env
 
-color = int(env.get["COLOR"])
+color = int(env.get("COLOR"))
 WEATHER_KEY = env.get("WEATHER_KEY")
 
 from googletrans import Translator

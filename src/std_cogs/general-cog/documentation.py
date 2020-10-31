@@ -64,7 +64,7 @@ class Documentation(commands.Cog):
             cache[key] = {}
             async with self.session.get(page + '/objects.inv') as resp:
                 if resp.status != 200:
-                    raise RuntimeError('Cannot build doc lookup table, try again later.')
+                    raise RuntimeError('No se puede crear la tabla de búsqueda de documentos. Vuelve a intentarlo más tarde..')
 
                 stream = SphinxObjectFileReader(await resp.read())
                 cache[key] = self.parse_object_inv(stream, page)

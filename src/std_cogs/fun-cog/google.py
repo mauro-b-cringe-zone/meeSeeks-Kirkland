@@ -27,7 +27,7 @@ class Google(commands.Cog):
 
         def gsync(query=query):
             name = str(ctx.message.author)
-            for j in search(query, tld="com", num=1, stop=1):
+            for j in search(query):
                 return j
 
         async with ctx.typing():

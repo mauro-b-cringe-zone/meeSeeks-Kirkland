@@ -173,7 +173,7 @@ class General(commands.Cog):
         embed.set_thumbnail(url=ctx.guild.icon_url)
         # embed.set_footer(text=f"Propuesto por {ctx.author.name}", icon_url=ctx.author.icon_url)
 
-        await ctx.send(embed=embed, file=discord.File("../infoserver.png"))
+        await ctx.send(embed=embed)
 
     @commands.command(description="¿Ha cuantos has invitado?")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -395,7 +395,7 @@ class General(commands.Cog):
     async def copyright(self, ctx):
         embed = discord.Embed(colour=color)
         embed.set_author(name="Copyright", icon_url="https://img.icons8.com/color/48/000000/creative-commons--v1.png")
-        embed.description = "> Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE#L19)"
+        embed.description = "> Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)"
 
         await ctx.send(embed=embed)
 
@@ -409,8 +409,8 @@ class General(commands.Cog):
 
         for m, v in longituz_palabra.items():
             if v > 1:
-                embed = discord.Embed(title=f"Encontrado", description=f"La **{m}** esta **{v}** veces en esta {palabra}",colour=color)
-                await ctx.send(embed=embed)
+                embed = discord.Embed(title=f"Encontrado", description=f"La **{m}** esta **{v}** veces en **{palabra}**",colour=color)
+        await ctx.send(embed=embed)
 
 
     @commands.command(aliases=["edit", "editar"], description="Pon | Donde quieras que este la marca de (editado)", usage="<texto> <Pon una \"|\" donde quieras que este el \"editado\">")
@@ -517,6 +517,30 @@ class General(commands.Cog):
 class GeneralSecundario(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+    def jsonisp(self, url):
+        from requests import get as decodeurl
+        return decodeurl(url).json()
+
+    def urlify(self, word):
+        from urllib.parse import quote_plus as urlencode
+        return urlencode(word).replace('+', '%20')
+    def api(self, url):
+        return get(url).json()
+    def dearray(self, arr):
+        return str(', '.join(arr))+'.'
+
+    def imagefromURL(self, url): 
+        return Image.open(BytesIO(get(url).content))
+
+    def buffer(self, data):
+        arr = BytesIO()
+        data.save(arr, format='PNG')
+        arr.seek(0)
+        return arr
+
+    def urltoimage(self, url):
+        image = self.imagefromURL(url)
+        return self.buffer(image)
 
 
     @commands.command(aliases=["qr"], description="Crea un codigo QR o de barras poniendo $barcode", usage="<texto>")
@@ -657,6 +681,7 @@ class GeneralSecundario(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def ufo(self, ctx):
         num = str(random.randint(50, 100))
+        wait = await ctx.send(content="> Espera un poco esto puede tardar...")
         data = self.api('http://ufo-api.herokuapp.com/api/sightings/search?limit='+num)
         if data['status']!='OK':
             await ctx.send(' | Hubo un problema al recuperar la información. \nEl servidor dijo: "'+str(data['status'])+'" :eyes:')
@@ -670,7 +695,7 @@ class GeneralSecundario(commands.Cog):
             traducted_duration = trans.translate(ufo['duration'], src="en", dest='es')
             embed = discord.Embed(title='Avistamiento de ovnis en: '+str(traducted_city.text)+' | '+str(traducted_state.text), description='**Descripcion:** '+str(traducted_summary.text)+'\n\n**Forma:** '+str(traducted_shape.text)+'\n**Fecha de avistamiento: **'+str(ufo['date'])[:-8].replace('T', ' ')+'\n**Duración: **'+str(traducted_duration.text)+'\n\n[Articulo]('+str(ufo['url'])+')', colour=color)
             embed.set_footer(text='¡Maubot asalto el área 51 y encontro esto!')
-            await ctx.send(embed=embed)
+            await wait.edit(content="", embed=embed)
 
 
 

@@ -4,6 +4,9 @@ import json
 import os
 from os import environ as env
 import random
+
+from utils.Logger.Logger import Logger
+
 color = int(env["COLOR"])
 C_NAMES = "diamantes"
 
@@ -62,10 +65,10 @@ async def buy_this(user,item_name,amount):
         obj = {"item":item_name , "amount" : amount}
         users[str(user.id)]["bag"] = [obj]        
 
-    with open("./json/mainbank.json","w") as f:
+    with open("./src/json/mainbank.json","w") as f:
         json.dump(users,f)
 
-    await update_bank(user,cost*-1,"wallet")
+    await update_bank(user, cost*-1, "wallet")
 
     return [True,"Worked"]
 
@@ -112,7 +115,7 @@ async def sell_this(user,item_name,amount,price=None):
     if users[str(user.id)]["bag"][index]["amount"] == 0:
         del users[str(user.id)]["bag"][index]
 
-    with open("./json/mainbank.json","w") as f:
+    with open("./src/json/mainbank.json","w") as f:
         json.dump(users,f)
 
     await update_bank(user,cost,"wallet")
@@ -121,7 +124,7 @@ async def sell_this(user,item_name,amount,price=None):
 
 
 async def get_bank_data():
-    with open("./json/mainbank.json", "r") as f:
+    with open("./src/json/mainbank.json", "r") as f:
         users = json.load(f)
 
     return users
@@ -130,7 +133,7 @@ async def open_acount(user):
 
     users = await get_bank_data()
 
-    with open("./json/mainbank.json","r") as f:
+    with open("./src/json/mainbank.json","r") as f:
         users = json.load(f)
 
     if str(user.id) in users:
@@ -140,7 +143,7 @@ async def open_acount(user):
         users[str(user.id)]["wallet"] = 0
         users[str(user.id)]["bank"] = 0
 
-    with open("./json/mainbank.json","w") as f:
+    with open("./src/json/mainbank.json","w") as f:
         json.dump(users, f) 
     return True
 
@@ -149,7 +152,7 @@ async def update_bank(user, change=0, mode="wallet"):
 
     users[str(user.id)][mode] += change
 
-    with open("./json/mainbank.json", "w") as f:
+    with open("./src/json/mainbank.json", "w") as f:
         json.dump(users, f)        
     
     bal = [users[str(user.id)]["wallet"],users[str(user.id)]["bank"]]
@@ -183,7 +186,10 @@ class Economia(commands.Cog):
         embed = discord.Embed(title=f"Cuenta bankaria de {member.name}", description=f"La cuenta de dinero de {member.mention}",colour=color)
         embed.add_field(name="Cartera", value=f"{wallet_amt} {C_NAMES}", inline=True)
         embed.add_field(name="Banco", value=f"{bank_amt} {C_NAMES}", inline=True)
-        embed.add_field(name="Objetos", value=f"{len(users[str(user.id)]['bag'])}", inline=True)
+        try:
+            embed.add_field(name="Objetos", value=f"{len(users[str(user.id)]['bag'])}", inline=True)
+        except:
+            Logger.info(f"El usuario {member} no tiene bolsa asique se la pasa el \"field\"")
         embed.set_footer(text=f"Puedes escribir {ctx.prefix}bag para ver tu inventario", icon_url=member.avatar_url)
         await ctx.send(embed=embed)
 
@@ -200,7 +206,7 @@ class Economia(commands.Cog):
 
         users[str(user.id)]["wallet"] += earnings
 
-        with open("./json/mainbank.json", "w") as f:
+        with open("./srcjson/mainbank.json", "w") as f:
             json.dump(users, f)         
 
     @commands.command(description="Deposita tu dinero al banko (Tienes que tener dinero en la cartera)", usage="[cantidad]")
@@ -315,7 +321,7 @@ class Economia(commands.Cog):
 
         if (a == b == c):
             await ctx.send(f"{slotmachine} Todo coincide, ¡Has ganado! 🎉")
-            await update_bank(ctx.author,2*amount)
+            await update_bank(ctx.author,3*amount)
         elif (a == b) or (a == c) or (b == c):
             await ctx.send(f"{slotmachine} 2 en una linea, ¡Has ganado! 🎉")
             await update_bank(ctx.author,2*amount)
@@ -385,6 +391,7 @@ class Economia(commands.Cog):
         try:
             bag = users[str(user.id)]["bag"]
         except:
+            cprint(f"[Log] Un error en \"economy-cog.main\": {e}", "red")
             bag = []
 
 
@@ -394,7 +401,7 @@ class Economia(commands.Cog):
             name = item["item"]
             amount = item["amount"]
 
-            em.add_field(name=name, value=amount, inline=False)    
+            em.add_field(name=name, value=amount, inline=True)    
 
         await ctx.send(embed=em)    
 
@@ -436,7 +443,11 @@ class Economia(commands.Cog):
             id_ = leader_board[amt]
             member = self.bot.get_user(id_)
             name = member.name
-            embed.add_field(name=f"#{index} | {name}", value=f"{amt} {C_NAMES}", inline=False)
+            if not member.id == ctx.author.id:
+                embed.add_field(name=f"#{index} | {name}", value=f"{amt} {C_NAMES}", inline=False)
+            else:
+                embed.add_field(name=f"#{index} | {name} (Tu)", value=f"{amt} {C_NAMES}", inline=False)
+
             if index == x:
                 break
             else:
