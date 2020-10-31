@@ -48,7 +48,7 @@ python ./src/main.py
 ```
 
 #### 4. archivo.env
-```text
+```txt
 TOKEN = El token del robot
 WEATHER_KEY = https://openweathermap.org/api (LLave de la api para este bot)
 COMP_KEY = Visitar (https://rapidapi.com/hermanzdosilovic/api/judge0)
