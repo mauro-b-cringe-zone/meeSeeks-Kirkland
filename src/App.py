@@ -136,11 +136,12 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.']
+        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji"]
 
         if env.get('DEBUG'):
-            if str(exception) in excepciones or str(exception).startswith(excepciones[1]):
-                return
+            for i in excepciones:
+                if i in str(exception):
+                    return
             await context.send(embed=discord.Embed(
                               title="Como saves los robots no son perfectos", 
                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",

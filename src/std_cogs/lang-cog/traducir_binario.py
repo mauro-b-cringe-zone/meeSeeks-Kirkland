@@ -32,11 +32,21 @@ class Binario(commands.Cog):
 
         embed = discord.Embed(title="Traducido del texto a binario", colour=color)
         embed.add_field(name="Texto original", value=texto)
-        embed.add_field(name="Traducido", value=resultado, inline=False)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")     
+        embed.add_field(name="Traducido", value=resultado, inline=False) 
 
         await ctx.send(embed=embed)
         
+    @commands.command(description="Hola, mundo", usage="[text]")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def bin2texto(self, ctx, *, texto = "PON TEXTO IDIOTA"):
+        
+        resultado = binario_a_texto(texto)
+
+        embed = discord.Embed(title="Traducido del binario a texto", colour=color)
+        embed.add_field(name="Binario original", value=texto)
+        embed.add_field(name="Traducido", value=resultado, inline=False)
+
+        await ctx.send(embed=embed)
     
 
 

@@ -3,7 +3,7 @@ from discord.ext import commands
 
 from os import environ as env
 
-color = env["COLOR"]
+color = int(env["COLOR"])
 
 class Mates(commands.Cog):
     def __init__(self, bot):

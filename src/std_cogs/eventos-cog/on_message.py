@@ -12,6 +12,16 @@ class Mensajes(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
 
+        # if message.author == self.bot:
+        #     return
+
+        with open("./src/json/mute.json", 'r') as f:
+            user = json.load(f)
+
+        # print(message.author.id)
+        if str(message.author.id) in user:
+            await message.delete()
+
         if message.content == "<@!730124969132163093>":
             # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
             await message.channel.send(embed=discord.Embed(title="Deja que me presente", 

@@ -322,7 +322,7 @@ class Execution(commands.Cog):
         if code.startswith("-v") or code.startswith("--version"):
             await ctx.send(embed=Embed(title=f"Version para {lang['command']}", color=int(env["COLOR"])).set_thumbnail(url=lang["icon"]).add_field(name="\uFEFF", value=f"> {lang['version']}"))
             cprint(f"[Log] Se ha pedido la version de {lang['command']}, Version: {lang['version']}", "green")
-            await ctx.author.message.add_reaction(Emoji.Execution.idle)
+            # await ctx.author.message.add_reaction(Emoji.Execution.idle)
             return
 
         # await ctx.author.message.add_reaction(Emoji.Execution.loading)
@@ -380,7 +380,7 @@ class Execution(commands.Cog):
                 # print(i)
                 lang_id = LANGUAGES["array"][i]
                 # print(lang_id)
-                listaDeLenguages += f"**{c}. {lang_id['command']}** | {lang_id['version']}\n"
+                listaDeLenguages += f"**{c}. {ctx.prefix}{lang_id['command']}** | {lang_id['version']}\n"
             embed.description = listaDeLenguages
             await ctx.send(embed=embed)
 

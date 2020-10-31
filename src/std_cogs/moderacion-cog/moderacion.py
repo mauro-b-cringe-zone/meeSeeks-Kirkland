@@ -62,7 +62,7 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def warn(self, ctx, member: discord.Member, *, razon="Sin especificar"):
-        with open('./json/warnings.json', 'r') as f:
+        with open('./src/json/warnings.json', 'r') as f:
             warns = json.load(f)
         # print(warns)
         try:
@@ -87,7 +87,7 @@ class Moderation(commands.Cog):
             except:
                 cprint('[Log] Un error intentando eliminar a alguien por 5 warniciones', 'red')
                 return await ctx.send(f"En error intentando eliminar a {member.mention}, Razon: Mas de 5 warniciones")
-        with open("./json/warnings.json","w") as f:
+        with open("./src/json/warnings.json","w") as f:
             json.dump(warns,f)    
         embed = discord.Embed(title="Warnicion", description=f"{member.mention}  Razon: {razon}\n\nLe quedan {5-warns[str(ctx.guild.id)][str(member.id)]['warns']} warniciones", colour=color)   
         await ctx.send(embed=embed)
@@ -96,7 +96,7 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def unwarn(self, ctx, member: discord.Member):
-        with open('./json/warnings.json', 'r') as f:
+        with open('./src/json/warnings.json', 'r') as f:
             warns = json.load(f)
         if str(member.id) in warns[str(ctx.guild.id)]:
             warns[str(ctx.guild.id)][str(member.id)]["warns"] -= 1
@@ -105,7 +105,7 @@ class Moderation(commands.Cog):
             del warns[str(ctx.guild.id)][str(member.id)]
         if warns[str(ctx.guild.id)] == {}:
             del warns[str(ctx.guild.id)]
-        with open("./json/warnings.json","w") as f:
+        with open("./src/json/warnings.json","w") as f:
             json.dump(warns,f)    
         embed = discord.Embed(title="Warnicion quitada", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan warniciones, ({ctx.prefix}warnlist @usuario para ver la lista)", colour=color)   
         await ctx.send(embed=embed)
@@ -116,27 +116,55 @@ class Moderation(commands.Cog):
     async def warnlist(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
-        with open('./json/warnings.json', 'r') as f:
+        with open('./src/json/warnings.json', 'r') as f:
             warns = json.load(f)
-        if not str(ctx.member.id) in warns[str(ctx.guild.id)]:
+        if not str(member.id) in warns[str(ctx.guild.id)]:
             return await ctx.send("Este usuario no tiene warniciones")
         embed = discord.Embed(title="Lista de warniciones", description=f"{member.mention}  Tiene:", colour=color) 
         for index in range(0, warns[str(ctx.guild.id)][str(member.id)]["warns"]):
-            embed.add_field(name=index + 1, value="Razon: " + warns[str(ctx.guild.id)][str(member.id)]["razones"][index], inline=False)
-        with open("./json/warnings.json","w") as f:
+            embed.add_field(name=f"{index + 1} | {warns[str(ctx.guild.id)][str(member.id)]['razones'][index]}", value="--------------", inline=False)
+        with open("./src/json/warnings.json","w") as f:
             json.dump(warns,f)    
-        embed.add_field(name="\uFEFF", value=f"Si tiene 5 warniciones {member.mention} sera expulsado")
+        embed.set_footer(text=f"Si tiene 5 warniciones {member.mention} sera expulsado")
         await ctx.send(embed=embed)
 
     @commands.command(description="Mutea ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    @commands.has_permissions(ban_members=True)
+    # @commands.has_permissions(mute_members=True)
     async def mute(self, ctx, member : discord.Member, *, reason=None):
         
-        await ctx.member.mute(reason=reason)
-        await ctx.send("{} a sido muteado".format(member.mention,ctx.author.mention))
+        with open("./src/json/mute.json", "r") as f:
+            user = json.load(f)
 
 
+        if not str(member.id) in user:
+            user[str(member.id)] = {}
+            user[str(member.id)]["razon"] = reason
+        else:
+            await ctx.send("Ese usuario ya estra baneado")
+
+        with open("./src/json/mute.json", "w") as f:
+            json.dump(user, f)
+
+        await ctx.send(embed=discord.Embed(title="Muteado", description=f"{ctx.author.mention}, se ha muteado a {member.mention}", color=color))
+
+    @commands.command(description="Desmutea ha alguien", usage="<usuario>")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    # @commands.has_permissions(mute_members=True)
+    async def unmute(self, ctx, member: discord.Member):
+        
+        with open("./src/json/mute.json", 'r') as f:
+            user = json.load(f)
+
+        if str(member.id) in user:
+            del user[str(member.id)]
+        else:
+            await ctx.send("Ese usuario no esta muteado")
+
+        with open("./src/json/mute.json", "w") as f:
+            json.dump(user, f)
+
+        await ctx.send(embed=discord.Embed(title="Desmuteado", description=f"{ctx.author.mention}, se ha desmuteado a {member.mention}", color=color))
 
     @commands.command(description="Crea una nueba categoria", usage="<nombre>")
     @commands.cooldown(1, 5, commands.BucketType.user)

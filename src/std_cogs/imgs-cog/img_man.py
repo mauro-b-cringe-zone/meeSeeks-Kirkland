@@ -349,6 +349,22 @@ class ImgSecundario(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def urlify(self, word):
+        return urlencode(word).replace('+', '%20')
+        
+    def imagefromURL(self, url): 
+        return Image.open(BytesIO(get(url).content))
+
+    def buffer(self, data):
+        arr = BytesIO()
+        data.save(arr, format='PNG')
+        arr.seek(0)
+        return arr
+
+    def urltoimage(self, url):
+        image = self.imagefromURL(url)
+        return self.buffer(image)
+
     @commands.command(asliases=['imageoftheday'], description="Mira la imagen del dia")
     @commands.cooldown(1, 21600, commands.BucketType.user)
     async def iotd(self, ctx):

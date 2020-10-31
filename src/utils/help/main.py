@@ -40,11 +40,12 @@ class Help(commands.Cog):
             ListaDeComandos = ListaDeComandos[:-2]
             ListaDeComandos += "\n"
             embed.add_field(name=f"║━━━━ {cog} ━━━━║\n", value=ListaDeComandos, inline=False)
+        return embed
 
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
     @commands.command(description="Ayuda para los comandos", usage="[cog]")
-    async def help(self, ctx, cog="1"):
+    async def help(self, ctx, cog=1):
         try:
             embed = discord.Embed(title="Ayuda con los comandos", color=int(env["COLOR"]))
 
@@ -54,9 +55,9 @@ class Help(commands.Cog):
 
             if re.search(r"\d", str(cog)):
 
-                await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
+                embedh = await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
 
-                msg = await ctx.send(embed=embed)
+                msg = await ctx.send(embed=embedh)
                 emos = ["◀️", "▶️", "❌"]
                 def _check(reaction, user):
                     return (
@@ -64,19 +65,38 @@ class Help(commands.Cog):
                         and user == ctx.author
                         and reaction.message.id == msg.id
                     )
-                for i in ["◀️", "▶️", "❌"]:
-                    await msg.add_reaction(i)
-                try:
-                    reaction, user = await self.bot.wait_for("reaction_add", check=_check)
-                except Exception as e:
-                    cprint(f"[Log] Un error en help: {e}", "red")
-                else:
-                    if reaction.emoji == emos[0]:
-                        await msg.edit(await self.ayuda(ctx, cog=cogs-1))
-                    if reaction.emoji == emos[1]:
-                        await msg.edit(await self.ayuda(ctx, cog=cogs+1))
-                    if reaction.emoji == emos[2]:
-                        await msg.delete()
+                for n in range(50):
+                    for i in ["◀️", "▶️", "❌"]:
+                        await msg.add_reaction(i)                    
+                    try:
+                        reaction, user = await self.bot.wait_for("reaction_add", check=_check)
+                    except Exception as e:
+                        cprint(f"[Log] Un error en help: {e}", "red")
+                    else:
+                        try:
+                            if reaction.emoji == emos[0]:
+                                await msg.edit(embed=None)
+                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                                await msg.clear_reactions()
+                            if reaction.emoji == emos[1]:
+                                await msg.edit(embed=None)
+                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                                await msg.clear_reactions()
+                            if reaction.emoji == emos[2]:
+                                await msg.delete()
+                                return
+                        except:
+                            if reaction.emoji == emos[0]:
+                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                                await msg.clear_reactions()
+                            if reaction.emoji == emos[1]:
+                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                                await msg.clear_reactions()
+                            if reaction.emoji == emos[2]:
+                                await msg.delete()
+                                return
+
+                return
                 
 
             elif re.search(r"[a-zA-Z]", str(cog)):
@@ -94,16 +114,16 @@ class Help(commands.Cog):
                     if comando.hidden:
                         continue
                 
-                    textoDeAyuda += f"** {comando.name} ━║** {comando.description}\n"
+                    textoDeAyuda += f"** {comando.name} ║** {comando.description}\n"
                 
                     if len(comando.aliases) > 0:
-                        textoDeAyuda += f"**Aliados ━║** {', '.join(comando.aliases)}\n"
+                        textoDeAyuda += f"**Aliados ║** {', '.join(comando.aliases)}\n"
                     textoDeAyuda += ''
                 
 
                     prefijo = ctx.prefix
 
-                    textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name} {comando.usage if comando.usage is not None else ''}`\n\n\n"
+                    textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name} {comando.usage if comando.usage is not None else ''}`\n\n"
                 embed.description = textoDeAyuda
 
                 await ctx.send(embed=embed)
