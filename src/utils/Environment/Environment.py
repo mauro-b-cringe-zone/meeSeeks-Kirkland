@@ -100,8 +100,8 @@ class Environment:
 
         def __read_env(self, root_path: Path):
             """
-            Read .env-file.
-            :return: Indicates whether env exists or not.
+            Leer archivo .env.
+            :return: indica si env existe o no.
             """
             env_file = None
             env_file_root = f'{root_path}/../.env'
@@ -117,11 +117,11 @@ class Environment:
 
         def get(self, name: str):
             """
-            Get environment variable.
-            Transforms to lower for argument and to upper for environment.
-            :raises EnvironmentError: Raises if variable not found.
-            :param name: Name of variable.
-            :return: Value of variable.
+            Obtenga la variable de entorno.
+            Se transforma en inferior para argumento y superior para entorno.
+            :genera EnvironmentError: aumenta si no se encuentra la variable.
+            :nombre del parámetro: Nombre de la variable.
+            :retorno: Valor de la variable.
             """
             name_lower = name.lower()
             name_upper = name.upper()
@@ -130,13 +130,13 @@ class Environment:
             elif self.__env_file_exists and os.getenv(name_upper) is not None:
                 return os.getenv(name_upper)
 
-            raise EnvironmentError(f'Attribute {name} not found.')
+            raise EnvironmentError(f'No se ha encontrado el atribbuto {name}.')
 
         def set(self, name: str, value):
             """
-            Sets environment variable.
-            :param name: Name of variable. Will be transformed to upper-case.
-            :param value: Value of variable.
+            Establece la variable de entorno.
+            :nombre del parámetro: Nombre de la variable. Se transformará en mayúsculas.
+            :param value: Valor de la variable.
             :return:
             """
             os.environ[name.upper()] = value

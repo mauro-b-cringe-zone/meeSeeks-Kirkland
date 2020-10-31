@@ -4,7 +4,6 @@ import colorama
 
 from consola.main import Consola
 from pathlib import Path
-directorio = str(Path.home().parent)
 
 def preparar():
     from App import App
@@ -56,65 +55,18 @@ def preparar():
 
     Logger.success('Las opciones del robot estan cargadas.')
 
-    app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse")
-    app.remove_command('help')
-
+    app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
 
     app.run(token)
-    app.add_cog(Main(app))
+
+
+
 
 if __name__ == "__main__":
     while True:
         comando = input("Maubot> ")
-        c = Consola(comando).procesar_comandos(directorio)
-
+        c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent)
         if c == "preparacion":
             preparar()
         else:
             continue
-
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-# 
-#   CLASE MAIN
-# 
-# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-import discord, asyncio, json
-from discord.ext import commands
-
-class Main(commands.Cog):
-    def __init__(self, app):
-        self.app = app
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        while True:
-            await self.app.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name=f"|  $help  |  {len(self.app.users)} Usuarios en  {len(self.app.guilds)} servidores | con 186 commandos"))
-            await asyncio.sleep(10) 
-            await self.app.change_presence(status=discord.Status.idle, activity=discord.Game(name=f"https://top.gg/bot/730124969132163093"))
-            await asyncio.sleep(10)
-            await self.app.change_presence(status=discord.Status.dnd, activity=discord.Game(name=f"| Enviando memes a los  {len(self.app.users)} usuarios | "))
-            await asyncio.sleep(10)
-            await self.app.change_presence(status=discord.Status.idle, activity=discord.Game(name=f"| Mejorandome para dominar el mundo | "))
-            await asyncio.sleep(10)
-            await self.app.change_presence(status=discord.Status.dnd, activity=discord.Game(name=f"| Hackeando sistemas del pais | "))
-            await asyncio.sleep(10)
-            await self.app.change_presence(status=discord.Status.idle, activity=discord.Game(name=f"| Haciendo una tarta | "))
-            await asyncio.sleep(10)
-
-    @commands.command(description="Cambia el prefijo")
-    @commands.cooldown(1, 25, commands.BucketType.user)
-    @commands.has_permissions(kick_members=True)
-    async def prefix(self, ctx, prefix):
-
-        with open('./src/json/prefix.json', 'r') as f:
-            prefixes = json.load(f)
-
-        prefixes[str(ctx.guild.id)] = prefix
-
-        with open('./src/json/prefix.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
-
-        e = discord.Embed(title="**__Se a cambiado el prefijo correctamente__**", description=f'Se a cambiado el prefijo a:     `{prefix}`', colour=color)
-        e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/4gfUZtB)**")
-        await ctx.send(embed=e)

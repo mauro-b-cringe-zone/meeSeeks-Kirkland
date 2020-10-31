@@ -1,27 +1,27 @@
-![hellocoding bot img](docs/images/logo-bold-discord-bot.svg)
+# Maubot
 
-![GitHub last commit](https://img.shields.io/github/last-commit/hellocodingDE/hellocoding-bot?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues-raw/hellocodingDE/hellocoding-bot?style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/hellocodingDE/hellocoding-bot?style=for-the-badge)  
+![GitHub last commit](https://img.shields.io/github/last-commit/maubg-debug/maubot?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues-raw/maubg-debug/maubot?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/maubg-debug/maubot?style=for-the-badge)  
 
-# HelloCoding Discord Bot - Community Edition
+# Maubot | El mejor bot de la historia
 
-## Maintainers
-[Have a look!](MAINTAINERS.md)
+## Autor
+[¡Miralo!](AUTOR.md)
 
-## Getting started
+## Como empezar
 
-#### 0. Install Python 3.6.0 - 3.9.x
-Versions below or above are not official supported
+#### 0. Instalar python 3.6.0 - 3.9.x
+Las versiones inferiores o superiores no son compatibles oficialmente
 
-#### 1. Install python dependencies
+#### 1. Instalar dependencias de Python
 ```
 pip install -r requirements.txt
 ```
 
-#### 2. Install additional dependencies
-- [ffmpeg binary (windows)](https://ffmpeg.org/download.html) (for voicechats)  
-(click on link to see download page)
+#### 2. Instalar dependencias adicionales
+- [ffmpeg binary (windows)](https://ffmpeg.org/download.html) (para charlas de voz)  
+(haga clic en el enlace para ver la página de descarga)
 
 - [macOS (homebrew)](https://formulae.brew.sh/formula/ffmpeg#default)  
 ```brew install wget```
@@ -33,16 +33,16 @@ pip install -r requirements.txt
 ``` pacman -S ffmpeg ```
 
 - [centOS (yum)](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-8/)  
-(click on link to see documentation)
+(haga clic en el enlace para ver la documentación)
 
 - [rpm (everything else)](https://rpmfind.net/linux/rpm2html/search.php?query=ffmpeg)  
-(click on link to see download page)
+(haga clic en el enlace para ver la página de descarga)
 
-#### 3. Edit environment
-a) Copy the `.env.example` file and rename it to `.env`
-b) Fill in the values
+#### 3. Editar el entorno
+a) Copie el archivo `.env.example` y cámbiele el nombre a `.env`
+b) Completa los valores
 
-#### 3. Run Bot
+#### 3. Correr el bot
 ```
 python ./src/main.py
 ```

@@ -16,6 +16,14 @@ class StdCogs(Cogs):
             if archivo != "__pycache__":
                 if self.__es_cog(archivo):
                     for nombre_archivo in os.listdir(f"{self.__cog_path}/{archivo}"):
+                        if nombre_archivo == "http_cmds":
+                            for i in os.listdir(f"{self.__cog_path}/{archivo}/{nombre_archivo}"):
+                                if i.startswith("cmd_"):
+                                    self.__cogs.append(f"std_cogs.fun-cog.http_cmds.{i[:-3]}")
+                        if nombre_archivo == "social_cmds":
+                            for i in os.listdir(f"{self.__cog_path}/{archivo}/{nombre_archivo}"):
+                                if not i.startswith("__py"):
+                                    self.__cogs.append(f"std_cogs.fun-cog.social_cmds.{i[:-3]}")
                         if not nombre_archivo.startswith("__py"):
                             if not nombre_archivo.endswith(".txt"):
                                 if not nombre_archivo.endswith("_cmds"):
@@ -26,6 +34,7 @@ class StdCogs(Cogs):
                                 continue
                         else:
                             continue
+        self.__cogs.append("utils.help.main")
 
     def __es_cog(self, archivo: str):
         return archivo.endswith('-cog')
