@@ -43,18 +43,32 @@ a) Copie el archivo `.env.example` y cámbiele el nombre a `.env`
 b) Completa los valores
 
 #### 3. Correr el bot
-```
+```shell
 python ./src/main.py
 ```
 
 #### 4. archivo.env
-```
+```shell
 TOKEN = El token del robot
 WEATHER_KEY = https://openweathermap.org/api (LLave de la api para este bot)
-COMP_KEY = Visitar (https://judge0.p.rapidapi.com)
-COLOR = Ver Las instrucciones ()
+COMP_KEY = Visitar (https://rapidapi.com/hermanzdosilovic/api/judge0)
+COLOR = Ver Las instrucciones (https://github.com/maubg-debug/maubot#instrucciones-para-el-color-del-env)
 USER_STATISTICS_THROTTLE_DURATION = 5 - Esto da igual
 USER_STATISTICS_INCREMENT = 10 - Esto da igual
 DEBUG = True|False
 ```
-##### Instrucciones para el color del .env
+#### Instrucciones para el color del .env
+```shell
+pip install envparse <- O -> pip install git+https://github.com/rconradharris/envparse.git
+
+python
+```
+Luego en la consola de python pondreis
+```python
+>> print(int(0xffffff)) # Enved de "0xffffff" poner buestro color
+16777215
+>> # Si no cogeremos el "COLOR" del .env como un str() y lo queremos en int() para el embed
+```
+
+# Licencia 
+Maubot esta bajo la licencia de [GNU](./LICENSE.md)
