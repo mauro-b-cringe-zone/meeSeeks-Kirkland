@@ -22,6 +22,8 @@ class App(commands.Bot):
         self.__cogs = cogs
         self.color = int(env.get("COLOR"))
 
+        self.help_url = "https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG"
+
         try:
             self.__load_cogs()
         except (commands.ExtensionNotLoaded,
@@ -139,13 +141,12 @@ class App(commands.Bot):
         if env.get('DEBUG'):
             if str(exception) in excepciones or str(exception).startswith(excepciones[1]):
                 return
-            await context.send(
-                'Como saves los robots no son perfectos,\n'
-                'Se ha producido un error, Visita:'
-                ' **[Nuestro github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)**'
-                ' para mencionarnos el error y enviarnos una captura de pantalla con el comando'
-                f'\nError: \n```{str(exception)}```'
-            )
+            await context.send(embed=discord.Embed(
+                              title="Como saves los robots no son perfectos", 
+                              description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
+                              color=self.color).set_footer(
+                                  text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon $help [seccion]"
+                              ))
             Logger.error(f'ERROR: {str(exception)}')
 
 

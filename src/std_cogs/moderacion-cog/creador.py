@@ -88,13 +88,11 @@ class Creador(commands.Cog):
     #     else:
     #         await ctx.send(embed=discord.Embed(title='Error en la execucion', description='Input:```sh\n'+str(unprefixed)+'```**Error:**```py\nDenegado por Maubot.py```', color=color))
 
-    def report(self, auth):
-        return 'lol'
 
     @commands.command(aliases=['ex','eval'], description="Evalua lo que quieras", usage="<texto>")
     async def evaluate(self, ctx, *args):
         unprefixed = ' '.join(list(args))
-        if int(ctx.message.author.id)==700812754855919667:
+        if int(ctx.message.author.id)==7008127548553919667:
             try:
                 res = eval(unprefixed.replace('"', "'"))
                 if isawaitable(res): 
@@ -106,8 +104,7 @@ class Creador(commands.Cog):
                     return
                 await ctx.send(embed=discord.Embed(title='La evaluación detectó una excepción', description='Input:```py\n'+unprefixed+'```\nException:```py\n'+str(e)+'```', color=discord.Colour.red()), delete_after=5)
         else:
-            self.report(ctx.message.author) # reports to the owner
-            await ctx.send(f'{self.bot.get_emoji(585885410257928194)} | ¿Estás buscando el token de Maubot? Bueno aqui esta: `daowihdawasdawpdua.dawd.awdawdd`')
+            await ctx.send(embed=discord.Embed(description=f'{self.bot.get_emoji(":sad:")} | ¿Estás buscando el token de Maubot? Bueno aqui esta: `daowihdawasdawpdua.dawd.awdawdd`', color=color))
 
     @commands.command(aliases=['bots'], description="Mira los bots")
     async def botmembers(self, ctx):

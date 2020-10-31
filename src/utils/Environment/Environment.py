@@ -75,6 +75,7 @@ class Environment:
             parser.add_argument('--token', '-t', help='define tu secreto de discord', type=str)
             # parser.add_argument('--prefix', help='define el prefijo de maubot', type=str)
             parser.add_argument('--debug', '-d', help='activa el modo de depuración', type=bool)
+            parser.add_argument('--cmd', '-c', help='activa el modo de depuración', type=str)
             return parser
 
         def __get_home_dir(self):

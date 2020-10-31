@@ -9,6 +9,7 @@ import colorama
 from consola.main import Consola
 from pathlib import Path
 
+
 def preparar():
     from App import App
     from models.StdModels import StdModels
