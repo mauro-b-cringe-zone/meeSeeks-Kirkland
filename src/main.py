@@ -1,3 +1,7 @@
+# Activar el enviroment
+# ".\env\Scripts\activate"
+# "deactivate"
+
 import sys
 
 import colorama

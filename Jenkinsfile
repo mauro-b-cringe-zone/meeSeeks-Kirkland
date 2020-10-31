@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Activate virtual environment') {
             steps {
-                sh "virtualenv hello-coding-bot-venv"
-                sh ". hello-coding-bot-venv/bin/activate"
+                sh "virtualenv maubot-bot-venv"
+                sh ". maubot/bin/activate"
             }
         }
         stage('Install Python dependencies') {

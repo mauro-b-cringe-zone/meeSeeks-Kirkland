@@ -27,10 +27,10 @@ pip install -r requirements.txt
 ```brew install wget```
 
 - [debian (ubuntu, mint, deepin, zorin, pop!_os,...)](https://wiki.debian.org/ffmpeg)  
-``` apt-get install libav-tools ffmpeg ```
+```apt-get install libav-tools ffmpeg```
 
 - [arch (manjaro,...)](https://www.archlinux.org/packages/extra/x86_64/ffmpeg/)  
-``` pacman -S ffmpeg ```
+```pacman -S ffmpeg```
 
 - [centOS (yum)](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-8/)  
 (haga clic en el enlace para ver la documentación)

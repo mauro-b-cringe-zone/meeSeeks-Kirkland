@@ -1,10 +1,6 @@
-# MAINTAINERS:
-(add your name alphabetically)
-<!-- [@username name <email>](github link) -->
+# Autor:
+### Maubg
 
-<!-- maintainers:start -->
-- [@fschuermeyer Felix Schürmeyer <office@hellocoding.de>](https://github.com/fschuermeyer)
-- [@micschwarz Michael Schwarz  <contact@micschwarz.dev>](https://github.com/micschwarz)
-- [@Tracer1337 Merlin Moelter <merlin.moelter@gmail.com>](https://github.com/Tracer1337)
-- [@uvulpos Tim Riedl <githubcontact@tim-riedl.de>](https://github.com/uvulpos)
-<!-- maintainers:end -->
+* [Github](https://github.com/maubg-debug)
+* [Website de maubot](http://maubot.mooo.com)
+* [LICENCIA](https://github.com/maubg-debug/maubot/blob/main/LICENCE.md)
