@@ -4,11 +4,9 @@
 # "deactivate"
 
 import sys
-
-import colorama
+from pathlib import Path
 
 from consola.main import Consola
-from pathlib import Path
 
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
@@ -17,13 +15,19 @@ __version__ = "1.0.0"
 
 def preparar():
     from App import App
+
     from models.StdModels import StdModels
+
     from utils.DataStore import data_store
     from utils.Environment import env
+
     from std_cogs.StdCogs import StdCogs
+
     from utils.Logger.Logger import Logger
     from utils.prefix import prefix
     from utils.Version import is_min_python_3_6
+
+    import colorama
 
     # ----------------------------------------------------------------------------------------------------------------------
     #       INIT COLORAMA
@@ -72,8 +76,8 @@ def preparar():
 if __name__ == "__main__":
     # print(sys.argv[2])
     try:
-        if sys.argv[2] == "run":
-            preparar()
+        if sys.argv[2]:
+            Consola(sys.argv[2]).procesar_comandos(directorio=Path(__file__).parent)
     except:
         while True:
             comando = input("Maubot> ")
