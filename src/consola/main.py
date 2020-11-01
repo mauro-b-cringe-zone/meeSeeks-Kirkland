@@ -15,11 +15,11 @@ class CrearEnv():
         if self.checkearPlataforma == "win":
             os.system("py -m pip install --user virtualenv")
             os.system("py -m venv env") 
-            os.system(".\env\Scripts\activate")
+            cprint("Ahora pon en la consola verdadera \".\env\Scripts\activate\" ara activarlo")
         elif self.checkearPlataforma == "lin":
             os.system("python3 -m pip install --user virtualenv")
             os.system("python3 -m venv env ")
-            os.system("source env/bin/activate")
+            cprint("Ahora pon en la consola verdadera \"source env/bin/activate\" ara activarlo")
         cprint("\nPuedes poner 'deactivate' para quitar el virtual env\n", "green")
 
 class Consola():
