@@ -75,9 +75,9 @@ if __name__ == "__main__":
             preparar()
     except:
         while True:
-                        comando = input("Maubot> ")
-                        c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent)
-                        if c == "preparacion":
-                            preparar()
-                        else:
-                            continue
+            comando = input("Maubot> ")
+            c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent)
+            if c == "preparacion":
+                preparar()
+            else:
+                continue
