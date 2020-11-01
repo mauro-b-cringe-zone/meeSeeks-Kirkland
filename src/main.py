@@ -69,10 +69,15 @@ def preparar():
 
 
 if __name__ == "__main__":
-    while True:
-        comando = input("Maubot> ")
-        c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent)
-        if c == "preparacion":
+    # print(sys.argv[2])
+    try:
+        if sys.argv[2] == "run":
             preparar()
-        else:
-            continue
+    except:
+        while True:
+                        comando = input("Maubot> ")
+                        c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent)
+                        if c == "preparacion":
+                            preparar()
+                        else:
+                            continue
