@@ -498,3 +498,6 @@ class Maubot(commands.Cog):
         embed.set_footer(text=f"Puesto por | {ctx.author}")
         embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
+
+def setup(app):
+    app.add_cog(Maubot(app))

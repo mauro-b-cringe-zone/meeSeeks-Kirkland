@@ -35,6 +35,7 @@ class StdCogs(Cogs):
                         else:
                             continue
         self.__cogs.append("utils.help.main")
+        self.__cogs.append("App")
 
     def __es_cog(self, archivo: str):
         return archivo.endswith('-cog')
