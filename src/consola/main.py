@@ -1,10 +1,31 @@
 import os, time, sys
 from termcolor import cprint
 
+class CrearEnv():
+    def __init__(self, directorio):
+        self.directorio = directorio
+
+    def checkearPlataforma(self):
+        if sys.platform.startswith("win") or sys.platform.startswith("cygwin"):  
+            return "win"
+        else:
+            return "lin"
+
+    def inizializar(self):
+        if self.checkearPlataforma == "win":
+            os.system("py -m pip install --user virtualenv")
+            os.system("py -m venv env") 
+            os.system(".\env\Scripts\activate")
+        elif self.checkearPlataforma == "lin":
+            os.system("python3 -m pip install --user virtualenv")
+            os.system("python3 -m venv env ")
+            os.system("source env/bin/activate")
+        cprint("\nPuedes poner 'deactivate' para quitar el virtual env\n", "green")
+
 class Consola():
     def __init__(self, comando):
         self.comando = comando.lower()
-        self.comandos = [["empezar", "run"], ["cls", "clear"], "pip", ["exit", "salir", "exit()"], "instalar", "python", ["help", "ayuda"], "instrucciones"]
+        self.comandos = [["empezar", "run"], ["cls", "clear"], "pip", ["exit", "salir", "exit()"], "instalar", "python", ["help", "ayuda"], "instrucciones", "env"]
 
     def pip(self, pack):
         if sys.platform.startswith("win") or sys.platform.startswith("cygwin"):  
@@ -62,7 +83,10 @@ class Consola():
             self.instrucciones(directorio)
 
         elif self.comando == self.comandos[6][1] or self.comando == self.comandos[6][0]:
-            cprint("\nAyuda:\n-> exit() - Se sale del programa\n-> pip <modulo> - Instalar un modulo con pip\n-> cls (clear) - Limpiar la consola\n-> run (empezar) - Correr maubot\n-> instalar - Instalar lo necesario para maubot (RECOMENDABLE SI ES LA PRIMERA VEZ QUE USAS MAUBOT)\n-> help (ayuda) - Enseña este mensage\n-> instrucciones - Te esñara como utilizar maubot\n", "green")
+            cprint("\nAyuda:\n-> exit() - Se sale del programa\n-> pip <modulo> - Instalar un modulo con pip\n-> cls (clear) - Limpiar la consola\n-> run (empezar) - Correr maubot\n-> instalar - Instalar lo necesario para maubot (RECOMENDABLE SI ES LA PRIMERA VEZ QUE USAS MAUBOT)\n-> help (ayuda) - Enseña este mensage\n-> instrucciones - Te esñara como utilizar maubot\n-> env - Empezar el 'virtual enviroment'\n", "green")
         
+        elif self.comando == self.comandos[8]:
+            CrearEnv(directorio).inizializar()
+
         else:
             cprint(f"\n{self.comando} no existe:\n-> Prueva a poner \"ayuda\" o \"help\"\n", "red")
