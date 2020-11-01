@@ -9,10 +9,10 @@ Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y apa
 
 # Maubot | El mejor bot de la historia
 
-![img](https://github.com/maubg-debug/maubot/blob/main/docs/Maubot-banner.jpg)
+![img](https://raw.github.com/maubg-debug/maubot/blob/main/docs/Maubot-banner.jpg)
 
 ## Autor
-[¡Miralo!](AUTOR.md)
+[¡Miralo!](https://github.com/maubg-debug/maubot/blob/main/AUTOR.md)
 
 # ¿Qué puede hacer Maubot?
 Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran variedad de comandos y secciones
@@ -21,12 +21,14 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 * Tambien dispone de musica
 * La malloria de maubot es para hacer la gente feliz asi que tiene <strong>muchiiisimos</strong> comandos de imagenes y juegos
 * La web (http://maubot.mooo.com)
-* Autor [Maubg](AUTOR.md)
+* Autor [Maubg](https://github.com/maubg-debug/maubot/blob/main/AUTOR.md)
 * Repo (https://github.com/maubg-debug/maubot) (Es codigo abierto)
 * Systema de bugs y re reportages de errores con $rate_bot < descripcion > 
 * Puede hacer interacciones con ols usuarios
 * Comandos de moderacion
 Maubot dispone de muchas mas cosas como <strong>prefijo custom ($prefix < prefijo >)</strong>. En si todos los comandos se pueden ver con <strong>$help [ Cog ]</strong>
+
+========================================================================================================================================
 
 # Por si quieres instalarlo
 
@@ -94,4 +96,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 # Licencia 
-Maubot esta bajo la licencia de [GNU](./LICENSE.md)
+Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/README.md)
