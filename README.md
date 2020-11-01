@@ -14,6 +14,22 @@ Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y apa
 ## Autor
 [¡Miralo!](AUTOR.md)
 
+# ¿Qué puede hacer Maubot?
+Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran variedad de comandos y secciones
+
+* Tiene un sistema de economia
+* Tambien dispone de musica
+* La malloria de maubot es para hacer la gente feliz asi que tiene <strong>muchiiisimos</strong> comandos de imagenes y juegos
+* La web (http://maubot.mooo.com)
+* Autor [Maubg](AUTOR.md)
+* Repo (https://github.com/maubg-debug/maubot) (Es codigo abierto)
+* Systema de bugs y re reportages de errores con $rate_bot < descripcion > 
+* Puede hacer interacciones con ols usuarios
+* Comandos de moderacion
+Maubot dispone de muchas mas cosas como <strong>prefijo custom ($prefix < prefijo >)</strong>. En si todos los comandos se pueden ver con <strong>$help [ Cog ]</strong>
+
+# Por si quieres instalarlo
+
 ## Como empezar
 
 #### 0. Instalar python 3.6.0 - 3.9.x
