@@ -1,5 +1,7 @@
 # Maubot
 
+Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos
+
 ![GitHub last commit](https://img.shields.io/github/last-commit/maubg-debug/maubot?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues-raw/maubg-debug/maubot?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/maubg-debug/maubot?style=for-the-badge)  
