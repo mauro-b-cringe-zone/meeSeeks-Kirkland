@@ -9,7 +9,7 @@ Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y apa
 
 # Maubot | El mejor bot de la historia
 
-![img](https://raw.github.com/maubg-debug/maubot/blob/main/docs/Maubot-banner.jpg)
+![img](https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/Maubot-banner.jpg)
 
 ## Autor
 [¡Miralo!](https://github.com/maubg-debug/maubot/blob/main/AUTOR.md)
@@ -28,7 +28,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 * Comandos de moderacion
 Maubot dispone de muchas mas cosas como <strong>prefijo custom ($prefix < prefijo >)</strong>. En si todos los comandos se pueden ver con <strong>$help [ Cog ]</strong>
 
-========================================================================================================================================
+
 
 # Por si quieres instalarlo
 
