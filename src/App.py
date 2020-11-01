@@ -11,7 +11,6 @@ from middleware import run_middleware_stack
 from discord.ext.commands.errors import BotMissingPermissions, CommandNotFound, CommandOnCooldown, MissingPermissions, MissingRequiredArgument, NotOwner
 from googletrans import Translator
 
-from utils.prefix import eliminar_prefix
 import random
 import datetime
 
@@ -215,7 +214,14 @@ class App(commands.Bot):
 
 
 
+def eliminar_prefix(guild):
+    with open('./src/json/prefix.json', 'r') as f:
+        prefixes = json.load(f)
+    
+    del prefixes[str(guild.id)]
 
+    with open('./src/json/prefix.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
 
 class Maubot(commands.Cog):
     def __init__(self, bot):
