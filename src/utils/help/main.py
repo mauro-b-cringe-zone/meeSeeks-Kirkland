@@ -45,7 +45,7 @@ class Help(commands.Cog):
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
     @commands.command(description="Ayuda para los comandos", usage="[cog]")
-    async def help(self, ctx, cog=1):
+    async def help(self, ctx, cog="1"):
         try:
             embed = discord.Embed(title="Ayuda con los comandos", color=int(env["COLOR"]))
 
@@ -58,43 +58,49 @@ class Help(commands.Cog):
                 embedh = await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
 
                 msg = await ctx.send(embed=embedh)
-                emos = ["◀️", "▶️", "❌"]
-                def _check(reaction, user):
-                    return (
-                        reaction.emoji in emos
-                        and user == ctx.author
-                        and reaction.message.id == msg.id
-                    )
-                for n in range(50):
-                    for i in ["◀️", "▶️", "❌"]:
-                        await msg.add_reaction(i)                    
-                    try:
-                        reaction, user = await self.bot.wait_for("reaction_add", check=_check)
-                    except Exception as e:
-                        cprint(f"[Log] Un error en help: {e}", "red")
-                    else:
-                        try:
-                            if reaction.emoji == emos[0]:
-                                await msg.edit(embed=discord.Embed())
-                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales+1, embed))
-                                await msg.clear_reactions()
-                            if reaction.emoji == emos[1]:
-                                await msg.edit(embed=discord.Embed())
-                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales-1, embed))
-                                await msg.clear_reactions()
-                            if reaction.emoji == emos[2]:
-                                await msg.delete()
-                                return
-                        except:
-                            if reaction.emoji == emos[0]:
-                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
-                                await msg.clear_reactions()
-                            if reaction.emoji == emos[1]:
-                                await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
-                                await msg.clear_reactions()
-                            if reaction.emoji == emos[2]:
-                                await msg.delete()
-                                return
+                # emos = ["◀️", "▶️", "❌"]
+                # def _check(reaction, user):
+                #     return (
+                #         reaction.emoji in emos
+                #         and user == ctx.author
+                #         and reaction.message.id == msg.id
+                #     )
+                # for n in range(50):
+                #     for i in ["◀️", "▶️", "❌"]:
+                #         await msg.add_reaction(i)                    
+                #     try:
+                #         reaction, user = await self.bot.wait_for("reaction_add", check=_check)
+                #     except Exception as e:
+                #         cprint(f"[Log] Un error en help: {e}", "red")
+                #     else:
+                #         try:
+                #             if reaction.emoji == emos[0]:
+                #                 if cog != 1:
+                #                     # await msg.edit(embed=discord.Embed())
+                #                     await msg.edit(embed=await self.ayuda(ctx, cog-1, cogs, paginasTotales, embed))
+                #                 await msg.clear_reactions()
+                #             if reaction.emoji == emos[1]:
+                #                 cog += 1
+                #                 print(cogs)
+                #                 print(paginasTotales)
+                #                 print(embed)
+                #                 # await msg.edit(embed=discord.Embed())
+                #                 await msg.edit(embed=await self.ayuda(ctx, cog, cogs, paginasTotales, embed))
+                #                 await msg.clear_reactions()
+                #             if reaction.emoji == emos[2]:
+                #                 await msg.delete()
+                #                 return
+                #         except:
+                #             if reaction.emoji == emos[0]:
+                #                 if cog != 1:
+                #                     await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                #                     await msg.clear_reactions()
+                #             if reaction.emoji == emos[1]:
+                #                 await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
+                #                 await msg.clear_reactions()
+                #             if reaction.emoji == emos[2]:
+                #                 await msg.delete()
+                #                 return
 
                 return
                 
@@ -128,7 +134,7 @@ class Help(commands.Cog):
 
                 await ctx.send(embed=embed)
         except Exception as e:
-            await ctx.send("Upsss.... Un error * Reportando al creador *")
+            await ctx.send("Upsss.... Un error **Reportando al creador**")
             return cprint(f"[Log] Un error ha ocurrido:  {e}", 'red')
 
 
