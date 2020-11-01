@@ -9,6 +9,8 @@ Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y apa
 
 # Maubot | El mejor bot de la historia
 
+![img](https://github.com/maubg-debug/maubot/blob/main/docs/Maubot-banner.jpg)
+
 ## Autor
 [¡Miralo!](AUTOR.md)
 
