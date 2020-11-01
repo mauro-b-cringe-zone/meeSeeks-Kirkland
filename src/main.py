@@ -10,6 +10,10 @@ import colorama
 from consola.main import Consola
 from pathlib import Path
 
+__autor__ = "Maubg"
+__github__ = "https://github.com/maubg-debug/"
+__repo__ = "https://github.com/maubg-debug/maubot"
+__version__ = "1.0.0"
 
 def preparar():
     from App import App

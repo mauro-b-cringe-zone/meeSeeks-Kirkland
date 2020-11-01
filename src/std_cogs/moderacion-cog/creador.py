@@ -137,7 +137,7 @@ class Creador(commands.Cog):
         except:
             pass
         finally:
-            os.system("python ./src/main.py")
+            os.system("python ./src/main.py --cmd run")
 
 
 
