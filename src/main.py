@@ -65,9 +65,6 @@ def preparar():
 
     app.run(token)
 
-
-
-
 if __name__ == "__main__":
     # print(sys.argv[2])
     try:
