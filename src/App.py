@@ -143,7 +143,7 @@ class App(commands.Bot):
                 if i in str(exception):
                     return
             await context.send(embed=discord.Embed(
-                              title="Como saves los robots no son perfectos", 
+                              title="Como sabes los robots no son perfectos", 
                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
                               color=self.color).set_footer(
                                   text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon $help [seccion]"
