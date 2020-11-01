@@ -147,7 +147,7 @@ class App(commands.Bot):
                 if i in str(exception):
                     return
             await context.send(embed=discord.Embed(
-                              title="Como sabes los robots no son perfectos", 
+                              title="Como sabes, los robots no son perfectos", 
                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
                               color=self.color).set_footer(
                                   text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon $help [seccion]"
@@ -481,7 +481,7 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def links(self, ctx):
 
-        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/4gfUZtB)\n**Web**: [Link](http://maubot.mooo.com/maubot/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
+        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/4gfUZtB)\n**Web**: [Link](http://maubot.mooo.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
         embed.set_author(name="INVITACIONES", icon_url="https://img.icons8.com/color/48/000000/share.png")
         embed.set_image(url="https://top.gg/api/widget/730124969132163093svg?usernamecolor=FFFFFF&topcolor=000000")
         # embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")

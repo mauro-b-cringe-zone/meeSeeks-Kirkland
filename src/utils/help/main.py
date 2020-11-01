@@ -8,6 +8,11 @@ import math
 from termcolor import cprint
 import asyncio
 
+__autor__ = "Maubg"
+__github__ = "https://github.com/maubg-debug/"
+__repo__ = "https://github.com/maubg-debug/maubot"
+
+
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
