@@ -130,7 +130,7 @@ class Moderation(commands.Cog):
 
     @commands.command(description="Mutea ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    # @commands.has_permissions(mute_members=True)
+    @commands.has_permissions(ban_members=True)
     async def mute(self, ctx, member : discord.Member, *, reason=None):
         
         with open("./src/json/mute.json", "r") as f:
@@ -150,7 +150,7 @@ class Moderation(commands.Cog):
 
     @commands.command(description="Desmutea ha alguien", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    # @commands.has_permissions(mute_members=True)
+    @commands.has_permissions(ban_members=True)
     async def unmute(self, ctx, member: discord.Member):
         
         with open("./src/json/mute.json", 'r') as f:

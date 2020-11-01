@@ -26,7 +26,8 @@ class App(commands.Bot):
         self.__autor__ = "Maubg"
         self.__github__ = "https://github.com/maubg-debug/"
         self.__repo__ = "https://github.com/maubg-debug/maubot"
-        self.__version__ = "1.0.0"
+        self.__version__ = "1.0.0"      
+        self.__web__ = "http://maubot.mooo.com"
 
         self.__cogs = cogs
         self.color = int(env.get("COLOR"))
@@ -45,7 +46,7 @@ class App(commands.Bot):
         self.add_command(App.__reload_cogs)
 
     async def on_ready(self):
-        Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot | {self.__repo__}\n4. Version | {self.__version__}", separador=False)
+        Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot | {self.__repo__}\n4. Version | {self.__version__}\n5. Web: {self.__web__}", separador=False)
         Logger.success(f'Maubot esta online como "{self.user}".', separador=True)
         # await self.change_presence(activity=self.__activity)
         while True:

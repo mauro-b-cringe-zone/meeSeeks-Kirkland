@@ -78,7 +78,7 @@ class Consola():
             self.python()
         
         elif self.comando == self.comandos[3][2]:
-            exit(0)
+            sys.exit(0)
 
         elif self.comando == self.comandos[7]:
             self.instrucciones(directorio)

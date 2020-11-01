@@ -10,8 +10,9 @@ from consola.main import Consola
 
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
-__repo__ = "https://github.com/maubg-debug/maubot"
+__repo__ = "https://github.com/maubg-debug/maubot/"
 __version__ = "1.0.0"
+__web__ = "http://maubot.mooo.com"
 
 def preparar():
     from App import App
@@ -77,11 +78,11 @@ if __name__ == "__main__":
     # print(sys.argv[2])
     try:
         if sys.argv[2]:
-            Consola(sys.argv[2]).procesar_comandos(directorio=Path(__file__).parent)
+            Consola(sys.argv[2]).procesar_comandos(directorio=Path(__file__).parent.parent)
     except:
         while True:
             comando = input("Maubot> ")
-            c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent)
+            c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent.parent)
             if c == "preparacion":
                 preparar()
             else:
