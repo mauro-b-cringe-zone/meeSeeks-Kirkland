@@ -78,7 +78,9 @@ if __name__ == "__main__":
     # print(sys.argv[2])
     try:
         if sys.argv[2]:
-            Consola(sys.argv[2]).procesar_comandos(directorio=Path(__file__).parent.parent)
+            c = Consola(sys.argv[2]).procesar_comandos(directorio=Path(__file__).parent.parent)
+            if c == "preparacion":
+                preparar()
     except:
         while True:
             comando = input("Maubot> ")
