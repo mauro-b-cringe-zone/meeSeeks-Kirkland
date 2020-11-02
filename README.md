@@ -47,26 +47,22 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
   * **Cambios en el servidor** Maubot tambien puede hacer cambios en el servidor, como eliminar mensages, crear canales, etc.
 
-## Invite Lookup
 
-* Have an invite URL and want to see what the server is about but don't want to be caught joining? You can now look up the general information about the invite and the server that it leads to.
+## Util y divertido
 
+* Maubot tiene funciones de economia y de musica
 
-## Useful & Fun
-
-* Display general information about a chosen user or a current server.
-
-* Randomize a member from the server, or within a role.
+* Al igual que tiene comandos de juegos, manipulacion de imagenes, etc.
 
 
-# Anti-Bot Farm
+# Anti-Bots
 
-* Quote will leave any server with more than 20 members that has more than 70% of the population composed of Bots.
+* Maubot dejara el servidor si el 70% de el servidor son robots
 
 
-# Suggestions
+# Sugerencias
 
-* Have a suggestion? Join our [**Support Server**](https://discord.gg/sbySHxA) and head over to #suggestions. Follow the template to submit your own suggestion.
+* Si tienes alguna sugerencia puedes unirte a [nuestro server](https://discord.gg/4gfUZtB) <- O -> Si tienes que contarnos un bug ve a [su github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)
 
 
 

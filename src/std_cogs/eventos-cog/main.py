@@ -101,6 +101,31 @@ class Servidor(commands.Cog):
             webhook = discord.Webhook.from_url(env["WEBHOOK_URL"], adapter = discord.AsyncWebhookAdapter(session))
             await webhook.send(content = ':outbox_tray: **Quitado de un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**')
 
+	@commands.Cog.listener()
+	async def on_ready(self):
+		for guild in self.bot.guilds:
+			if guild.member_count > 20:
+				bots = [member for member in guild.members if member.bot]
+				result = (len(bots) / guild.member_count) * 100
+				if result > 70.0:
+					await guild.leave()
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        if member.guild.member_count > 20:
+            bots = [member for member in member.guild.members if member.bot]
+            result = (len(bots) / member.guild.member_count) * 100
+            if result > 70.0:
+                await member.guild.leave()
+
+	@commands.Cog.listener()
+	async def on_member_remove(self, member):
+		if member.guild.member_count > 20:
+			bots = [member for member in member.guild.members if member.bot]
+			result = (len(bots) / member.guild.member_count) * 100
+			if result > 70.0:
+				await member.guild.leave()
+
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
 
