@@ -188,8 +188,8 @@ class App(commands.Bot):
         except (commands.ExtensionNotLoaded,
                 commands.ExtensionNotFound,
                 commands.NoEntryPointError,
-                commands.ExtensionFailed):
-            message_error = 'Error al recargar piñones.'
+                commands.ExtensionFailed) as e:
+            message_error = 'Error al recargar cogs. {e}'
             Logger.error(message_error)
             await ctx.send(message_error)
 
@@ -233,82 +233,6 @@ def eliminar_prefix(guild):
 class Maubot(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    # Cuando el bot entra al servidor
-    @commands.Cog.listener()
-    async def on_guild_join(self, guild):
-        # if not guild.id == 336642139381301249:
-        def check(event):
-            return event.target.id == self.bot.user.id
-        bot_entry = await guild.audit_logs(action=discord.AuditLogAction.bot_add).find(check)
-        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa", description=f""":tada: ¡¡¡Hola!!!Mi nombre e **{self.bot.user.name}**, Y soy el responsable que te ayudara 
-            a ganar partidas en el destini `hacer tu server mejor` porque tu eres 
-            uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.\n\n
-            **El prefijo del comando es: `$`, `!`, `?`, `m.`**\n\n
-            Ese es mi prefijo, siempre puedes hacerme menciones con **@{self.bot.user.name}**. 
-            Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
-            para cambiar de prefijo tienes que poner **$server** y luego **$prefix <nuevo prefijo>** (NO USES LOS BRACKETS).\n\n
-            Para una lista de commando solo tienes que poner $help y te saldran tooodos los comandos. 
-            \n\n
-            y se enviara un mensaje a mi desarroyador! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
-            mantente actualizado con las nuevas funciones, o si solo quieres mas ayuda, mira el server oficial de 
-            {self.bot.user.name} ¿¡A que esperas!? ( https://discord.gg/4gfUZtB )""", colour=color))
-
-    
-        with open('./src/json/prefix.json', 'r') as f:
-            prefixes = json.load(f)
-        
-        prefixes[str(guild.id)] = '$'
-
-        with open('./src/json/prefix.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
-
-        channel = discord.utils.get(guild.text_channels)
-        # if not guild.id == 336642139381301249:
-
-        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `$help` o con el prefijo que tu le ayas puesto.\n\n **ESCRIVE $verify PARA VERIFICAR QUE ERES HUMANO**", colour=color)
-        embed1.set_author(name='Maubot', icon_url="https://img.icons8.com/nolan/64/launched-rocket.png")
-        embed1.add_field(name="¿Necesitas ayuda?", value=f"Puedes poner **$help** para conseguir una lista de los comandos mas guays del mundo desde diversion hasta musica y economia. La lista de comandos estan separadas por secciones asi que podrias poner `$help [seccion]` para descubrir mas comandos super chulos. o si no puedes poner **<@730124969132163093>** .", inline=True)
-        embed1.add_field(name="Diversion atope", value=f"Maubot tiene muchos comando para divertirse con manipulacion de imagenes a juegos como el `conecta4`, `rps` y mucho mas. Maubot tambien tiene un sistema de economia muy avanzado para ser millonarios y dominar el mundo 🤤...", inline=True)
-        embed1.add_field(name="Legal", value=f"Escribe `$copyright` para ver el copyright de Maubot y tambien escribe `$verify` para erificar que eres humano", inline=False)
-        embed1.add_field(name="¿Aun no te has enterado?", value=f"Puedes ver un tutorial de como usar Maubot poniendo <@730124969132163093>", inline=False)
-        embed1.set_footer(text="Maubot - Puedes escribir @Maubot para mas info")
-
-
-        msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://discord.gg/4gfUZtB)**", embed=embed1)
-
-
-    @commands.command(description="Verifica que eres humano")
-    async def verify(self, ctx):
-        embed5 = discord.Embed(title="Verifica que eres humano", description="En estos tiempos Discord cadavez tiene mas atackes de bots por lo que para mas seguridad verificar que no soy robots. \n\n porfavor dale al ✅ para comfirmar que no eres un robot", colour=0x1cce52)
-        embed5.set_footer(text='Maubot | Verifica que eres humano')
-        
-        embed = discord.Embed(title="Bien eres humano", description="Ya puedes comenzar a usar el bot... pero cuidado. ajajaja solo bromeaba disfruta", colour=color)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
-
-
-        msg = await ctx.send(embed=embed5)
-        await msg.add_reaction('✅')
-        guild = self.bot.get_guild(ctx.guild.id)
-        def _check(reaction, user):
-            return (
-                reaction.emoji in '✅'
-                and user == ctx.author
-                and reaction.message.id == msg.id
-            )
-        try:
-            reaction, user = await self.bot.wait_for("reaction_add", timeout=600, check=_check)
-        except asyncio.TimeoutError:
-            await self.bot.leave_guild(guild)
-        else:
-            await msg.edit(embed=embed)
-
-
-
-    @commands.Cog.listener()
-    async def on_guild_remove(self, guild):
-
-        eliminar_prefix(guild)
 
     @commands.command(description="Mira la info del bot o la config ($_bot info | $_bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
