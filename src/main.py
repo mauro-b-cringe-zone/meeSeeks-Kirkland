@@ -36,7 +36,7 @@ def preparar():
     colorama.init(autoreset=True)
 
     # ----------------------------------------------------------------------------------------------------------------------
-    #      COMPRUEBE LA VERSIÓN 3.X DE PYTHON
+    #       COMPRUEBE LA VERSION 3.X DE PYTHON
     # ----------------------------------------------------------------------------------------------------------------------
     if not is_min_python_3_6:
         Logger.error('Maubot fue desarrollado para Python 3. Utilice la versión 3.6 o superior.')
