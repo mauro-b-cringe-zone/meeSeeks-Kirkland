@@ -3,7 +3,7 @@
 windows_debug.bat
 linux_debug.bat
 
-*/data.db
+./src/data.db
 */json/*
 
 # test
@@ -198,3 +198,5 @@ local.properties
 .idea/
 reports/
 .doit.*
+src/data.db
+src/json/*
