@@ -39,11 +39,11 @@ def preparar():
     #       COMPRUEBE LA VERSION 3.X DE PYTHON
     # ----------------------------------------------------------------------------------------------------------------------
     if not is_min_python_3_6:
-        Logger.error('Maubot fue desarrollado para Python 3. Utilice la versión 3.6 o superior.')
+        Logger.error('Maubot fue desarrollado para Python 3. Utilice la version 3.6 o superior.')
         sys.exit(1)
 
     # ----------------------------------------------------------------------------------------------------------------------
-    #       LIBERACIÓN DEL BOT
+    #       LIBERACION DEL BOT
     # ----------------------------------------------------------------------------------------------------------------------
     env.set('VERSION_MAUBOT', "0.1")
 
@@ -62,11 +62,11 @@ def preparar():
         token = env.get('TOKEN')
         color = int(env.get('COLOR'))
     except EnvironmentError:
-        Logger.error('No se encontró ninguna ficha. Ejecute el bot con el parámetro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')
+        Logger.error('No se encontro ninguna ficha. Ejecute el bot con el parametro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')
         sys.exit(1)
 
     if env.is_debug():
-        Logger.warning('Modo de depuración habilitado. Ejecute el bot sin el parámetro --debug (-d) o inserte DEBUG=False en el archivo .env.')
+        Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
 
     Logger.success('Las opciones del robot estan cargadas.')
 
