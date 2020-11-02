@@ -3,8 +3,8 @@
 windows_debug.bat
 linux_debug.bat
 
-./src/data.db
-./src/json/*
+*/src/data.db
+*/src/json/*
 
 # test
 test.py
