@@ -200,3 +200,5 @@ reports/
 .doit.*
 src/data.db
 src/json/*
+*.db
+*.json
