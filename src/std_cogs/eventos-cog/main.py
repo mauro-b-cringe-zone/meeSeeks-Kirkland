@@ -38,7 +38,7 @@ class Servidor(commands.Cog):
                     # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
                     await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
                                                 description="Mis prefijos son `$ (O custom $prefix [prefijo])`, `!`, `?`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
-                                                colour=color))
+                                                colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-prefix.png"))
 
 
         with open("./src/json/userslvl.json", "r") as f:
