@@ -59,7 +59,7 @@ def preparar():
     cogs = StdCogs()
 
     try:
-        token = env.get('TOKEN')
+        token = env.get('TOKE_BOT')
         color = int(env.get('COLOR'))
     except EnvironmentError:
         Logger.error('No se encontro ninguna ficha. Ejecute el bot con el parametro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')

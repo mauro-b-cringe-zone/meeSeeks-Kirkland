@@ -43,21 +43,9 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
   * **Mutear y Desmutear** Maubot al igual que con los comandos de expulsion y etc, Checkea si el usuario tiene permisos y el que este muteado no podra hablar en le chat
 
-  * **Automatic image filter** detects any attachment image sent in a normal channel and deletes it if the image's NSFW rates are equal to, or high enough, to your custom set harshness level.
+  * **Warniciones** Maubot detecta si un usuario tiene mas de 5 warniviones `$warnlist [@usuario]` para ver las warniciones
 
-  * **Member persistence** is a greatly demanding feature for every server, as when the member leaves the server and they had roles and/or a nickname, it saves them in the database for later, so when the user joins again they get all their stuff back.
-
-
-## Member Presence
-
-* Welcome/leave messages enables you to create a warm welcome for your new members and/or letting them know of your server rules, or notify the existing members of someone's lack of presence.
-
-  * **Customizable messages** lets you set the perfect first impression for your members as they join in.
-
-  * **Greeting members** is scalable to be sent either in a server or directly into their DMs, or even both.
-
-  * **Automatic message deletion** lets you avoid the flood of welcome/leave messages if you so desire.
-
+  * **Cambios en el servidor** Maubot tambien puede hacer cambios en el servidor, como eliminar mensages, crear canales, etc.
 
 ## Invite Lookup
 

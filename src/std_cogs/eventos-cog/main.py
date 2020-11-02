@@ -104,6 +104,12 @@ class Servidor(commands.Cog):
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
 
+        if guild.member_count > 20:
+            bots = [member for member in guild.members if member.bot]
+            result = (len(bots) / guild.member_count) * 100
+            if result > 70.0:
+                await guild.leave()
+
         bots = [member for member in guild.members if member.bot]
         async with aiohttp.ClientSession() as session:
             webhook = discord.Webhook.from_url(env["WEBHOOK_URL"], adapter = discord.AsyncWebhookAdapter(session))
