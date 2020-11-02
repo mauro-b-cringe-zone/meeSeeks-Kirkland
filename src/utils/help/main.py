@@ -101,8 +101,6 @@ class Help(commands.Cog):
                 #             if reaction.emoji == emos[2]:
                 #                 await msg.delete()
                 #                 return
-
-                return
                 
 
             elif re.search(r"[a-zA-Z]", str(cog)):

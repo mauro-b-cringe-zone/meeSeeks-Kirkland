@@ -375,53 +375,6 @@ class Maubot(commands.Cog):
 
         await ctx.send(content=None, embed=embed)
 
-    @commands.command(description="Haz una reseña a el robot")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def rate_bot(self, ctx, *, texto):
-        NUMBERS = {
-            "1⃣": 0,
-            "2⃣": 1,
-            "3⃣": 2,
-            "4⃣": 3,
-            "5⃣": 4,
-        }
-
-        embed = discord.Embed(title="Califica al bot", colour=color)
-        embed.add_field(name="Descripcion", value=f"`{texto}`")
-        embed.set_footer(text=f"Propuesto por: {ctx.author.name}", icon_url=ctx.author.avatar_url)
-
-        msg = await ctx.send(embed=embed)
-
-        def _check(reaction, user):
-            return reaction.emoji in NUMBERS.keys() and reaction.message.id == msg.id and user == ctx.author
-
-        embed_time_out = discord.Embed(title="SE ACABO EL TIEMPO", description="Intentalo otra vez pero esta vez no tardes 20 minutos", colour=color)
-
-        embed_done = discord.Embed(title="Confirmando...", colour=color)
-        embed_done.set_footer(text=f"Propuesto por: {ctx.author.name}", icon_url=ctx.author.avatar_url)
-
-
-        for emoji in list(NUMBERS.keys()):
-            await msg.add_reaction(emoji)
-
-        try:
-            reaction, user = await self.bot.wait_for("reaction_add", timeout=20, check=_check)
-            embed_done.add_field(name="Gracias por tu calificacion", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://discord.gg/4gfUZtB) para decirnos que tal tu experencia**")
-
-
-        except asyncio.TimeoutError:
-            await msg.clear_reactions()
-            await msg.edit(embed=embed_time_out)
-
-        else:
-            await msg.clear_reactions()
-            await msg.edit(embed=embed_done)    
-
-            feedbackCh = self.bot.get_channel(748235336869478441)
-            embed_feed_CH = discord.Embed(title=f"Nueva reseña", colour=color)
-            embed_feed_CH.add_field(name="Calificacion:", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}")
-            await feedbackCh.send('<@700812754855919667>, Usuario con ID: '+str(ctx.message.author.id)+f' Ha enviado una reseña', embed=embed_feed_CH)
-
 
     @commands.command(description="Mira la info de un usuario")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -512,5 +465,85 @@ class Maubot(commands.Cog):
         embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
 
+    @commands.command(aliases=['head'])
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def magicb(self, ctx, filetype):
+        file = open('./src/json/magic.json').read()
+        alldata = json.loads(file)
+        try:
+            messy_signs = str(alldata[filetype]['signs'])
+            signs = messy_signs.split('[')[1].split(',')[0].split(']')[0].replace("'", '')
+            filetype = alldata[filetype]['mime']
+            await ctx.send(f'''{filetype}: {signs}''')
+        except:
+            await ctx.send(f"{filetype} no encontrado :( Si cree que este tipo de archivo debe incluirse, haga `> request \"magicb {filetype}\"`")
+
+
+class Feedback(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command(description="Haz una reseña a el robot")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def rate_bot(self, ctx, *, texto):
+        NUMBERS = {
+            "1⃣": 0,
+            "2⃣": 1,
+            "3⃣": 2,
+            "4⃣": 3,
+            "5⃣": 4,
+        }
+
+        embed = discord.Embed(title="Califica al bot", colour=color)
+        embed.add_field(name="Descripcion", value=f"`{texto}`")
+        embed.set_footer(text=f"Propuesto por: {ctx.author.name}", icon_url=ctx.author.avatar_url)
+
+        msg = await ctx.send(embed=embed)
+
+        def _check(reaction, user):
+            return reaction.emoji in NUMBERS.keys() and reaction.message.id == msg.id and user == ctx.author
+
+        embed_time_out = discord.Embed(title="SE ACABO EL TIEMPO", description="Intentalo otra vez pero esta vez no tardes 20 minutos", colour=color)
+
+        embed_done = discord.Embed(title="Confirmando...", colour=color)
+        embed_done.set_footer(text=f"Propuesto por: {ctx.author.name}", icon_url=ctx.author.avatar_url)
+
+
+        for emoji in list(NUMBERS.keys()):
+            await msg.add_reaction(emoji)
+
+        try:
+            reaction, user = await self.bot.wait_for("reaction_add", timeout=20, check=_check)
+            embed_done.add_field(name="Gracias por tu calificacion", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://discord.gg/4gfUZtB) para decirnos que tal tu experencia**")
+
+
+        except asyncio.TimeoutError:
+            await msg.clear_reactions()
+            await msg.edit(embed=embed_time_out)
+
+        else:
+            await msg.clear_reactions()
+            await msg.edit(embed=embed_done)    
+
+            feedbackCh = self.bot.get_channel(748235336869478441)
+            embed_feed_CH = discord.Embed(title=f"Nueva reseña", colour=color)
+            embed_feed_CH.add_field(name="Calificacion:", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}")
+            await feedbackCh.send('<@700812754855919667>, Usuario con ID: '+str(ctx.message.author.id)+f' Ha enviado una reseña', embed=embed_feed_CH)
+
+    @bot.command()
+    async def request(self, ctx, feature):
+        creator = await self.bot.fetch_user(700812754855919667)
+        authors_name = str(ctx.author)
+        await creator.send(f''':pencil: {authors_name}: {feature}''')
+        await ctx.send(discord.Embed(title="Gracias", description=f''':pencil: Thanks, "{feature}" has been requested!''', color=color))
+
+    @bot.command()
+    async def report(self, ctx, error_report):
+        creator = await self.bot.fetch_user(700812754855919667)
+        authors_name = str(ctx.author)
+        await creator.send(f''':triangular_flag_on_post: {authors_name}: {error_report}''')
+        await ctx.send(embed=discord.Embed(title="Gracias", description=f''':triangular_flag_on_post: Gracias por tu ayuda, ¡El error ha sido informado! Pero tambien lo puedes sugerir en [Github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)''', color=color))
+
 def setup(app):
     app.add_cog(Maubot(app))
+    app.add_cog(Feedback(app))
