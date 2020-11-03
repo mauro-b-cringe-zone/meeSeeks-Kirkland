@@ -59,6 +59,8 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 * Tambien puedes poner `$rate_bot <descripcion>` para darle nua reseña, `$request <descripcion>` Para alguna idea y `$report` Para reportar algun bug que tenga maubot.
 
+# Ayuda
+[![Image from Gyazo](https://i.gyazo.com/a6b79abe4009be0c06ff0c5717882f1b.gif)](https://gyazo.com/a6b79abe4009be0c06ff0c5717882f1b)
 
 # Por si quieres instalarlo
 
