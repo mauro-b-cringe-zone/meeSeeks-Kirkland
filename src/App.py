@@ -438,7 +438,7 @@ class Feedback(commands.Cog):
 
         try:
             reaction, user = await self.bot.wait_for("reaction_add", timeout=20, check=_check)
-            embed_done.add_field(name="Gracias por tu calificacion", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://discord.gg/4gfUZtB) para decirnos que tal tu experencia**")
+            embed_done.add_field(name="Gracias por tu calificacion, Puedes poner tu calificacion [aqui](https://bots.ondiscord.xyz/bots/730124969132163093/review)", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://discord.gg/4gfUZtB) para decirnos que tal tu experencia**")
 
 
         except asyncio.TimeoutError:

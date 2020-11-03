@@ -128,4 +128,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 # Licencia 
-Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/README.md)
+Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)
