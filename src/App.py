@@ -147,7 +147,7 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji"]
+        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'"]
 
         if env.get('DEBUG'):
             for i in excepciones:

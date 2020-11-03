@@ -7,7 +7,16 @@ import aiohttp
 from App import eliminar_prefix
 import asyncio
 
+async def cerrar(iniciador=None, destinatario=None):
+    with open("./src/json/chats.json", "r") as f:
+        chats = json.load(f)
 
+    if str(iniciador.id) in chats:
+        del chats[f"{iniciador.id}"]
+        del chats[f"{destinatario.id}"]
+
+    with open("./src/json/chats.json", "w") as f:
+        json.dump(chats, f)
 
 color = int(env["COLOR"])
 
@@ -20,6 +29,23 @@ class Servidor(commands.Cog):
 
         # if message.author == self.bot:
         #     return
+
+        with open("./src/json/chats.json", "r") as f:
+            chats = json.load(f)
+
+        if str(message.author.id) in chats:
+            dest = chats[f"{message.author.id}"]["dest"]
+            if str(dest) in chats:
+                if discord.ChannelType.private:
+                    dest = self.bot.get_user(int(dest))
+                    return await dest.send(f"**{message.author.name}:** {message.content}")
+
+                    if message.content == "cerrarchat":
+                        await cerrar(message.author, chats[f"{message.author.id}"]["dest"])
+
+
+        with open("./src/json/chats.json", "w") as f:
+            json.dump(chats, f)
 
         with open("./src/json/mute.json", 'r') as f:
             user = json.load(f)
