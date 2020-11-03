@@ -24,14 +24,6 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 * El bot viene con una función `$help` que muestra la lista de todos los comandos disponibles.
 * Puede escribir `!help [Cog]` para ver más información sobre cada comando.
 
-
-## Set Language
-
-* The key feature is to let individual servers to use a specific language in which the bot will respond in. This makes it that all communities get the full experience by letting everyone to understand what each response means.
-
-* If you do not see your language in our list of available languages, this means that we do not yet have translators to support that language. Believe it or not, but we do not know every single language for you to deliver, so instead we are recruiting a team of translators to help us with this mission! If you are interested, [join our support server](https://discord.gg/sbySHxA) for more information.
-
-
 ## Prefijos
 * Los prefijos de Maubot son (!, ?, m.) y uno personalizado que es $ y puedes cambiarlo poniendo `$prefix <tu prefijo>` 
 
@@ -60,10 +52,12 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 * Maubot dejara el servidor si el 70% de el servidor son robots
 
 
+
 # Sugerencias
 
 * Si tienes alguna sugerencia puedes unirte a [nuestro server](https://discord.gg/4gfUZtB) <- O -> Si tienes que contarnos un bug ve a [su github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)
 
+* Tambien puedes poner `$rate_bot <descripcion>` para darle nua reseña, `$request <descripcion>` Para alguna idea y `$report` Para reportar algun bug que tenga maubot.
 
 
 # Por si quieres instalarlo
