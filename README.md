@@ -80,6 +80,9 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 # Ayuda
 [![Image from Gyazo](https://i.gyazo.com/a6b79abe4009be0c06ff0c5717882f1b.gif)](https://gyazo.com/a6b79abe4009be0c06ff0c5717882f1b)
 
+# Chats
+Maubot esta equipado con unos chats integrados que se podran activar poniendo `$startchat <@usuario>` y ya estaria
+
 # Web
 * Aqui esta la [web](http://maubot.mooo.com)
 
