@@ -46,12 +46,30 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 * Al igual que tiene comandos de juegos, manipulacion de imagenes, etc.
 
+# Seguro
+
+> Maubot no podra ser hackeado ni nada por el estilo porque las llaves y todo estan super seguras
+
+# No esta loco
+
+* Maubot no ara nada de lo que tu no le ordenes
 
 # Anti-Bots
 
 * Maubot dejara el servidor si el 70% de el servidor son robots
 
-
+# Extras
+* Musica
+  * Maubot esta implementado con un equipo de musica para que tu fiesta siga marchosa 🎉
+* Niveles
+  * Maubot tiene un gran sistema de niveles que te havisa cuando ayas suvido de nivel
+  * Tambien tiene un comando que lo puedes usar al poner `$rank` Y te dara la info de tu nivel
+* Economia
+  * Maubot esta disponible con un sistema de economia con comandos como:
+    * `$balance [@usuario]`, `$rob <@usuario>`, `$slots`, `$shop [pagina]`, `$buy <objeto>`, `$sell <objeto>`, ...
+* Maubot tiene tambien un compilador lo podeis usar poniendo `$[lenguage]` <- O -> `$run --list` para ver los idiomas
+  * Si quereis podeis usarlo desde la [web](http://maubot.mooo.com/maucompilador)
+* Y MUCO MASSSSS......
 
 # Sugerencias
 
@@ -61,6 +79,9 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 # Ayuda
 [![Image from Gyazo](https://i.gyazo.com/a6b79abe4009be0c06ff0c5717882f1b.gif)](https://gyazo.com/a6b79abe4009be0c06ff0c5717882f1b)
+
+# Web
+* Aqui esta la [web](http://maubot.mooo.com)
 
 # Por si quieres instalarlo
 
