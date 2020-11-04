@@ -80,10 +80,10 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 # Ayuda
 * Comandos para comenzar con Maubot
- * $help (!help, m.help, ?help)
- * Con menciones
-  * <@730124969132163093>
-  * <@730124969132163093> prefijos
+    * $help (!help, m.help, ?help)
+    * Con menciones
+        * <@730124969132163093>
+        * <@730124969132163093> prefijos
 
 # Chats
 * Maubot esta equipado con unos chats integrados que se podran activar poniendo `$startchat <@usuario>` y ya estaria
