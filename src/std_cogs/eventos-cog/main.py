@@ -7,13 +7,13 @@ import aiohttp
 from App import eliminar_prefix
 import asyncio
 
-async def cerrar(iniciador=None, destinatario=None):
+async def cerrar(iniciador=None, destinatario:int=None):
     with open("./src/json/chats.json", "r") as f:
         chats = json.load(f)
 
     if str(iniciador.id) in chats:
         del chats[f"{iniciador.id}"]
-        del chats[f"{destinatario.id}"]
+        del chats[f"{destinatario}"]
 
     with open("./src/json/chats.json", "w") as f:
         json.dump(chats, f)
@@ -27,22 +27,25 @@ class Servidor(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
 
-        # if message.author == self.bot:
-        #     return
 
         with open("./src/json/chats.json", "r") as f:
             chats = json.load(f)
 
-        if str(message.author.id) in chats:
-            dest = chats[f"{message.author.id}"]["dest"]
-            if str(dest) in chats:
-                if discord.ChannelType.private:
-                    dest = self.bot.get_user(int(dest))
-                    return await dest.send(f"**{message.author.name}:** {message.content}")
-
+        if not message.guild:
+            if str(message.author.id) in chats:
+                dest = chats[f"{message.author.id}"]["dest"]
+                if str(dest) in chats:
+                    destid, dest = int(dest), self.bot.get_user(int(dest))
                     if message.content == "cerrarchat":
-                        await cerrar(message.author, chats[f"{message.author.id}"]["dest"])
+                        await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
+                        await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
+                        return await cerrar(message.author, destid)
 
+                    else: 
+                        return await dest.send(f"**{message.author.name}:** {message.content}")
+
+            else:
+                return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help chat)**", color=0xf15069))
 
         with open("./src/json/chats.json", "w") as f:
             json.dump(chats, f)
