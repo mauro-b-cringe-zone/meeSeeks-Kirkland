@@ -19,7 +19,7 @@ class Eventos():
             chats[f"{iniciador.id}"] = {}
             chats[f"{iniciador.id}"]["dest"] = destinatario.id
             chats[f"{destinatario.id}"] = {}
-            chats[f"{destinatario.id}"]["dest"] = destinatario.id
+            chats[f"{destinatario.id}"]["dest"] = iniciador.id
         else:
             if chats[f"{iniciador.id}"] == {}:
                 return "Usuario ya en chat"

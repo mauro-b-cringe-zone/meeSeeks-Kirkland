@@ -6,6 +6,7 @@ from os import environ as env
 import aiohttp
 from App import eliminar_prefix
 import asyncio
+from termcolor import cprint
 
 async def cerrar(iniciador=None, destinatario:int=None):
     with open("./src/json/chats.json", "r") as f:
@@ -31,21 +32,28 @@ class Servidor(commands.Cog):
         with open("./src/json/chats.json", "r") as f:
             chats = json.load(f)
 
-        if not message.guild:
-            if str(message.author.id) in chats:
-                dest = chats[f"{message.author.id}"]["dest"]
-                if str(dest) in chats:
-                    destid, dest = int(dest), self.bot.get_user(int(dest))
-                    if message.content == "cerrarchat":
-                        await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
-                        await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
-                        return await cerrar(message.author, destid)
+        try:
+            if not message.guild:
+                if message.author.id == 755433402299056139 or message.author.id == 730124969132163093:
+                    return
+                else:
+                    if str(message.author.id) in chats:
+                        dest = chats[f"{message.author.id}"]["dest"]
+                        # print(dest)
+                        if str(dest) in chats:
+                            destid, dest = int(dest), self.bot.get_user(int(dest))
+                            if message.content == "cerrarchat":
+                                await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
+                                await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
+                                return await cerrar(message.author, destid)
+                            else: 
+                                cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "green")
+                                return await dest.send(f"**{message.author.name}:** {message.content}")
+                    else:
+                        return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help chat)**", color=0xf15069))
 
-                    else: 
-                        return await dest.send(f"**{message.author.name}:** {message.content}")
-
-            else:
-                return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help chat)**", color=0xf15069))
+        except Exception as e:
+            cprint(f"[Log] Un error en on_message: {e}", "red")
 
         with open("./src/json/chats.json", "w") as f:
             json.dump(chats, f)
