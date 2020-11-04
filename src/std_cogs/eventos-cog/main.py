@@ -47,7 +47,7 @@ class Servidor(commands.Cog):
                                 await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
                                 return await cerrar(message.author, destid)
                             else: 
-                                cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "green")
+                                cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
                                 return await dest.send(f"**{message.author.name}:** {message.content}")
                     else:
                         return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help chat)**", color=0xf15069))
