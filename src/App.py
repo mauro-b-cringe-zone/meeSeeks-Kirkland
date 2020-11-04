@@ -122,7 +122,7 @@ class App(commands.Bot):
                 await self.reaction(context, msg_error)
 
             elif isinstance(exception, commands.MissingRequiredArgument):
-                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xc42323)
+                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Escribe todos los argumentos requeridos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.set_footer(text='\n-- ERROR')
                 msg_error = await context.send(embed=embed)
@@ -147,7 +147,7 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'"]
+        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'"]
 
         if env.get('DEBUG'):
             for i in excepciones:
