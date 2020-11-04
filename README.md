@@ -49,6 +49,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 # Seguro
 
 > Maubot no podra ser hackeado ni nada por el estilo porque las llaves y todo estan super seguras
+> Ademas de eso, Maubot mantendra toda tu informacion guardada o nisiquiera coger informacion
 
 # No esta loco
 
