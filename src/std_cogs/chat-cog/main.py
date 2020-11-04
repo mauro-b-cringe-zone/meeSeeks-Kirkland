@@ -42,6 +42,15 @@ class ChatApp(commands.Cog):
 
     @commands.command(aliases="startchat,start_chat,chat_start,chatstart".split(","), description="Inicia un chat con una persona", usage="<id del usuario NO MENCIONES>", name="chat")
     async def __start_chat(self, ctx):
+        """
+        Inicia un chat
+        Mas codigo de esto esta en  ./src/eventos-cog/main.py 
+        Justo donde pone 'if not message.guild:'
+        Tambien la funcion asyncrona de cerrar() 'async def cerrar(iniciador=None, destinatario:int=None):'
+        :return  if not str(message.author.id) in chats: No se pueden hacer comandos en los DMs
+        :return if not message.content == "cerrarchat": Se cierrran los chats de DM y la funcion de la linea de arriba se ejecuta
+        El json esta en ./src/json/chats.json
+        """        
         destinatario = ctx.message.mentions[0]
 
         iniciador = ctx.author
