@@ -32,8 +32,8 @@ class Eventos():
             j = await self.abrir(iniciador, dest)
             if j == "Usuario ya en chat":
                 return await ctx.send("Ese usuario ya esta en un chat...")
-            await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.name}**",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
-            await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.name}** ha creado un chat para hablar",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
+            await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
+            await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
         else: return await ctx.send("Ese usuario no existe. Creo...")
 
 class ChatApp(commands.Cog):
