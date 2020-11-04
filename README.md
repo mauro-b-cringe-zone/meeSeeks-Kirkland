@@ -79,13 +79,17 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 * Tambien puedes poner `$rate_bot <descripcion>` para darle nua reseña, `$request <descripcion>` Para alguna idea y `$report` Para reportar algun bug que tenga maubot.
 
 # Ayuda
-[![Image from Gyazo](https://i.gyazo.com/a6b79abe4009be0c06ff0c5717882f1b.gif)](https://gyazo.com/a6b79abe4009be0c06ff0c5717882f1b)
+* Comandos para comenzar con Maubot
+ * $help (!help, m.help, ?help)
+ * Con menciones
+  * <@730124969132163093>
+  * <@730124969132163093> prefijos
 
 # Chats
-Maubot esta equipado con unos chats integrados que se podran activar poniendo `$startchat <@usuario>` y ya estaria
+* Maubot esta equipado con unos chats integrados que se podran activar poniendo `$startchat <@usuario>` y ya estaria
 
 # Web
-* Aqui esta la [web](http://maubot.mooo.com)
+* Aqui esta la [http://maubot.mooo.com](http://maubot.mooo.com)
 
 # Por si quieres instalarlo
 
