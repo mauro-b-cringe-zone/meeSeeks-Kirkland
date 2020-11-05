@@ -200,7 +200,7 @@ reports/
 .doit.*
 src/data.db
 src/json/*
-*.json
-*.db
+**/*.json
+**/*.db
 # *.db
 # *.json
