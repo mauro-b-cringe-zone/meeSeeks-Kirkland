@@ -70,7 +70,8 @@ def preparar():
 
     Logger.success('Las opciones del robot estan cargadas.')
 
-    app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
+    app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse")
+    app.remove_command("help")
 
     app.run(token)
 
