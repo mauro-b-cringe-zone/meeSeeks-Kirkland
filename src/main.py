@@ -60,11 +60,20 @@ def preparar():
 
     try:
         token = env.get('TOKEN_BOT_PRUEVAS')
-        color = int(env.get('COLOR'))
     except EnvironmentError:
         Logger.error('No se encontro ninguna ficha. Ejecute el bot con el parametro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')
         sys.exit(1)
 
+    extrasenv = ["WEATHER_KEY", "COMP_KEY", "COLOR", "WEBHOOK_URL"]
+    for i in extrasenv:
+        try:
+            ex = env.get(f'{i}')
+            if ex == "" or ex == " ":
+                Logger.warning(f"Te falta rellenar el {i} en el .env, es posible que algunos comandos no funcionen")
+        except:
+            Logger.warning(f"Te falta rellenar el {i} en el .env, es posible que algunos comandos no funcionen")
+        
+        
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
 
