@@ -13,8 +13,8 @@ async def cerrar(iniciador=None, destinatario:int=None):
         chats = json.load(f)
 
     if str(iniciador.id) in chats:
-        del chats[f"{iniciador.id}"]
-        del chats[f"{destinatario}"]
+        del chats["chats"][f"{iniciador.id}"]
+        del chats["chats"][f"{destinatario}"]
 
     with open("./src/json/chats.json", "w") as f:
         json.dump(chats, f)
@@ -38,7 +38,7 @@ class Servidor(commands.Cog):
                     return
                 else:
                     if str(message.author.id) in chats:
-                        dest = chats[f"{message.author.id}"]["dest"]
+                        dest = chats["chats"][f"{message.author.id}"]["dest"]
                         # print(dest)
                         if str(dest) in chats:
                             destid, dest = int(dest), self.bot.get_user(int(dest))
