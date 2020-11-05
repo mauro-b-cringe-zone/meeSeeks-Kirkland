@@ -3,13 +3,13 @@
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos.
 Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y aparte de eso es un bot maravilloso
 
+`$help [Cog]`
+
 ![GitHub last commit](https://img.shields.io/github/last-commit/maubg-debug/maubot?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues-raw/maubg-debug/maubot?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/maubg-debug/maubot?style=for-the-badge)  
 
 # Maubot | El mejor bot de la historia
-
-<!-- ![img](https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/Maubot-banner.jpg) -->
 
 ## Autor
 [¡Miralo!](https://github.com/maubg-debug/maubot/blob/main/AUTOR.md)
@@ -80,16 +80,19 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 # Ayuda
 * Comandos para comenzar con Maubot
-    * $help (!help, m.help, ?help)
+    * `$help (!help, m.help, ?help)`
     * Con menciones
-        * <@730124969132163093>
-        * <@730124969132163093> prefijos
+        * `<@730124969132163093>`
+        * `<@730124969132163093> prefijos`
 
 # Chats
 * Maubot esta equipado con unos chats integrados que se podran activar poniendo `$startchat <@usuario>` y ya estaria
 
 # Web
 * Aqui esta la [http://maubot.mooo.com](http://maubot.mooo.com)
+* `$links`
+
+## Por supuesto mucho maaasss.....
 
 # Por si quieres instalarlo
 
@@ -158,3 +161,5 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 # Licencia 
 Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)
+
+* `$copyright`

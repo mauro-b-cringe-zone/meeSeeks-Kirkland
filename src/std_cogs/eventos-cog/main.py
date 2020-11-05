@@ -51,9 +51,8 @@ class Servidor(commands.Cog):
                                 return await dest.send(f"**{message.author.name}:** {message.content}")
                     else:
                         return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help chat)**", color=0xf15069))
-
         except Exception as e:
-            cprint(f"[Log] Un error en on_message: {e}", "red")
+            return cprint(f"[Log] Un error en on_message: {e}", "red")
 
         with open("./src/json/chats.json", "w") as f:
             json.dump(chats, f)

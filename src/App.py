@@ -215,7 +215,7 @@ class App(commands.Bot):
         with open('./src/json/prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
-        e = discord.Embed(title="**__Se a cambiado el prefijo correctamente__**", description=f'Se a cambiado el prefijo a:      `{prefix}`', colour=self.color)
+        e = discord.Embed(title="Se a cambiado el prefijo correctamente", description=f'Se a cambiado el prefijo a:      `{prefix}`', colour=self.color)
         e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/4gfUZtB)**")
         await ctx.send(embed=e)
 
