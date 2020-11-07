@@ -136,13 +136,16 @@ python ./src/main.py
 
 #### 4. archivo.env
 ```txt
-TOKEN = El token del robot
-WEATHER_KEY = https://openweathermap.org/api (LLave de la api para este bot)
-COMP_KEY = Visitar (https://rapidapi.com/hermanzdosilovic/api/judge0)
-COLOR = Ver Las instrucciones (https://github.com/maubg-debug/maubot#instrucciones-para-el-color-del-env)
-USER_STATISTICS_THROTTLE_DURATION = 5 - Esto da igual
-USER_STATISTICS_INCREMENT = 10 - Esto da igual
+TOKEN = https://discord.com/developers/applications
+WEATHER_KEY = https://openweathermap.org/api
+COMP_KEY = 
+COLOR = https://github.com/maubg-debug/maubot#instrucciones-para-el-color-del-env
+USER_STATISTICS_THROTTLE_DURATION =5
+USER_STATISTICS_INCREMENT = 10
 DEBUG = True|False
+WEBHOOK_URL = https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks
+JSON_DIR = Tu direccion para los json
+DB_DIR = Tu direccion para la DB
 ```
 #### Instrucciones para el color del .env
 ```shell
