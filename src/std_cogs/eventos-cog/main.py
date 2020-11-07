@@ -208,12 +208,6 @@ class Servidor(commands.Cog):
             if result > 70.0:
                 return await guild.leave()
 
-        with open(env["JSON_DIR"] + "servers.json", "r") as f:
-            s = json.load(f)
-        s[str(guild.id)] = {}
-        with open(env["JSON_DIR"] + "servers.json", "w") as f:
-            json.dump(s, f)
-
         bots = [member for member in guild.members if member.bot]
 
         def check(event):
