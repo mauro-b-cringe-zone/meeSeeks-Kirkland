@@ -266,7 +266,7 @@ class GeneralSecExtra(commands.Cog):
     @commands.command(description="(╯°□°）╯︵ ┻━┻")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def tableflip(self, ctx):
-        await ctx.send("(╯°□°）╯︵ ┻━┻")
+        await ctx.send(embed=discord.Embed(color=color).set_image(url=f'https://vacefron.nl/api/tableflip?user={ctx.author.avatar_url}?size=2048'))
 
     @commands.command(description="┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -275,8 +275,10 @@ class GeneralSecExtra(commands.Cog):
 
     @commands.command(description="¡¡¡Que careto!!!")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def misc_weeb_face(self, ctx):
-        await ctx.send("(・`ω´・)")
+    async def water(self, ctx: commands.Context, *, message):
+        if len(message) >= 10:
+            return await ctx.send("No tanto texto")
+        await ctx.send(embed=discord.Embed(color=int(color)).set_image(url=f'https://vacefron.nl/api/water?text={str(message.replace(" ", "%20"))}'))
 
     @commands.command(description="︻芫═───")
     @commands.cooldown(1, 5, commands.BucketType.user)

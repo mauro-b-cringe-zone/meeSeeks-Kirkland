@@ -155,8 +155,8 @@ class App(commands.Bot):
                 if i in str(exception):
                     return
             async with aiohttp.ClientSession() as session:
-                webhook = discord.Webhook.from_url(env["WEBHOOK_URL_ERRORES"], adapter = discord.AsyncWebhookAdapter(session))
-                await webhook.send(content = f':lightno: **Un error** ` {exception}')
+                webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
+                await webhook.send(content = f'<:lightno:774581319367655424> **Un error** ` {exception}')
 
             await context.send(embed=discord.Embed(
                               title="Como sabes, los robots no son perfectos", 

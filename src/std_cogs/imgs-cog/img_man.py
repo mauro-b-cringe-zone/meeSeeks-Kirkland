@@ -132,7 +132,7 @@ class Img(commands.Cog):
         else:
             async with ctx.message.channel.typing():
                 url='https://nekobot.xyz/api/imagegen?type=clyde&text='+'+'.join(list(args))+'&raw=1'
-                await ctx.send(file=discord.File(self.urltoimage(url), 'lawl.png'))
+                await ctx.send(embed=discord.Embed(color=color).set_image(url=url))
 
 
     @commands.command(description="FELICIDADES HAS CONSEGUIDO UN LOGRO", usage="<texto>")
@@ -180,14 +180,19 @@ class Img(commands.Cog):
                 await ctx.send(file=discord.File(data, 'drake.png'))
 
 
-    @commands.command(description="Salero", usage="[usuario]")
+    @commands.command(description="Maubot no era el impostor", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def salty(self, ctx, *args):
+    async def amongus(self, ctx):
         async with ctx.message.channel.typing():
-            av = getUserAvatar(ctx, args)
-            url = 'https://api.alexflipnote.dev/salty?image='+str(av)
-            data = self.urltoimage(url)
-            await ctx.send(file=discord.File(data, 'salty.png'))
+            try:
+                us = ctx.message.mentions[0]
+            except:
+                return await ctx.send("Menciona ha alguien porfavor")
+            impostor = random.choice(["true", "false"])
+            rcolor = random.choice(["black","blue","brown","cyan","darkgreen","lime","orange","pink","purple","red","white","yellow"])
+            url = f"https://vacefron.nl/api/ejected?name={us.name}&impostor={impostor}&crewmate={rcolor}"
+            embed = discord.Embed(title=f"{us.name} {'no' if impostor == 'false' else 'si'} era el impostor", color=color).set_image(url=url)
+            await ctx.send(embed=embed) 
 
     @commands.command(description="Don comendias", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -227,13 +232,14 @@ class Img(commands.Cog):
 
     @commands.command(description="¿Quieres ha alguien?", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def ship(self, ctx, *args):
+    async def tinder(self, ctx, *args):
         async with ctx.message.channel.typing():
             av = ctx.message.author.avatar_url
-            toTrash = getUserAvatar(ctx, args)
-            url='https://api.alexflipnote.dev/ship?user='+str(av).replace('webp', 'png')+'&user2='+str(toTrash).replace('webp', 'png')
-            data = self.urltoimage(url)
-            await ctx.send(file=discord.File(data, 'trashed.png'))
+            match = getUserAvatar(ctx, args)
+            url=f'https://useless-api.vierofernando.repl.co/tinder?image1={av}?size=1024&image2={match}?size=1024'
+            if av == match:
+                return await ctx.send("¿Te emparejas con tigo mismo?")
+            await ctx.send(embed=discord.Embed(title="Soy perfectos el uno con el otro", color=color).set_image(url=url))
 
     def jsonisp(self, url):
         from requests import get as decodeurl
@@ -365,13 +371,14 @@ class ImgSecundario(commands.Cog):
         image = self.imagefromURL(url)
         return self.buffer(image)
 
-    @commands.command(asliases=['imageoftheday'], description="Mira la imagen del dia")
+    def jsonisp(self, url):
+        from requests import get as decodeurl
+        return decodeurl(url).json()
+
+    @commands.command(asliases=['ft'], description="Mira la tienda de fortnite")
     @commands.cooldown(1, 21600, commands.BucketType.user)
-    async def iotd(self, ctx):
-        data = self.jsonisp('https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=en-US')['images'][0]
-        embed = discord.Embed( title=data['copyright'], url=data['copyrightlink'], color=color)
-        embed.set_image(url='https://bing.com'+data['url'])
-        await ctx.send(embed=embed)
+    async def fortnite(self, ctx):
+        await ctx.send(embed=discord.Embed(color=color).set_image(url='https://api.nitestats.com/v1/shop/image?footer=%20Consigue%20APIs%20gratis%20Codigo-en:%20http://maubot.mooo.com&background=00000014.png&header=Tienda%20de%20fortnite'))
 
     @commands.command(description="Mira el avatar de alguien descontrolarse", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -441,16 +448,16 @@ class ImgSecundario(commands.Cog):
             except Exception as e:
                 await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
 
-    @commands.command(description="Los mallores peligros de la humanidad", usage="[usuario]")
+    @commands.command(description="Me gusta  la tarta | A mi no", usage="<texto1> | <texto2>")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def threats(self, ctx, *args):
-        source = getUserAvatar(ctx, args)
-        async with ctx.channel.typing():
-            try:
-                data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=threats&url='+source)["message"]
-                return await ctx.send(embed=discord.Embed(title='Salvense quien pueda...', color=color).set_image(url=data))
-            except Exception as e:
-                await ctx.send(" | ¡Oops! Un error generando tu meme; `"+str(e)+"`")
+    async def npc(self, ctx: commands.Context, *, args):
+        if "|" in args:
+            args = args.split(" | ")
+            t1 = args[0]
+            t2 = args[1]
+            url = f"https://vacefron.nl/api/npc?text1={t1}&text2={t2}".replace(" ", "%20")
+            await ctx.send(embed=discord.Embed(color=color).set_image(url=url))
+        else: return await ctx.send("Escribe el segundo texto o pon **$help imgsecundario**")
 
     @commands.command(description="COME COME COME @usuario", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)

@@ -29,6 +29,8 @@ class Servidor(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
 
+        if message.author.bot:
+            return
 
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
@@ -105,7 +107,7 @@ class Servidor(commands.Cog):
         lvl_start = users[str(user.id)]["level"]
         lvl_end = int(experience ** (1/4))
 
-        if lvl_start < lvl_end and not user.id == 730124969132163093 and not user.id == 755433402299056139:
+        if lvl_start < lvl_end:
             await channel.send(embed=discord.Embed(title=f':tada: ¡felicidades!', description=f'{user.mention}, has subido al nivel {lvl_end}! :champagne_glass: ', colour=color))
             users[str(user.id)]['level'] = lvl_end
 
@@ -118,15 +120,21 @@ class Servidor(commands.Cog):
             user = ctx.author
 
         experience = users[str(user.id)]["experience"]
+        lvl_start = users[str(user.id)]["level"]
         lvl_end = int(experience ** (1/4))
+        print(int(experience / lvl_end))
         
+        # url = f'https://vacefron.nl/api/rankcard?username={user.name}&avatar={user.avatar_url}&level={users[str(user.id)]["level"]}&currentxp={experience - lvl_end}&rank=1&nextlevelxp={experience}&previouslevelxp={lvl_end}&custombg=https://cdn.discordapp.com/attachments/740416020761804821/741310178330148894/1596811604088.png&xpcolor=FFFFFF&isboosting=true'.replace(" ", "%20")
+
         if not str(user.id) in users:
             await ctx.send(f"El usuario {user} aun no tiene un rango.")
         else:
             embed = discord.Embed(colour=color)
+            embed.description = f"{user.mention} te queda"
             embed.set_author(name=f"nivel - {user.name}", icon_url=user.avatar_url)
             embed.add_field(name="nivel", value=users[str(user.id)]["level"], inline=True)
             embed.add_field(name="exp", value=users[str(user.id)]["experience"], inline=True)
+            # embed.set_image(url=url)
             await ctx.send(embed=embed)
     
 
