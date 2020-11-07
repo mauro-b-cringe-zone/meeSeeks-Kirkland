@@ -13,6 +13,7 @@ from googletrans import Translator
 
 import random
 import datetime
+import aiohttp
 
 color = int(env.get("COLOR"))
 
@@ -147,12 +148,16 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-        excepciones = ['Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'"]
+        excepciones = ['command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'"]
 
         if env.get('DEBUG'):
             for i in excepciones:
                 if i in str(exception):
                     return
+            async with aiohttp.ClientSession() as session:
+                webhook = discord.Webhook.from_url(env["WEBHOOK_URL_ERRORES"], adapter = discord.AsyncWebhookAdapter(session))
+                await webhook.send(content = f':lightno: **Un error** ` {exception}')
+
             await context.send(embed=discord.Embed(
                               title="Como sabes, los robots no son perfectos", 
                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
@@ -207,27 +212,27 @@ class App(commands.Bot):
     @commands.has_permissions(kick_members=True)
     async def prefix(self, ctx, prefix):
 
-        with open('./src/json/prefix.json', 'r') as f:
+        with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
 
         prefixes[str(ctx.guild.id)] = prefix
 
-        with open('./src/json/prefix.json', 'w') as f:
+        with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
         e = discord.Embed(title="Se a cambiado el prefijo correctamente", description=f'Se a cambiado el prefijo a:      `{prefix}`', colour=self.color)
-        e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/4gfUZtB)**")
+        e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/mwDBgubwdP)**")
         await ctx.send(embed=e)
 
 
 
 def eliminar_prefix(guild):
-    with open('./src/json/prefix.json', 'r') as f:
+    with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
         prefixes = json.load(f)
     
     del prefixes[str(guild.id)]
 
-    with open('./src/json/prefix.json', 'w') as f:
+    with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
         json.dump(prefixes, f, indent=4)
 
 class Maubot(commands.Cog):
@@ -242,9 +247,9 @@ class Maubot(commands.Cog):
             em.title = 'Info de Maubot'
             em.set_author(name=ctx.author.name, icon_url="https://img.icons8.com/plasticine/100/000000/bot.png")
             try:
-                em.description = self.bot.psa + '\n[Soporta nuestro server](https://discord.gg/4gfUZtB)'
+                em.description = self.bot.psa + '\n[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
             except AttributeError:
-                em.description = 'Un bot echo por [Maubg](https://www.youtube.com/channel/UCnNQ8-WPlcMqKpTdvAL8_HA). [¡Ùnete a que esperas!](https://discord.gg/4gfUZtB)'
+                em.description = 'Un bot echo por [Maubg](https://www.youtube.com/channel/UCnNQ8-WPlcMqKpTdvAL8_HA). [¡Ùnete a que esperas!](https://discord.gg/mwDBgubwdP)'
             em.add_field(name="Servidores", value=f"> {len(self.bot.guilds)}")
             em.add_field(name="Usuarios online", value=f"> {str(len({m.id for m in self.bot.get_all_members() if m.status is not discord.Status.offline}))}")
             em.add_field(name='Usuarios totales', value=f"> {len(self.bot.users)}")
@@ -267,10 +272,10 @@ class Maubot(commands.Cog):
             em.title = 'Configuracion de Maubot'
             em.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
             try:
-                em.description = self.bot.psa + '[Soporta nuestro server](https://discord.gg/4gfUZtB)'
+                em.description = self.bot.psa + '[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
                 # CAMBIAR LINK AL TENER UN SERVER DE VERDAD
             except AttributeError:
-                em.description = '[¡Unete a que esperas!](https://discord.gg/4gfUZtB)'
+                em.description = '[¡Unete a que esperas!](https://discord.gg/mwDBgubwdP)'
                 # CAMBIAR LINK AL TENER UN SERVER DE VERDAD
             em.add_field(name="Prefix", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix !**")
             em.add_field(name='rename_bot', value=f'Puedes usar este comando para ponerle in __nickname__ a Maubot.', inline=False)
@@ -365,7 +370,7 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def links(self, ctx):
 
-        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/4gfUZtB)\n**Web**: [Link](http://maubot.mooo.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
+        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/mwDBgubwdP)\n**Web**: [Link](http://maubot.mooo.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
         embed.set_author(name="INVITACIONES", icon_url="https://img.icons8.com/color/48/000000/share.png")
         embed.set_image(url="https://top.gg/api/widget/730124969132163093svg?usernamecolor=FFFFFF&topcolor=000000")
         # embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
@@ -438,7 +443,7 @@ class Feedback(commands.Cog):
 
         try:
             reaction, user = await self.bot.wait_for("reaction_add", timeout=20, check=_check)
-            embed_done.add_field(name="Gracias por tu calificacion, Puedes poner tu calificacion [aqui](https://bots.ondiscord.xyz/bots/730124969132163093/review)", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://discord.gg/4gfUZtB) para decirnos que tal tu experencia**")
+            embed_done.add_field(name="Gracias por tu calificacion, Puedes poner tu calificacion [aqui](https://bots.ondiscord.xyz/bots/730124969132163093/review)", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://discord.gg/mwDBgubwdP) para decirnos que tal tu experencia**")
 
 
         except asyncio.TimeoutError:

@@ -42,12 +42,12 @@ class Tags(commands.Cog):
         }
 
     def abrir_json(self):
-        with open('./src/json/tags.json', "r") as f:
+        with open(env["JSON_DIR"] + 'tags.json', "r") as f:
             tags = json.load(f)
         return tags
 
     def cerrar_json(self, tags):
-        with open('./src/json/tags.json', "w") as f:
+        with open(env["JSON_DIR"] + 'tags.json', "w") as f:
             json.dump(tags, f)
 
     @commands.group(invoke_without_command=True, description="Buscar una tag", usage="[nombre]")

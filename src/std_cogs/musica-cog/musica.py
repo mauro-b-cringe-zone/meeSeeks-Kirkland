@@ -591,6 +591,7 @@ class Music(commands.Cog):
                     except Exception as e:
                         cprint(str("[Log] un error: " + e), 'red') 
 
+
     @_join.before_invoke
     @_play.before_invoke
     async def ensure_voice_state(self, ctx: commands.Context):

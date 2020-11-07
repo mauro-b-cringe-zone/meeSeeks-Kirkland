@@ -13,7 +13,7 @@ class AfkCmd(commands.Cog):
 
         user = ctx.author
 
-        with open("./src/json/afk.json", "r") as f:
+        with open(env["JSON_DIR"] + "afk.json", "r") as f:
             users = json.load(f)
         
         if str(user.id) in users:
@@ -23,7 +23,7 @@ class AfkCmd(commands.Cog):
             users[str(user.id)]["afk"] = "1"
             users[str(user.id)]["status"] = "False"
 
-        with open("./src/json/afk.json", "w") as f:
+        with open(env["JSON_DIR"] + "afk.json", "w") as f:
             json.dump(users,f)        
         
         await ctx.send(embed=discord.Embed(title="Usuario AFK", description=f"{user.mention} Ha sido puesto en **AFK** por favor no lo molesteis", colour=color).add_field(name="Razon", value=razon))
@@ -33,7 +33,7 @@ class AfkCmd(commands.Cog):
     async def on_message(self, message):
         user = message.author
 
-        with open("./src/json/afk.json", "r") as f:
+        with open(env["JSON_DIR"] + "afk.json", "r") as f:
             users = json.load(f)
 
         if str(user.id) in users:   
@@ -48,7 +48,7 @@ class AfkCmd(commands.Cog):
             if users[str(user.id)]["afk"] == "1":
                 users[str(user.id)]["status"] = "True"
 
-            with open("./src/json/afk.json", "w") as f:
+            with open(env["JSON_DIR"] + "afk.json", "w") as f:
                 json.dump(users,f)    
 
 def setup(bot):

@@ -7,16 +7,17 @@ import aiohttp
 from App import eliminar_prefix
 import asyncio
 from termcolor import cprint
+from discord.utils import get
 
 async def cerrar(iniciador=None, destinatario:int=None):
-    with open("./src/json/chats.json", "r") as f:
+    with open(env["JSON_DIR"] + "chats.json", "r") as f:
         chats = json.load(f)
 
     if str(iniciador.id) in chats:
         del chats["chats"][f"{iniciador.id}"]
         del chats["chats"][f"{destinatario}"]
 
-    with open("./src/json/chats.json", "w") as f:
+    with open(env["JSON_DIR"] + "chats.json", "w") as f:
         json.dump(chats, f)
 
 color = int(env["COLOR"])
@@ -29,7 +30,7 @@ class Servidor(commands.Cog):
     async def on_message(self, message):
 
 
-        with open("./src/json/chats.json", "r") as f:
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
         try:
@@ -54,10 +55,10 @@ class Servidor(commands.Cog):
         except Exception as e:
             return cprint(f"[Log] Un error en on_message: {e}", "red")
 
-        with open("./src/json/chats.json", "w") as f:
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
-        with open("./src/json/mute.json", 'r') as f:
+        with open(env["JSON_DIR"] + "mute.json", 'r') as f:
             user = json.load(f)
 
         # print(message.author.id)
@@ -77,14 +78,14 @@ class Servidor(commands.Cog):
                                                 colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-prefix.png"))
 
 
-        with open("./src/json/userslvl.json", "r") as f:
+        with open(env["JSON_DIR"] + "userslvl.json", "r") as f:
             users = json.load(f)
 
         await self.update_data(users, message.author)
         await self.add_experience(users, message.author, 5)
         await self.level_up(self.bot, users, message.author, message.channel)
 
-        with open("./src/json/userslvl.json", "w") as f:
+        with open(env["JSON_DIR"] + "userslvl.json", "w") as f:
             json.dump(users, f)
         # await self.bot.process_commands(message)
 
@@ -110,7 +111,7 @@ class Servidor(commands.Cog):
 
     @commands.command(description="Mira tu nivel de mensajes", usage="[usuario]")
     async def rank(self, ctx, user: discord.Member = None):
-        with open("./src/json/userslvl.json", "r") as f:
+        with open(env["JSON_DIR"] + "userslvl.json", "r") as f:
             users = json.load(f)
 
         if user is None:
@@ -133,9 +134,19 @@ class Servidor(commands.Cog):
     async def on_guild_remove(self, guild):
         eliminar_prefix(guild)
         bots = [member for member in guild.members if member.bot]
+        with open(env["JSON_DIR"] + "servers.json", "r") as f:
+            s = json.load(f)
+        try:
+            del s[str(guild.id)]
+        except:
+            pass
+        with open(env["JSON_DIR"] + "servers.json", "w") as f:
+            json.dump(s, f)
+
         async with aiohttp.ClientSession() as session:
-            webhook = discord.Webhook.from_url(env["WEBHOOK_URL"], adapter = discord.AsyncWebhookAdapter(session))
+            webhook = discord.Webhook.from_url(env["WEBHOOK_URL_SALIDA"], adapter = discord.AsyncWebhookAdapter(session))
             await webhook.send(content = ':outbox_tray: **Quitado de un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**')
+
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -154,6 +165,10 @@ class Servidor(commands.Cog):
             if result > 70.0:
                 await member.guild.leave()
 
+        if int(member.guild) == 774577061893242930:
+            role = get(member.server.roles, id="774577061893242933")
+            await member.add_roles(role)
+
     @commands.Cog.listener()
     async def on_member_remove(self, member):
     	if member.guild.member_count > 20:
@@ -162,6 +177,20 @@ class Servidor(commands.Cog):
     		if result > 70.0:
     			await member.guild.leave()
 
+    # @commands.Cog.listener()
+    # async def on_command(self, ctx):
+
+    #     with open(env["JSON_DIR"] + "servers.json", "r") as f:
+    #         s = json.load(f)
+    #     if not ctx.message.content == f"{ctx.prefix}verify":
+    #         if str(ctx.guild.id) in s:
+    #             command = self.bot.get_command(ctx.message.content.split(f"{ctx.prefix}")[1])
+    #             print(command)
+    #             command.update(enabled=False)
+    #             await ctx.send(embed=discord.Embed(title="No estais verificados", description="Para poder verificar el server poner `$verify`", color=0x00fbff))
+    #     command = self.bot.get_command(ctx.message.content.split(f"{ctx.prefix}")[1])
+    #     command.update(enabled=True)
+
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
 
@@ -169,13 +198,15 @@ class Servidor(commands.Cog):
             bots = [member for member in guild.members if member.bot]
             result = (len(bots) / guild.member_count) * 100
             if result > 70.0:
-                await guild.leave()
+                return await guild.leave()
+
+        with open(env["JSON_DIR"] + "servers.json", "r") as f:
+            s = json.load(f)
+        s[str(guild.id)] = {}
+        with open(env["JSON_DIR"] + "servers.json", "w") as f:
+            json.dump(s, f)
 
         bots = [member for member in guild.members if member.bot]
-        async with aiohttp.ClientSession() as session:
-            webhook = discord.Webhook.from_url(env["WEBHOOK_URL"], adapter = discord.AsyncWebhookAdapter(session))
-            await webhook.send(content = ':inbox_tray: **Añadido a un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**')
-
 
         def check(event):
             return event.target.id == self.bot.user.id
@@ -191,55 +222,68 @@ class Servidor(commands.Cog):
             \n\n
             y se enviara un mensaje a mi desarroyador! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
             mantente actualizado con las nuevas funciones, o si solo quieres mas ayuda, mira el server oficial de 
-            {self.bot.user.name} ¿¡A que esperas!? ( https://discord.gg/4gfUZtB )""", colour=color))
+            {self.bot.user.name} ¿¡A que esperas!? ( https://discord.gg/mwDBgubwdP )""", colour=color))
 
     
-        with open('./src/json/prefix.json', 'r') as f:
+        with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
         
         prefixes[str(guild.id)] = '$'
 
-        with open('./src/json/prefix.json', 'w') as f:
+        with open(env["JSON_DIR"] + 'prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
         channel = discord.utils.get(guild.text_channels)
 
-        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `$help` o con el prefijo que tu le ayas puesto.\n\n **ESCRIVE $verify PARA VERIFICAR QUE ERES HUMANO**", colour=color)
+        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `$help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
         embed1.set_author(name='Maubot', icon_url="https://img.icons8.com/nolan/64/launched-rocket.png")
         embed1.add_field(name="¿Necesitas ayuda?", value=f"Puedes poner **$help** para conseguir una lista de los comandos mas guays del mundo desde diversion hasta musica y economia. La lista de comandos estan separadas por secciones asi que podrias poner `$help [seccion]` para descubrir mas comandos super chulos. o si no puedes poner **<@730124969132163093>** .", inline=True)
         embed1.add_field(name="Diversion atope", value=f"Maubot tiene muchos comando para divertirse con manipulacion de imagenes a juegos como el `conecta4`, `rps` y mucho mas. Maubot tambien tiene un sistema de economia muy avanzado para ser millonarios y dominar el mundo 🤤...", inline=True)
-        embed1.add_field(name="Legal", value=f"Escribe `$copyright` para ver el copyright de Maubot y tambien escribe `$verify` para erificar que eres humano", inline=False)
+        embed1.add_field(name="Legal", value=f"Escribe `$copyright` para ver el copyright de Maubot.", inline=False)
         embed1.add_field(name="¿Aun no te has enterado?", value=f"Puedes ver un tutorial de como usar Maubot poniendo <@730124969132163093>", inline=False)
         embed1.set_footer(text="Maubot - Puedes escribir @Maubot para mas info")
 
 
-        msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://discord.gg/4gfUZtB)**", embed=embed1)
+        msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://discord.gg/mwDBgubwdP)**", embed=embed1)
+        async with aiohttp.ClientSession() as session:
+            webhook = discord.Webhook.from_url(env["WEBHOOK_URL_ENTRADA"], adapter = discord.AsyncWebhookAdapter(session))
+            await webhook.send(content = ':inbox_tray: **Añadido a un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**')
 
 
-    @commands.command(description="Verifica que eres humano")
-    async def verify(self, ctx):
-        embed5 = discord.Embed(title="Verifica que eres humano", description="En estos tiempos Discord cadavez tiene mas atackes de bots por lo que para mas seguridad verificar que no soy robots. \n\n porfavor dale al ✅ para comfirmar que no eres un robot", colour=0x1cce52)
-        embed5.set_footer(text='Maubot | Verifica que eres humano')
+
+    # @commands.command(description="Verifica que eres humano")
+    # async def verify(self, ctx):
+    #     embed5 = discord.Embed(title="Verifica que eres humano", description="En estos tiempos Discord cadavez tiene mas atackes de bots por lo que para mas seguridad verificar que no soy robots. \n\n porfavor dale al ✅ para comfirmar que no eres un robot", colour=0x1cce52)
+    #     embed5.set_footer(text='Maubot | Verifica que eres humano')
         
-        embed = discord.Embed(title="Bien eres humano", description="Ya puedes comenzar a usar el bot... pero cuidado. ajajaja solo bromeaba disfruta", colour=color)
-        embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
+    #     embed = discord.Embed(title="Bien eres humano", description="Ya puedes comenzar a usar el bot... pero cuidado. ajajaja solo bromeaba disfruta", colour=color)
+    #     embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
 
 
-        msg = await ctx.send(embed=embed5)
-        await msg.add_reaction('✅')
-        guild = self.bot.get_guild(ctx.guild.id)
-        def _check(reaction, user):
-            return (
-                reaction.emoji in '✅'
-                and user == ctx.author
-                and reaction.message.id == msg.id
-            )
-        try:
-            reaction, user = await self.bot.wait_for("reaction_add", timeout=600, check=_check)
-        except asyncio.TimeoutError:
-            await self.bot.leave_guild(guild)
-        else:
-            await msg.edit(embed=embed)
+    #     msg = await ctx.send(embed=embed5)
+    #     await msg.add_reaction('✅')
+    #     guild = self.bot.get_guild(ctx.guild.id)
+    #     def _check(reaction, user):
+    #         return (
+    #             reaction.emoji in '✅'
+    #             and user == ctx.author
+    #             and reaction.message.id == msg.id
+    #         )
+    #     try:
+    #         reaction, user = await self.bot.wait_for("reaction_add", timeout=600, check=_check)
+    #     except asyncio.TimeoutError:
+    #         pass
+    #     else:
+    #         with open(env["JSON_DIR"] + "servers.json", "r") as f:
+    #             s = json.load(f)
+    #         try:
+    #             del s[str(ctx.guild.id)]
+    #         except:
+    #             pass
+    #         with open(env["JSON_DIR"] + "servers.json", "w") as f:
+    #             json.dump(s, f)
+    #         await msg.clear_reactions()
+    #         await msg.edit(embed=embed)
 
 
 def setup(bot):

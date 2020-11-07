@@ -74,7 +74,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 # Sugerencias
 
-* Si tienes alguna sugerencia puedes unirte a [nuestro server](https://discord.gg/4gfUZtB) <- O -> Si tienes que contarnos un bug ve a [su github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)
+* Si tienes alguna sugerencia puedes unirte a [nuestro server](https://discord.gg/mwDBgubwdP) <- O -> Si tienes que contarnos un bug ve a [su github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)
 
 * Tambien puedes poner `$rate_bot <descripcion>` para darle nua reseña, `$request <descripcion>` Para alguna idea y `$report` Para reportar algun bug que tenga maubot.
 

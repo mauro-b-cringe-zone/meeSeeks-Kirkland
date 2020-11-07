@@ -16,7 +16,7 @@ C_NAMES = "diamantes"
 
 mainshop = [
     {"name":"reloj", "price":1000,"description":"Reloj de lujo cuvierto de oro con un laser incluido en la parte superior del reloj"},
-    {"name":"PC", "price":739,"description":"PC rapido perfecto para gaming **[¡30% DE DESCUENTO!](https://discord.gg/4gfUZtB)**"},
+    {"name":"PC", "price":739,"description":"PC rapido perfecto para gaming **[¡30% DE DESCUENTO!](https://discord.gg/mwDBgubwdP)**"},
     {"name":"Laptop", "price":509,"description":"Bueno para hackear en silencio con un gran soporte con ventilador para que no se sobre caliente"},
     {"name":"Sarten", "price":30,"description":"No se pega nada ni si quiera la grasa y sirve mucho para dar golpes con la sarten"},
     {"name":"Pistola", "price":100000,"description":"**Solo se venden a los mallores de edad 🔞** Sirve para hacer pium pium a los malos que quieran robar"},
@@ -65,7 +65,7 @@ async def buy_this(user,item_name,amount):
         obj = {"item":item_name , "amount" : amount}
         users[str(user.id)]["bag"] = [obj]        
 
-    with open("./src/json/mainbank.json","w") as f:
+    with open(env["JSON_DIR"] + "mainbank.json","w") as f:
         json.dump(users,f)
 
     await update_bank(user, cost*-1, "wallet")
@@ -115,7 +115,7 @@ async def sell_this(user,item_name,amount,price=None):
     if users[str(user.id)]["bag"][index]["amount"] == 0:
         del users[str(user.id)]["bag"][index]
 
-    with open("./src/json/mainbank.json","w") as f:
+    with open(env["JSON_DIR"] + "mainbank.json","w") as f:
         json.dump(users,f)
 
     await update_bank(user,cost,"wallet")
@@ -124,7 +124,7 @@ async def sell_this(user,item_name,amount,price=None):
 
 
 async def get_bank_data():
-    with open("./src/json/mainbank.json", "r") as f:
+    with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
         users = json.load(f)
 
     return users
@@ -133,7 +133,7 @@ async def open_acount(user):
 
     users = await get_bank_data()
 
-    with open("./src/json/mainbank.json","r") as f:
+    with open(env["JSON_DIR"] + "mainbank.json","r") as f:
         users = json.load(f)
 
     if str(user.id) in users:
@@ -143,7 +143,7 @@ async def open_acount(user):
         users[str(user.id)]["wallet"] = 0
         users[str(user.id)]["bank"] = 0
 
-    with open("./src/json/mainbank.json","w") as f:
+    with open(env["JSON_DIR"] + "mainbank.json","w") as f:
         json.dump(users, f) 
     return True
 
@@ -152,7 +152,7 @@ async def update_bank(user, change=0, mode="wallet"):
 
     users[str(user.id)][mode] += change
 
-    with open("./src/json/mainbank.json", "w") as f:
+    with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
         json.dump(users, f)        
     
     bal = [users[str(user.id)]["wallet"],users[str(user.id)]["bank"]]

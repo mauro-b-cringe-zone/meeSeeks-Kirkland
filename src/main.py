@@ -59,12 +59,12 @@ def preparar():
     cogs = StdCogs()
 
     try:
-        token = env.get('TOKEN')
+        token = env.get('TOKEN_BOT_PRUEVAS')
     except EnvironmentError:
         Logger.error('No se encontro ninguna ficha. Ejecute el bot con el parametro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')
         sys.exit(1)
 
-    extrasenv = ["WEATHER_KEY", "COMP_KEY", "COLOR", "WEBHOOK_URL"]
+    extrasenv = ["WEATHER_KEY", "COMP_KEY", "COLOR"]
     for i in extrasenv:
         try:
             ex = env.get(f'{i}')

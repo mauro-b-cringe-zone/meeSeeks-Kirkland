@@ -20,7 +20,7 @@ class Help(commands.Cog):
         embed.set_footer(
             text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
         )
-        embed.description = "Maubot tiene unos docs por si quieres tener mas informacion, si quieres visitarlos puedes ir [aqui](https://maubot.docs.com/)"
+        embed.description = "Maubot tiene unos docs por si quieres tener mas informacion, si quieres visitarlos puedes ir [aqui](https://maubot.gitbook.io/maubot/)"
 
         CogsNecesitados = []
         for i in range(6):
@@ -37,18 +37,26 @@ class Help(commands.Cog):
                 if comando.hidden:
                     continue
 
-                ListaDeComandos += f"`{ctx.prefix}{comando.name}`, "
+                ListaDeComandos += f"{ctx.prefix}{comando.name},  "
             ListaDeComandos = ListaDeComandos[:-2]
             ListaDeComandos += "\n"
-            embed.add_field(name=f"║━━━━ {cog} ━━━━║\n", value=ListaDeComandos, inline=False)
+            embed.add_field(name=f"->  {cog}\n", value=ListaDeComandos, inline=False)
         return embed
 
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
     @commands.command(description="Ayuda para los comandos", usage="[cog]")
-    async def help(self, ctx, cog="1"):
+    async def help(self, ctx, cog="0"):
         try:
-            embed = discord.Embed(title="Ayuda con los comandos", color=int(env["COLOR"]))
+            if cog == "0":
+                embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"]))
+                cogs = [c for c in self.bot.cogs.keys()]
+                paginasTotales = math.ceil(len(cogs) / 6)
+                embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://maubot.gitbook.io/maubot/)"
+                embedhs.add_field(name="->   Buscar por paginas", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `$help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. $help {random.randint(2, 7)}**", inline=False)
+                embedhs.add_field(name="->   Buscar por cogs", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. $help {random.choice(cogs)}**")                
+                return await ctx.send(embed=embedhs)
+            embed = discord.Embed(title="-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"]))
 
             cogs = [c for c in self.bot.cogs.keys()]
             cprint(f"[Log] Cogs: {len(cogs)}", 'yellow')

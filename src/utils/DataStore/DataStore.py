@@ -14,7 +14,7 @@ class DataStore:
         __db = Database
 
         def __init__(self):
-            self.__db = SqliteDatabase('./src/data.db')
+            self.__db = SqliteDatabase(env.get("DB_DIR") + 'data.db')
 
         def __open_connection(self):
             """

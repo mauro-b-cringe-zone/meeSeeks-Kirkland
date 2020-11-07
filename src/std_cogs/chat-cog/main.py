@@ -13,7 +13,7 @@ class Eventos():
         self.color_c = 0x00fbff
 
     async def _checkear_usuario_baneado(self, ctx, iniciador, dest):
-        with open("./src/json/chats.json", "r") as f:
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
         if str(iniciador.id) in chats["baneos"]:
@@ -25,11 +25,11 @@ class Eventos():
         else:
             return "c"
 
-        with open("./src/json/chats.json", "w") as f:
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
     async def cerrar(self, iniciador=None):
-        with open("./src/json/chats.json", "r") as f:
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
         if str(iniciador.id) in chats:
@@ -39,11 +39,11 @@ class Eventos():
             del chats["chats"][f"{iniciador.id}"]
             del chats["chats"][f"{destinatario}"]
 
-        with open("./src/json/chats.json", "w") as f:
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
     async def abrir(self, iniciador, destinatario):
-        with open("./src/json/chats.json", "r") as f:
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
         if not str(iniciador.id) in chats:
@@ -55,7 +55,7 @@ class Eventos():
             if chats["chats"][f"{iniciador.id}"] == {}:
                 return "Usuario ya en chat"
 
-        with open("./src/json/chats.json", "w") as f:
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
     async def inicio(self, ctx, iniciador=None, dest=None):
@@ -111,7 +111,7 @@ class ChatApp(commands.Cog):
         Cerramos el chat con el usuario con el que este conectado y le enviamos que el chat se ha terminado
         """
         destinatario = ctx.message.mentions[0]
-        with open("./src/json/chats.json", "r") as f:
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
         if str(ctx.author.id) in chats["baneos"]:
@@ -124,7 +124,7 @@ class ChatApp(commands.Cog):
             chats["baneos"][str(ctx.author.id)][str(destinatario.id)] = destinatario.id
             await ctx.send(embed=discord.Embed(title="Baneado", description=f"Se ha baneadp a {destinatario.mention} de tus chats", color=color))
 
-        with open("./src/json/chats.json", "w") as f:
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
     @commands.command(aliases="unbanchat,chatunban".split(","), description="banea a una persona", name="unbanfromchat")
@@ -134,7 +134,7 @@ class ChatApp(commands.Cog):
         """
         Ev = Eventos(self.bot)
         destinatario = ctx.message.mentions[0]
-        with open("./src/json/chats.json", "r") as f:
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
         if str(ctx.author.id) in chats["baneos"]:
@@ -148,7 +148,7 @@ class ChatApp(commands.Cog):
         else:
             return await ctx.send(embed=discord.Embed(title="Not tienes una lista de baneos", description=f"{ctx.author.mention}, No tienes una lista de baneos.", color=color).set_footer(text="Puedes poner $banchat <@usuario> para quitarlo de la lista"))
 
-        with open("./src/json/chats.json", "w") as f:
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
 def setup(bot):

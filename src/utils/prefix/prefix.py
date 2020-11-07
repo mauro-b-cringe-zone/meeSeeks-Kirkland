@@ -1,4 +1,5 @@
 import json
+from os import environ as env
 
 def get_prefix(bot, message):
     """
@@ -13,7 +14,7 @@ def get_prefix(bot, message):
     :return: @#~€ (Tiene que ser algo dificil)
     """
     if message.guild is not None:
-        with open('./src/json/prefix.json', 'r') as f:
+        with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
         base = [prefixes[str(message.guild.id)], '?', '!', 'm.']
         return base
