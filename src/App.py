@@ -397,7 +397,7 @@ class Maubot(commands.Cog):
     @commands.command(aliases=['head'])
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def magicb(self, ctx, filetype):
-        file = open('./src/json/magic.json').read()
+        file = open('./src/utils/magic/magic.json').read()
         alldata = json.loads(file)
         try:
             messy_signs = str(alldata[filetype]['signs'])
