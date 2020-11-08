@@ -250,7 +250,7 @@ class Servidor(commands.Cog):
         msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://discord.gg/mwDBgubwdP)**", embed=embed1)
         async with aiohttp.ClientSession() as session:
             webhook = discord.Webhook.from_url(env["WEBHOOK_URL_ENTRADA"], adapter = discord.AsyncWebhookAdapter(session))
-            await webhook.send(content = ':inbox_tray: **Añadido a un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**')
+            await webhook.send(content = ':inbox_tray: **Añadido a un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**' + '<:maubot:774967705831997501>')
 
 
 
