@@ -459,14 +459,14 @@ class Feedback(commands.Cog):
             await feedbackCh.send('<@700812754855919667>, Usuario con ID: '+str(ctx.message.author.id)+f' Ha enviado una reseña', embed=embed_feed_CH)
 
     @commands.command()
-    async def request(self, ctx, *feature):
+    async def request(self, ctx: commands.Context, *, feature):
         creator = await self.bot.fetch_user(700812754855919667)
         authors_name = str(ctx.author)
         await creator.send(f''':pencil: {authors_name}: {feature}''')
         await ctx.send(discord.Embed(title="Gracias", description=f''':pencil: Gracias, Se ha solicitado tu idea!''', color=color))
 
     @commands.command()
-    async def report(self, ctx, *error_report):
+    async def report(self, ctx: commands.Context, *, error_report):
         creator = await self.bot.fetch_user(700812754855919667)
         authors_name = str(ctx.author)
         await creator.send(f''':triangular_flag_on_post: {authors_name}: {error_report}''')

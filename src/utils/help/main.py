@@ -56,7 +56,7 @@ class Help(commands.Cog):
                 embedhs.add_field(name="->   Buscar por paginas", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `$help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. $help {random.randint(2, 7)}**", inline=False)
                 embedhs.add_field(name="->   Buscar por cogs", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. $help {random.choice(cogs)}**")                
                 return await ctx.send(embed=embedhs)
-            embed = discord.Embed(title="-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"]))
+            embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"]))
 
             cogs = [c for c in self.bot.cogs.keys()]
             cprint(f"[Log] Cogs: {len(cogs)}", 'yellow')
@@ -136,7 +136,7 @@ class Help(commands.Cog):
 
                     prefijo = ctx.prefix
 
-                    textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name} {comando.usage if comando.usage is not None else ''}`\n\n"
+                    textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name}{ ' ' + comando.usage if comando.usage is not None else ''}`\n\n"
                 embed.description = textoDeAyuda
 
                 await ctx.send(embed=embed)

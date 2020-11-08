@@ -504,7 +504,7 @@ class Juegos(commands.Cog):
             for i in range(0, len(al)):
                 await wait.add_reaction(al[i])
         except Exception as e:
-            await wait.edit(content="", embed=discord.Embed(title="Ups..", description=f' | Upss..!\nun error intenta usar {ctx.prefix}report <error>.\n```{e}```', colour=color))
+            return await wait.edit(content="", embed=discord.Embed(title="Ups..", description=f' | Upss..!\nun error intenta usar {ctx.prefix}report <error>.\n```{e}```', colour=color))
         guy = ctx.message.author
         def check(reaction, user):
             return user == guy
