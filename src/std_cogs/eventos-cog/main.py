@@ -13,7 +13,7 @@ async def cerrar(iniciador=None, destinatario:int=None):
     with open(env["JSON_DIR"] + "chats.json", "r") as f:
         chats = json.load(f)
 
-    if str(iniciador.id) in chats:
+    if str(iniciador.id) in chats["chats"]:
         del chats["chats"][f"{iniciador.id}"]
         del chats["chats"][f"{destinatario}"]
 
