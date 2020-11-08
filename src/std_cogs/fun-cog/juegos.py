@@ -514,7 +514,7 @@ class Juegos(commands.Cog):
             await wait.add_reaction('😔')
         if str(reaction.emoji)==str(corr):
             await wait.edit(embed=discord.Embed(title="Bien hecho", description=' | <@'+str(guy.id)+'>, Felicidades! Estas correcto. :partying_face:', colour=color))
-        
+            await wait.clear_reactions()
             user = ctx.author
             diamantes_dados = random.randint(10, 30)
             with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
