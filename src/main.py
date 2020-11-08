@@ -68,7 +68,7 @@ def preparar():
         extrasenv = ["WEATHER_KEY", "COMP_KEY", "COLOR"]
         for i in extrasenv:
             try:
-                ex = env.get(f'{i}')
+                ex = env.get(str(i))
                 if ex == "" or ex == " ":
                     Logger.warning(f"Te falta rellenar el {i} en el .env, es posible que algunos comandos no funcionen")
             except:
