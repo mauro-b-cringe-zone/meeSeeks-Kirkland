@@ -713,10 +713,13 @@ class Juegos(commands.Cog):
             reaction, user = await self.bot.wait_for('reaction_add', timeout=15.0, check=check)
         except asyncio.TimeoutError:
             await main.edit(content='', embed=embedType(1))
+            await main.clear_reactions()
         if str(reaction.emoji)!=correct:
             await main.edit(content='', embed=embedType(1))
+            await main.clear_reactions()
         else:
             await main.edit(content='', embed=embedType(2))
+            await main.clear_reactions()
             diamantes_dados = random.randint(10, 30)
             user = ctx.author
             with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
