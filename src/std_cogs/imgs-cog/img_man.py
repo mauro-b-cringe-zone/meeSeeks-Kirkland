@@ -395,17 +395,11 @@ class ImgSecundario(commands.Cog):
         
     @commands.command(description="Crea un meme con alguien", usage="<usuario> <[texto1]><texto2>")
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def avmeme(self, ctx, *args):
+    async def shoot(self, ctx, member: discord.Member):
         async with ctx.message.channel.typing():
             try:
                 av = ctx.message.mentions[0].avatar_url
-                mes = ctx.message.content[int(len(args[0])+len(args[1])+1):]
-                top = self.urlify(str(ctx.message.content).split('[')[1].split(']')[0])
-                bott = self.urlify(str(ctx.message.content).split('[')[2].split(']')[0])
-                name = 'custom'
-                extr = '?alt='+str(av).replace('webp', 'png')
-                url='https://memegen.link/'+str(name)+'/'+str(top)+'/'+str(bott)+'.jpg'+str(extr)
-                await ctx.send(embed=discord.Embed(title="Avmeme creado", colour=color, description=f"Dale al **[link]({url})** para ver la imagen"))
+                await ctx.send(embed=discord.Embed(title=f"Headshoot, {random.randint(10, 700)} puntos", colour=color).set_image(url=f"https://api.no-api-key.com/api/v2/shoot?image={av}"))
             except Exception as e:
                 await ctx.send(f' | ¡Error!\n```{e}```Parametros invalidos. Ejemplo: `{ctx.prefix}avmeme <@Alguien> [Texto de arriba] [Texto de abajo]`')
 
