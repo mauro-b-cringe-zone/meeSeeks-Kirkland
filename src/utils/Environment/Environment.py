@@ -53,7 +53,7 @@ class Environment:
             Logger.info('- Directorio inicial de inicio... ', newline=False)
             home_dir = self.__get_home_dir()
             self.set('MAUBOT_DIRECCION_DE_CASA', home_dir)
-            self.set(f'{env["DB_DIR"]}data.db', f'{env["DB_DIR"]}data.db')
+            #self.set(f'{env["DB_DIR"]}data.db', f'{env["DB_DIR"]}data.db')
             Logger.success('Hecho.')
 
             # Cargar .env
