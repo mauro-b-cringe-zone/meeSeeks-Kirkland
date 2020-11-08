@@ -61,8 +61,35 @@ class Environment:
             self.__env_file_exists = self.__read_env(root_path)
             if self.__env_file_exists:
                 Logger.success('Hecho.')
+            if self.__env_file_exists:
+                Logger.success('Hecho.')
             else:
                 Logger.warning('.env No existe.')
+                ENVFILE = Path(__file__).parent.parent.parent.parent / ".env"
+                Logger.warning("Es posible que no ayas cambiado el .example.env a .env. Si no es asi porfavor pon [y] para crearte un .env")
+                conf = input("Parece que no existe el archivo .env ¿Quieres crear uno? [y/n]: ")
+                if conf == "y":
+                    token = input("Introduce el token: ")
+                    with Path.open(ENVFILE, 'w', encoding='utf-8') as file:
+                        file.write(f"TOKEN={token}\n")
+                        file.write("WEATHER_KEY = https://openweathermap.org/api\n")
+                        file.write("COMP_KEY = \n")
+                        file.write("COLOR = https://github.com/maubg-debug/maubot#instrucciones-para-el-color-del-env\n")
+                        file.write("USER_STATISTICS_THROTTLE_DURATION =5\n")
+                        file.write("USER_STATISTICS_INCREMENT = 10\n")
+                        file.write("DEBUG = True|False\n")
+                        file.write("WEBHOOK_URL = https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks\n")
+                        file.write("JSON_DIR = Tu direccion para los json\n")
+                        file.write("DB_DIR = Tu direccion para la DB\n")
+                    print(f"Entra en el .env y sigue los pasos")
+                    hecho = input("Cuando ayas terminado pon [Y] para empezar de nuevo, o pon [n] para terminar el programa: ")
+                    if hecho == "y":
+                        Logger.success("> python ./src/main.py --cmd run")
+                        sys.exit(0)
+                    else:
+                        sys.exit(0)
+                else:
+                    sys.exit(0)
 
             # Init final
             Logger.success('Ambiente preparado.')
