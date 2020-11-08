@@ -37,7 +37,7 @@ class Eventos():
             await iniciador.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{iniciador.mention} se ha cerrado la conexion con **{us.mention}**", color=self.color_c))
             await us.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{us.mention}, **{iniciador.mention}** Ha cerrado la conexion con el chat.", color=self.color_c))
             del chats["chats"][f"{iniciador.id}"]
-            del chats["chats"][f"{us}"]
+            del chats["chats"][f"{destinatario}"]
 
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
@@ -105,6 +105,7 @@ class ChatApp(commands.Cog):
         """
         Ev = Eventos(self.bot)
         await Ev.cerrar(ctx.author)
+        await ctx.send(embed=discord.Embed(title="Se cerro el chat", description="Se ha cerrado la conexion", color=color))
 
     @commands.command(aliases="banchat,chatban".split(","), description="banea a una persona", name="banfromchat")
     async def __banear_usuario(self, ctx):
