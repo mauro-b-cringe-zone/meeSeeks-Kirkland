@@ -213,7 +213,7 @@ class Servidor(commands.Cog):
         def check(event):
             return event.target.id == self.bot.user.id
         bot_entry = await guild.audit_logs(action=discord.AuditLogAction.bot_add).find(check)
-        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f""":tada: ¡Hola! Mi nombre e **{self.bot.user.name}**, Y soy el responsable que te ayudara 
+        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f"""<:maubot:774967705831997501> ¡Hola! Mi nombre e **{self.bot.user.name}**, Y soy el responsable que te ayudara 
             a ganar partidas en el destini `hacer tu server mejor` porque tu eres 
             uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.\n\n
             **Los prefijos de los comandos son: `$`, `!`, `?`, `m.`**\n\n
@@ -225,6 +225,7 @@ class Servidor(commands.Cog):
             y se enviara un mensaje a mi desarroyador! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
             mantente actualizado con las nuevas funciones, o si solo quieres mas ayuda, mira el server oficial de 
             {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)""", colour=color))
+        await msg_ent.add_reaction("<:maubot:774967705831997501>")
 
     
         with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
