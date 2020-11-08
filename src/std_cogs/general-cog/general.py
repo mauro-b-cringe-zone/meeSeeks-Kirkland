@@ -182,7 +182,7 @@ class General(commands.Cog):
         for i in await ctx.guild.invites():
             if i.inviter == ctx.author:
                 totalInvites += i.uses
-        embed = discord.Embed(title="Invitaciones", description=f"{ctx.author.mention} has invitado a {totalInvites} persona{'' if totalInvites == 1 else 's'}", colour=color)        
+        embed = discord.Embed(title="Invitaciones", description=f"{ctx.author.mention} has invitado a **{totalInvites}** persona{'' if totalInvites == 1 else 's'}", colour=color)        
         await ctx.send(embed=embed)
 
     @commands.command(description="¿Una cerbeza?", usage="[usuario] [razon]")
