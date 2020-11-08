@@ -82,7 +82,7 @@ class Environment:
                         file.write("JSON_DIR = Tu direccion para los json\n")
                         file.write("DB_DIR = Tu direccion para la DB\n")
                     print(f"Entra en el .env y sigue los pasos")
-                    hecho = input("Cuando ayas terminado pon [Y] para empezar de nuevo, o pon [n] para terminar el programa: ")
+                    hecho = input("Cuando ayas terminado pon [Y] para empezar de nuevo, o pon [n] para terminar el programa (https://github.com/maubg-debug/maubot/blob/main/.example.env): ")
                     if hecho == "y":
                         Logger.success("> python ./src/main.py --cmd run")
                         sys.exit(0)
