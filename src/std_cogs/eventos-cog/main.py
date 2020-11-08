@@ -40,7 +40,7 @@ class Servidor(commands.Cog):
                 if message.author.id == 755433402299056139 or message.author.id == 730124969132163093:
                     return
                 else:
-                    if str(message.author.id) in chats:
+                    if str(message.author.id) in chats["chats"]:
                         dest = chats["chats"][f"{message.author.id}"]["dest"]
                         # print(dest)
                         if str(dest) in chats:
