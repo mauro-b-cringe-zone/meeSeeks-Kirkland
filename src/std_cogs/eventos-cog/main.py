@@ -28,6 +28,7 @@ class Servidor(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, message):
+        await message.channel.send("<:maubot:774967705831997501>")
 
         if message.author.bot:
             return
@@ -213,10 +214,10 @@ class Servidor(commands.Cog):
         def check(event):
             return event.target.id == self.bot.user.id
         bot_entry = await guild.audit_logs(action=discord.AuditLogAction.bot_add).find(check)
-        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa", description=f""":tada: ¡¡¡Hola!!!Mi nombre e **{self.bot.user.name}**, Y soy el responsable que te ayudara 
+        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f""":tada: ¡Hola! Mi nombre e **{self.bot.user.name}**, Y soy el responsable que te ayudara 
             a ganar partidas en el destini `hacer tu server mejor` porque tu eres 
             uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.\n\n
-            **El prefijo del comando es: `$`, `!`, `?`, `m.`**\n\n
+            **Los prefijos de los comandos son: `$`, `!`, `?`, `m.`**\n\n
             Ese es mi prefijo, siempre puedes hacerme menciones con **@{self.bot.user.name}**. 
             Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
             para cambiar de prefijo tienes que poner **$server** y luego **$prefix <nuevo prefijo>** (NO USES LOS BRACKETS).\n\n
@@ -224,7 +225,7 @@ class Servidor(commands.Cog):
             \n\n
             y se enviara un mensaje a mi desarroyador! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
             mantente actualizado con las nuevas funciones, o si solo quieres mas ayuda, mira el server oficial de 
-            {self.bot.user.name} ¿¡A que esperas!? ( https://discord.gg/mwDBgubwdP )""", colour=color))
+            {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)""", colour=color))
 
     
         with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
@@ -237,7 +238,7 @@ class Servidor(commands.Cog):
 
         channel = discord.utils.get(guild.text_channels)
 
-        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `$help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
+        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="<:maubot:774967705831997501> Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `$help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
         embed1.set_author(name='Maubot', icon_url="https://img.icons8.com/nolan/64/launched-rocket.png")
         embed1.add_field(name="¿Necesitas ayuda?", value=f"Puedes poner **$help** para conseguir una lista de los comandos mas guays del mundo desde diversion hasta musica y economia. La lista de comandos estan separadas por secciones asi que podrias poner `$help [seccion]` para descubrir mas comandos super chulos. o si no puedes poner **<@730124969132163093>** .", inline=True)
         embed1.add_field(name="Diversion atope", value=f"Maubot tiene muchos comando para divertirse con manipulacion de imagenes a juegos como el `conecta4`, `rps` y mucho mas. Maubot tambien tiene un sistema de economia muy avanzado para ser millonarios y dominar el mundo 🤤...", inline=True)
