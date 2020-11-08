@@ -369,7 +369,7 @@ class Music(commands.Cog):
         # Borra la cola y sale del canal de voz.
 
         if not ctx.voice_state.voice:
-            return await ctx.send('No conectada a ningún canal de voz.')
+            return await ctx.send('No conectado a ningún canal de voz.')
 
         await ctx.voice_state.stop()
         del self.voice_states[ctx.guild.id]

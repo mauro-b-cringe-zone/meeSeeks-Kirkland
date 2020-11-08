@@ -190,7 +190,7 @@ class Img(commands.Cog):
                 return await ctx.send("Menciona ha alguien porfavor")
             impostor = random.choice(["true", "false"])
             rcolor = random.choice(["black","blue","brown","cyan","darkgreen","lime","orange","pink","purple","red","white","yellow"])
-            url = f"https://vacefron.nl/api/ejected?name={us.name}&impostor={impostor}&crewmate={rcolor}"
+            url = f"https://vacefron.nl/api/ejected?name={us.name.replace(' ', '%20')}&impostor={impostor}&crewmate={rcolor}"
             embed = discord.Embed(title=f"{us.name} {'no' if impostor == 'false' else 'si'} era el impostor", color=color).set_image(url=url)
             await ctx.send(embed=embed) 
 

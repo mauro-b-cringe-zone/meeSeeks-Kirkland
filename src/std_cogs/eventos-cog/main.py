@@ -130,7 +130,7 @@ class Servidor(commands.Cog):
             await ctx.send(f"El usuario {user} aun no tiene un rango.")
         else:
             embed = discord.Embed(colour=color)
-            embed.description = f"{user.mention} te queda"
+            # embed.description = f"{user.mention} te queda"
             embed.set_author(name=f"nivel - {user.name}", icon_url=user.avatar_url)
             embed.add_field(name="nivel", value=users[str(user.id)]["level"], inline=True)
             embed.add_field(name="exp", value=users[str(user.id)]["experience"], inline=True)
