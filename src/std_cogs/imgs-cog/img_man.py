@@ -399,7 +399,6 @@ class ImgSecundario(commands.Cog):
         async with ctx.message.channel.typing():
             try:
                 av = ctx.message.mentions[0].avatar_url_as(format="jpg")
-                await ctx.send(f"https://api.no-api-key.com/api/v2/shoot?image={av}")
                 await ctx.send(embed=discord.Embed(title=f"Headshoot, {random.randint(10, 700)} puntos", colour=color).set_image(url=f"https://api.no-api-key.com/api/v2/shoot?image={av}"))
             except Exception as e:
                 await ctx.send(f' | ¡Error!\n```{e}```Parametros invalidos. Ejemplo: `{ctx.prefix}shoot <@Alguien>`')

@@ -174,7 +174,7 @@ class Servidor(commands.Cog):
                 await member.guild.leave()
 
         if int(member.guild) == 774577061893242930:
-            role = get(member.server.roles, id="774577061893242933")
+            role = get(member.server.roles, name="Miembro")
             await member.add_roles(role)
 
     @commands.Cog.listener()
