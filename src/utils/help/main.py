@@ -38,7 +38,7 @@ class Help(commands.Cog):
                     continue
 
                 ListaDeComandos += f"{ctx.prefix}{comando.name},  "
-            ListaDeComandos = ListaDeComandos[:-2]
+            ListaDeComandos = ListaDeComandos[:-3]
             ListaDeComandos += "\n"
             embed.add_field(name=f"->  {cog}\n", value=ListaDeComandos, inline=False)
         return embed

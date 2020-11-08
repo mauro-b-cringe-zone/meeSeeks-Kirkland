@@ -222,7 +222,7 @@ class Maubot(commands.Cog):
         self.bot = bot
 
     @commands.command(description="Cambia el prefijo")
-    @commands.cooldown(1, 25, commands.BucketType.user)
+    @commands.cooldown(1, 15, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
     async def prefix(self, ctx, prefix):
 

@@ -16,13 +16,6 @@ async def fetch(session, url):
     async with session.get(url) as response:
         return await response.json()
 
-async def get_random_gif_by_theme(theme: str):
-    async with aiohttp.ClientSession() as session:
-        response = await fetch(session, f"https://api.tenor.com/v1/random?q={theme.replace(' ', '+')}&contentfilter=medium")
-        await session.close()
-        return response["results"][random.randint(0, len(response["results"]) - 1)]["media"][0]["gif"]["url"]
-
-
 async def get_answer(question: str):
     async with aiohttp.ClientSession() as session:
         response = await fetch(session, f"https://8ball.delegator.com/magic/JSON/{question}")
@@ -36,7 +29,7 @@ class Ball(commands.Cog):
 
     @commands.command(description="¿Qué tocaraa...?")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def ball(self, ctx, *, question: str):
+    async def ball(self, ctx: commands.Context, *, question: str):
         trans = Translator()
         translated_response = trans.translate(await get_answer(question), src='en', dest='es')
         await ctx.send(f"{ctx.message.author.mention}, ¡{translated_response.text}!")
