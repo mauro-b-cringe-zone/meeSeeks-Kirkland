@@ -74,7 +74,7 @@ class Environment:
                         file.write(f"TOKEN={token}\n")
                         file.write("WEATHER_KEY = https://openweathermap.org/api\n")
                         file.write("COMP_KEY = \n")
-                        file.write("COLOR = https://github.com/maubg-debug/maubot#instrucciones-para-el-color-del-env\n")
+                        file.write("COLOR = 16777215\n")
                         file.write("USER_STATISTICS_THROTTLE_DURATION =5\n")
                         file.write("USER_STATISTICS_INCREMENT = 10\n")
                         file.write("DEBUG = True|False\n")
