@@ -206,7 +206,21 @@ class App(commands.Bot):
 
 
 
-    # @staticmethod
+
+
+def eliminar_prefix(guild):
+    with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
+        prefixes = json.load(f)
+    
+    del prefixes[str(guild.id)]
+
+    with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
+        json.dump(prefixes, f, indent=4)
+
+class Maubot(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
     @commands.command(description="Cambia el prefijo")
     @commands.cooldown(1, 25, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
@@ -223,21 +237,6 @@ class App(commands.Bot):
         e = discord.Embed(title="Se a cambiado el prefijo correctamente", description=f'Se a cambiado el prefijo a:      `{prefix}`', colour=self.color)
         e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/mwDBgubwdP)**")
         await ctx.send(embed=e)
-
-
-
-def eliminar_prefix(guild):
-    with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
-        prefixes = json.load(f)
-    
-    del prefixes[str(guild.id)]
-
-    with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
-        json.dump(prefixes, f, indent=4)
-
-class Maubot(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
 
     @commands.command(description="Mira la info del bot o la config ($_bot info | $_bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
