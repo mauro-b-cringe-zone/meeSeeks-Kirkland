@@ -368,15 +368,17 @@ class Music(commands.Cog):
     async def _leave(self, ctx: commands.Context):
         # Borra la cola y sale del canal de voz.
 
-        if not ctx.voice_state.voice:
-            return await ctx.send('No conectado a ningún canal de voz.')
+        try:
+            if not ctx.voice_state.voice:
+                return await ctx.send('No conectado a ningún canal de voz.')
 
-        await ctx.voice_state.stop()
-        del self.voice_states[ctx.guild.id]
-
-        
-        embed = discord.Embed(title=f"Me he ido de {ctx.author.voice.channel}", colour=color)
-        await ctx.send(embed=embed)
+            await ctx.voice_state.stop()
+            del self.voice_states[ctx.guild.id]
+            embed = discord.Embed(title=f"Me he ido de {ctx.author.voice.channel}", colour=color)
+            await ctx.send(embed=embed)
+        except:
+            embed = discord.Embed(title=f"Me he ido de {ctx.author.voice.channel}", colour=color)
+            await ctx.send(embed=embed)
 
     @commands.command(name='volume', description="Cambia el volumen de la cancion", usage="<volumen>")
     @commands.cooldown(1, 5, commands.BucketType.user)
