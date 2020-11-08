@@ -32,12 +32,12 @@ class Eventos():
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
-        if str(iniciador.id) in chats:
+        if str(iniciador.id) in chats["chats"]:
             destinatario, us = int(chats["chats"][str(iniciador.id)]["dest"]), self.bot.get_user(int(chats["chats"][str(iniciador.id)]["dest"]))
             await iniciador.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{iniciador.mention} se ha cerrado la conexion con **{us.mention}**", color=self.color_c))
             await us.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{us.mention}, **{iniciador.mention}** Ha cerrado la conexion con el chat.", color=self.color_c))
             del chats["chats"][f"{iniciador.id}"]
-            del chats["chats"][f"{destinatario}"]
+            del chats["chats"][f"{us}"]
 
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
@@ -71,7 +71,7 @@ class Eventos():
                     return await ctx.send("Ese usuario ya esta en un chat...")
                 await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
                 await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
-                await ctx.send(embed=discord.Embed(title="Chat creado", description=f"{ctx.author.id}, Se ha creado un chat por DM con {destinatario.mention}", color=color))
+                await ctx.send(embed=discord.Embed(title="Chat creado", description=f"{ctx.author.id}, Se ha creado un chat por DM con {dest.mention}", color=color))
         else: return await ctx.send("Ese usuario no existe. Creo...")
 
 class ChatApp(commands.Cog):
