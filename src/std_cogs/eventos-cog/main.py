@@ -43,7 +43,7 @@ class Servidor(commands.Cog):
                     if str(message.author.id) in chats["chats"]:
                         dest = chats["chats"][f"{message.author.id}"]["dest"]
                         # print(dest)
-                        if str(dest) in chats:
+                        if str(dest) in chats["chats"]:
                             destid, dest = int(dest), self.bot.get_user(int(dest))
                             if message.content == "cerrarchat":
                                 await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=0xc01fe0))
