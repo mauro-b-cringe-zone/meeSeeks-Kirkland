@@ -68,9 +68,9 @@ def preparar():
         try:
             ex = env.get(str(i))
             if ex == "" or ex == " ":
-                Logger.warning(f"Te falta rellenar el "+ i + " en el .env, es posible que algunos comandos no funcionen")
+                Logger.warning("Te falta rellenar el " + i + " en el .env, es posible que algunos comandos no funcionen")
         except:
-            Logger.warning(f"Te falta rellenar el {i} en el .env, es posible que algunos comandos no funcionen")
+            Logger.warning("Te falta rellenar el " + i + " en el .env, es posible que algunos comandos no funcionen")
         
         
     if env.is_debug():
