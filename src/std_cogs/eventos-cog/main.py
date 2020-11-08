@@ -61,22 +61,22 @@ class Servidor(commands.Cog):
             json.dump(chats, f)
 
         with open(env["JSON_DIR"] + "mute.json", 'r') as f:
-            user = json.load(f)
+            userm = json.load(f)
 
         # print(message.author.id)
-        if str(message.author.id) in user:
+        if str(message.author.id) in userm:
             await message.delete()
 
         if message.content == "<@!730124969132163093>":
             # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
             await message.channel.send(embed=discord.Embed(title="Deja que me presente", 
-                                                           description="Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **$help**", 
+                                                           description="<:maubot:774967705831997501> Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **$help**", 
                                                            colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `$help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `$rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**"))
                         
         if message.content == "<@!730124969132163093> prefijos":
                     # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
                     await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
-                                                description="Mis prefijos son `$ (O custom $prefix [prefijo])`, `!`, `?`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
+                                                description="<:maubot:774967705831997501> Mis prefijos son `$ (O custom $prefix [prefijo])`, `!`, `?`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
                                                 colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-prefix.png"))
 
 
@@ -213,16 +213,17 @@ class Servidor(commands.Cog):
         def check(event):
             return event.target.id == self.bot.user.id
         bot_entry = await guild.audit_logs(action=discord.AuditLogAction.bot_add).find(check)
-        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f"""<:maubot:774967705831997501> ¡Hola! Mi nombre e **{self.bot.user.name}**, Y soy el responsable que te ayudara 
-            a ganar partidas en el destini `hacer tu server mejor` porque tu eres 
-            uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.\n\n
-            **Los prefijos de los comandos son: `$`, `!`, `?`, `m.`**\n\n
-            Ese es mi prefijo, siempre puedes hacerme menciones con **@{self.bot.user.name}**. 
+        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f"""<:maubot:774967705831997501> ¡Hola! Mi nombre es **{self.bot.user.name}**, Y soy el responsable que te ayudara 
+            a ganar partidas en el destini y `hacer tu server mejor` porque tu eres 
+            uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.
+
+            **Los prefijos de los comandos son: `$`, `!`, `?`, `m.`**\n
+            Esos son mis prefijos, siempre puedes hacerme menciones con **@{self.bot.user.name}**. 
             Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
-            para cambiar de prefijo tienes que poner **$server** y luego **$prefix <nuevo prefijo>** (NO USES LOS BRACKETS).\n\n
+            para cambiar de prefijo tienes que poner **$server** y luego **$prefix <nuevo prefijo>** (NO USES LOS BRACKETS).
             Para una lista de commando solo tienes que poner $help y te saldran tooodos los comandos. 
-            \n\n
-            y se enviara un mensaje a mi desarroyador! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
+            
+            ¡Y se enviara un mensaje a mi desarroyador si pones `$rate_bot <descripcion>`! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
             mantente actualizado con las nuevas funciones, o si solo quieres mas ayuda, mira el server oficial de 
             {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)""", colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
