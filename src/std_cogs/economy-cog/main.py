@@ -206,7 +206,7 @@ class Economia(commands.Cog):
 
         users[str(user.id)]["wallet"] += earnings
 
-        with open("./srcjson/mainbank.json", "w") as f:
+        with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
             json.dump(users, f)         
 
     @commands.command(description="Deposita tu dinero al banko (Tienes que tener dinero en la cartera)", usage="[cantidad]")
