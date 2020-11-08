@@ -28,7 +28,6 @@ class Servidor(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, message):
-        await message.channel.send("<:maubot:774967705831997501>")
 
         if message.author.bot:
             return
