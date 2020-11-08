@@ -206,7 +206,7 @@ class App(commands.Bot):
 
 
 
-    @staticmethod
+    # @staticmethod
     @commands.command(description="Cambia el prefijo")
     @commands.cooldown(1, 25, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
