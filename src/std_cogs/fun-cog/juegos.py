@@ -504,7 +504,7 @@ class Juegos(commands.Cog):
             for i in range(0, len(al)):
                 await wait.add_reaction(al[i])
         except Exception as e:
-            await wait.edit(content="", embed=discord.Embed(title="Ups..", description=f' | Upss..!\nun error intenta usar {ctx.prefix}rate_bot <descripcion>.\n```{e}```', colour=color))
+            await wait.edit(content="", embed=discord.Embed(title="Ups..", description=f' | Upss..!\nun error intenta usar {ctx.prefix}report <error>.\n```{e}```', colour=color))
         guy = ctx.message.author
         def check(reaction, user):
             return user == guy
@@ -514,7 +514,7 @@ class Juegos(commands.Cog):
             await wait.add_reaction('😔')
         if str(reaction.emoji)==str(corr):
             await wait.edit(embed=discord.Embed(title="Bien hecho", description=' | <@'+str(guy.id)+'>, Felicidades! Estas correcto. :partying_face:', colour=color))
-            await wait.clear_reactions()
+            # await wait.clear_reactions()
             user = ctx.author
             diamantes_dados = random.randint(10, 30)
             with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
