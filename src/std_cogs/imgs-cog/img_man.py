@@ -398,10 +398,10 @@ class ImgSecundario(commands.Cog):
     async def shoot(self, ctx, member: discord.Member):
         async with ctx.message.channel.typing():
             try:
-                av = ctx.message.mentions[0].avatar_url.replace(".webp", ".jpg").replace("?size=1024", "")
-                await ctx.send(embed=discord.Embed(title=f"Headshoot, {random.randint(10, 700)} puntos", colour=color).set_image(url=f"https://api.no-api-key.com/api/v2/shoot?image={av}"))
+                av = ctx.message.mentions[0].avatar_url
+                await ctx.send(embed=discord.Embed(title=f"Headshoot, {random.randint(10, 700)} puntos", colour=color).set_image(url=f"https://api.no-api-key.com/api/v2/shoot?image={av.replace('.webp', '.jpg').replace('?size=1024', '')}"))
             except Exception as e:
-                await ctx.send(f' | ¡Error!\n```{e}```Parametros invalidos. Ejemplo: `{ctx.prefix}avmeme <@Alguien> [Texto de arriba] [Texto de abajo]`')
+                await ctx.send(f' | ¡Error!\n```{e}```Parametros invalidos. Ejemplo: `{ctx.prefix}shoot <@Alguien>`')
 
 
     @commands.command(description="Cambia mis opiniones", usage="[texto]")
