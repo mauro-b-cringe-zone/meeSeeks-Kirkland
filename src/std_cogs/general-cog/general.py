@@ -590,8 +590,7 @@ class GeneralSecundario(commands.Cog):
     @commands.command(description="Busca canciones en itunes", usage="<cancion>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def itunes(self, ctx, *args):
-        if len(list(args))==0: 
-            return await ctx.send(' | ¡Porfavor pon un termino!')
+        if len(list(args))==0: return await ctx.send(' | ¡Porfavor pon un termino!')
         data = self.jsonisp('https://itunes.apple.com/search?term={}&media=music&entity=song&limit=1&explicit=no'.format(self.urlify(' '.join(list(args)))))
         if len(data['results'])==0: 
             return await ctx.send(' | No se encontro nada... oops...')
