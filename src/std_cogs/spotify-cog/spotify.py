@@ -158,7 +158,7 @@ class Spotify(commands.Cog):
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 38), SUBTITLE_TEXT, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 65), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
 
-        MAIN.paste(COVER, (20, 20))
+        MAIN.paste(COVER, (25, 10))
         
         return self.buffer(MAIN)
 
