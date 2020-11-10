@@ -112,13 +112,13 @@ class Spotify(commands.Cog):
     def custom_panel(self, title="Title text", subtitle="Subtitle text", description="Description text here", icon="https://cdn.discordapp.com/embed/avatars/0.png", spt=None):
         SPOTIFY = False if (spt is None) else True
         TITLE_TEXT = title if not SPOTIFY else spt.title
-        TITLE_FONT = self.get_font("NotoSansDisplay-Bold", 20, otf=True)
+        TITLE_FONT = self.get_font("NotoSansDisplay-Bold", 15, otf=True)
 
         SUBTITLE_TEXT = subtitle if not SPOTIFY else "By "+(', '.join(spt.artists))
-        SUBTITLE_FONT = self.get_font("NotoSansDisplay-Bold", 15, otf=True)
+        SUBTITLE_FONT = self.get_font("NotoSansDisplay-Bold", 10, otf=True)
 
         DESC_TEXT = description if not SPOTIFY else "On "+spt.album
-        DESC_FONT = self.get_font("NotoSansDisplay-Bold", 15, otf=True)
+        DESC_FONT = self.get_font("NotoSansDisplay-Bold", 10, otf=True)
         COVER_URL = icon if not SPOTIFY else spt.album_cover_url
         COVER = self.buffer_from_url(COVER_URL).resize((100, 100))
         BACKGROUND_COLOR = self.get_color_accent(COVER_URL, right=True)
