@@ -9,6 +9,8 @@ from discord.ext import commands
 
 from os import environ as env
 
+from inspect import getsource
+
 class Documentation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -118,7 +120,6 @@ class Documentation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def pythondocs(self, ctx, *, obj: str = None):
         await self.fetch_doc_links(ctx, 'python', obj)
-
 
 class SphinxObjectFileReader:
     # Inspired by Sphinx's InventoryFileReader

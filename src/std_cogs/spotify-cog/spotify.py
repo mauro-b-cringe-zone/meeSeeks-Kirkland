@@ -120,7 +120,7 @@ class Spotify(commands.Cog):
         DESC_TEXT = description if not SPOTIFY else "On "+spt.album
         DESC_FONT = self.get_font("NotoSansDisplay-Bold", 15, otf=True)
         COVER_URL = icon if not SPOTIFY else spt.album_cover_url
-        COVER = self.buffer_from_url(COVER_URL).resize((200, 200))
+        COVER = self.buffer_from_url(COVER_URL).resize((100, 100))
         BACKGROUND_COLOR = self.get_color_accent(COVER_URL, right=True)
         FOREGROUND_COLOR = self.invert(BACKGROUND_COLOR)
 
@@ -145,8 +145,8 @@ class Spotify(commands.Cog):
 
         if SPOTIFY:
             SEEK = round(round((t.now() - spt.created_at).total_seconds())/round(spt.duration.total_seconds())*100)
-            STR_CURRENT = strftime('%H:%M:%S', gmtime(round((t.now() - spt.created_at).total_seconds())))
-            STR_END = strftime('%H:%M:%S', gmtime(round(spt.duration.total_seconds())))
+            STR_CURRENT = strftime('%M:%S', gmtime(round((t.now() - spt.created_at).total_seconds())))
+            STR_END = strftime('%M:%S', gmtime(round(spt.duration.total_seconds())))
             DURATION_LEFT_SIZE = DRAW.textsize(STR_END, font=SUBTITLE_FONT)[0]
 
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 100), (MARGIN_RIGHT, MARGIN_TOP + 120)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)))

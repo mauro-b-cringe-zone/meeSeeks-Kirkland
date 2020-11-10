@@ -12,6 +12,7 @@ from utils.hack import hackflow
 from utils.fun.lists import drunkaf, fight_results, insults, honkhonkfgt
 import hashlib
 from os import environ as env
+import requests
 color = int(env["COLOR"])
 
 class GeneralExtra(commands.Cog):
@@ -58,14 +59,14 @@ class GeneralExtra(commands.Cog):
     async def honkhonk(self, ctx):
         await ctx.send(random.choice(honkhonkfgt))
 
-    @commands.command(description="Di algo", usage="[Mensage]")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def say(self, ctx, *, message:str):
+    @commands.command(aliases='useless,uselesssites,uselessweb,uselesswebsites,uselesswebsite'.split(","))
+    @commands.cooldown(1, 3, commands.BucketType.user)
+    async def uselesswebs(self, ctx):
         try:
-            await ctx.message.delete()
+            url = requests.get('https://useless-api.vierofernando.repl.co/uselesssites').json()["url"]
+            await ctx.send(embed=discord.Embed(title="Web inutil", description=f'**{url}**', color=color))
         except:
-            pass
-        await ctx.send(message)
+            await ctx.send(f'Ups. hay algún error, mientras tanto mira este sitio inútil: <https://top.gg/bot/730124969132163093/vote>')
 
     # @commands.command()
     # @commands.cooldown(1, 5, commands.BucketType.user)
