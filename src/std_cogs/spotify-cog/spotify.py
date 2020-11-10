@@ -136,9 +136,9 @@ class Spotify(commands.Cog):
         if WIDTH < 500:
             WIDTH = 500
 
-        MARGIN_LEFT = 100
+        MARGIN_LEFT = 110
         MARGIN_RIGHT = WIDTH - 20
-        MARGIN_TOP = 20
+        MARGIN_TOP = 10
 
         MAIN = Image.new(mode="RGB", color=BACKGROUND_COLOR, size=(WIDTH, 120))
         DRAW = ImageDraw.Draw(MAIN)
