@@ -136,7 +136,7 @@ class Spotify(commands.Cog):
         if WIDTH < 500:
             WIDTH = 500
 
-        MARGIN_LEFT = 130
+        MARGIN_LEFT = 140
         MARGIN_RIGHT = WIDTH - 20
         MARGIN_TOP = 5
 
@@ -155,8 +155,8 @@ class Spotify(commands.Cog):
             DRAW.text((MARGIN_RIGHT - DURATION_LEFT_SIZE, MARGIN_TOP + 130), STR_END, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
 
         DRAW.text((MARGIN_LEFT, MARGIN_TOP), TITLE_TEXT, font=TITLE_FONT, fill=FOREGROUND_COLOR)
-        DRAW.text((MARGIN_LEFT, MARGIN_TOP + 38), SUBTITLE_TEXT, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
-        DRAW.text((MARGIN_LEFT, MARGIN_TOP + 65), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
+        DRAW.text((MARGIN_LEFT, MARGIN_TOP + 30), SUBTITLE_TEXT, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
+        DRAW.text((MARGIN_LEFT, MARGIN_TOP + 55), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
 
         MAIN.paste(COVER, (25, 10))
         
