@@ -140,7 +140,7 @@ class Spotify(commands.Cog):
         MARGIN_RIGHT = WIDTH - 20
         MARGIN_TOP = 20
 
-        MAIN = Image.new(mode="RGB", color=BACKGROUND_COLOR, size=(WIDTH, 200))
+        MAIN = Image.new(mode="RGB", color=BACKGROUND_COLOR, size=(WIDTH, 150))
         DRAW = ImageDraw.Draw(MAIN)
 
         if SPOTIFY:
@@ -158,7 +158,7 @@ class Spotify(commands.Cog):
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 38), SUBTITLE_TEXT, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 65), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
 
-        MAIN.paste(COVER, (0, 0))
+        MAIN.paste(COVER, (50, 100))
         
         return self.buffer(MAIN)
 
