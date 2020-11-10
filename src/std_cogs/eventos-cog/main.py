@@ -46,8 +46,8 @@ class Servidor(commands.Cog):
                         if str(dest) in chats["chats"]:
                             destid, dest = int(dest), self.bot.get_user(int(dest))
                             if message.content == "cerrarchat":
-                                await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=0xc01fe0))
-                                await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=0xc01fe0))
+                                await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
+                                await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
                                 return await cerrar(message.author, destid)
                             else: 
                                 cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
