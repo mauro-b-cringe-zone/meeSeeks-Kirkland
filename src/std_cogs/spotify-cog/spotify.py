@@ -122,7 +122,7 @@ class Spotify(commands.Cog):
         COVER_URL = icon if not SPOTIFY else spt.album_cover_url
         COVER = self.buffer_from_url(COVER_URL).resize((100, 100))
         BACKGROUND_COLOR = self.get_color_accent(COVER_URL, right=True)
-        FOREGROUND_COLOR = "#2ecc71"
+        FOREGROUND_COLOR = self.invert(BACKGROUND_COLOR)
 
         if len(TITLE_TEXT) > 25: TITLE_TEXT = TITLE_TEXT[0:25] + "..."
         if len(SUBTITLE_TEXT) > 35: SUBTITLE_TEXT = SUBTITLE_TEXT[0:35] + "..."
@@ -149,8 +149,8 @@ class Spotify(commands.Cog):
             STR_END = strftime('%M:%S', gmtime(round(spt.duration.total_seconds())))
             DURATION_LEFT_SIZE = DRAW.textsize(STR_END, font=SUBTITLE_FONT)[0]
 
-            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 50), (MARGIN_RIGHT, MARGIN_TOP + 120)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)))
-            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 100), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 120)], fill=FOREGROUND_COLOR)
+            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 70), (MARGIN_RIGHT, MARGIN_TOP + 120)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)))
+            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 70), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 120)], fill="#2ecc71")
             DRAW.text((MARGIN_LEFT, MARGIN_TOP + 130), STR_CURRENT, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
             DRAW.text((MARGIN_RIGHT - DURATION_LEFT_SIZE, MARGIN_TOP + 130), STR_END, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
 
