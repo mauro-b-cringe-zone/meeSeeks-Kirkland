@@ -136,7 +136,7 @@ class Spotify(commands.Cog):
         if WIDTH < 500:
             WIDTH = 500
 
-        MARGIN_LEFT = 220
+        MARGIN_LEFT = 100
         MARGIN_RIGHT = WIDTH - 20
         MARGIN_TOP = 20
 
