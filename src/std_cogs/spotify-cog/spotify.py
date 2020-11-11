@@ -149,10 +149,10 @@ class Spotify(commands.Cog):
             STR_END = strftime('%M:%S', gmtime(round(spt.duration.total_seconds())))
             DURATION_LEFT_SIZE = DRAW.textsize(STR_END, font=SUBTITLE_FONT)[0]
 
-            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 70), (MARGIN_RIGHT, MARGIN_TOP + 100)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)))
-            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 70), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 100)], fill="#2ecc71")
-            DRAW.text((MARGIN_LEFT, MARGIN_TOP + 130), STR_CURRENT, font=SUBTITLE_FONT, fill="#2ecc71")
-            DRAW.text((MARGIN_RIGHT - DURATION_LEFT_SIZE, MARGIN_TOP + 130), STR_END, font=SUBTITLE_FONT, fill="#2ecc71")
+            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 70), (MARGIN_RIGHT, MARGIN_TOP + 95)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)))
+            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 70), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 95)], fill="#2ecc71")
+            DRAW.text((MARGIN_LEFT, MARGIN_TOP + 100), STR_CURRENT, font=SUBTITLE_FONT, fill="#2ecc71")
+            DRAW.text((MARGIN_RIGHT - DURATION_LEFT_SIZE, MARGIN_TOP + 100), STR_END, font=SUBTITLE_FONT, fill="#2ecc71")
 
         DRAW.text((MARGIN_LEFT, MARGIN_TOP), TITLE_TEXT, font=TITLE_FONT, fill=FOREGROUND_COLOR)
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 25), SUBTITLE_TEXT, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
