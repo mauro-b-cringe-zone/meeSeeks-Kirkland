@@ -150,7 +150,7 @@ class Spotify(commands.Cog):
             DURATION_LEFT_SIZE = DRAW.textsize(STR_END, font=SUBTITLE_FONT)[0]
 
             
-            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), (MARGIN_RIGHT, MARGIN_TOP + 85)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)), outline="#fff" if BACKGROUND_COLOR != "#ffff" else "#999")
+            DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), (MARGIN_RIGHT, MARGIN_TOP + 85)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)), outline=tuple(map(lambda x: x + 25, BACKGROUND_COLOR)))
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 85)], fill="#2ecc71")
             DRAW.pieslice((0, 0, 10 * 2, 10 * 2), 180, 270, fill="#000")
             DRAW.text((MARGIN_LEFT, MARGIN_TOP + 90), STR_CURRENT, font=SUBTITLE_FONT, fill="#2ecc71")
