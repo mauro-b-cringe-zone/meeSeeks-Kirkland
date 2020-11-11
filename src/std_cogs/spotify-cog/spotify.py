@@ -151,8 +151,8 @@ class Spotify(commands.Cog):
 
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), (MARGIN_RIGHT, MARGIN_TOP + 85)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)))
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 85)], fill="#2ecc71")
-            DRAW.text((MARGIN_LEFT, MARGIN_TOP + 80), STR_CURRENT, font=SUBTITLE_FONT, fill="#2ecc71")
-            DRAW.text((MARGIN_RIGHT - DURATION_LEFT_SIZE, MARGIN_TOP + 80), STR_END, font=SUBTITLE_FONT, fill="#2ecc71")
+            DRAW.text((MARGIN_LEFT, MARGIN_TOP + 90), STR_CURRENT, font=SUBTITLE_FONT, fill="#2ecc71")
+            DRAW.text((MARGIN_RIGHT - DURATION_LEFT_SIZE, MARGIN_TOP + 90), STR_END, font=SUBTITLE_FONT, fill="#2ecc71")
 
         DRAW.text((MARGIN_LEFT, MARGIN_TOP), TITLE_TEXT, font=TITLE_FONT, fill=FOREGROUND_COLOR)
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 25), SUBTITLE_TEXT, font=SUBTITLE_FONT, fill=FOREGROUND_COLOR)
