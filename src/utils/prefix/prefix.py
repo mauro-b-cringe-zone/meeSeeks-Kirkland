@@ -11,15 +11,15 @@ def get_prefix(bot, message):
     
     Si es un mensage directo
 
-    :return: @#~€ (Tiene que ser algo dificil)
+    :return: $
     """
     if message.guild is not None:
         try:
             with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
                 prefixes = json.load(f)
             base = [prefixes[str(message.guild.id)], '?', '!', 'm.']
-            return base
+            return commands.when_mentioned_or(*base)(bot, message)
         except:
             return ['$', '?', '!', 'm.']
     else:
-        return "@#~€" # Retornar algo que sea imposible de activar como prefijo
+        return "$" # Si no esta en un servidor retornar el prefjio "$"
