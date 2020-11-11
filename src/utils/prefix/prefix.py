@@ -1,6 +1,8 @@
 import json
 from os import environ as env
 
+from discord.ext import commands
+
 def get_prefix(bot, message):
     """
     Tendremos que coger los prefijos cadavez que esta funcion se llame
