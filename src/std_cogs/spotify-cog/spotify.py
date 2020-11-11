@@ -152,25 +152,25 @@ class Spotify(commands.Cog):
             
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), (MARGIN_RIGHT, MARGIN_TOP + 85)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)), outline=tuple(map(lambda x: x + 25, BACKGROUND_COLOR)))
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 85)], fill="#2ecc71")
-            DRAW.pieslice([MARGIN_LEFT, (MARGIN_LEFT[0] + 20 * 2, MARGIN_LEFT[1] + 20 * 2)],
+            DRAW.pieslice([MARGIN_LEFT, (MARGIN_LEFT + 20 * 2, MARGIN_LEFT + 20 * 2)],
                 180,
                 270,
                 fill="#000",
                 outline="#fff"
             )
-            DRAW.pieslice([(MARGIN_LEFT[0] - 20 * 2, MARGIN_LEFT[1] - 20 * 2), MARGIN_LEFT],
+            DRAW.pieslice([(MARGIN_LEFT - 20 * 2, MARGIN_LEFT - 20 * 2), MARGIN_LEFT],
                 0,
                 90,
                 fill="#000",
                 outline="#fff"
             )
-            DRAW.pieslice([(MARGIN_LEFT[0], MARGIN_LEFT[1] - 20 * 2), (MARGIN_LEFT[0] + 20 * 2, MARGIN_LEFT[1])],
+            DRAW.pieslice([(MARGIN_LEFT, MARGIN_LEFT - 20 * 2), (MARGIN_LEFT + 20 * 2, MARGIN_LEFT)],
                 90,
                 180,
                 fill="#000",
                 outline="#fff"
             )
-            DRAW.pieslice([(MARGIN_LEFT[0] - 20 * 2, MARGIN_LEFT[1]), (MARGIN_LEFT[0], MARGIN_LEFT[1] + 20 * 2)],
+            DRAW.pieslice([(MARGIN_LEFT - 20 * 2, MARGIN_LEFT), (MARGIN_LEFT, MARGIN_LEFT + 20 * 2)],
                 270,
                 360,
                 fill="#000",
