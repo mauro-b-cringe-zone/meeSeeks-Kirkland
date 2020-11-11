@@ -1,6 +1,7 @@
 import json
 from os import environ as env
 from discord.ext import commands
+from termcolor import cprint
 
 def get_prefix(bot, message):
     """
@@ -12,13 +13,13 @@ def get_prefix(bot, message):
     
     Si es un mensage directo
 
-    :return: $
+    :return: $@dl.@# (Algo dificil)
     """
     if message.guild is not None:
         try:
             msg = str(message.content)
             id = str(f'<@!{bot.user.id}>')
-            if id in msg or msg in f"<@!{bot.user.id}> prefijos":
+            if id == msg or msg == f"<@!{bot.user.id}> prefijos":
                 return ["$", '?', '!', 'm.']
             with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
                 prefixes = json.load(f)
@@ -28,9 +29,9 @@ def get_prefix(bot, message):
                     json.dump(prefixes, f) 
                 return [prefixes[str(message.guild.id)], '?', '!', 'm.']
             base = [prefixes[str(message.guild.id)], '?', '!', 'm.']
-            return commands.when_mentioned_or(base)(bot, message)
+            return commands.when_mentioned_or(*base)(bot, message)
         except Exception as e:
-            print(e)
+            cprint(f"{e}")
             return ['$', '?', '!', 'm.']
     else:
-        return "$" # Si no esta en un servidor retornar el prefjio "$"
+        return "$@dl.@#" # Si no esta en un servidor retornar el prefjio "$@dl.@#" (Algo dificil)
