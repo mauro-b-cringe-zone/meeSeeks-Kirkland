@@ -154,10 +154,6 @@ class App(commands.Bot):
             for i in excepciones:
                 if i in str(exception):
                     return
-            async with aiohttp.ClientSession() as session:
-                webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
-                await webhook.send(content = f'<:lightno:774581319367655424> **Un error** ` {exception}')
-
             await context.send(embed=discord.Embed(
                               title="Como sabes, los robots no son perfectos", 
                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
@@ -165,6 +161,10 @@ class App(commands.Bot):
                                   text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon $help [seccion]"
                               ))
             Logger.error(f'ERROR: {str(exception)}')
+            async with aiohttp.ClientSession() as session:
+                webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
+                await webhook.send(content = f'<:lightno:774581319367655424> **Un error** ` {exception}')
+
 
 
     def __load_cogs(self):
