@@ -7,7 +7,7 @@ from requests import get
 from aiohttp import ClientSession
 from urllib.parse import quote_plus as urlencode
 from PIL import Image, ImageFont, ImageDraw, GifImagePlugin, ImageOps, ImageFilter
-import re
+import re, requests
 import random
 from os import environ as env
 color =   int(env["COLOR"]) 
@@ -521,6 +521,24 @@ class ImgSecundario(commands.Cog):
             embed.set_image(url=data["url"])
         await ctx.send(embed=embed)
         
+    @commands.command(aliases="webcapt,captureweb,web".split(","))
+    async def websitecapture(self, ctx, web):
+        web = web.replace("https://", "").replace("http://", "")
+        url = "https://pagepeeker-pagepeeker.p.rapidapi.com/thumbs.php"
+
+        querystring = {"size":"m","url":f"http://{web}","refresh":"1"}
+
+        key = str(env['COMP_KEY'])
+
+        headers = {
+            'x-rapidapi-key': f"{key}",
+            'x-rapidapi-host': "pagepeeker-pagepeeker.p.rapidapi.com"
+            }
+
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        print(response.text)
+        await ctx.send(embed=discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color))
+
 def setup(bot):
     bot.add_cog(Img(bot))
     bot.add_cog(ImgSecundario(bot))
