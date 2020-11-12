@@ -74,7 +74,7 @@ class App(commands.Bot):
         # await self.change_presence(activity=self.__activity)
         while True:
             # await self.barra_de_actividad(f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos", discord.Status.do_not_disturb)
-            await self.barra_de_actividad(f"|-. Processando $help y @mencion -|", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Processando $help y @mencion -|", discord.Status.dnd)
 
     async def on_message(self, message):
         await run_middleware_stack(message)
