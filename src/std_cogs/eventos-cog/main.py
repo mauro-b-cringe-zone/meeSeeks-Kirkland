@@ -37,23 +37,20 @@ class Servidor(commands.Cog):
 
         try:
             if not message.guild:
-                if message.author.id == 755433402299056139 or message.author.id == 730124969132163093:
-                    return
+                if str(message.author.id) in chats["chats"]:
+                    dest = chats["chats"][f"{message.author.id}"]["dest"]
+                    # print(dest)
+                    if str(dest) in chats["chats"]:
+                        destid, dest = int(dest), self.bot.get_user(int(dest))
+                        if message.content == "cerrarchat":
+                            await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
+                            await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
+                            return await cerrar(message.author, destid)
+                        else: 
+                            cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
+                            return await dest.send(f"**{message.author.name}:** {message.content}")
                 else:
-                    if str(message.author.id) in chats["chats"]:
-                        dest = chats["chats"][f"{message.author.id}"]["dest"]
-                        # print(dest)
-                        if str(dest) in chats["chats"]:
-                            destid, dest = int(dest), self.bot.get_user(int(dest))
-                            if message.content == "cerrarchat":
-                                await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
-                                await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
-                                return await cerrar(message.author, destid)
-                            else: 
-                                cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
-                                return await dest.send(f"**{message.author.name}:** {message.content}")
-                    else:
-                        return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help ChatApp)**", color=0xf15069))
+                    return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help ChatApp)**", color=0xf15069))
         except Exception as e:
             return cprint(f"[Log] Un error en on_message: {e}", "red")
 
@@ -67,13 +64,13 @@ class Servidor(commands.Cog):
         if str(message.author.id) in userm:
             await message.delete()
 
-        if message.content == "<@!730124969132163093>":
+        if message.content == f"<@!{self.bot.user.id}>":
             # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
             await message.channel.send(embed=discord.Embed(title="Deja que me presente", 
                                                            description="<:maubot:774967705831997501> Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **$help**", 
                                                            colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `$help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `$rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**"))
                         
-        if message.content == "<@!730124969132163093> prefijos":
+        if message.content == f"<@!{self.bot.user.id}> prefijos":
                     # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
                     await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
                                                 description="<:maubot:774967705831997501> Mis prefijos son `$ (O custom $prefix [prefijo])`, `!`, `?`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
