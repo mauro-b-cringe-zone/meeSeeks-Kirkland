@@ -524,14 +524,15 @@ class ImgSecundario(commands.Cog):
     @commands.command(aliases="webcapt,captureweb,web,webcapture".split(","), description="Mira una web sin tener que ir ha eya", usage="<web>")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def websitecapture(self, ctx, web):
+        main = await ctx.send(content="Porfavor espera...")
         web = web.replace("https://", "").replace("http://", "")
-        key = env["WEB_KEY"]
-        url = f"https://screenshotapi.net/api/v1/screenshot?token={key}&url={web}&full_page=false&fresh=true&output=image"
-    
+        key = "XEBLAHTIOMFWGIH9NHYCL0KZNPBTX1C4"
+        url = requests.get(f"https://screenshotapi.net/api/v1/screenshot?token={key}&url={web}&full_page=false&fresh=true").json()
+        url = url["screenshot"]
         embed = discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color)
         embed.set_image(url=str(url))
         embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url)})**")
-        await ctx.send(embed=embed)
+        await main.edit(content="", embed=embed)
                                   
 def setup(bot):
     bot.add_cog(Img(bot))
