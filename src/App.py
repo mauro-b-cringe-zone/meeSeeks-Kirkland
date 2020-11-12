@@ -45,24 +45,41 @@ class App(commands.Bot):
             sys.exit(1)
 
         self.add_command(App.__reload_cogs)
+    
+    async def barra_de_actividad(self, texto, status):
+        for i in range(10):
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|█---------|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|██--------|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|███-------|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|████------|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|█████-----|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|██████----|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|███████---|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|████████--|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|█████████-|"))
+            asyncio.sleep(0.5)
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto}\n|██████████|"))
+        asyncio.sleep(1)
 
     async def on_ready(self):
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot | {self.__repo__}\n4. Version | {self.__version__}\n5. Web: {self.__web__}", separador=False)
         Logger.success(f'Maubot esta online como "{self.user}".', separador=True)
         # await self.change_presence(activity=self.__activity)
         while True:
-            await self.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name=f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos"))
-            await asyncio.sleep(10) 
-            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name=f"https://top.gg/bot/730124969132163093"))
-            await asyncio.sleep(10)
-            await self.change_presence(status=discord.Status.dnd, activity=discord.Game(name=f"| Enviando memes a los  {len(self.users)} usuarios | "))
-            await asyncio.sleep(10)
-            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name=f"| Mejorandome para dominar el mundo | "))
-            await asyncio.sleep(10)
-            await self.change_presence(status=discord.Status.dnd, activity=discord.Game(name=f"| Hackeando sistemas del pais | "))
-            await asyncio.sleep(10)
-            await self.change_presence(status=discord.Status.idle, activity=discord.Game(name=f"| Haciendo una tarta | "))
-            await asyncio.sleep(10)
+            await self.barra_de_actividad(f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos", discord.Status.do_not_disturb)
+            await self.barra_de_actividad("https://top.gg/bot/730124969132163093", discord.Status.idle)
+            await self.barra_de_actividad(f"| Enviando memes a los  {len(self.users)} usuarios | ", discord.Status.dnd)
+            await self.barra_de_actividad(f"| Mejorandome para dominar el mundo | ", discord.Status.online)
+            await self.barra_de_actividad("| Hackeando sistemas del pais | ", discord.Status.do_not_disturb)
+            await self.barra_de_actividad(f"| Haciendo una tarta | ", discord.Status.idle)
 
     async def on_message(self, message):
         await run_middleware_stack(message)
