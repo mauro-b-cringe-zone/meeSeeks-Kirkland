@@ -121,7 +121,7 @@ class Spotify(commands.Cog):
         DESC_FONT = self.get_font("NotoSansDisplay-Bold", 10, otf=True)
         COVER_URL = icon if not SPOTIFY else spt.album_cover_url
         COVER = self.buffer_from_url(COVER_URL).resize((100, 100))
-        SPOTIFY_ICON = self.buffer_from_url("./maubot/docs/images/sp.png").resize((100, 100))
+        SPOTIFY_ICON = self.buffer_from_url("https://www.clipartmax.com/png/full/293-2938089_icono-spotify-png-bic-sports-downwind-kayak-sail-31657.png").resize((100, 100))
         BACKGROUND_COLOR = self.get_color_accent(COVER_URL, right=True)
         FOREGROUND_COLOR = self.invert(BACKGROUND_COLOR)
 
@@ -161,7 +161,7 @@ class Spotify(commands.Cog):
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 40), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
 
         MAIN.paste(COVER, (25, 10))
-        MAIN.paste(SPOTIFY_ICON, (0, 0))
+        MAIN.paste(SPOTIFY_ICON, (0, 0), SPOTIFY_ICON)
         
         return self.buffer(MAIN)
 
