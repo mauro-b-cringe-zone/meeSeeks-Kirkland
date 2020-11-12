@@ -161,7 +161,7 @@ class Spotify(commands.Cog):
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 40), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
 
         MAIN.paste(COVER, (25, 10))
-        SPI = SPOTIFY_ICON.rotate(45)
+        SPI = SPOTIFY_ICON.rotate(-45)
         MAIN.paste(SPI, (400, 10), SPI)
         
         return self.buffer(MAIN)
