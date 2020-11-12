@@ -544,8 +544,11 @@ class ImgSecundario(commands.Cog):
         }
         url = await self.generar_url_web_capt(key, options)
     
-        await ctx.send(embed=discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color).set_image(url=url + ".png"))
-
+        embed = discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color)
+        embed.set_image(url=str(url + ".png"))
+        embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url + '.png')})**")
+        await ctx.send(embed=embed)
+                                  
 def setup(bot):
     bot.add_cog(Img(bot))
     bot.add_cog(ImgSecundario(bot))
