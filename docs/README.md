@@ -60,7 +60,7 @@ USER_STATISTICS_INCREMENT=5
 # True|False
 DEBUG=
 
-# https://www.screenshotmachine.com/
+# https://screenshotapi.net/home/query-builder
 WEB_KEY =
 
 # Las instrucciones se pueden ver aqui https://github.com/maubg-debug/maubot/tree/main/data#instalacion-de-data
