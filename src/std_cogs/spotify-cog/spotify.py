@@ -121,6 +121,7 @@ class Spotify(commands.Cog):
         DESC_FONT = self.get_font("NotoSansDisplay-Bold", 10, otf=True)
         COVER_URL = icon if not SPOTIFY else spt.album_cover_url
         COVER = self.buffer_from_url(COVER_URL).resize((100, 100))
+        SPOTIFY_ICON = self.buffer_from_url("https://www.clipartmax.com/png/full/293-2938089_icono-spotify-png-bic-sports-downwind-kayak-sail-31657.png").resize((100, 100))
         BACKGROUND_COLOR = self.get_color_accent(COVER_URL, right=True)
         FOREGROUND_COLOR = self.invert(BACKGROUND_COLOR)
 
@@ -152,7 +153,6 @@ class Spotify(commands.Cog):
             
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), (MARGIN_RIGHT, MARGIN_TOP + 85)], fill=tuple(map(lambda x: x - 25, BACKGROUND_COLOR)), outline="#ddd")
             DRAW.rectangle([(MARGIN_LEFT, MARGIN_TOP + 60), ((SEEK / 100 * (MARGIN_RIGHT - MARGIN_LEFT)) + MARGIN_LEFT, MARGIN_TOP + 85)], fill="#2ecc71")       
-            DRAW.ellipse((0, 0, MARGIN_LEFT * 2, MARGIN_LEFT * 2), 180, 270, fill="https://www.clipartmax.com/png/full/293-2938089_icono-spotify-png-bic-sports-downwind-kayak-sail-31657.png")
             DRAW.text((MARGIN_LEFT, MARGIN_TOP + 90), STR_CURRENT, font=SUBTITLE_FONT, fill="#2ecc71")
             DRAW.text((MARGIN_RIGHT - DURATION_LEFT_SIZE, MARGIN_TOP + 90), STR_END, font=SUBTITLE_FONT, fill="#2ecc71")
 
@@ -161,6 +161,7 @@ class Spotify(commands.Cog):
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 40), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
 
         MAIN.paste(COVER, (25, 10))
+        MAIN.paste(SPOTIFY_ICON, (0, 0))
         
         return self.buffer(MAIN)
 
