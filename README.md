@@ -95,7 +95,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 ## Por supuesto mucho maaasss.....
 
 # Por si quieres instalarlo
-* Mira las [intrucciones]()
+* Mira las [intrucciones](https://github.com/maubg-debug/maubot/blob/main/docs/README.md)
 
 # Licencia 
 Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)
