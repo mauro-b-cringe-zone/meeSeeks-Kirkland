@@ -63,7 +63,20 @@ def preparar():
         Logger.error('No se encontro ninguna ficha. Ejecute el bot con el parametro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')
         sys.exit(1)
 
-    extrasenv = ["WEATHER_KEY", "COMP_KEY", "COLOR"]
+    extrasenv = [
+        "WEATHER_KEY", 
+        "COMP_KEY", 
+        "COLOR",
+        "WEBHOOK_URL_ENTRADA",
+        "WEBHOOK_URL_SALIDA",
+        "WEBHOOK_URL_ERRORES",
+        "DEBUG",
+        "WEB_KEY",
+        "JSON_DIR",
+        "DB_DIR",
+        "USER_STATISTICS_THROTTLE_DURATION",
+        "USER_STATISTICS_INCREMENT"
+    ]
     for i in extrasenv:
         try:
             ex = env.get(str(i))
