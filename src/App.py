@@ -74,11 +74,7 @@ class App(commands.Bot):
         # await self.change_presence(activity=self.__activity)
         while True:
             # await self.barra_de_actividad(f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos", discord.Status.do_not_disturb)
-            await self.barra_de_actividad("https://top.gg/bot/730124969132163093", discord.Status.idle)
-            await self.barra_de_actividad(f"| Enviando memes a los  {len(self.users)} usuarios xd | ", discord.Status.dnd)
-            await self.barra_de_actividad(f"| Mejorandome para dominar el mundo ", discord.Status.online)
-            await self.barra_de_actividad("| Hackeando sistemas del pais  (Shhhh)| ", discord.Status.do_not_disturb)
-            await self.barra_de_actividad(f"| Haciendo una tarta para mi lider | ", discord.Status.idle)
+            await self.barra_de_actividad(f"| Processando $help y @maubot | ", discord.Status.dnd)
 
     async def on_message(self, message):
         await run_middleware_stack(message)
