@@ -520,33 +520,17 @@ class ImgSecundario(commands.Cog):
         else:
             embed.set_image(url=data["url"])
         await ctx.send(embed=embed)
-        
-    import urllib.request
-
-    async def generar_url_web_capt(self, llave, options):
-        from urllib.parse import urlencode
-        api_url = 'https://api.screenshotmachine.com/?key=' + llave
-        api_url = api_url + '&' + urlencode(options)
-        return api_url
 
     @commands.command(aliases="webcapt,captureweb,web,webcapture".split(","), description="Mira una web sin tener que ir ha eya", usage="<web>")
     @commands.cooldown(1, 30, commands.BucketType.user)
     async def websitecapture(self, ctx, web):
         web = web.replace("https://", "").replace("http://", "")
-        key = str(env["WEB_KEY"])
-        options = {
-            'url': f'http://{web}',
-            'dimension': '1024x768',
-            'device': 'desktop',
-            'cacheLimit' : '0',
-            'delay' : '0',
-            'zoom' : '0'
-        }
-        url = await self.generar_url_web_capt(key, options)
+        key = env["WEB_KEY"]
+        url = f"https://screenshotapi.net/api/v1/screenshot?token={key}&url={web}&full_page=false&fresh=true&output=image"
     
         embed = discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color)
-        embed.set_image(url=str(url + ".png"))
-        embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url + '.png')})**")
+        embed.set_image(url=str(url))
+        embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url)})**")
         await ctx.send(embed=embed)
                                   
 def setup(bot):
