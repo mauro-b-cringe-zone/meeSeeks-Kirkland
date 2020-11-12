@@ -521,23 +521,30 @@ class ImgSecundario(commands.Cog):
             embed.set_image(url=data["url"])
         await ctx.send(embed=embed)
         
-    @commands.command(aliases="webcapt,captureweb,web".split(","))
+    import urllib.request
+
+    async def generar_url_web_capt(self, llave, options):
+        from urllib.parse import urlencode
+        api_url = 'https://api.screenshotmachine.com/?key=' + llave
+        api_url = api_url + '&' + urlencode(options)
+        return api_url
+
+    @commands.command(aliases="webcapt,captureweb,web,webcapture".split(","), description="Mira una web sin tener que ir ha eya", usage="<web>")
+    @commands.cooldown(1, 30, commands.BucketType.user)
     async def websitecapture(self, ctx, web):
         web = web.replace("https://", "").replace("http://", "")
-        url = "https://pagepeeker-pagepeeker.p.rapidapi.com/thumbs.php"
-
-        querystring = {"size":"m","url":f"http://{web}","refresh":"1"}
-
-        key = str(env['COMP_KEY'])
-
-        headers = {
-            'x-rapidapi-key': f"{key}",
-            'x-rapidapi-host': "pagepeeker-pagepeeker.p.rapidapi.com"
-            }
-
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        print(response.text)
-        await ctx.send(embed=discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color))
+        key = str(env["WEB_KEY"])
+        options = {
+            'url': f'http://{web}',
+            'dimension': '1024x768',
+            'device': 'desktop',
+            'cacheLimit' : '0',
+            'delay' : '0',
+            'zoom' : '0'
+        }
+        url = await self.generar_url_web_capt(key, options)
+    
+        await ctx.send(embed=discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color).set_image(url=url + ".png"))
 
 def setup(bot):
     bot.add_cog(Img(bot))
