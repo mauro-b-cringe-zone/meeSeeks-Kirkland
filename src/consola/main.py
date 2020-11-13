@@ -49,7 +49,7 @@ class Consola():
         
         elif self.comando == self.comandos[0][0] or self.comando == self.comandos[0][1]:
             cprint("\nCTRL + C para parar el programa e iniciar la consola\n", "red")
-            time.sleep(2)
+            time.sleep(1)
             return "preparacion"
         
         elif self.comando == self.comandos[1][0] or self.comando == self.comandos[1][1]:
