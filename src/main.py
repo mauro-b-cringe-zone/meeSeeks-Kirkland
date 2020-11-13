@@ -111,8 +111,8 @@ def preparar():
     app.run(token)
 
 if __name__ == "__main__":
-    try:
-        if sys.argv[1]:
+    if sys.argv[1]:
+        try:
             if sys.argv[1] == "--help" or sys.argv[1] == "-h":
                 Consola("help").procesar_comandos(directorio=Path(__file__).parent.parent)
                 sys.exit(0)
@@ -120,7 +120,9 @@ if __name__ == "__main__":
                 c = Consola(sys.argv[2]).procesar_comandos(directorio=Path(__file__).parent.parent)
                 if c == "preparacion":
                     preparar()
-    except:
+        except Exception as e:
+            print(e)
+    else:
         while True:
             comando = input("Maubot -> ")
             c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent.parent)
