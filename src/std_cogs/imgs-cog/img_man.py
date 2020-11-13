@@ -521,21 +521,21 @@ class ImgSecundario(commands.Cog):
             embed.set_image(url=data["url"])
         await ctx.send(embed=embed)
 
-    @commands.command(aliases="webcapt,captureweb,web,webcapture".split(","), description="Mira una web sin tener que ir ha eya", usage="<web>")
-    @commands.cooldown(1, 30, commands.BucketType.user)
-    async def websitecapture(self, ctx, web):
-        main = await ctx.send(content="Porfavor espera...")
-        web = web.replace("https://", "").replace("http://", "")
-        key = str(env["WEB_KEY"])
-        try:
-            url = requests.get(f"https://screenshotapi.net/api/v1/screenshot?token={key}&url={web}&full_page=false&fresh=true").json()
-            url = url["screenshot"]
-        except:
-            return await ctx.send("No No No...")
-        embed = discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color)
-        embed.set_image(url=str(url))
-        embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url)})**")
-        await main.edit(content="", embed=embed)
+    # @commands.command(aliases="webcapt,captureweb,web,webcapture".split(","), description="Mira una web sin tener que ir ha eya", usage="<web>", enabled=False)
+    # @commands.cooldown(1, 30, commands.BucketType.user)
+    # async def websitecapture(self, ctx, web):
+    #     main = await ctx.send(content="Porfavor espera...")
+    #     web = web.replace("https://", "").replace("http://", "")
+    #     key = str(env["WEB_KEY"])
+    #     try:
+    #         url = requests.get(f"https://screenshotapi.net/api/v1/screenshot?token={key}&url={web}&full_page=false&fresh=true").json()
+    #         url = url["screenshot"]
+    #     except:
+    #         return await ctx.send("No No No...")
+    #     embed = discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color)
+    #     embed.set_image(url=str(url))
+    #     embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url)})**")
+    #     await main.edit(content="", embed=embed)
                                   
 def setup(bot):
     bot.add_cog(Img(bot))
