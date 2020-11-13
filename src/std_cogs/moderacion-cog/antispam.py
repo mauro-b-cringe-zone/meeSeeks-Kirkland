@@ -15,6 +15,7 @@ class AntiSpam(commands.Cog):
         self.bot = bot
 
     @commands.command(description="Se cambia automaticamente y añade un anti espam. EG: !seguridad = Verdadero, !seguridad = Falso")
+    @commands.has_permissions(manage_channels=True)
     async def seguridad(self, ctx):
         with open(str(env["JSON_DIR"] + "ext\seguridad.json"), "r") as f:
             guild = json.load(f)
@@ -23,19 +24,23 @@ class AntiSpam(commands.Cog):
             guild[str(ctx.guild.id)] = True
         else:
             if guild[str(ctx.guild.id)] is True: guild[str(ctx.guild.id)] = False
-            if guild[str(ctx.guild.id)] is False: guild[str(ctx.guild.id)] = True
+            elif guild[str(ctx.guild.id)] is False: guild[str(ctx.guild.id)] = True
         await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | {guild[str(ctx.guild.id)]}", color=color))
 
         with open(str(env["JSON_DIR"] + "ext\seguridad.json"), "w") as f:
             json.dump(guild, f, indent=4)
     
     @commands.Cog.listener()
-    @Decoradores.EsEspam(pass_context=True)
     async def on_message(self, msg: Message):
-        if msg.content.channel_mentions[9]: # 10
-            await msg.delete()
+        ctx = await self.bot.get_context(msg)
+        d = await Decoradores().EsEspam(ctx=ctx)
+        if d:
+            if len(msg.raw_mentions) >= 10:
+                await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 10** menciones", color=color).set_footer(text="$seguridad | Para desactivarlo"))
+                await msg.delete()
+        else:
+            pass
 
 
 def setup(bot):
-    """Load the TokenRemover cog."""
     bot.add_cog(AntiSpam(bot))
