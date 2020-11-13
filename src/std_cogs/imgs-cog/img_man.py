@@ -526,7 +526,7 @@ class ImgSecundario(commands.Cog):
     async def websitecapture(self, ctx, web):
         main = await ctx.send(content="Porfavor espera...")
         web = web.replace("https://", "").replace("http://", "")
-        key = "XEBLAHTIOMFWGIH9NHYCL0KZNPBTX1C4"
+        key = str(env["WEB_KEY"])
         try:
             url = requests.get(f"https://screenshotapi.net/api/v1/screenshot?token={key}&url={web}&full_page=false&fresh=true").json()
             url = url["screenshot"]
