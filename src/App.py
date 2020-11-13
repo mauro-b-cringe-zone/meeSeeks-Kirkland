@@ -48,27 +48,13 @@ class App(commands.Bot):
 
         self.add_command(App.__reload_cogs)
     
-    async def barra_de_actividad(self, texto, status):
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|█████----------------|"))
+    async def barra_de_actividad(self, texto, status, ver=None, li=None):
+        if li:
+            await self.change_presence(status=status, activity=discord.Activity(type=discord.ActivityType.listening, name=f"{texto} - Maubot"))
+        if ver:
+            await self.change_presence(status=status, activity=discord.Activity(type=discord.ActivityType.watching, name=f"{texto} - Maubot"))
+        await self.change_presence(status=status, activity=discord.Game(name=f"{texto} - Maubot"))
         await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|███████--------------|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|████████-------------|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|█████████------------|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|██████████-----------|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|███████████----------|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|█████████████--------|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|██████████████-------|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|███████████████████--|"))
-        await asyncio.sleep(4)
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto}  \n|█████████████████████|"))
-        await asyncio.sleep(2)
 
     async def on_ready(self):
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot | {self.__repo__}\n4. Version | {self.__version__}\n5. Web: {self.__web__}", separador=False)
@@ -76,7 +62,31 @@ class App(commands.Bot):
         # await self.change_presence(activity=self.__activity)
         while True:
             # await self.barra_de_actividad(f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos", discord.Status.do_not_disturb)
-            await self.barra_de_actividad(f"|-> Processando $help y @mencion |", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Processando $help y @mencion ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> ¡Mirame en top.gg y bots.ondiscord.xyz! ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Preparandome para matar ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Hackeando el systema de la nasa ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Cambiando el codigo fuente de google ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Troleando a mis espias ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Enviando mensages a los de la policia ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Cambiando contraseña en discord ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Sirviendo té a mi amo ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Mejorando mi web ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Haciendo una tarta con chocolate ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Haciendo PVPs contra niños de 9 años en mc ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Mirando por la dark web ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Tutoriales de como abrir puertas ", discord.Status.dnd, ver=True)
+            await self.barra_de_actividad(f"|-> a un dios ", discord.Status.idle, li=True)
+            await self.barra_de_actividad(f"|-> haqueando la webcam de el presidente de UUEE ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> FORTNITE ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> MINECRAFT ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Haciendo deveres ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> PUBG ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHH ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> A mimir ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Conseguir gemas en dungeons and drugons ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Defendiendo a los robots ", discord.Status.idle)
+            await self.barra_de_actividad(f"|-> Viendo el lenguage universal (Python ;v) ", discord.Status.idle)
 
 
     async def on_message(self, message):
