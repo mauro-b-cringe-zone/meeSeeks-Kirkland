@@ -60,6 +60,7 @@ def preparar():
     # ----------------------------------------------------------------------------------------------------------------------
 
     cogs = StdCogs()
+    prueva = "TOKEN"
     try:
         pruevas = env.get("PRUEVA")
         if pruevas == "True":
