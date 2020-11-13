@@ -68,9 +68,9 @@ def preparar():
             pruevas = "TOKEN"
     except EnvironmentError:
         prueva = "TOKEN"
-        
+
     try:
-        token = env.get(f'{prueva}')
+        token = env.get(prueva)
     except EnvironmentError:
         Logger.error('No se encontro ninguna ficha. Ejecute el bot con el parametro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')
         sys.exit(1)
