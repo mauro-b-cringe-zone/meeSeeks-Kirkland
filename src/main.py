@@ -61,7 +61,16 @@ def preparar():
 
     cogs = StdCogs()
     try:
-        token = env.get('TOKEN')
+        pruevas = env.get("PRUEVA")
+        if pruevas == "True":
+            prueva = "TOKEN_BOT_PRUEVAS"
+        else:
+            pruevas = "TOKEN"
+    except EnvironmentError:
+        prueva = "TOKEN"
+        
+    try:
+        token = env.get(f'{prueva}')
     except EnvironmentError:
         Logger.error('No se encontro ninguna ficha. Ejecute el bot con el parametro --token (-t) <token> o inserte TOKEN = <token> en el archivo .env.')
         sys.exit(1)
@@ -92,13 +101,13 @@ def preparar():
         
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
-  
-  
-    for i in tqdm(range(1, 100), desc ="Las opciones del robot estan cargadas."): 
+    
+    for i in tqdm(range(1, 100), desc ="Cargando cogs", smoothing=1, leave=False): 
         sleep(.001)
+    
+    Logger.success("Las opciones del robot estan cargadas")
 
     app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
-
     app.run(token)
 
 if __name__ == "__main__":

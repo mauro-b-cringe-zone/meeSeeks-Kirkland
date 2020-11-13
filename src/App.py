@@ -8,7 +8,9 @@ from utils.Environment import Environment, env
 from utils.Logger.Logger import Logger
 from cogs.Cogs import Cogs
 from middleware import run_middleware_stack
+
 from discord.ext.commands.errors import BotMissingPermissions, CommandNotFound, CommandOnCooldown, MissingPermissions, MissingRequiredArgument, NotOwner
+
 from googletrans import Translator
 
 import random
@@ -75,6 +77,7 @@ class App(commands.Bot):
         while True:
             # await self.barra_de_actividad(f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos", discord.Status.do_not_disturb)
             await self.barra_de_actividad(f"|-> Processando $help y @mencion |", discord.Status.dnd)
+
 
     async def on_message(self, message):
         await run_middleware_stack(message)
