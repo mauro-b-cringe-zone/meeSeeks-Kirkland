@@ -8,6 +8,9 @@ from pathlib import Path
 
 from consola.main import Consola
 
+from tqdm import tqdm 
+from time import sleep 
+
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
 __repo__ = "https://github.com/maubg-debug/maubot/"
@@ -77,6 +80,7 @@ def preparar():
         "USER_STATISTICS_THROTTLE_DURATION",
         "USER_STATISTICS_INCREMENT"
     ]
+
     for i in extrasenv:
         try:
             ex = env.get(str(i))
@@ -88,8 +92,10 @@ def preparar():
         
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
-
-    Logger.success('Las opciones del robot estan cargadas.')
+  
+  
+    for i in tqdm(range(1, 100), desc ="Las opciones del robot estan cargadas."): 
+        sleep(.1)
 
     app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
 
