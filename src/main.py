@@ -95,7 +95,7 @@ def preparar():
   
   
     for i in tqdm(range(1, 100), desc ="Las opciones del robot estan cargadas."): 
-        sleep(.1)
+        sleep(.001)
 
     app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
 
