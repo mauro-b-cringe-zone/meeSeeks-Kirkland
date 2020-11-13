@@ -31,29 +31,25 @@ class Json():
 
     def JsonM(self):
         if self.modo == "r":
-            with open(dir, modo) as f:
+            with open(self.dir, self.modo) as f:
                 self.val = json.load(f)
             return self.val
         elif self.modo == "w":
-            with open(dir, modo) as f:
+            with open(self.dir, self.modo) as f:
                 json.dump(self.val, f, indent=4)
         else:
             raise ValueError
             
 
-class Ayudas():
+class ayuda:
     def __init__(self):
-        super().__init__()
-        self.lista_negra = ""
         self.j = Json
 
-
-
-class Decoradores(Ayudas):
+class Decoradores(ayuda):
 
     async def EsEspam(self, ctx):
         seguridad = None
-        seguridad = self.j(str(env["JSON_DIR"] + "ext\seguridad.json"), "r", seguridad)
+        seguridad = self.j(str(env["JSON_DIR"] + "ext\seguridad.json"), "r", seguridad).JsonM()
         
         async def decorador(ctx):
             if str(ctx.guild.id) in seguridad: 
