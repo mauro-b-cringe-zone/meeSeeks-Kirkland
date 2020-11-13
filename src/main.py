@@ -103,8 +103,8 @@ def preparar():
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
     
-    for i in tqdm(range(1, 100), desc ="Cargando cogs", smoothing=1, leave=False): 
-        sleep(.001)
+    for i in tqdm(range(1, 100), desc="Cargando cogs", leave=False): 
+        pass
     
     Logger.success("Las opciones del robot estan cargadas")
 
