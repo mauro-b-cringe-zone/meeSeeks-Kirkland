@@ -17,7 +17,7 @@ class AntiSpam(commands.Cog):
     @commands.command(description="Se cambia automaticamente y añade un anti espam. EG: !seguridad = Verdadero, !seguridad = Falso")
     @commands.has_permissions(manage_channels=True)
     async def seguridad(self, ctx):
-        with open(str(env["JSON_DIR"] + "ext\seguridad.json"), "r") as f:
+        with open(str(env["JSON_DIR"] + "ext/seguridad.json"), "r") as f:
             guild = json.load(f)
 
         if not str(ctx.guild.id) in guild:
@@ -27,7 +27,7 @@ class AntiSpam(commands.Cog):
             elif guild[str(ctx.guild.id)] is False: guild[str(ctx.guild.id)] = True
         await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | {guild[str(ctx.guild.id)]}", color=color))
 
-        with open(str(env["JSON_DIR"] + "ext\seguridad.json"), "w") as f:
+        with open(str(env["JSON_DIR"] + "ext/seguridad.json"), "w") as f:
             json.dump(guild, f, indent=4)
     
     @commands.Cog.listener()

@@ -49,7 +49,7 @@ class Decoradores(ayuda):
 
     async def EsEspam(self, ctx):
         seguridad = None
-        seguridad = self.j(str(env["JSON_DIR"] + "ext\seguridad.json"), "r", seguridad).JsonM()
+        seguridad = self.j(str(env["JSON_DIR"] + "ext/seguridad.json"), "r", seguridad).JsonM()
         
         async def decorador(ctx):
             if str(ctx.guild.id) in seguridad: 

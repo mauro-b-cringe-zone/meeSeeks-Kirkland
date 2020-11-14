@@ -458,7 +458,7 @@ class Execution(commands.Cog):
         source_code: Optional[str], language_id: int, stdin=""
     ) -> dict:
         """
-        Sends submission in Judge0 API and waits for output.
+        Envia la submision del codigo del usuario 
         """
         base_url = f"{BASE_URL}/submissions/"
         payload = Execution.prepare_paylad(source_code, language_id, stdin)
