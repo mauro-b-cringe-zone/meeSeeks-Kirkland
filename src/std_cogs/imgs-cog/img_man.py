@@ -10,6 +10,8 @@ from PIL import Image, ImageFont, ImageDraw, GifImagePlugin, ImageOps, ImageFilt
 import re, requests
 import random
 from os import environ as env
+import datetime
+import os
 color =   int(env["COLOR"]) 
 
 def randomhash():
@@ -536,7 +538,7 @@ class ImgSecundario(commands.Cog):
     #     embed.set_image(url=str(url))
     #     embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url)})**")
     #     await main.edit(content="", embed=embed)
-                                  
+
 def setup(bot):
     bot.add_cog(Img(bot))
     bot.add_cog(ImgSecundario(bot))

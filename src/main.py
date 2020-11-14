@@ -10,12 +10,17 @@ from consola.main import Consola
 
 from tqdm import tqdm 
 from time import sleep 
+import threading
 
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
 __repo__ = "https://github.com/maubg-debug/maubot/"
 __version__ = "1.0.0"
 __web__ = "http://maubot.mooo.com"
+
+def cargar(texto):
+    for i in tqdm(range(1, 100), desc=texto, leave=False): 
+        sleep(.01)
 
 def preparar():
     from App import App
@@ -103,16 +108,17 @@ def preparar():
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
     
-    for i in tqdm(range(1, 100), desc="Cargando cogs", leave=False): 
-        pass
-    
-    Logger.success("Las opciones del robot estan cargadas")
+    x = threading.Thread(target=cargar, args=("Cargando cogs",))
+    x.start()
 
     app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
+    Logger.success("Las opciones del robot estan cargadas")
+    x = threading.Thread(target=cargar, args=("Haciendo login",))
+    x.start()
     app.run(token)
 
 if __name__ == "__main__":
-    if sys.argv[1]:
+    if len(sys.argv) > 1:
         try:
             if sys.argv[1] == "--help" or sys.argv[1] == "-h":
                 Consola("help").procesar_comandos(directorio=Path(__file__).parent.parent)

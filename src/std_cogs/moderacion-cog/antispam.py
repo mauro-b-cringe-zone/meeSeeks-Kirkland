@@ -45,9 +45,6 @@ class AntiSpam(commands.Cog):
             if len(msg.content) >= 1000:
                 await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 2000** caracteres", color=color).set_footer(text="$seguridad | Para desactivarlo"))
                 await msg.delete()
-        else:
-            pass
-
 
 def setup(bot):
     bot.add_cog(AntiSpam(bot))
