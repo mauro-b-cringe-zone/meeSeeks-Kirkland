@@ -29,7 +29,7 @@ class AntiSpam(commands.Cog):
                 await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | falso", description=f"**¿Qué implica esto?**\n\Maubot ya no se encargara en analizar los mensages del servidor | **{ctx.guild.name}**", color=color))
             elif guild[str(ctx.guild.id)] is False: 
                 guild[str(ctx.guild.id)] = True
-                await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | verdadero", description=f"**¿Qué implica esto?**\n\n<:list:774983585727119391> No mas de **10** menciones\n<:list:774983585727119391> No mas de **2000** caracteres en un mensage", color=color))
+                await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | verdadero", description=f"**¿Qué implica esto?**\n\n<:list:774983585727119391> No mas de **10** menciones\n<:list:774983585727119391> No mas de **1000** caracteres en un mensage", color=color))
 
         with open(str(env["JSON_DIR"] + "ext/seguridad.json"), "w") as f:
             json.dump(guild, f, indent=4)
@@ -42,7 +42,7 @@ class AntiSpam(commands.Cog):
             if len(msg.raw_mentions) >= 10:
                 await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 10** menciones", color=color).set_footer(text="$seguridad | Para desactivarlo"))
                 await msg.delete()
-            if len(msg.content) >= 2000:
+            if len(msg.content) >= 1000:
                 await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 2000** caracteres", color=color).set_footer(text="$seguridad | Para desactivarlo"))
                 await msg.delete()
         else:
