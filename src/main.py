@@ -18,9 +18,9 @@ __repo__ = "https://github.com/maubg-debug/maubot/"
 __version__ = "1.0.0"
 __web__ = "http://maubot.mooo.com"
 
-def cargar(texto):
+def cargar(texto, t):
     for i in tqdm(range(1, 100), desc=texto, leave=False): 
-        sleep(.01)
+        sleep(t)
 
 def preparar():
     from App import App
@@ -108,13 +108,13 @@ def preparar():
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
     
-    x = threading.Thread(target=cargar, args=("Cargando cogs",))
+    x = threading.Thread(target=cargar, args=("Cargando cogs", .017,))
     x.start()
-
     app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
     Logger.success("Las opciones del robot estan cargadas")
-    x = threading.Thread(target=cargar, args=("Haciendo login",))
-    x.start()
+
+    y = threading.Thread(target=cargar, args=("Haciendo login", .01,))
+    y.start()
     app.run(token)
 
 if __name__ == "__main__":
