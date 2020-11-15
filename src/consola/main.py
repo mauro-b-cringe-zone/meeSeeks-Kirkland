@@ -26,7 +26,7 @@ class CrearEnv():
 class Consola():
     def __init__(self, comando):
         self.comando = comando.lower()
-        self.comandos = [["empezar", "run"], ["cls", "clear"], "pip", ["exit", "salir", "exit()"], "instalar", "python", ["help", "ayuda"], "instrucciones", "env"]
+        self.comandos = [["empezar", "run"], ["cls", "clear"], "pip", ["exit", "salir", "exit()"], "instalar", "python", ["help", "ayuda"], "instrucciones", "env", "restart"]
 
     def pip(self, pack):
         if sys.platform.startswith("win") or sys.platform.startswith("cygwin"):  
@@ -88,6 +88,9 @@ class Consola():
         
         elif self.comando == self.comandos[8]:
             CrearEnv(directorio).inizializar()
+        
+        elif self.comando == self.comandos[9]:
+            os.system("python ./src/main.py")
 
         else:
             cprint(f"\n{self.comando} no existe:\n-> Prueva a poner \"ayuda\" o \"help\"\n", "red")

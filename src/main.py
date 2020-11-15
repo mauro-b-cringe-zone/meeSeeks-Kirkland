@@ -107,7 +107,7 @@ def preparar():
         
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
-    
+
     x = threading.Thread(target=cargar, args=("Cargando cogs", .01,))
     x.start()
     app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None)
