@@ -373,7 +373,7 @@ class Execution(commands.Cog):
 
         if str(ctx.invoked_with) == "run" and code == "list" or code == "--list":
             embed = Embed(title="Lista de lenguages", color=int(env["COLOR"]))
-            listaDeLenguages = ""
+            listaDeLenguages = ""   
             c = 0
             for i in LANGUAGES["array"]:
                 c += 1
