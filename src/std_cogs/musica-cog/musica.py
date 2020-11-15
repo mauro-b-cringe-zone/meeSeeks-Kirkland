@@ -467,4 +467,5 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
 
 def setup(bot):
+    # Con lavalink
     bot.add_cog(Music(bot))
