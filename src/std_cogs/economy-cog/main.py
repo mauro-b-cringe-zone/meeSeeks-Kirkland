@@ -14,14 +14,11 @@ C_NAMES = "diamantes"
 # HYPERFUNCIONES
 
 
-mainshop = [
-    {"name":"reloj", "price":1000,"description":"Reloj de lujo cuvierto de oro con un laser incluido en la parte superior del reloj"},
-    {"name":"PC", "price":739,"description":"PC rapido perfecto para gaming **[¡30% DE DESCUENTO!](https://discord.gg/mwDBgubwdP)**"},
-    {"name":"Laptop", "price":509,"description":"Bueno para hackear en silencio con un gran soporte con ventilador para que no se sobre caliente"},
-    {"name":"Sarten", "price":30,"description":"No se pega nada ni si quiera la grasa y sirve mucho para dar golpes con la sarten"},
-    {"name":"Pistola", "price":100000,"description":"**Solo se venden a los mallores de edad 🔞** Sirve para hacer pium pium a los malos que quieran robar"},
-    {"name":"Teclado", "price":1500,"description":"Gran velocidad de respuesta con teclas personalizables."}
-]
+mainshop = []
+with open("./src/utils/shop.json") as f:
+    mainshop = json.load(f)
+
+mainshop = mainshop["shop"]
 
 async def buy_this(user,item_name,amount):
     item_name = item_name.lower()
