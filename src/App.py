@@ -479,7 +479,7 @@ class Feedback(commands.Cog):
             await msg.clear_reactions()
             await msg.edit(embed=embed_done)    
 
-            feedbackCh = self.bot.get_channel(748235336869478441)
+            feedbackCh = self.bot.get_channel(777598645725167618)
             embed_feed_CH = discord.Embed(title=f"Nueva reseña", colour=color)
             embed_feed_CH.add_field(name="Calificacion:", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}")
             await feedbackCh.send('<@700812754855919667>, Usuario con ID: '+str(ctx.message.author.id)+f' Ha enviado una reseña', embed=embed_feed_CH)
@@ -488,14 +488,14 @@ class Feedback(commands.Cog):
     async def request(self, ctx: commands.Context, *, feature):
         creator = await self.bot.fetch_user(700812754855919667)
         authors_name = str(ctx.author)
-        await creator.send(f''':pencil: {authors_name}: {feature}''')
+        await creator.send(discord.Embed(title="Nueva propuesta", description=f':pencil: {authors_name}: {feature}', color=color))
         await ctx.send(discord.Embed(title="Gracias", description=f''':pencil: Gracias, Se ha solicitado tu idea!''', color=color))
 
     @commands.command()
     async def report(self, ctx: commands.Context, *, error_report):
         creator = await self.bot.fetch_user(700812754855919667)
         authors_name = str(ctx.author)
-        await creator.send(f''':triangular_flag_on_post: {authors_name}: {error_report}''')
+        await creator.send(embed=discord.Embed(title="Nuevo bug", description=f':triangular_flag_on_post: {authors_name}: {error_report}', color=color))
         await ctx.send(embed=discord.Embed(title="Gracias", description=f''':triangular_flag_on_post: Gracias por tu ayuda, ¡El error ha sido informado! Pero tambien lo puedes sugerir en [Github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)''', color=color))
 
 def setup(app):

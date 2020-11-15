@@ -167,12 +167,11 @@ class Player(wavelink.Player):
             self.queue.add(*tracks.tracks)
         elif len(tracks) == 1:
             self.queue.add(tracks[0])
-            await ctx.send(f"Added {tracks[0].title} to the queue.")
-            await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola").set_footer(text="Se a añadido la primera cancion de la lista", icon_url=ctx.author.avatar_url))
+            await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color).set_footer(text="Se a añadido la primera cancion de la lista", icon_url=ctx.author.avatar_url))
         else:
             if (track := await self.choose_track(ctx, tracks)) is not None:
                 self.queue.add(track)
-                await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola").set_footer(icon_url=ctx.author.avatar_url))
+                await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color).set_footer(icon_url=ctx.author.avatar_url))
 
         if not self.is_playing and not self.queue.is_empty:
             await self.start_playback()
@@ -197,7 +196,7 @@ class Player(wavelink.Player):
             timestamp=dt.datetime.utcnow()
         )
         embed.set_author(name="Resultados de canciones", icon_url="https://img.icons8.com/clouds/100/000000/music.png")
-        embed.set_footer(text=f"Invocado por {ctx.author.mention}", icon_url=ctx.author.avatar_url)
+        embed.set_footer(text=f"Invocado por {ctx.author.name}", icon_url=ctx.author.avatar_url)
 
         msg = await ctx.send(embed=embed)
         for emoji in list(OPTIONS.keys())[:min(len(tracks), len(OPTIONS))]:
@@ -281,7 +280,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         elif isinstance(obj, discord.Guild):
             return self.wavelink.get_player(obj.id, cls=Player)
 
-    @commands.command(name="connect", aliases=["join"])
+    @commands.command(name="connect", aliases=["join"], description="Maubot se unira a un canal de voz", usage="[canal]")
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
         player = self.get_player(ctx)
         channel = await player.connect(ctx, channel)
@@ -289,20 +288,26 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         await ctx.send(embed=embed)
 
     @connect_command.error
-    async def connect_command(self, ctx, exc):
+    async def connect_command_error(self, ctx, exc):
         if isinstance(exc, AlreadyConnectedToChannel):
             await ctx.send("Ya estoy en un canal.")
         elif isinstance(exc, NoVoiceChannel):
             await ctx.send("No se ha encontrado ningun canal de voz.")
 
-    @commands.command(name="disconnect", aliases=["leave"])
+    @commands.command(name="disconnect", aliases=["leave"], description="Maubot se ira a un canal de voz")
     async def disconnect_command(self, ctx):
         player = self.get_player(ctx)
         await player.teardown()
         embed = discord.Embed(title=f"Me he ido de el canal", colour=color)
         await ctx.send(embed=embed)
 
-    @commands.command(name="play")
+    @commands.command(name="resume", description="Continua la musica")
+    async def resume_command(self, ctx):
+        player = self.get_player(ctx)
+        await player.set_pause(False)
+        await ctx.send(embed=discord.Embed(title="Reproducción reanudada.", color=color))
+
+    @commands.command(name="play", description="Si Maubot no esta conectado a un canal se unira, Maubot añadira una cancion a la cola si ya hay una por lo contrario reproducira la cancion. Si no hay cancion Maubot resumira la cancion", usage="[cancion]")
     async def play_command(self, ctx, *, query: t.Optional[str]):
         player = self.get_player(ctx)
 
@@ -330,7 +335,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         elif isinstance(exc, NoVoiceChannel):
             await ctx.send("No se proporcionó ningún canal de voz adecuado.")
 
-    @commands.command(name="pause")
+    @commands.command(name="pause", description="Pausa la musica")
     async def pause_command(self, ctx):
         player = self.get_player(ctx)
 
@@ -349,7 +354,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if isinstance(exc, PlayerIsAlreadyPaused):
             await ctx.send("Ya pausado.")
 
-    @commands.command(name="stop")
+    @commands.command(name="stop", description="Eliminara la cola y no reproducira la musica")
     async def stop_command(self, ctx):
         player = self.get_player(ctx)
         player.queue.empty()
@@ -360,7 +365,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         embed.set_author(name="parando...", icon_url="https://img.icons8.com/color/48/000000/stop-squared.png")
         await ctx.send(embed=embed)
 
-    @commands.command(name="next", aliases=["skip"])
+    @commands.command(name="next", aliases=["skip"], description="Reproduce la siguiente cancion")
     async def next_command(self, ctx):
         player = self.get_player(ctx)
 
@@ -381,7 +386,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         elif isinstance(exc, NoMoreTracks):
             await ctx.send("No hay más pistas en la cola.")
 
-    @commands.command(name="previous")
+    @commands.command(name="previous", description="Reproduce la cancion anterior")
     async def previous_command(self, ctx):
         player = self.get_player(ctx)
 
@@ -401,7 +406,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         elif isinstance(exc, NoPreviousTracks):
             await ctx.send("No hay pistas anteriores en la cola.")
 
-    @commands.command(name="shuffle")
+    @commands.command(name="shuffle", description="Varajea la cola")
     async def shuffle_command(self, ctx):
         player = self.get_player(ctx)
         player.queue.shuffle()
@@ -414,7 +419,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if isinstance(exc, QueueIsEmpty):
             await ctx.send("La cola no se pudo barajar porque actualmente está vacía.")
 
-    @commands.command(name="repeat", aliases=["loop"])
+    @commands.command(name="repeat", aliases=["loop"], description="Escribe el modo en el que se repitira la cancion", usage="[<none (Se cancela el loop)><1 (Repite la cancion 1 vez)><all (Repite la cancion asta que se diga que no)>]")
     async def repeat_command(self, ctx, mode: str):
         if mode not in ("none", "1", "all"):
             raise InvalidRepeatMode
@@ -426,7 +431,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         embed = discord.Embed(title=f'cambiando loop a ({mode})', colour=color)
         await ctx.send(embed=embed)         
 
-    @commands.command(name="queue")
+    @commands.command(name="queue", description="Mira la lista de canciones", usage="[numero maximo de canciones en la cola]")
     async def queue_command(self, ctx, show: t.Optional[int] = 10):
         player = self.get_player(ctx)
 
@@ -458,7 +463,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @queue_command.error
     async def queue_command_error(self, ctx, exc):
         if isinstance(exc, QueueIsEmpty):
-            await ctx.send("Actualmente, la cola está vacía.")
+            await ctx.send(embed=discord.Embed(title="Nada...", color=color, description="Actualmente, la cola está vacía."))
 
 
 def setup(bot):
