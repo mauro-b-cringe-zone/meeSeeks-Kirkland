@@ -62,7 +62,7 @@ class App(commands.Bot):
         # await self.change_presence(activity=self.__activity)
         while True:
             # await self.barra_de_actividad(f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos", discord.Status.do_not_disturb)
-            await self.barra_de_actividad(f"|-> Processando $help y @mencion ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Processando m.help y @mencion ", discord.Status.dnd)
             await self.barra_de_actividad(f"|-> ¡Mirame en top.gg y bots.ondiscord.xyz! ", discord.Status.idle)
             await self.barra_de_actividad(f"|-> Preparandome para matar ", discord.Status.dnd)
             await self.barra_de_actividad(f"|-> Hackeando el systema de la nasa ", discord.Status.idle)
@@ -183,7 +183,7 @@ class App(commands.Bot):
                               title="Como sabes, los robots no son perfectos", 
                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
                               color=self.color).set_footer(
-                                  text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon $help [seccion]"
+                                  text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
                               ))
             Logger.error(f'ERROR: {str(exception)}')
             async with aiohttp.ClientSession() as session:
