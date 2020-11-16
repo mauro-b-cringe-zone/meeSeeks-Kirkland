@@ -147,8 +147,8 @@ class Player(wavelink.Player):
         if self.is_connected:
             raise AlreadyConnectedToChannel
 
-        if (channel := getattr(ctx.author.voice, "channel", channel)) is None:
-            raise NoVoiceChannel
+#        if (channel := getattr(ctx.author.voice, "channel", channel)) is None:
+#            raise NoVoiceChannel
 
         await super().connect(channel.id)
         return channel
