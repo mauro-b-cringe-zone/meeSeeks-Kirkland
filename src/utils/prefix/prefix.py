@@ -20,11 +20,11 @@ def get_prefix(bot, message):
             msg = str(message.content)
             id = str(f'<@!{bot.user.id}>')
             if id == msg or msg == f"<@!{bot.user.id}> prefijos":
-                return ['m.', 'm-', "$"]
+                return ['m.', 'm-', "&"]
             with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
                 prefixes = json.load(f)
             if not str(message.guild.id) in prefixes:
-                prefixes[str(message.guild.id)] = "$"
+                prefixes[str(message.guild.id)] = "&"
                 with open(env["JSON_DIR"] + 'prefix.json', 'w') as f:
                     json.dump(prefixes, f) 
                 return [prefixes[str(message.guild.id)], 'm.', 'm-']
@@ -32,6 +32,6 @@ def get_prefix(bot, message):
             return commands.when_mentioned_or(*base)(bot, message)
         except Exception as e:
             cprint(f"{e}")
-            return ['m.', 'm-', "$"]
+            return ['m.', 'm-', "&"]
     else:
         return "$@dl.@#" # Si no esta en un servidor retornar el prefjio "$@dl.@#" (Algo dificil)
