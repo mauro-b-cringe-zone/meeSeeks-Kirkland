@@ -253,7 +253,7 @@ class Maubot(commands.Cog):
                                 
         for i in "!,-,.,+,?,$,>,/,;,*,s!,=,m!,!!".split(","):
             if str(prefix) == str(i):
-                return await ctx.send(embed=discord.Embed(description=f"{ctx.author.mention}, Los prefijos: `!`,`-`,`.`,`+`,`?`,`$`,`>`,`/`,`;`,`*`,`s!`,`=`,`m!`,`!!` no estan permitidos", color=color))
+                return await ctx.send(embed=discord.Embed(description=f"{ctx.author.mention}, Los prefijos: `!, -, ., +, ?, $, >, /, ;, *, s!, =, m!, !!` no estan permitidos", color=color))
 
         with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
