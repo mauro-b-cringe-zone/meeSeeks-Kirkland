@@ -106,9 +106,32 @@ class Servidor(commands.Cog):
         lvl_start = users[str(user.id)]["level"]
         lvl_end = int(experience ** (1/4))
 
+        try:
+            with open(env["JSON_DIR"] + "userslvl.json") as f:
+                f = json.load(f)
+            guilds = f["active"][str(channel.guild.id)]
+        except:
+            pass
+
         if lvl_start < lvl_end:
-            await channel.send(embed=discord.Embed(title=f':tada: ¡felicidades!', description=f'{user.mention}, has subido al nivel {lvl_end}! :champagne_glass: ', colour=color))
-            users[str(user.id)]['level'] = lvl_end
+            if guilds == True:
+                await channel.send(embed=discord.Embed(title=f':tada: ¡felicidades!', description=f'{user.mention}, has subido al nivel {lvl_end}! :champagne_glass: ', colour=color).set_footer(text="Si quieres desactivarlo puedes poner m.levels para desactivarlo"))
+                users[str(user.id)]['level'] = lvl_end
+        
+    @commands.command(description="Cambia los si quieres recivir notificaciones de niveles")
+    async def levels(self, ctx):
+        with open(env["JSON_DIR"] + "userslvl.json", "r") as f:
+            guilds = json.load(f)
+
+        if not str(ctx.guild.id) in guilds["active"]:
+            guilds["active"][str(ctx.guild.id)] = False
+        else:
+            guilds["active"][str(ctx.guild.id)] = not guilds["active"][str(ctx.guild.id)]
+
+        await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el sistema de los niveles a | {guilds['active'][str(ctx.guild.id)]}", color=color))
+
+        with open(env["JSON_DIR"] + "userslvl.json", "w") as f:
+            json.dump(guilds, f)
 
     @commands.command(description="Mira tu nivel de mensajes", usage="[usuario]")
     async def rank(self, ctx, user: discord.Member = None):
