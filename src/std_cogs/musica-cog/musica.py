@@ -460,7 +460,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         )
         if upcoming := player.queue.upcoming:
             embed.add_field(
-                name="Siguiente",
+                name="Siguiente", # Siguiente porfavor
                 value="\n".join(t.title for t in upcoming[:show]),
                 inline=False
             )
