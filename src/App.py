@@ -250,6 +250,8 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 15, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
     async def prefix(self, ctx, prefix):
+                                
+        for i in "!,-,.,+,?,$,>,/,;,*,s!,=,m!,!!":
 
         with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
