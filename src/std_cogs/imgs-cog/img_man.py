@@ -478,17 +478,6 @@ class ImgSecundario(commands.Cog):
             except Exception as e:
                 await ctx.send(" | ¡Oops! Un error generando tu captcha; `"+str(e)+"`")
 
-    @commands.command(description="Policia del lol ¿Què quiere?", usage="[usuario]")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def lolice(self, ctx, member):
-        source = getUserAvatar(ctx, member)
-        async with ctx.channel.typing():
-            try:
-                data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=lolice&url='+source)["message"]
-                return await ctx.send(embed=discord.Embed(title='¿Policia?', color=color).set_image(url=data))
-            except Exception as e:
-                await ctx.send(" | ¡Oops! Un error generando tu captcha; `"+str(e)+"`")
-
     @commands.command(description="GG", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def img_girl(self, ctx, member):
