@@ -218,7 +218,8 @@ class Player(wavelink.Player):
 
     async def advance(self):
         try:
-            if (track := self.queue.get_next_track()) is not None:
+            track = self.queue.get_next_track()
+            if track is not None:
                 await self.play(track)
         except QueueIsEmpty:
             pass
