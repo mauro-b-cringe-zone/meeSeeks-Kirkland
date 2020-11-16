@@ -147,7 +147,8 @@ class Player(wavelink.Player):
         if self.is_connected:
             raise AlreadyConnectedToChannel
 
-        if (channel := getattr(ctx.author.voice, "channel", channel)) is None:
+        channel = getattr(ctx.author.voice, "channel", channel)
+        if channel is None:
             raise NoVoiceChannel
 
         await super().connect(channel.id)
@@ -169,7 +170,8 @@ class Player(wavelink.Player):
             self.queue.add(tracks[0])
             await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color).set_footer(text="Se a añadido la primera cancion de la lista", icon_url=ctx.author.avatar_url))
         else:
-            if (track := await self.choose_track(ctx, tracks)) is not None:
+            track = await self.choose_track(ctx, tracks)
+            if track is not None:
                 self.queue.add(track)
                 await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color).set_footer(icon_url=ctx.author.avatar_url))
 
