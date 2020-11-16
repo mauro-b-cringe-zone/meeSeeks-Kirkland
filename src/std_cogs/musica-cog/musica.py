@@ -454,7 +454,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             value=getattr(player.queue.current_track, "title", "No tracks currently playing."),
             inline=False
         )
-        if upcoming := player.queue.upcoming:
+        upcoming = player.queue.upcoming
+        if upcoming:
             canciones = ""
             for t in upcoming[:show]:
                 canciones += t.title
