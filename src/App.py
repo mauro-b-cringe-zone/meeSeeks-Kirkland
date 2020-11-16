@@ -54,7 +54,7 @@ class App(commands.Bot):
         if ver:
             await self.change_presence(status=status, activity=discord.Activity(type=discord.ActivityType.watching, name=f"{texto} - Maubot"))
         await self.change_presence(status=status, activity=discord.Game(name=f"{texto} - Maubot"))
-        await asyncio.sleep(4)
+        await asyncio.sleep(20)
 
     async def on_ready(self):
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
