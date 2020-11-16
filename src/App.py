@@ -44,7 +44,6 @@ class App(commands.Bot):
                 commands.NoEntryPointError,
                 commands.ExtensionFailed) as e:
             Logger.error(f'Error cargando cogs. {e}')
-            sys.exit(1)
 
         self.add_command(App.__reload_cogs)
     
