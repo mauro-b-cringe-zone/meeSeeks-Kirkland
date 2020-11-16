@@ -466,11 +466,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             await ctx.send(embed=discord.Embed(title="Nada...", color=color, description="Actualmente, la cola está vacía."))
 
 
-<<<<<<< HEAD
-#def setup(bot):
-#    bot.add_cog(Music(bot))
-=======
 def setup(bot):
     # Con lavalink
     bot.add_cog(Music(bot))
->>>>>>> e18bedb0d285595054d8f3286fc9d9bf0d740e93
