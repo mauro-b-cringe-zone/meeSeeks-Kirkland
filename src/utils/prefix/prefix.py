@@ -13,7 +13,7 @@ def get_prefix(bot, message):
     
     Si es un mensage directo
 
-    :return: $@dl.@# (Algo dificil)
+    :return: m.@dl.@# (Algo dificil)
     """
     if message.guild is not None:
         try:
@@ -34,4 +34,4 @@ def get_prefix(bot, message):
             cprint(f"{e}")
             return ['m.', 'm-', "&"]
     else:
-        return "$@dl.@#" # Si no esta en un servidor retornar el prefjio "$@dl.@#" (Algo dificil)
+        return "m.@dl.@#" # Si no esta en un servidor retornar el prefjio "m.@dl.@#" (Algo dificil)
