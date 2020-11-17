@@ -52,7 +52,7 @@ class Servidor(commands.Cog):
                             cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
                             return await dest.send(f"**{message.author.name}:** {message.content}")
                 else:
-                    return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien $help ChatApp)**", color=0xf15069))
+                    return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien m-help ChatApp)**", color=0xf15069))
         except Exception as e:
             return cprint(f"[Log] Un error en on_message: {e}", "red")
 
@@ -69,13 +69,13 @@ class Servidor(commands.Cog):
         if message.content == f"<@!{self.bot.user.id}>":
             # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
             await message.channel.send(embed=discord.Embed(title="Deja que me presente", 
-                                                           description="<:maubot:774967705831997501> Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **$help**", 
-                                                           colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `$help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `$rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**"))
+                                                           description="<:maubot:774967705831997501> Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **m.help**", 
+                                                           colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `m.help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `&rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**"))
                         
         if message.content == f"<@!{self.bot.user.id}> prefijos":
                     # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
                     await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
-                                                description="<:maubot:774967705831997501> Mis prefijos son `$ (O custom $prefix [prefijo])`, `!`, `?`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
+                                                description="<:maubot:774967705831997501> Mis prefijos son `& (O custom m.prefix [prefijo])`, `m-`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
                                                 colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-prefix.png"))
 
 
@@ -106,9 +106,32 @@ class Servidor(commands.Cog):
         lvl_start = users[str(user.id)]["level"]
         lvl_end = int(experience ** (1/4))
 
+        try:
+            with open(env["JSON_DIR"] + "userslvl.json") as f:
+                f = json.load(f)
+            guilds = f["active"][str(channel.guild.id)]
+        except:
+            pass
+
         if lvl_start < lvl_end:
-            await channel.send(embed=discord.Embed(title=f':tada: ¡felicidades!', description=f'{user.mention}, has subido al nivel {lvl_end}! :champagne_glass: ', colour=color))
-            users[str(user.id)]['level'] = lvl_end
+            if guilds == True:
+                await channel.send(embed=discord.Embed(title=f':tada: ¡felicidades!', description=f'{user.mention}, has subido al nivel {lvl_end}! :champagne_glass: ', colour=color).set_footer(text="Si quieres desactivarlo puedes poner m.levels para desactivarlo"))
+                users[str(user.id)]['level'] = lvl_end
+        
+    @commands.command(description="Cambia los si quieres recivir notificaciones de niveles")
+    async def levels(self, ctx):
+        with open(env["JSON_DIR"] + "userslvl.json", "r") as f:
+            guilds = json.load(f)
+
+        if not str(ctx.guild.id) in guilds["active"]:
+            guilds["active"][str(ctx.guild.id)] = False
+        else:
+            guilds["active"][str(ctx.guild.id)] = not guilds["active"][str(ctx.guild.id)]
+
+        await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el sistema de los niveles a | {guilds['active'][str(ctx.guild.id)]}", color=color))
+
+        with open(env["JSON_DIR"] + "userslvl.json", "w") as f:
+            json.dump(guilds, f)
 
     @commands.command(description="Mira tu nivel de mensajes", usage="[usuario]")
     async def rank(self, ctx, user: discord.Member = None):
@@ -194,7 +217,7 @@ class Servidor(commands.Cog):
     #             command = self.bot.get_command(ctx.message.content.split(f"{ctx.prefix}")[1])
     #             print(command)
     #             command.update(enabled=False)
-    #             await ctx.send(embed=discord.Embed(title="No estais verificados", description="Para poder verificar el server poner `$verify`", color=0x00fbff))
+    #             await ctx.send(embed=discord.Embed(title="No estais verificados", description="Para poder verificar el server poner `m.verify`", color=0x00fbff))
     #     command = self.bot.get_command(ctx.message.content.split(f"{ctx.prefix}")[1])
     #     command.update(enabled=True)
 
@@ -216,13 +239,13 @@ class Servidor(commands.Cog):
             a ganar partidas en el destini y `hacer tu server mejor` porque tu eres 
             uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.
 
-            **Los prefijos de los comandos son: `$`, `!`, `?`, `m.`**\n
+            **Los prefijos de los comandos son: `&`, `m.`, `m-`**\n
             Esos son mis prefijos, siempre puedes hacerme menciones con **@{self.bot.user.name}**. 
             Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
-            para cambiar de prefijo tienes que poner **$server** y luego **$prefix <nuevo prefijo>** (NO USES LOS BRACKETS).
-            Para una lista de commando solo tienes que poner $help y te saldran tooodos los comandos. 
+            para cambiar de prefijo tienes que poner **m.server** y luego **m.prefix <nuevo prefijo>** (NO USES LOS BRACKETS).
+            Para una lista de commando solo tienes que poner m.help y te saldran tooodos los comandos. 
             
-            ¡Y se enviara un mensaje a mi desarroyador si pones `$rate_bot <descripcion>`! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
+            ¡Y se enviara un mensaje a mi desarroyador si pones `m.rate_bot <descripcion>`! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
             mantente actualizado con las nuevas funciones, o si solo quieres mas ayuda, mira el server oficial de 
             {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)""", colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
@@ -231,18 +254,18 @@ class Servidor(commands.Cog):
         with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
         
-        prefixes[str(guild.id)] = '$'
+        prefixes[str(guild.id)] = '&'
 
         with open(env["JSON_DIR"] + 'prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
 
         channel = discord.utils.get(guild.text_channels)
 
-        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="<:maubot:774967705831997501> Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `$help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
+        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="<:maubot:774967705831997501> Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `m.help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
         embed1.set_author(name='Maubot', icon_url="https://img.icons8.com/nolan/64/launched-rocket.png")
-        embed1.add_field(name="¿Necesitas ayuda?", value=f"Puedes poner **$help** para conseguir una lista de los comandos mas guays del mundo desde diversion hasta musica y economia. La lista de comandos estan separadas por secciones asi que podrias poner `$help [seccion]` para descubrir mas comandos super chulos. o si no puedes poner **<@730124969132163093>** .", inline=True)
+        embed1.add_field(name="¿Necesitas ayuda?", value=f"Puedes poner **m.help** para conseguir una lista de los comandos mas guays del mundo desde diversion hasta musica y economia. La lista de comandos estan separadas por secciones asi que podrias poner `m.help [seccion]` para descubrir mas comandos super chulos. o si no puedes poner **<@730124969132163093>** .", inline=True)
         embed1.add_field(name="Diversion atope", value=f"Maubot tiene muchos comando para divertirse con manipulacion de imagenes a juegos como el `conecta4`, `rps` y mucho mas. Maubot tambien tiene un sistema de economia muy avanzado para ser millonarios y dominar el mundo 🤤...", inline=True)
-        embed1.add_field(name="Legal", value=f"Escribe `$copyright` para ver el copyright de Maubot.", inline=False)
+        embed1.add_field(name="Legal", value=f"Escribe `&copyright` para ver el copyright de Maubot.", inline=False)
         embed1.add_field(name="¿Aun no te has enterado?", value=f"Puedes ver un tutorial de como usar Maubot poniendo <@730124969132163093>", inline=False)
         embed1.set_footer(text="Maubot - Puedes escribir @Maubot para mas info")
 

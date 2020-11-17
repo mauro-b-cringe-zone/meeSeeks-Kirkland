@@ -297,7 +297,7 @@ class General(commands.Cog):
         embed.add_field(name=f"{bpm}bpm, {randomTuning}", value=output, inline=True)
         await ctx.send(embed=embed)
 
-    @commands.command(description="Traduze a el idioma que quieras (Ej: m.translate es helllo ($translate --lista para ver los idiomas disponibles))", usage="<lang><texto>")
+    @commands.command(description="Traduze a el idioma que quieras (Ej: m.translate es helllo (m.translate --lista para ver los idiomas disponibles))", usage="<lang><texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def translate(self, ctx, *args):
         wait = await ctx.send(' | Porfavor espera...') ; args = list(args)
@@ -543,7 +543,7 @@ class GeneralSecundario(commands.Cog):
         return self.buffer(image)
 
 
-    @commands.command(aliases=["qr"], description="Crea un codigo QR o de barras poniendo $barcode", usage="<texto>")
+    @commands.command(aliases=["qr"], description="Crea un codigo QR o de barras poniendo m.barcode", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def barcode(self, ctx, *args):
         if len(list(args))==0:
@@ -674,7 +674,7 @@ class GeneralSecundario(commands.Cog):
     #             )
     #         return await wait.edit(content='', embed=discord.Embed(title=title, description=desc, color=ctx.guild.me.roles[::-1][0].color))
     #     except Exception as e:
-    #         cprint(f"[Log] Un error con el $joinposition {e}", "red")
+    #         cprint(f"[Log] Un error con el m.joinposition {e}", "red")
 
     @commands.command(description="Un uo")
     @commands.cooldown(1, 10, commands.BucketType.user)

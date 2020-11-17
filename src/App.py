@@ -54,7 +54,7 @@ class App(commands.Bot):
         if ver:
             await self.change_presence(status=status, activity=discord.Activity(type=discord.ActivityType.watching, name=f"{texto} - Maubot"))
         await self.change_presence(status=status, activity=discord.Game(name=f"{texto} - Maubot"))
-        await asyncio.sleep(4)
+        await asyncio.sleep(20)
 
     async def on_ready(self):
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
@@ -62,7 +62,7 @@ class App(commands.Bot):
         # await self.change_presence(activity=self.__activity)
         while True:
             # await self.barra_de_actividad(f"|  $help  |  {len(self.users)} Usuarios en  {len(self.guilds)} servidores | con 186 commandos", discord.Status.do_not_disturb)
-            await self.barra_de_actividad(f"|-> Processando $help y @mencion ", discord.Status.dnd)
+            await self.barra_de_actividad(f"|-> Processando m.help y @mencion ", discord.Status.dnd)
             await self.barra_de_actividad(f"|-> ¡Mirame en top.gg y bots.ondiscord.xyz! ", discord.Status.idle)
             await self.barra_de_actividad(f"|-> Preparandome para matar ", discord.Status.dnd)
             await self.barra_de_actividad(f"|-> Hackeando el systema de la nasa ", discord.Status.idle)
@@ -173,7 +173,7 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-        excepciones = ['command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
+        excepciones = ["You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
         if env.get('DEBUG'):
             for i in excepciones:
@@ -183,7 +183,7 @@ class App(commands.Bot):
                               title="Como sabes, los robots no son perfectos", 
                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
                               color=self.color).set_footer(
-                                  text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon $help [seccion]"
+                                  text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
                               ))
             Logger.error(f'ERROR: {str(exception)}')
             async with aiohttp.ClientSession() as session:
@@ -250,6 +250,10 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 15, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)
     async def prefix(self, ctx, prefix):
+                                
+        for i in "!,-,.,+,?,$,>,/,;,*,s!,=,m!,!!".split(","):
+            if str(prefix) == str(i):
+                return await ctx.send(embed=discord.Embed(description=f"{ctx.author.mention}, Los prefijos: `!, -, ., +, ?, $, >, /, ;, *, s!, =, m!, !!` no estan permitidos", color=color))
 
         with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
@@ -263,7 +267,7 @@ class Maubot(commands.Cog):
         e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/mwDBgubwdP)**")
         await ctx.send(embed=e)
 
-    @commands.command(description="Mira la info del bot o la config ($_bot info | $_bot config)")
+    @commands.command(description="Mira la info del bot o la config (m._bot info | m._bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _bot(self, ctx, inf_con):
         if inf_con == 'info':

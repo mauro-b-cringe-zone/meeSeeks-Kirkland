@@ -86,7 +86,7 @@ class Img(commands.Cog):
         image = self.imagefromURL(url)
         return self.buffer(image)
 
-    @commands.command(aliases=['dym'], description="$didyoumean [hola][adios]", usage="<[texto1]><[texto2]>")
+    @commands.command(aliases=['dym'], description="m.didyoumean [hola][adios]", usage="<[texto1]><[texto2]>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def didyoumean(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -162,7 +162,7 @@ class Img(commands.Cog):
     def urlify(self, word):
         return urlencode(word).replace('+', '%20')
 
-    @commands.command(description="$drake [hola][ola]", usage="<[texto1]><[texto2]>")
+    @commands.command(description="m.drake [hola][ola]", usage="<[texto1]><[texto2]>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def drake(self, ctx, *args):
         unprefixed = ' '.join(list(args))
@@ -260,7 +260,7 @@ class Img(commands.Cog):
         data = self.buffer(cropped_img)
         return data
 
-    @commands.command(description="$philosoraptor [lol][xd]", usage="<[texto1]><[texto2]>")
+    @commands.command(description="m.philosoraptor [lol][xd]", usage="<[texto1]><[texto2]>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def philosoraptor(self, ctx, *args):
         async with ctx.message.channel.typing():
@@ -453,7 +453,7 @@ class ImgSecundario(commands.Cog):
             t2 = args[1]
             url = f"https://vacefron.nl/api/npc?text1={t1}&text2={t2}".replace(" ", "%20")
             await ctx.send(embed=discord.Embed(color=color).set_image(url=url))
-        else: return await ctx.send("Escribe el segundo texto o pon **$help imgsecundario**")
+        else: return await ctx.send("Escribe el segundo texto o pon **m.help imgsecundario**")
 
     @commands.command(description="COME COME COME @usuario", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -475,17 +475,6 @@ class ImgSecundario(commands.Cog):
             try:
                 data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=captcha&url='+source+'&username='+av)["message"]
                 return await ctx.send(embed=discord.Embed(title='Tu captcha', color=color).set_image(url=data))
-            except Exception as e:
-                await ctx.send(" | ¡Oops! Un error generando tu captcha; `"+str(e)+"`")
-
-    @commands.command(description="Policia del lol ¿Què quiere?", usage="[usuario]")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def lolice(self, ctx, member):
-        source = getUserAvatar(ctx, member)
-        async with ctx.channel.typing():
-            try:
-                data = self.jsonisp('https://nekobot.xyz/api/imagegen?type=lolice&url='+source)["message"]
-                return await ctx.send(embed=discord.Embed(title='¿Policia?', color=color).set_image(url=data))
             except Exception as e:
                 await ctx.send(" | ¡Oops! Un error generando tu captcha; `"+str(e)+"`")
 
