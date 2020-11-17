@@ -138,6 +138,9 @@ class Servidor(commands.Cog):
         with open(env["JSON_DIR"] + "userslvl.json", "r") as f:
             users = json.load(f)
 
+        if users["active"][str(ctx.guild.id)] is None or users["active"][str(ctx.guild.id)] is False:
+            return await ctx.send(embed=discord.Embed(title="No se permiten los niveles", description=f"{ctx.author.mention} En este servidor no se admiten los niveles", color=color).set_footer(text="puedes poner m.levels para activarlo".capitalize()))
+
         if user is None:
             user = ctx.author
 
