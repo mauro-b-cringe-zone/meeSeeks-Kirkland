@@ -62,9 +62,9 @@ class Eventos():
         if dest is not None:
             b = await self._checkear_usuario_baneado(ctx, iniciador, dest)
             if b == "a":
-                return await ctx.send(embed=discord.Embed(title="Lo has baneado", description=f"{iniciador.mention} ya tienes ha ese usuario baneado. **No** puedes hablar con el", color=self.color_c).set_footer(text="Puedes poner $unbanchat <@usuario> para quitarlo de la lista"))
+                return await ctx.send(embed=discord.Embed(title="Lo has baneado", description=f"{iniciador.mention} ya tienes ha ese usuario baneado. **No** puedes hablar con el", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
             elif b == "b":
-                return await ctx.send(embed=discord.Embed(title="Te ha baneado", description=f"{iniciador.mention}, **No** puedes hablar con el porque {dest.mention} te tiene baneado", color=self.color_c).set_footer(text="Puedes poner $unbanchat <@usuario> para quitarlo de la lista"))
+                return await ctx.send(embed=discord.Embed(title="Te ha baneado", description=f"{iniciador.mention}, **No** puedes hablar con el porque {dest.mention} te tiene baneado", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
             elif b == "c":
                 j = await self.abrir(iniciador, dest)
                 if j == "Usuario ya en chat":
@@ -118,7 +118,7 @@ class ChatApp(commands.Cog):
 
         if str(ctx.author.id) in chats["baneos"]:
             if str(destinatario.id) in chats["baneos"][str(ctx.author.id)]:
-                return await ctx.send(embed=discord.Embed(title="Banear x 2", description=f"{ctx.author.mention}, {destinatario.mention} ya esta baneado en tu lista de baneos.", color=color).set_footer(text="Puedes poner $unbanchat <@usuario> para quitarlo de la lista"))
+                return await ctx.send(embed=discord.Embed(title="Banear x 2", description=f"{ctx.author.mention}, {destinatario.mention} ya esta baneado en tu lista de baneos.", color=color).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
             chats["baneos"][str(ctx.author.id)][str(destinatario.id)] = destinatario.id
             await ctx.send(embed=discord.Embed(title="Baneado", description=f"Se ha baneadp a {destinatario.mention} de tus chats", color=color))
         else:
@@ -144,11 +144,11 @@ class ChatApp(commands.Cog):
                 del chats["baneos"][str(ctx.author.id)][str(destinatario.id)]
                 if chats["baneos"][str(ctx.author.id)] == {}:
                     del chats["baneos"][str(ctx.author.id)]
-                await ctx.send(embed=discord.Embed(title="Desbaneado del chat", description=f"{ctx.author.mention}, se ha desbaneado en tu lista de baneos.", color=color).set_footer(text="Puedes poner $banchat <@usuario> para quitarlo de la lista"))
+                await ctx.send(embed=discord.Embed(title="Desbaneado del chat", description=f"{ctx.author.mention}, se ha desbaneado en tu lista de baneos.", color=color).set_footer(text="Puedes poner m.banchat <@usuario> para quitarlo de la lista"))
             else:
-                await ctx.send(embed=discord.Embed(title="No lo tienes como baneado", description=f"{ctx.author.mention}, no tienes a este usuario baneado.", color=color).set_footer(text="Puedes poner $banchat <@usuario> para quitarlo de la lista"))
+                await ctx.send(embed=discord.Embed(title="No lo tienes como baneado", description=f"{ctx.author.mention}, no tienes a este usuario baneado.", color=color).set_footer(text="Puedes poner m.banchat <@usuario> para quitarlo de la lista"))
         else:
-            return await ctx.send(embed=discord.Embed(title="Not tienes una lista de baneos", description=f"{ctx.author.mention}, No tienes una lista de baneos.", color=color).set_footer(text="Puedes poner $banchat <@usuario> para quitarlo de la lista"))
+            return await ctx.send(embed=discord.Embed(title="Not tienes una lista de baneos", description=f"{ctx.author.mention}, No tienes una lista de baneos.", color=color).set_footer(text="Puedes poner m.banchat <@usuario> para quitarlo de la lista"))
 
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)

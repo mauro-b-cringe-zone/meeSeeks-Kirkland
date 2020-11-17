@@ -25,7 +25,7 @@ from termcolor import cprint
 AUTH_HEADER = 'X-RapidAPI-Key'
 AUTH_KEY = env['COMP_KEY'] # Llave
 BASE_URL = 'https://judge0.p.rapidapi.com'
-PREFIX = '$'
+PREFIX = 'm.'
 NEWLINES_LIMIT = 10 
 CHARACTERS_LIMIT = 300
 

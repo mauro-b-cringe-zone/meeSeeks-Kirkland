@@ -45,7 +45,7 @@ class Moderation(commands.Cog):
         await ctx.send(embed=embed)
         
 
-    @commands.command(description="Desbanea a un baneado **uso: $unban <id del usuario>**", usage="<id del usuario>")
+    @commands.command(description="Desbanea a un baneado **uso: m.unban <id del usuario>**", usage="<id del usuario>")
     @commands.has_permissions(manage_messages=True)
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, member=None):
@@ -55,7 +55,7 @@ class Moderation(commands.Cog):
             embed = discord.Embed(title=f"Desbaneado", description=f"Se a desbaneado a {member.mention} del servidor",colour=color)
             return await ctx.send(embed=embed)
         else:
-            return await ctx.send("**uso: $unban <id del usuario>**")
+            return await ctx.send("**uso: m.unban <id del usuario>**")
         
 
     @commands.command(pass_context=True, description="Haz un haviso ha alguien", usage="<usuario> [razon]")

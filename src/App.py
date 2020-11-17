@@ -267,7 +267,7 @@ class Maubot(commands.Cog):
         e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/mwDBgubwdP)**")
         await ctx.send(embed=e)
 
-    @commands.command(description="Mira la info del bot o la config ($_bot info | $_bot config)")
+    @commands.command(description="Mira la info del bot o la config (m._bot info | m._bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _bot(self, ctx, inf_con):
         if inf_con == 'info':

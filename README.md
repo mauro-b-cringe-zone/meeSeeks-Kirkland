@@ -3,7 +3,7 @@
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos.
 Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y aparte de eso es un bot maravilloso
 
-`$help [Cog]`
+`m.help [Cog]`
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/maubg-debug/maubot?style=for-the-badge)
 ![GitHub issues](https://img.shields.io/github/issues-raw/maubg-debug/maubot?style=for-the-badge)
@@ -21,11 +21,11 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 ## Ayuda
 
-* El bot viene con una función `$help` que muestra la lista de todos los comandos disponibles.
+* El bot viene con una función `m.help` que muestra la lista de todos los comandos disponibles.
 * Puede escribir `!help [Cog]` para ver más información sobre cada comando.
 
 ## Prefijos
-* Los prefijos de Maubot son (!, ?, m.) y uno personalizado que es $ y puedes cambiarlo poniendo `$prefix <tu prefijo>` 
+* Los prefijos de Maubot son (!, ?, m.) y uno personalizado que es m. y puedes cambiarlo poniendo `m.prefix <tu prefijo>` 
 
 ## Moderacion basica
 
@@ -35,7 +35,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
   * **Mutear y Desmutear** Maubot al igual que con los comandos de expulsion y etc, Checkea si el usuario tiene permisos y el que este muteado no podra hablar en le chat
 
-  * **Warniciones** Maubot detecta si un usuario tiene mas de 5 warniviones `$warnlist [@usuario]` para ver las warniciones
+  * **Warniciones** Maubot detecta si un usuario tiene mas de 5 warniviones `m.warnlist [@usuario]` para ver las warniciones
 
   * **Cambios en el servidor** Maubot tambien puede hacer cambios en el servidor, como eliminar mensages, crear canales, etc.
 
@@ -64,11 +64,11 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
   * Maubot esta implementado con un equipo de musica para que tu fiesta siga marchosa 🎉
 * Niveles
   * Maubot tiene un gran sistema de niveles que te havisa cuando ayas suvido de nivel
-  * Tambien tiene un comando que lo puedes usar al poner `$rank` Y te dara la info de tu nivel
+  * Tambien tiene un comando que lo puedes usar al poner `m.rank` Y te dara la info de tu nivel
 * Economia
   * Maubot esta disponible con un sistema de economia con comandos como:
-    * `$balance [@usuario]`, `$rob <@usuario>`, `$slots`, `$shop [pagina]`, `$buy <objeto>`, `$sell <objeto>`, ...
-* Maubot tiene tambien un compilador lo podeis usar poniendo `$[lenguage]` <- O -> `$run --list` para ver los idiomas
+    * `m.balance [@usuario]`, `m.rob <@usuario>`, `m.slots`, `m.shop [pagina]`, `m.buy <objeto>`, `m.sell <objeto>`, ...
+* Maubot tiene tambien un compilador lo podeis usar poniendo `m.[lenguage]` <- O -> `m.run --list` para ver los idiomas
   * Si quereis podeis usarlo desde la [web](http://maubot.mooo.com/maucompilador)
 * Y MUCO MASSSSS......
 
@@ -76,21 +76,21 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 * Si tienes alguna sugerencia puedes unirte a [nuestro server](https://discord.gg/mwDBgubwdP) <- O -> Si tienes que contarnos un bug ve a [su github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)
 
-* Tambien puedes poner `$rate_bot <descripcion>` para darle nua reseña, `$request <descripcion>` Para alguna idea y `$report` Para reportar algun bug que tenga maubot.
+* Tambien puedes poner `m.rate_bot <descripcion>` para darle nua reseña, `m.request <descripcion>` Para alguna idea y `m.report` Para reportar algun bug que tenga maubot.
 
 # Ayuda
 * Comandos para comenzar con Maubot
-    * `$help (!help, m.help, ?help)`
+    * `m.help (!help, m.help, ?help)`
     * Con menciones
         * `<@730124969132163093>`
         * `<@730124969132163093> prefijos`
 
 # Chats
-* Maubot esta equipado con unos chats integrados que se podran activar poniendo `$startchat <@usuario>` y ya estaria
+* Maubot esta equipado con unos chats integrados que se podran activar poniendo `m.startchat <@usuario>` y ya estaria
 
 # Web
 * Aqui esta la [http://maubot.mooo.com](http://maubot.mooo.com)
-* `$links`
+* `m.links`
 
 ## Por supuesto mucho maaasss.....
 
@@ -100,4 +100,4 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 # Licencia 
 Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)
 
-* `$copyright`
+* `m.copyright`
