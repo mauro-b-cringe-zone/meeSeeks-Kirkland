@@ -53,8 +53,9 @@ class App(commands.Bot):
             await self.change_presence(status=status, activity=discord.Activity(type=discord.ActivityType.listening, name=f"{texto} - Maubot"))
         if ver:
             await self.change_presence(status=status, activity=discord.Activity(type=discord.ActivityType.watching, name=f"{texto} - Maubot"))
-        await self.change_presence(status=status, activity=discord.Game(name=f"{texto} - Maubot"))
-        await asyncio.sleep(20)
+        else:
+            await self.change_presence(status=status, activity=discord.Game(name=f"{texto} - Maubot"))
+        await asyncio.sleep(10)
 
     async def on_ready(self):
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
@@ -253,7 +254,7 @@ class Maubot(commands.Cog):
                                 
         for i in "!,-,.,+,?,$,>,/,;,*,s!,=,m!,!!".split(","):
             if str(prefix) == str(i):
-                return await ctx.send(embed=discord.Embed(description=f"{ctx.author.mention}, Los prefijos: `!, -, ., +, ?, $, >, /, ;, *, s!, =, m!, !!` no estan permitidos", color=color))
+                return await ctx.send(embed=discord.Embed(description=f"{ctx.author.mention}, \nLos prefijos: `!, -, ., +, ?, $, >, /, ;, *, s!, =, m!, !!`\n no estan permitidos", color=color))
 
         with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
             prefixes = json.load(f)
@@ -301,10 +302,8 @@ class Maubot(commands.Cog):
             em.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
             try:
                 em.description = self.bot.psa + '[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
-                # CAMBIAR LINK AL TENER UN SERVER DE VERDAD
             except AttributeError:
                 em.description = '[¡Unete a que esperas!](https://discord.gg/mwDBgubwdP)'
-                # CAMBIAR LINK AL TENER UN SERVER DE VERDAD
             em.add_field(name="Prefix", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix !**")
             em.add_field(name='rename_bot', value=f'Puedes usar este comando para ponerle in __nickname__ a Maubot.', inline=False)
             em.add_field(name='rate_bot <commentario>', value=f'Puedes darle un rating de 5 estrellas.', inline=False)
