@@ -146,6 +146,7 @@ class Player(wavelink.Player):
     async def connect(self, ctx, channel=None):
         if self.is_connected:
             raise AlreadyConnectedToChannel
+     
 
         channel = getattr(ctx.author.voice, "channel", channel)
         if channel is None:
