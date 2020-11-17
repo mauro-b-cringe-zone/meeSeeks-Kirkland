@@ -124,7 +124,7 @@ class Servidor(commands.Cog):
             guilds = json.load(f)
 
         if not str(ctx.guild.id) in guilds["active"]:
-            guilds["active"][str(ctx.guild.id)] = False
+            guilds["active"][str(ctx.guild.id)] = True
         else:
             guilds["active"][str(ctx.guild.id)] = not guilds["active"][str(ctx.guild.id)]
 
