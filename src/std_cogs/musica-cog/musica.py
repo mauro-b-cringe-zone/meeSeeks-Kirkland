@@ -12,6 +12,9 @@ from discord.ext import commands
 from utils.Logger.Logger import Logger
 
 from os import environ as env
+import threading
+from time import sleep
+from tqdm import tqdm
 
 URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
 OPTIONS = {
@@ -241,8 +244,15 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             if not [m for m in before.channel.members if not m.bot]:
                 await self.get_player(member.guild).teardown()
 
+    def cargar(self, texto, t):
+        for i in tqdm(range(1, 100), desc=texto, leave=False): 
+            sleep(t)
+
     @wavelink.WavelinkMixin.listener()
     async def on_node_ready(self, node):
+        x = threading.Thread(target=self.cargar, args=("Cargando musica", .01,))
+        x.start()
+        x.join()
         Logger.info(f"MUSICA Wavelink preparado en el nodo: `{node.identifier}`.", separador=True)
 
     @wavelink.WavelinkMixin.listener("on_track_stuck")
