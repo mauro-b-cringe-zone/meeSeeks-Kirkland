@@ -458,8 +458,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if upcoming:
             canciones = ""
             for t in upcoming[:show]:
-                canciones += t.title
-            embed.add_field(name="Siguiente", value="\n".join(), inline=False)
+                canciones += t.title + "\n"
+            embed.add_field(name="Siguiente", value=canciones, inline=False)
 
         msg = await ctx.send(embed=embed)
 
