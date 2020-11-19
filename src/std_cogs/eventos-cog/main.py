@@ -105,12 +105,13 @@ class Servidor(commands.Cog):
         experience = users[str(user.id)]["experience"]
         lvl_start = users[str(user.id)]["level"]
         lvl_end = int(experience ** (1/4))
+        guilds = False
         try:
             with open(env["JSON_DIR"] + "userslvl.json") as f:
                 f = json.load(f)
             guilds = f["active"][str(channel.guild.id)]
         except:
-            guilds = False
+            pass
 
         if lvl_start < lvl_end:
             if guilds == True:
