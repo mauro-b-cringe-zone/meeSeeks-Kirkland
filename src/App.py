@@ -383,8 +383,8 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def avatar(self, ctx, member: discord.Member = None):
         member = ctx.author if member == None else member
-        embed = discord.Embed(title=f"**Avatar de -- ({member})**", description=f"[Link]({member.avatar_url})",colour=color)
-        embed.set_image(url=f"{member.avatar_url}")
+        embed = discord.Embed(title=f"**Avatar de -- ({member})**", description=f"[Link]({member.avatar_url_as(static_format='png')})",colour=color)
+        embed.set_image(url=f"{member.avatar_url_as(static_format='png')}")
         await ctx.send(embed=embed)
 
     @commands.command(description="Mira el token del bot")

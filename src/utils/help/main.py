@@ -23,8 +23,8 @@ class Help(commands.Cog):
         embed.description = "Maubot tiene unos docs por si quieres tener mas informacion, si quieres visitarlos puedes ir [aqui](https://maubot.gitbook.io/maubot/)"
 
         CogsNecesitados = []
-        for i in range(6):
-            x = i + (int(cog) - 1) * 6
+        for i in range(4):
+            x = i + (int(cog) - 1) * 4
             try:
                 CogsNecesitados.append(cogs[x])
             except IndexError as e:
@@ -51,10 +51,10 @@ class Help(commands.Cog):
             if cog == "0":
                 embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
                 cogs = [c for c in self.bot.cogs.keys()]
-                paginasTotales = math.ceil(len(cogs) / 6)
                 embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://maubot.gitbook.io/maubot/)"
                 embedhs.add_field(name="->   Buscar por paginas", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
                 embedhs.add_field(name="->   Buscar por cogs", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
+                embedhs.add_field(name="-> Cogs", value=f"{cogs}")
                 return await ctx.send(embed=embedhs)
             embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
 
