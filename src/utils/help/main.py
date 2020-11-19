@@ -20,7 +20,7 @@ class Help(commands.Cog):
         embed.set_footer(
             text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
         )
-        embed.description = "Maubot tiene unos docs por si quieres tener mas informacion, si quieres visitarlos puedes ir [aqui](https://maubot.gitbook.io/maubot/)"
+        embed.description = "Maubot tiene unos docs por si quieres tener mas informacion, si quieres visitarnos puedes ir **[aqui](http://maubot.mooo.com)**"
 
         CogsNecesitados = []
         for i in range(4):
@@ -37,7 +37,7 @@ class Help(commands.Cog):
                 if comando.hidden:
                     continue
 
-                ListaDeComandos += f"{ctx.prefix}{comando.name},  "
+                ListaDeComandos += f"`{ctx.prefix}{comando.name}`,  "
             ListaDeComandos = ListaDeComandos[:-3]
             ListaDeComandos += "\n"
             embed.add_field(name=f"->  {cog}\n", value=ListaDeComandos, inline=False)
@@ -71,49 +71,6 @@ class Help(commands.Cog):
                 embedh = await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
 
                 msg = await ctx.send(embed=embedh)
-                # emos = ["◀️", "▶️", "❌"]
-                # def _check(reaction, user):
-                #     return (
-                #         reaction.emoji in emos
-                #         and user == ctx.author
-                #         and reaction.message.id == msg.id
-                #     )
-                # for n in range(50):
-                #     for i in ["◀️", "▶️", "❌"]:
-                #         await msg.add_reaction(i)                    
-                #     try:
-                #         reaction, user = await self.bot.wait_for("reaction_add", check=_check)
-                #     except Exception as e:
-                #         cprint(f"[Log] Un error en help: {e}", "red")
-                #     else:
-                #         try:
-                #             if reaction.emoji == emos[0]:
-                #                 if cog != 1:
-                #                     # await msg.edit(embed=discord.Embed())
-                #                     await msg.edit(embed=await self.ayuda(ctx, cog-1, cogs, paginasTotales, embed))
-                #                 await msg.clear_reactions()
-                #             if reaction.emoji == emos[1]:
-                #                 cog += 1
-                #                 print(cogs)
-                #                 print(paginasTotales)
-                #                 print(embed)
-                #                 # await msg.edit(embed=discord.Embed())
-                #                 await msg.edit(embed=await self.ayuda(ctx, cog, cogs, paginasTotales, embed))
-                #                 await msg.clear_reactions()
-                #             if reaction.emoji == emos[2]:
-                #                 await msg.delete()
-                #                 return
-                #         except:
-                #             if reaction.emoji == emos[0]:
-                #                 if cog != 1:
-                #                     await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
-                #                     await msg.clear_reactions()
-                #             if reaction.emoji == emos[1]:
-                #                 await msg.edit(embed=await self.ayuda(ctx, cog+1, cogs, paginasTotales, embed))
-                #                 await msg.clear_reactions()
-                #             if reaction.emoji == emos[2]:
-                #                 await msg.delete()
-                #                 return
                 
 
             elif re.search(r"[a-zA-Z]", str(cog)):
