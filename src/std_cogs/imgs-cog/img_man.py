@@ -12,6 +12,7 @@ import random
 from os import environ as env
 import datetime
 import os
+
 color =   int(env["COLOR"]) 
 
 def randomhash():
@@ -497,20 +498,30 @@ class ImgSecundario(commands.Cog):
             capt = 'Maubot' if len(list(args))==0 else '+'.join(list(args))
             await ctx.send(embed=discord.Embed(title="Captcha",).set_image(url='https://useless-api.vierofernando.repl.co/captcha?text={}'.format(capt)))
 
-
-    @commands.command(description="Memes random para pasar el tiempo")
+    @commands.command(description="QUEMALO")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def meme(self, ctx):
-        data = self.jsonisp("https://meme-api.herokuapp.com/gimme")
-        embed = discord.Embed(colour = color)
-        from googletrans import Translator
-        trans_title = Translator().translate(data["title"], src='en', dest='es')
-        embed.set_author(name=trans_title.text, url=data["postLink"])
-        if data["nsfw"]:
-            return await ctx.send("Lo siento continuemos")
-        else:
-            embed.set_image(url=data["url"])
-        await ctx.send(embed=embed)
+    async def burn(self, ctx, member: discord.Member = None):
+        if member is None:
+            member = ctx.author
+        from uselessapi import UselessAPI
+        api = UselessAPI()
+        async with ctx.channel.typing():
+            img = member.avatar_url_as(static_format='png')
+            img = api.burn(image=img)
+            await ctx.send(embed=discord.Embed(title="¿Qué es esto?", color=color).set_image(url=img.full_response.url))
+
+    @commands.command(description="Me das muscho miedo")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def door(self, ctx, member: discord.Member = None):
+        if member is None:
+            member = ctx.author
+        from uselessapi import UselessAPI
+        api = UselessAPI()
+        async with ctx.channel.typing():
+            img = member.avatar_url_as(static_format='png')
+            img = api.door(image=img)
+            await ctx.send(embed=discord.Embed(title="Me das miedo", color=color).set_image(url=img.full_response.url))
+
 
     # @commands.command(aliases="webcapt,captureweb,web,webcapture".split(","), description="Mira una web sin tener que ir ha eya", usage="<web>", enabled=False)
     # @commands.cooldown(1, 30, commands.BucketType.user)
@@ -527,6 +538,16 @@ class ImgSecundario(commands.Cog):
     #     embed.set_image(url=str(url))
     #     embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url)})**")
     #     await main.edit(content="", embed=embed)
+
+    @commands.command(description="Mira a un usuario desde un pimplode", usage="[Usuario]")
+    async def pimplode(self, ctx, member: discord.Member = None):
+        if member is None:
+            member = ctx.author
+        async with ctx.typing():
+            from uselessapi import UselessAPI
+            img = member.avatar_url_as(static_format='png')
+            img = UselessAPI().implode(image=img)
+            await ctx.send(embed=discord.Embed(title="...", color=color).set_image(url=img.full_response.url))
 
 def setup(bot):
     bot.add_cog(Img(bot))

@@ -11,6 +11,7 @@ from consola.main import Consola
 from tqdm import tqdm 
 from time import sleep 
 import threading
+from termcolor import cprint
 
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
@@ -116,7 +117,11 @@ def preparar():
 
     y = threading.Thread(target=cargar, args=("Haciendo login", .01,))
     y.start()
-    app.run(token)
+    try:
+        app.run(token)
+    except Exception as e:
+        y.join()
+        cprint(f"Un error con el login: {e}", "red")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

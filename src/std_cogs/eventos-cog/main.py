@@ -105,9 +105,13 @@ class Servidor(commands.Cog):
         experience = users[str(user.id)]["experience"]
         lvl_start = users[str(user.id)]["level"]
         lvl_end = int(experience ** (1/4))
+<<<<<<< HEAD
 
         guilds =  False
 
+=======
+        guilds = False
+>>>>>>> 3aa1a8204e8ba8f9b913ac6555030d9ca17d8f9a
         try:
             with open(env["JSON_DIR"] + "userslvl.json") as f:
                 f = json.load(f)
