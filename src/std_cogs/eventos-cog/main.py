@@ -106,7 +106,7 @@ class Servidor(commands.Cog):
         lvl_start = users[str(user.id)]["level"]
         lvl_end = int(experience ** (1/4))
 
-	guilds =  False
+        guilds =  False
 
         try:
             with open(env["JSON_DIR"] + "userslvl.json") as f:
