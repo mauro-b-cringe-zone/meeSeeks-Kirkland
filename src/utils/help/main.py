@@ -37,8 +37,8 @@ class Help(commands.Cog):
                 if comando.hidden:
                     continue
 
-                ListaDeComandos += f"`{ctx.prefix}{comando.name}`,  "
-            ListaDeComandos = ListaDeComandos[:-3]
+                ListaDeComandos += f"`{ctx.prefix}{comando.name}` **|** "
+            ListaDeComandos = ListaDeComandos[:-6]
             ListaDeComandos += "\n"
             embed.add_field(name=f"->  {cog}\n", value=ListaDeComandos, inline=False)
         return embed
@@ -57,8 +57,8 @@ class Help(commands.Cog):
                 embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
                 cogsL = ""
                 for i in cogs:
-                    cogsL += f"`{i}`, "
-                embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"{cogsL[:-2]}", inline=False)
+                    cogsL += f"`{i}` **|** "
+                embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"{cogsL[:-6]}", inline=False)
                 return await ctx.send(embed=embedhs)
             embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
 

@@ -26,6 +26,8 @@ OPTIONS = {
 }
 
 color = int(env["COLOR"])
+
+
 class AlreadyConnectedToChannel(commands.CommandError):
     pass
 
@@ -172,12 +174,12 @@ class Player(wavelink.Player):
             self.queue.add(*tracks.tracks)
         elif len(tracks) == 1:
             self.queue.add(tracks[0])
-            await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color).set_footer(text="Se a añadido la primera cancion de la lista", icon_url=ctx.author.avatar_url))
+            await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color, url=tracks[0].uri).add_field(name="Autor", value=tracks[0].author).add_field(name="Duracion", value=f"{int(tracks[0].duration) / 60}  Minutos").add_field(name="Musica puesta por", value=ctx.author.mention).set_footer(icon_url=ctx.author.avatar_url).set_image(url=tracks[0].thumb))
         else:
             track = await self.choose_track(ctx, tracks)
             if track is not None:
                 self.queue.add(track)
-                await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color).set_footer(icon_url=ctx.author.avatar_url))
+                await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **[{tracks[0].title}]({tracks[0].uri})** a la cola", color=color, url=tracks[0].uri).add_field(name="Autor", value=tracks[0].author).add_field(name="Duracion", value=f"{int(int(tracks[0].duration) / 60)}  Minutos").add_field(name="Musica puesta por", value=ctx.author.mention).set_footer(icon_url=ctx.author.avatar_url).set_image(url=tracks[0].thumb))
 
         if not self.is_playing and not self.queue.is_empty:
             await self.start_playback()
@@ -287,7 +289,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
         for node in nodes.values():
             await self.wavelink.initiate_node(**node)
-
+            
     def get_player(self, obj):
         if isinstance(obj, commands.Context):
             return self.wavelink.get_player(obj.guild.id, cls=Player, context=obj)
@@ -454,7 +456,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
         embed = discord.Embed(
             title="Cola de canciones",
-            description=f"Mostrando hasta las siguientes {show} pistas",
+            description=f"Mostrando hasta las siguientes **{show}** pistas",
             colour=color,
             timestamp=dt.datetime.utcnow()
         )
