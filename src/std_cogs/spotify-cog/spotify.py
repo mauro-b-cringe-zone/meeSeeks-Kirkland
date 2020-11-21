@@ -266,7 +266,7 @@ class Spotify(commands.Cog):
                 try:
                     return await ctx.send(file=discord.File(spotify_gen2(), 'spotify.png'))
                 except: return 
-            await ctx.send(file=discord.File(spotify_gen2(act.album_cover_url, act.artist, act.title, act.album_title, self.get_color_accent(act.album_cover_url, right=True), strftime('%M:%S', gmtime(round((t.now() - act.created_at).total_seconds()))), False, False), 'spotify.png'))
+            await ctx.send(file=discord.File(self.spotify_gen2(act.album_cover_url, act.artist, act.title, act.album_title, self.get_color_accent(act.album_cover_url, right=True), strftime('%M:%S', gmtime(round((t.now() - act.created_at).total_seconds()))), False, False), 'spotify.png'))
 
 def setup(bot):
     bot.add_cog(Spotify(bot)) 
