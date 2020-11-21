@@ -59,3 +59,4 @@ pathlib==1.0.1
 tqdm
 wavelink
 uselessapi
+legofy

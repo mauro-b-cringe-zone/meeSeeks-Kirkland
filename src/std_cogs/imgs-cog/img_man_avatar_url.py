@@ -1,3 +1,4 @@
+
 import aiohttp
 from discord import User, Message, File
 from discord.ext.commands import BadArgument, MissingRequiredArgument
@@ -16,6 +17,10 @@ from io import BytesIO
 import discord
 import urllib
 from os import environ as env
+
+import legofy
+import requests
+
 color = int(env["COLOR"])
 
 async def fetch_media(session, url):
@@ -86,15 +91,20 @@ class ImgAvatarUser(commands.Cog):
             await ctx.send(file=File(await gray_scale_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"gray_scale_{ctx.message.author}.gif"))
 
-    @commands.command(description="Pinchas jaja lol", usage="[usuario]")
+    @commands.command(description="Estas cuadrado", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def glass(self, ctx, target: User):
-        if ctx.message.author != target:
-            await ctx.send(file=File(await glass_pic(str(target.avatar_url_as(static_format='png'))),
-                           f"glass_{target}.gif"))
-        else:
-            await ctx.send(file=File(await glass_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
-                           f"glass_{ctx.message.author}.gif"))
+    async def lego(self, ctx, target: User = None):
+        if target is None:
+            target = ctx.author
+        response = requests.get(target.avatar_url_as(static_format="png"))
+        async with ctx.channel.typing():
+            file = open(env["JSON_DIR"] + "avatars/av.png", "wb")
+            file.write(response.content)
+            file.close()
+            img = legofy.main(env["JSON_DIR"] + "avatars/av.png")
+            file = discord.File(fp=env["JSON_DIR"] + "avatars/av_lego.png")
+            await ctx.send("Enjoy :>", file=file)
+        
 
     @commands.command(description="Convierte un usuario en sepia", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
