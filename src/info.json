@@ -1,0 +1,46 @@
+{
+    "ids": {
+        "creador": 700812754855919667,
+        "bot": 730124969132163093
+    },
+    "emojis": {
+        "maubot": "<:maubot:774967705831997501>",
+        "estados": {
+            "online": "<:online:774982837354496021>",
+            "offline": "<:offline:774982964592640030>",
+            "idle": "<:idle:774983296533790730>",
+            "dnd": "<:dnd:774983232541163541>"
+        },
+        "list": "<:list:774983585727119391>",
+        "github": "<:github:774580260506435594>",
+        "airplane": "<:airplane:774982199312121876>",
+        "checks": {
+            "on": "<:checkon:774982765577240578>",
+            "off": "<:checkoff:774982901942714398>"
+        },
+        "discord": "<:discord:774580580019994644>",
+        "shields": {
+            "warn": "<:warn:774582406547898398>",
+            "yes": "<:yesshield:774582109313433610>"
+        },
+        "ticks": {
+            "poss": "<:greentick:774983063435214869>",
+            "neg": "<:redtick:774983128581668875>",
+            "circulados": {
+                "poss": "<:roundedcheckmark:774580783092334604>",
+                "neg": "<:lightno:774581319367655424>"
+            },
+            "dedos_gordos": {
+                "verde": "<:thumbsup1:774580080726900757>",
+                "rojo": "<:thumbsdown1:774580193675051048>"
+            }
+        }
+    },
+    "colores": {
+        "color": 9549258,
+        "error": "0x00fbff"
+    },
+    "servidor": 774577061893242930,
+    "inicio": "python ./src/main.py --cmd run",
+    "web": "http://maubot.mooo.com"
+}
