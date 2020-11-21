@@ -12,6 +12,8 @@ from colorthief import ColorThief
 from time import gmtime, strftime
 
 from os import environ as env
+import asyncio
+import numpy as np
 
 color = int(env["COLOR"])
 
@@ -166,6 +168,84 @@ class Spotify(commands.Cog):
         
         return self.buffer(MAIN)
 
+    async def spotify_gen2(self, album_cover, artist, title, album_title, dom_color, timestamp, local_file, hidden):
+            smallfont = ImageFont.truetype(
+                './src/utils/fonts/Arial-Unicode-MS.ttf', size=40)
+            bigfont = ImageFont.truetype(
+                './src/utils/fonts/Arial-Unicode-MS.ttf', size=50)
+            boldfont = ImageFont.truetype(
+                './src/utils/fonts/Arial-Unicode-Bold.ttf', size=60)
+
+            width = 1280
+            height = 400
+
+            if hidden:
+                width -= 100
+                height -= 100
+
+            canvas = Image.new('RGB', (width, height), dom_color[0])
+
+            img = Image.open(album_cover).convert('RGBA').resize((height, height))
+            canvas_fade = await self.fade(canvas.crop((0, 0, height, height)), 'right', 58 if hidden else 78)
+
+            canvas.paste(img, (width - height, 0), img)
+            canvas.paste(canvas_fade, (width - height, 0), canvas_fade)
+
+            texts = (boldfont, title), (bigfont, artist)
+            text_area = width - height - 50
+            title, artist, fontcolor = await asyncio.gather(*([self.get_text(f, t, text_area) for f, t in texts] + \
+                                                [self.get_font_color(*dom_color)]))
+            alt_color = [self.get_alt_color(fontcolor, i, dom_color[0]) for i in (20, 30)]
+            alt_color.append(fontcolor)
+
+            reverse = self.get_luminosity(dom_color[0]) > 128
+            alt_color, lighter_color, fontcolor = sorted(alt_color, key=self.get_luminosity, reverse=reverse)
+
+            spotify_logo = Image.open('./docs/images/spotify.png').convert('RGBA').resize((50, 50))
+            data = np.array(spotify_logo)
+            red, green, blue, alpha = data.T
+            non_transparent_areas = alpha > 0
+            data[..., :-1][non_transparent_areas.T] = lighter_color
+
+            spotify_logo = Image.fromarray(data)
+            canvas.paste(spotify_logo, (50, 50), spotify_logo)
+
+            draw = ImageDraw.Draw(canvas)
+
+            spotify_text = 'Spotify \u2022'
+            if local_file:
+                album_title = 'Local Files'
+            else:
+                album_title = await self.get_text(smallfont, f'{album_title}', width - height - 280)
+
+            draw.text((120, 50), spotify_text, font=smallfont, fill=lighter_color)
+            draw.text((280, 50), album_title, font=smallfont, fill=alt_color)
+            draw.text((50, 110), title, font=boldfont, fill=fontcolor)
+            draw.text((50, 190), artist, font=bigfont, fill=alt_color)
+
+            if hidden:
+                y1 = 70
+                y2 = 80
+            else:
+                y1 = 80
+                y2 = 70
+
+            draw.line(((width-90, y1), (width-79, y2)), fill=lighter_color, width=5)
+            draw.line(((width-81, y2), (width-70, y1)), fill=lighter_color, width=5)
+
+            await self.add_corners(canvas, 50)
+            if hidden:
+                return canvas
+
+            rectangle_length = timestamp[2] / 100 * (width - 100)
+            elapsed_bar = self.round_rectangle((width - 100, 10), 5, (*lighter_color, 255)).crop((0, 0, int(rectangle_length), 10))
+            bar = self.round_rectangle((width - 100, 10), 5, (*lighter_color, 150))
+
+            canvas.paste(bar, (50, 300), bar)
+            canvas.paste(elapsed_bar, (50, 300), elapsed_bar)
+
+            r = 15
+
     @commands.command(aliases='spot,splay,listeningto,sp'.split(","))
     async def spotify(self, ctx, *args):
         source, act = await self.getUser(ctx, tuple([
@@ -184,9 +264,9 @@ class Spotify(commands.Cog):
             print(act)
             if force:
                 try:
-                    return await ctx.send(file=discord.File(self.custom_panel(spt=act), 'spotify.png'))
+                    return await ctx.send(file=discord.File(spotify_gen2(), 'spotify.png'))
                 except: return 
-            await ctx.send(file=discord.File(self.custom_panel(spt=act), 'spotify.png'))
+            await ctx.send(file=discord.File(spotify_gen2(act.album_cover_url, act.artist, act.title, act.album_title, self.get_color_accent(act.album_cover_url, right=True), strftime('%M:%S', gmtime(round((t.now() - act.created_at).total_seconds()))), False, False), 'spotify.png'))
 
 def setup(bot):
     bot.add_cog(Spotify(bot)) 
