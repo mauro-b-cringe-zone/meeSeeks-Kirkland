@@ -4,7 +4,7 @@ from discord.ext import commands
 from os import environ as env
 import inspect
 
-color = int(env["color"])
+color = int(env["COLOR"])
 
 class Source(commands.Cog):
 
