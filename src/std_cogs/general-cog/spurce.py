@@ -29,7 +29,7 @@ class Source(commands.Cog):
         lines_extension = f"#L{first_line_no}-L{first_line_no+len(lines)-1}" # Conseguimos la linea final        
         linea = f"{url}{lines_extension}"
         
-        msg = await ctx.send(embed=discord.Embed(color=color, title=f"<:github:774580260506435594> Comando: {cmd.name}", description=f"<:list:774983585727119391> El comando se puede encontrar **[aqui]({linea})**").add_field(name="Descripcion", value=cmd.description if cmd.description else "Este comando no tiene descripcion").set_thumbnail(url=self.logo))
+        msg = await ctx.send(embed=discord.Embed(color=color, title=f"<:github:774580260506435594> | Comando: {cmd.name}", description=f"<:list:774983585727119391> El comando se puede encontrar **[aqui]({linea})**").add_field(name="Descripcion", value=cmd.description if cmd.description else "Este comando no tiene descripcion").set_thumbnail(url=self.logo))
         await msg.add_reaction("<:github:774580260506435594>")
 
 def setup(bot):
