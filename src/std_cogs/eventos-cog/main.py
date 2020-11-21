@@ -243,7 +243,7 @@ class Servidor(commands.Cog):
             Estoy seguro de que tu y yo seremos los mejores socios de la historia asique, gracias por invitarme a\n-> **{guild.name}**.
 
             **Los prefijos de los comandos son: `&`, `m.`, `m-`, `@mencion`** - `&` Es custom\n
-            Esos son mis prefijos, siempre puedes hacerme menciones con **<!@{self.bot.user.id}>**. 
+            Esos son mis prefijos, siempre puedes hacerme menciones con **{self.bot.user.mention}**. 
             Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
             para cambiar de prefijo tienes que poner **m.prefix <nuevo prefijo>** (NO USES LOS BRACKETS).
             Para una lista de commando solo tienes que poner **m.help** y te saldran tooodos los comandos. 

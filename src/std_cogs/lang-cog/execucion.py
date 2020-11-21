@@ -191,7 +191,7 @@ LANGUAGES = {
         'pascal': 67, 'php': 68, 'prolog': 69, 'python': 71,
         'py': 71, 'ruby': 72, 'rust': 73,
         'typescript': 74, 'ts': 74
-        }
+    }
 }
 
 
@@ -429,16 +429,16 @@ class Execution(commands.Cog):
         Esto evita el abuso de salida grande que molesta a los usuarios en el chat.
         """
         if len(output) > 300 or output.count("\n") > 10:
-            embed.description = f"Salida demasiado grande - [Salida completa](http://maubot.mooo.com/maucompilador/?{token})"
+            embed.description = f"Salida demasiado grande - [Salida completa](http://maubot.mooo.com/compilador.html?{token})"
 
             if output.count("\n") > 10:
                 output = "\n".join(output.split("\n")[:10]) + "\n(...)"
             else:
                 output = output[:300] + "\n(...)"
         else:
-            embed.description = f"Edite este código en un IDE en línea - [Aqui](http://maubot.mooo.com/maucompilador/?{token})"
+            embed.description = f"Edite este código en un IDE en línea - [Aqui](http://maubot.mooo.com/compilador.html?{token})"
 
-        embed.add_field(name="Salida", value=f"```yaml\n{output}```", inline=False)
+        embed.add_field(name="Salida:", value=f"```yaml\n{output}```", inline=False)
         return embed
     
     @staticmethod
@@ -490,7 +490,7 @@ class Execution(commands.Cog):
         
         Despoja:
             código envuelto en comillas invertidas `(código de una línea)
-            código envuelto en triple backtick `` `(código multilínea)
+            código envuelto en triple backtick ```(código multilínea)
             código envuelto en comillas triples y
                  palabra clave del lenguaje `` python (resaltado de sintaxis)
         """
