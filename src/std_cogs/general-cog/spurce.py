@@ -11,11 +11,12 @@ class Source(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.url_base = "https://github.com/maubg-debug/maubot/"
+        self.logo = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
 
     @commands.command(description="Mira el codigo fuente de un comando", usage="[comando]", aliases="command,src".split(","))
     async def source(self, ctx, comando=None):
         if comando is None:
-            return await ctx.send(embed=discord.Embed(title="Codigo fuente de Maubot", description=f"Puedes mirarlo dandole al **[link]({self.url_base})**", color=color).set_thumbnail(url="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"))
+            return await ctx.send(embed=discord.Embed(title="Codigo fuente de Maubot", description=f"Puedes mirarlo dandole al **[link]({self.url_base})**", color=color).set_thumbnail(url=self.logo))
         try:
             cmd = self.bot.get_command(comando)
             root = cmd.module.replace(".", "/") + ".py"
@@ -28,7 +29,8 @@ class Source(commands.Cog):
         lines_extension = f"#L{first_line_no}-L{first_line_no+len(lines)-1}" # Conseguimos la linea final        
         linea = f"{url}{lines_extension}"
         
-        await ctx.send(embed=discord.Embed(color=color, title=f"Comando: {cmd.name}", description=f"<:list:774983585727119391> El comando se puede encontrar **[aqui]({linea})**").add_field(name="Descripcion", value=cmd.description))
+        msg = await ctx.send(embed=discord.Embed(color=color, title=f"<:github:774580260506435594> Comando: {cmd.name}", description=f"<:list:774983585727119391> El comando se puede encontrar **[aqui]({linea})**").add_field(name="Descripcion", value=cmd.description if cmd.description else "Este comando no tiene descripcion").set_thumbnail(url=self.logo))
+        await msg.add_reaction("<:github:774580260506435594>")
 
 def setup(bot):
     bot.add_cog(Source(bot))
