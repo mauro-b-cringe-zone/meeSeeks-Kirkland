@@ -243,17 +243,17 @@ class Servidor(commands.Cog):
             Estoy seguro de que tu y yo seremos los mejores socios de la historia asique, gracias por invitarme a\n-> **{guild.name}**.
 
             **Los prefijos de los comandos son: `&`, `m.`, `m-`, `@mencion`** - `&` Es custom\n
-            Esos son mis prefijos, siempre puedes hacerme menciones con **<!@{self.bot.user.id}**. 
+            Esos son mis prefijos, siempre puedes hacerme menciones con **<!@{self.bot.user.id}>**. 
             Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
             para cambiar de prefijo tienes que poner **m.prefix <nuevo prefijo>** (NO USES LOS BRACKETS).
             Para una lista de commando solo tienes que poner **m.help** y te saldran tooodos los comandos. 
             
-            ¡Y se enviara un mensaje a mi desarroyador si pones `m.rate_bot <descripcion>`, `report <error>`, `request <cosa nueva>`! Cada uno de los comandos seran respectivos a los nombres
+            ¡Y se enviara un mensaje a mi desarroyador si pones `m.rate_bot <descripcion>`, `m.report <error>`, `m.request <cosa nueva>`! Cada uno de los comandos seran respectivos a los nombres
             {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)
             
             Puedes verme en:
-            -> [top.gg](https://top.gg/bot/730124969132163093)
-            -> [bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)
+            -> **[top.gg](https://top.gg/bot/730124969132163093)**
+            -> **[bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)**
             """, colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
 
