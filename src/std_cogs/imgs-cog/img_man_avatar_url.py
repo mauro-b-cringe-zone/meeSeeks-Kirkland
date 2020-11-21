@@ -102,8 +102,7 @@ class ImgAvatarUser(commands.Cog):
             file.write(response.content)
             file.close()
             img = legofy.main(env["JSON_DIR"] + "avatars/av.png")
-            file = discord.File(fp=env["JSON_DIR"] + "avatars/av_lego.png")
-            await ctx.send("Enjoy :>", file=file)
+            await ctx.send(embed=discord.Embed(color=int(color), title="Estas cuadrado").set_image(url=f"attachment://{env['JSON_DIR']}avatars/av_lego.png"))
         
 
     @commands.command(description="Convierte un usuario en sepia", usage="[usuario]")
