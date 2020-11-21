@@ -96,9 +96,9 @@ class Creador(commands.Cog):
             try:
                 res = eval(unprefixed.replace('"', "'"))
                 if isawaitable(res): 
-                    await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 Input:```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(await res)+'```Typo de objeto:```py\n'+str(type(await res))+'```', color=color))
+                    await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 **Input:**```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(await res)+'```**Typo de objeto:**```py\n'+str(type(await res))+'```', color=color))
                 else: 
-                    await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 Input:```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(res)+'```Typo de objeto:```py\n'+str(type(res))+'```', color=color))
+                    await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 **Input:**```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(res)+'```**Typo de objeto:**```py\n'+str(type(res))+'```', color=color))
             except Exception as e:
                 if 'cannot reuse already awaited coroutine' in str(e): 
                     return
@@ -129,7 +129,7 @@ class Creador(commands.Cog):
     @commands.is_owner()
     async def restart(self, ctx):
         # await ctx.send('Hasta luego!')
-        embed = discord.Embed(color=color)
+        embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **10s**")
         embed.set_author(name="Reiniciando...")
         try:
             await ctx.send(embed=embed)

@@ -239,19 +239,22 @@ class Servidor(commands.Cog):
         def check(event):
             return event.target.id == self.bot.user.id
         bot_entry = await guild.audit_logs(action=discord.AuditLogAction.bot_add).find(check)
-        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f"""<:maubot:774967705831997501> ¡Hola! Mi nombre es **{self.bot.user.name}**, Y soy el responsable que te ayudara 
-            a ganar partidas en el destini y `hacer tu server mejor` porque tu eres 
-            uno de los mejores socios que voy a tener, asique, gracias por invitarme a **{guild.name}**.
+        msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f"""<:maubot:774967705831997501> ¡Hola! Mi nombre es **{self.bot.user.name}**, Mi dever es hacer que tu servidor como tu se diviertan los mas posible
+            Estoy seguro de que tu y yo seremos los mejores socios de la historia asique, gracias por invitarme a\n-> **{guild.name}**.
 
-            **Los prefijos de los comandos son: `&`, `m.`, `m-`**\n
-            Esos son mis prefijos, siempre puedes hacerme menciones con **@{self.bot.user.name}**. 
+            **Los prefijos de los comandos son: `&`, `m.`, `m-`, `@mencion`** - `&` Es custom\n
+            Esos son mis prefijos, siempre puedes hacerme menciones con **<!@{self.bot.user.id}**. 
             Si otro bot esta usando el mismo prefijo. `deves anikilarlo` es broma
-            para cambiar de prefijo tienes que poner **m.server** y luego **m.prefix <nuevo prefijo>** (NO USES LOS BRACKETS).
-            Para una lista de commando solo tienes que poner m.help y te saldran tooodos los comandos. 
+            para cambiar de prefijo tienes que poner **m.prefix <nuevo prefijo>** (NO USES LOS BRACKETS).
+            Para una lista de commando solo tienes que poner **m.help** y te saldran tooodos los comandos. 
             
-            ¡Y se enviara un mensaje a mi desarroyador si pones `m.rate_bot <descripcion>`! por si quieres poner una nueva cosa nueva en el bot, o poner un bug, 
-            mantente actualizado con las nuevas funciones, o si solo quieres mas ayuda, mira el server oficial de 
-            {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)""", colour=color))
+            ¡Y se enviara un mensaje a mi desarroyador si pones `m.rate_bot <descripcion>`, `report <error>`, `request <cosa nueva>`! Cada uno de los comandos seran respectivos a los nombres
+            {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)
+            
+            Puedes verme en:
+            -> [top.gg](https://top.gg/bot/730124969132163093)
+            -> [bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)
+            """, colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
 
     
