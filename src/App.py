@@ -286,14 +286,14 @@ class Maubot(commands.Cog):
             em.add_field(name="Tardanza de respuesta", value=f"> {self.bot.ws.latency * 1000:.0f} ms")        
             em.add_field(name="Color de maubot", value=f"> {color}")       
             c = self.bot.get_user(700812754855919667)
-            em.add_field(name="Creador de maubot", value=f"> {c.name}")         
+            em.add_field(name="Creador de maubot", value=f"> {c.name}#{c.discriminator}")         
             em.add_field(name="id de maubot", value=f"> 730124969132163093")  
             em.add_field(name="discriminador", value=f"> #6247")    
             em.add_field(name="prefijo", value=f"> {ctx.prefix}") 
             em.add_field(name="descripcion", value=f"{self.bot.description}") 
             em.add_field(name="Invita al bot", value=f"> [Invita al bot](https://discordapp.com/oauth2/authorize?client_id={self.bot.user.id}&permissions=8&scope=bot)", inline=True)
 
-            em.add_field(name="INFORMACÍON", value=f"```Maubot es un discord bot que puede ser utilizado para ajustar servidores, diversíon, imagenes, informacíon, y mucho mas. El creador es ({c.name}) por si quereis contactarlo.```", inline=False)
+            em.add_field(name="INFORMACÍON", value=f"```Maubot es un discord bot que puede ser utilizado para ajustar servidores, diversíon, imagenes, informacíon, y mucho mas. El creador es ({c.name}#{c.discriminator}) por si quereis contactarlo.```", inline=False)
             em.set_footer(text="Maubot | Echo por Maubg")
             await ctx.send(embed=em) 
 
