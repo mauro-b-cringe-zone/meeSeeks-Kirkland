@@ -21,7 +21,7 @@ class Google(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description="Busca algo en google")
+    @commands.command(description="Busca algo en google", usage="<Busqueda>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def gl(self, ctx, *, query):
 
@@ -35,7 +35,7 @@ class Google(commands.Cog):
             await ctx.send(gasync)
 
 
-    @commands.command(description="Busca algo en google")
+    @commands.command(description="Busca algo en google", usage="<Busqueda>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def google(self, ctx, *, term: str):
         embed= discord.Embed(title="Busqueda de google", url=f"https://lmgtfy.com/?q={term.replace(' ', '+')}", colour=color)

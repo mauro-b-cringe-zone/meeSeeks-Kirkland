@@ -364,14 +364,6 @@ class Maubot(commands.Cog):
         await ctx.send(embed=embed)
 
 
-
-
-
-
-
-    #fin de ayuda
-
-
     @commands.command(description="Hola 👏 Gente 👏 ¿Què 👏 Tal 👏 ?")
     @commands.cooldown(1, 15, commands.BucketType.guild)
     async def palmadas(self, ctx, *, message):
@@ -384,7 +376,7 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def avatar(self, ctx, member: discord.Member = None):
         member = ctx.author if member == None else member
-        embed = discord.Embed(title=f"**Avatar de -- ({member})**", description=f"[Link]({member.avatar_url_as(static_format='png')})",colour=color)
+        embed = discord.Embed(title=f"**Avatar de -- ({member})**", description=f"**[Link]({member.avatar_url_as(static_format='png')})**",colour=color)
         embed.set_image(url=f"{member.avatar_url_as(static_format='png')}")
         await ctx.send(embed=embed)
 
@@ -419,8 +411,6 @@ class Maubot(commands.Cog):
         embed = discord.Embed(title="👑 Owner del servidor", colour=color)
         embed.add_field(name=f"El owner de __{ctx.guild.name}__ es:", value=f"\n👑 **{ctx.guild.owner}**", inline=False)
         embed.set_thumbnail(url=f"{ctx.guild.owner.avatar_url}")
-        embed.set_footer(text=f"Puesto por | {ctx.author}")
-        embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
 
     @commands.command(aliases=['head'])
