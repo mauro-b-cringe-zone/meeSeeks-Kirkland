@@ -312,7 +312,7 @@ class Maubot(commands.Cog):
             em.set_footer(text="Maubot | Echo por Maubg")
             await ctx.send(embed=em) 
         else:
-            await ctx.send(embed=discord.Embed(title="Escoje de estas opciones", description=f"-{ctx.prefix}bot info\n-{ctx.prefix}bot config", color=color))
+            await ctx.send(embed=discord.Embed(title="Escoje de estas opciones", description=f"- {ctx.prefix}bot info\n- {ctx.prefix}bot config", color=color))
 
     @commands.command(aliases=['permisos_visu'], description="Mira los permisos de alguien")
     @commands.cooldown(1, 15, commands.BucketType.user)
