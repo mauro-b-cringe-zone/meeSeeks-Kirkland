@@ -131,7 +131,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx, member : discord.Member, *, reason=None):
         
-        if ctx.author.bot:
+        if member.bot is True:
             return await ctx.send(embed=discord.Embed(color=color, title="Es un robot", description=f"{ctx.author.mention} Yo no puede banear bots"))
 
         with open(env["JSON_DIR"] + "mute.json", "r") as f:
@@ -147,7 +147,7 @@ class Moderation(commands.Cog):
         with open(env["JSON_DIR"] + "mute.json", "w") as f:
             json.dump(user, f)
 
-        await ctx.send(embed=discord.Embed(title="Muteado", description=f"{ctx.author.mention}, se ha muteado a {member.mention}", color=color))
+        await ctx.send(embed=discord.Embed(title="Muteado", description=f"{ctx.author.mention}, se ha muteado a {member.mention}", color=color).add_field(name="Razon:", value=reason if reason is not None else "Sin especificar"))
 
     @commands.command(description="Desmutea ha alguien", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
