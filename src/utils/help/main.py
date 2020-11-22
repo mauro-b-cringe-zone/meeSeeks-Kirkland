@@ -20,7 +20,7 @@ class Help(commands.Cog):
         embed.set_footer(
             text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
         )
-        embed.description = "Maubot tiene unos docs por si quieres tener mas informacion, si quieres visitarnos puedes ir **[aqui](http://maubot.mooo.com)**"
+        embed.description = "Maubot tiene una pagina web, si quieres visitarla dale **[aqui](http://maubot.mooo.com)**"
 
         CogsNecesitados = []
         for i in range(4):
