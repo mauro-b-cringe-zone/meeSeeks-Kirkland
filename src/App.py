@@ -270,7 +270,7 @@ class Maubot(commands.Cog):
 
     @commands.command(description="Mira la info del bot o la config (m._bot info | m._bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def _bot(self, ctx, inf_con):
+    async def bot(self, ctx, inf_con):
         if inf_con == 'info':
             em = discord.Embed(timestamp=datetime.datetime.utcnow(), colour=color)
             em.title = 'Info de Maubot'
@@ -278,14 +278,15 @@ class Maubot(commands.Cog):
             try:
                 em.description = self.bot.psa + '\n[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
             except AttributeError:
-                em.description = 'Un bot echo por [Maubg](https://www.youtube.com/channel/UCnNQ8-WPlcMqKpTdvAL8_HA). [¡Ùnete a que esperas!](https://discord.gg/mwDBgubwdP)'
+                em.description = 'Un bot echo por [Maubg](https://github.com/maubg-debug). [¡Ùnete a que esperas!](https://discord.gg/mwDBgubwdP)'
             em.add_field(name="Servidores", value=f"> {len(self.bot.guilds)}")
             em.add_field(name="Usuarios online", value=f"> {str(len({m.id for m in self.bot.get_all_members() if m.status is not discord.Status.offline}))}")
             em.add_field(name='Usuarios totales', value=f"> {len(self.bot.users)}")
             em.add_field(name="Librerías", value=f"> discord.py")
             em.add_field(name="Tardanza de respuesta", value=f"> {self.bot.ws.latency * 1000:.0f} ms")        
-            em.add_field(name="Color de maubot", value=f"> {color}")                 
-            em.add_field(name="Creador de maubot", value=f"> Maubg ︻芫═───#2688")         
+            em.add_field(name="Color de maubot", value=f"> {color}")       
+            c = self.bot.get_user(730124969132163093)
+            em.add_field(name="Creador de maubot", value=f"> {c.name}")         
             em.add_field(name="id de maubot", value=f"> 730124969132163093")  
             em.add_field(name="discriminador", value=f"> #6247")    
             em.add_field(name="prefijo", value=f"> {ctx.prefix}") 
@@ -296,22 +297,22 @@ class Maubot(commands.Cog):
             em.set_footer(text="Maubot | Echo por Maubg")
             await ctx.send(embed=em) 
 
-        if inf_con == 'config':
-            em = discord.Embed(timestamp=self.datetime.datetime.utcnow(), colour=color)
+        elif inf_con == 'config':
+            em = discord.Embed(timestamp=datetime.datetime.utcnow(), colour=color)
             em.title = 'Configuracion de Maubot'
             em.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
             try:
                 em.description = self.bot.psa + '[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
             except AttributeError:
                 em.description = '[¡Unete a que esperas!](https://discord.gg/mwDBgubwdP)'
-            em.add_field(name="Prefix", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix !**")
-            em.add_field(name='rename_bot', value=f'Puedes usar este comando para ponerle in __nickname__ a Maubot.', inline=False)
-            em.add_field(name='rate_bot <commentario>', value=f'Puedes darle un rating de 5 estrellas.', inline=False)
+            em.add_field(name="Prefix", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix <prefijo>**")
+            em.add_field(name='rename_bot', value=f'Puedes usar este comando para ponerle in __nickname__ a Maubot.', inline=True)
 
 
             em.set_footer(text="Maubot | Echo por Maubg")
             await ctx.send(embed=em) 
-
+        else:
+            await ctx.send(embed=discord.Embed(title="Escoje de estas opciones", description=f"-{ctx.prefix}bot info\n-{ctx.prefix}bot config", color=color))
 
     @commands.command(aliases=['permisos_visu'], description="Mira los permisos de alguien")
     @commands.cooldown(1, 15, commands.BucketType.user)
