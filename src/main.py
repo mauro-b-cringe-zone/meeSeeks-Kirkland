@@ -119,6 +119,7 @@ def preparar():
     y.start()
     try:
         app.run(token)
+        y.join()
     except Exception as e:
         y.join()
         cprint(f"Un error con el login: {e}", "red")

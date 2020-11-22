@@ -92,8 +92,11 @@ class ChatApp(commands.Cog):
             :return if not message.content == "cerrarchat": Se cierrran los chats de DM y la funcion de la linea de arriba se ejecuta
 
         El json esta en ./src/json/chats.json
-        """        
-        destinatario = ctx.message.mentions[0]
+        """      
+        try:  
+            destinatario = ctx.message.mentions[0]
+        except:
+            return await ctx.send(embed=discord.Embed(color=color, title="¿Vas a chatear tu solo?", description=f"{ctx.author.mention} | Menciona ha alguien"))
         iniciador = ctx.author
         Ev = Eventos(self.bot)
         await Ev.inicio(ctx, iniciador, destinatario)
