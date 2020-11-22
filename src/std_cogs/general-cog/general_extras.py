@@ -39,7 +39,7 @@ class GeneralExtra(commands.Cog):
 
     @commands.command(description="Cambia el nombre del robot", usage="[nombre]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    @commands.has_permissions(kick_members=True)
+    @commands.has_permissions(manage_channels=True)
     async def rename_bot(self, ctx, *, text='Maubot'):
         await ctx.message.guild.me.edit(nick=text)
         await ctx.send(f'Apodo establecido a **{text}**')

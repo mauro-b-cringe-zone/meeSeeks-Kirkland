@@ -249,7 +249,7 @@ class Maubot(commands.Cog):
 
     @commands.command(description="Cambia el prefijo")
     @commands.cooldown(1, 15, commands.BucketType.user)
-    @commands.has_permissions(kick_members=True)
+    @commands.has_permissions(manage_channels=True)
     async def prefix(self, ctx, prefix):
                                 
         for i in "!,-,.,+,?,$,>,/,;,*,s!,=,m!,!!".split(","):
@@ -320,8 +320,6 @@ class Maubot(commands.Cog):
 
         if not member:
             member = ctx.author
-
-
 
         perms = ',\n'.join(perm for perm, value in member.guild_permissions if value)
         trans = Translator()

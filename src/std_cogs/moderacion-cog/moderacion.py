@@ -46,7 +46,6 @@ class Moderation(commands.Cog):
         
 
     @commands.command(description="Desbanea a un baneado **uso: m.unban <id del usuario>**", usage="<id del usuario>")
-    @commands.has_permissions(manage_messages=True)
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, member=None):
         if not member is None:
@@ -112,7 +111,6 @@ class Moderation(commands.Cog):
 
     @commands.command(pass_context=True, description="La lista de warniciones que alguien tendra", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    @commands.has_permissions(manage_channels=True)
     async def warnlist(self, ctx, member: discord.Member=None):
         if member is None:
             member = ctx.author
@@ -130,7 +128,7 @@ class Moderation(commands.Cog):
 
     @commands.command(description="Mutea ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    @commands.has_permissions(ban_members=True)
+    @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx, member : discord.Member, *, reason=None):
         
         with open(env["JSON_DIR"] + "mute.json", "r") as f:
@@ -150,7 +148,7 @@ class Moderation(commands.Cog):
 
     @commands.command(description="Desmutea ha alguien", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    @commands.has_permissions(ban_members=True)
+    @commands.has_permissions(manage_channels=True)
     async def unmute(self, ctx, member: discord.Member):
         
         with open(env["JSON_DIR"] + "mute.json", 'r') as f:
