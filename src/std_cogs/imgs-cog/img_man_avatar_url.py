@@ -1,25 +1,20 @@
 
 import aiohttp
 from discord import User, Message, File
-from discord.ext.commands import BadArgument, MissingRequiredArgument
 
 from discord.ext import commands
-from numpy import format_parser
 import typing
-from distutils import util
-import io
-import json
-import os
-import functools
 from discord.ext import commands
 from random import randint
 from io import BytesIO
 import discord
 import urllib
+
 from os import environ as env
 
 import legofy
 import requests
+import io
 
 color = int(env["COLOR"])
 
