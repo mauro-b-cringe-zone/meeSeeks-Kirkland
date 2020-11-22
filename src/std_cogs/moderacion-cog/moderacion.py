@@ -131,6 +131,9 @@ class Moderation(commands.Cog):
     @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx, member : discord.Member, *, reason=None):
         
+        if ctx.author.bot:
+            return await ctx.send(embed=discord.Embed(color=color, title="Es un robot", description=f"{ctx.author.mention} Yo no puede banear bots"))
+
         with open(env["JSON_DIR"] + "mute.json", "r") as f:
             user = json.load(f)
 
@@ -139,7 +142,7 @@ class Moderation(commands.Cog):
             user[str(member.id)] = {}
             user[str(member.id)]["razon"] = reason
         else:
-            await ctx.send("Ese usuario ya estra baneado")
+            return await ctx.send("Ese usuario ya estra muteado")
 
         with open(env["JSON_DIR"] + "mute.json", "w") as f:
             json.dump(user, f)
@@ -157,7 +160,7 @@ class Moderation(commands.Cog):
         if str(member.id) in user:
             del user[str(member.id)]
         else:
-            await ctx.send("Ese usuario no esta muteado")
+            return await ctx.send("Ese usuario no esta muteado")
 
         with open(env["JSON_DIR"] + "mute.json", "w") as f:
             json.dump(user, f)
