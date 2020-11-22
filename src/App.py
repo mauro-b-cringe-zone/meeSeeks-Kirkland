@@ -270,7 +270,7 @@ class Maubot(commands.Cog):
 
     @commands.command(description="Mira la info del bot o la config (m._bot info | m._bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def bot(self, ctx, inf_con):
+    async def bot(self, ctx, inf_con=None):
         if inf_con == 'info':
             em = discord.Embed(timestamp=datetime.datetime.utcnow(), colour=color)
             em.title = 'Info de Maubot'
@@ -285,7 +285,7 @@ class Maubot(commands.Cog):
             em.add_field(name="Librerías", value=f"> discord.py")
             em.add_field(name="Tardanza de respuesta", value=f"> {self.bot.ws.latency * 1000:.0f} ms")        
             em.add_field(name="Color de maubot", value=f"> {color}")       
-            c = self.bot.get_user(730124969132163093)
+            c = self.bot.get_user(700812754855919667)
             em.add_field(name="Creador de maubot", value=f"> {c.name}")         
             em.add_field(name="id de maubot", value=f"> 730124969132163093")  
             em.add_field(name="discriminador", value=f"> #6247")    
@@ -293,7 +293,7 @@ class Maubot(commands.Cog):
             em.add_field(name="descripcion", value=f"{self.bot.description}") 
             em.add_field(name="Invita al bot", value=f"> [Invita al bot](https://discordapp.com/oauth2/authorize?client_id={self.bot.user.id}&permissions=8&scope=bot)", inline=True)
 
-            em.add_field(name="INFORMACÍON", value="```Maubot es un discord bot que puede ser utilizado para ajustar servidores, roles, diversíon, imagenes, informacíon, y mucho mas. El creador es (Maubg ︻芫═───#2688) por si quereis contactarlo.```", inline=False)
+            em.add_field(name="INFORMACÍON", value=f"```Maubot es un discord bot que puede ser utilizado para ajustar servidores, diversíon, imagenes, informacíon, y mucho mas. El creador es ({c.name}) por si quereis contactarlo.```", inline=False)
             em.set_footer(text="Maubot | Echo por Maubg")
             await ctx.send(embed=em) 
 
