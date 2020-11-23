@@ -17,7 +17,7 @@ class Eventos():
             chats = json.load(f)
 
         if str(iniciador.id) in chats["baneos"]:
-            if str(dest.id) in chats["baneos"][str(iniciador.id)]:
+            if str(dest.id) in chats["baneos"][str(iniciador.id)]: 
                 return "a"
         if str(dest.id) in chats["baneos"]:
             if dest.id in chats["baneos"][str(dest.id)]:
@@ -58,25 +58,49 @@ class Eventos():
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
+    async def _checkear_usuario_sin_chats_premitidos(self, ctx, destinatario):
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
+            chats = json.load(f)
+            chats = chats["usuarios_chekceo"]
+        if str(destinatario.id) in chats:
+            if chats[str(destinatario.id)] is True: return False
+            else: return True
+        else: return True
+
     async def inicio(self, ctx, iniciador=None, dest=None):
         if dest is not None:
-            b = await self._checkear_usuario_baneado(ctx, iniciador, dest)
-            if b == "a":
-                return await ctx.send(embed=discord.Embed(title="Lo has baneado", description=f"{iniciador.mention} ya tienes ha ese usuario baneado. **No** puedes hablar con el", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
-            elif b == "b":
-                return await ctx.send(embed=discord.Embed(title="Te ha baneado", description=f"{iniciador.mention}, **No** puedes hablar con el porque {dest.mention} te tiene baneado", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
-            elif b == "c":
-                j = await self.abrir(iniciador, dest)
-                if j == "Usuario ya en chat":
-                    return await ctx.send("Ese usuario ya esta en un chat...")
-                await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
-                await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
-                await ctx.send(embed=discord.Embed(title="Chat creado", description=f"{ctx.author.mention}, Se ha creado un chat por DM con {dest.mention}", color=color))
+            sinchats = self._checkear_usuario_sin_chats_premitidos(ctx, dest)
+            if sinchats:
+                b = await self._checkear_usuario_baneado(ctx, iniciador, dest)
+                if b == "a":
+                    return await ctx.send(embed=discord.Embed(title="Lo has baneado", description=f"{iniciador.mention} ya tienes ha ese usuario baneado. **No** puedes hablar con el", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
+                elif b == "b":
+                    return await ctx.send(embed=discord.Embed(title="Te ha baneado", description=f"{iniciador.mention}, **No** puedes hablar con el porque {dest.mention} te tiene baneado", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
+                elif b == "c":
+                    j = await self.abrir(iniciador, dest)
+                    if j == "Usuario ya en chat":
+                        return await ctx.send("Ese usuario ya esta en un chat...")
+                    await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
+                    await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
+                    await ctx.send(embed=discord.Embed(title="Chat creado", description=f"{ctx.author.mention}, Se ha creado un chat por DM con {dest.mention}", color=color))
+            if not sinchats: return await ctx.send(embed=discord.Embed(color=color, description="Este usuario esta con todos los chats privados, lo siento", title="Esta persona no es sociable"))
         else: return await ctx.send("Ese usuario no existe. Creo...")
 
 class ChatApp(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command(description="Te baneas a ti mismo de todos los chats (Booleano invertido)", aliases="banfromchat,chatremove".split(","), name="opt-out")
+    async def __opt_out(self, ctx):
+        author = str(ctx.author.id)
+        with open(env["JSON_DIR"] + "chats.json", "r") as f:
+            chats = json.load(f)
+            chats = chats["usuarios_chekceo"]
+        if not str(author) in chats:
+            chats[author] = True
+        else:
+            chats[author] = not chats[author]
+        await ctx.send(embed=discord.Embed(color=color, title=f"Se te ha {'puesto' if chats[author] in True else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
 
     @commands.command(aliases="startchat,start_chat,chat_start,chatstart".split(","), description="Inicia un chat con una persona", usage="<Mencion del usuario>", name="chat")
     async def __start_chat(self, ctx):
