@@ -91,7 +91,7 @@ class ChatApp(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description="Te baneas a ti mismo de todos los chats (Booleano invertido)", aliases="disapearromchat,disromchat,chatremove".split(","), name="opt-out")
+    @commands.command(description="Te baneas a ti mismo de todos los chats (Booleano invertido)", aliases="disapeafromchat,disromchat,chatremove".split(","), name="opt-out")
     async def __opt_out(self, ctx):
         author = str(ctx.author.id)
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
