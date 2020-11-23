@@ -10,7 +10,7 @@ color = int(env["COLOR"])
 class Eventos():
     def __init__(self, bot):
         self.bot = bot
-        self.color_c = 0x00fbff
+        self.color_c = color
 
     async def _checkear_usuario_baneado(self, ctx, iniciador, dest):
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
@@ -82,7 +82,7 @@ class Eventos():
                     j = await self.abrir(iniciador, dest)
                     if j == "Usuario ya en chat":
                         return await ctx.send("Ese usuario ya esta en un chat...")
-                    await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
+                    await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).add_field(name="comandos", value="**-** m.banchat @usuario \ Banear ha alguien de los DMs\n**-** m.opt-out | No reciviras Dms de ningun usuario").set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
                     await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
                     await ctx.send(embed=discord.Embed(title="Chat creado", description=f"{ctx.author.mention}, Se ha creado un chat por DM con {dest.mention}", color=color))
         else: return await ctx.send("Ese usuario no existe. Creo...")
