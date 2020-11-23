@@ -137,8 +137,13 @@ if __name__ == "__main__":
         except Exception as e:
             print(e)
     else:
+        cprint("\nPuedes poner help para ver la lista de comando\n", "green")
         while True:
-            comando = input("Maubot -> ")
+            try:
+                comando = input("Maubot -> ")
+            except KeyboardInterrupt:
+                cprint("\n\nSi quieres salir del programa deverias de poner \"exit()\"\n", "yellow")
+                continue
             c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent.parent)
             if c == "preparacion":
                 preparar()
