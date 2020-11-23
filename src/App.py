@@ -261,8 +261,7 @@ class Maubot(commands.Cog):
 
         with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
-
-        e = discord.Embed(title="Se a cambiado el prefijo correctamente", description=f'Se a cambiado el prefijo a:      `{prefix}`', color=color)
+        e = discord.Embed(title="Se a cambiado el prefijo correctamente", description=f'Se a cambiado el prefijo a:      `{prefix}`\nLos prefijos de este servidor son: `{prefix}`, `m.` `m-`', color=color)
         e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/mwDBgubwdP)**")
         await ctx.send(embed=e)
 
