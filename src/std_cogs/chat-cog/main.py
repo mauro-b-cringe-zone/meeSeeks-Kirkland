@@ -70,7 +70,7 @@ class Eventos():
     async def inicio(self, ctx, iniciador=None, dest=None):
         if dest is not None:
             sinchats = self._checkear_usuario_sin_chats_premitidos(ctx, dest)
-            if sinchats: return await ctx.send(embed=discord.Embed(color=color, description="Este usuario esta con todos los chats privados, lo siento", title="Esta persona no es sociable"))
+            if not sinchats: return await ctx.send(embed=discord.Embed(color=color, description="Este usuario esta con todos los chats privados, lo siento", title="Esta persona no es sociable"))
             else:
                 b = await self._checkear_usuario_baneado(ctx, iniciador, dest)
                 if b == "a":
