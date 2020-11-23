@@ -70,7 +70,7 @@ class Eventos():
     async def inicio(self, ctx, iniciador=None, dest=None):
         if dest is not None:
             sinchats = self._checkear_usuario_sin_chats_premitidos(ctx, dest)
-            if sinchats:
+            if not sinchats:
                 b = await self._checkear_usuario_baneado(ctx, iniciador, dest)
                 if b == "a":
                     return await ctx.send(embed=discord.Embed(title="Lo has baneado", description=f"{iniciador.mention} ya tienes ha ese usuario baneado. **No** puedes hablar con el", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
@@ -83,7 +83,7 @@ class Eventos():
                     await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
                     await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
                     await ctx.send(embed=discord.Embed(title="Chat creado", description=f"{ctx.author.mention}, Se ha creado un chat por DM con {dest.mention}", color=color))
-            if not sinchats: return await ctx.send(embed=discord.Embed(color=color, description="Este usuario esta con todos los chats privados, lo siento", title="Esta persona no es sociable"))
+            if sinchats: return await ctx.send(embed=discord.Embed(color=color, description="Este usuario esta con todos los chats privados, lo siento", title="Esta persona no es sociable"))
         else: return await ctx.send("Ese usuario no existe. Creo...")
 
 class ChatApp(commands.Cog):
