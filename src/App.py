@@ -111,8 +111,6 @@ class App(commands.Bot):
     async def on_command_error(self, context, exception):
         env = Environment()
 
-        
-
         exception_type = exception.__class__
         if exception_type:
 
