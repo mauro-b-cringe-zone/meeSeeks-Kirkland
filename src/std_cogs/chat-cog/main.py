@@ -99,7 +99,7 @@ class ChatApp(commands.Cog):
         if not str(author) in chats:
             chats[author] = True
         else:
-            chats[author] = not chats[author]
+            del chats[author]
         await ctx.send(embed=discord.Embed(color=color, description=f"Se te ha {'puesto' if chats[author] is True else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats_j, f)
