@@ -63,16 +63,16 @@ class Eventos():
             chats = json.load(f)
             chats = chats["usuarios_chekceo"]
         if str(destinatario.id) in chats:
-            return False
-        else: 
             return True
+        else: 
+            return False
 
     async def inicio(self, ctx, iniciador=None, dest=None):
         if dest is not None:
             sinchats = self._checkear_usuario_sin_chats_premitidos(ctx, dest)
-            if not sinchats: 
+            if sinchats: 
                 return await ctx.send(embed=discord.Embed(color=color, description="Este usuario esta con todos los chats privados, lo siento", title="Esta persona no es sociable"))
-            else:
+            if not sinchats:
                 b = await self._checkear_usuario_baneado(ctx, iniciador, dest)
                 if b == "a":
                     return await ctx.send(embed=discord.Embed(title="Lo has baneado", description=f"{iniciador.mention} ya tienes ha ese usuario baneado. **No** puedes hablar con el", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
@@ -95,15 +95,14 @@ class ChatApp(commands.Cog):
     async def __opt_out(self, ctx):
         author = str(ctx.author.id)
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
-            chats_j = json.load(f)
-            chats = chats_j["usuarios_chekceo"]
-        if not str(author) in chats:
-            chats[author] = True
+            chats = json.load(f)
+        if not str(author) in chats["usuarios_chekceo"]:
+            chats["usuarios_chekceo"][author] = True
         else:
-            del chats[author]
-        await ctx.send(embed=discord.Embed(color=color, description=f"Se te ha {'puesto' if author in chats else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
+            del chats["usuarios_chekceo"][author]
+        await ctx.send(embed=discord.Embed(color=color, description=f"Se te ha {'puesto' if author in chats['usuarios_chekceo'] else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
-            json.dump(chats_j, f)
+            json.dump(chats, f)
 
     @commands.command(aliases="startchat,start_chat,chat_start,chatstart".split(","), description="Inicia un chat con una persona", usage="<Mencion del usuario>", name="chat")
     async def __start_chat(self, ctx):
