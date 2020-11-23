@@ -94,13 +94,15 @@ class ChatApp(commands.Cog):
     async def __opt_out(self, ctx):
         author = str(ctx.author.id)
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
-            chats = json.load(f)
-            chats = chats["usuarios_chekceo"]
+            chats_j = json.load(f)
+            chats = chats_j["usuarios_chekceo"]
         if not str(author) in chats:
             chats[author] = True
         else:
             chats[author] = not chats[author]
         await ctx.send(embed=discord.Embed(color=color, description=f"Se te ha {'puesto' if chats[author] is True else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
+            json.dump(chats_j, f)
 
     @commands.command(aliases="startchat,start_chat,chat_start,chatstart".split(","), description="Inicia un chat con una persona", usage="<Mencion del usuario>", name="chat")
     async def __start_chat(self, ctx):
