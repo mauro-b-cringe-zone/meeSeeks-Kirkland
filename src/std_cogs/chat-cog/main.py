@@ -100,7 +100,7 @@ class ChatApp(commands.Cog):
             chats[author] = True
         else:
             chats[author] = not chats[author]
-        await ctx.send(embed=discord.Embed(color=color, title=f"Se te ha {'puesto' if chats[author] in True else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
+        await ctx.send(embed=discord.Embed(color=color, description=f"Se te ha {'puesto' if chats[author] in True else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
 
     @commands.command(aliases="startchat,start_chat,chat_start,chatstart".split(","), description="Inicia un chat con una persona", usage="<Mencion del usuario>", name="chat")
     async def __start_chat(self, ctx):
