@@ -304,7 +304,7 @@ class GeneralSecExtra(commands.Cog):
     @commands.command(description="Tedoy un -10 de 20", usage="[usuario]")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def rate(self, ctx, user:discord.User=None):
-        with open('mauutils/languages/spanish.json', 'r') as f:
+        with open('./src/utils/languages/spanish.json', 'r') as f:
             Language = json.load(f)
         if user is None or user.id == ctx.author.id:
             await ctx.send(Language.get("fun.rate_author", ctx).format(random.randint(10)))
