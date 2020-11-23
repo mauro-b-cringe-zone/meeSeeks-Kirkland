@@ -69,7 +69,7 @@ class Eventos():
 
     async def inicio(self, ctx, iniciador=None, dest=None):
         if dest is not None:
-            sinchats = self._checkear_usuario_sin_chats_premitidos(ctx, dest)
+            sinchats = await self._checkear_usuario_sin_chats_premitidos(ctx, dest)
             if sinchats: 
                 return await ctx.send(embed=discord.Embed(color=color, description="Este usuario esta con todos los chats privados, lo siento", title="Esta persona no es sociable"))
             if not sinchats:
@@ -100,7 +100,7 @@ class ChatApp(commands.Cog):
             chats["usuarios_chekceo"][author] = True
         else:
             del chats["usuarios_chekceo"][author]
-        await ctx.send(embed=discord.Embed(color=color, description=f"Se te ha {'puesto' if author in chats['usuarios_chekceo'] else 'quitado'} de la lista de gente que no quiere chats", title="100% sano"))
+        await ctx.send(embed=discord.Embed(color=color, description=f"Se te ha **{'puesto' if author in chats['usuarios_chekceo'] else 'quitado'}** de la lista de gente que no quiere chats", title="100% sano"))
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
@@ -124,6 +124,7 @@ class ChatApp(commands.Cog):
         except:
             return await ctx.send(embed=discord.Embed(color=color, title="¿Vas a chatear tu solo?", description=f"{ctx.author.mention} | Menciona ha alguien"))
         iniciador = ctx.author
+        if int(destinatario.id) == int(iniciador.id): return await ctx.send(embed=discord.Embed(title="¿Tienes amigos no?", description="No puedes crear un chat con tigo mismo", color=color)) 
         Ev = Eventos(self.bot)
         await Ev.inicio(ctx, iniciador, destinatario)
 
