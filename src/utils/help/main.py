@@ -57,7 +57,7 @@ class Help(commands.Cog):
                 embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
                 cogsL = ""
                 for i in cogs:
-                    cogsL += f"`{ctx.prefix}help {i.lower()}` **|** "
+                    cogsL += f"`{i.lower()}` **|** "
                 embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"{cogsL[:-6]}", inline=False)
                 return await ctx.send(embed=embedhs)
             embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
