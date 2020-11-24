@@ -49,8 +49,9 @@ class Eventos():
         if not str(iniciador.id) in chats:
             chats["chats"][f"{iniciador.id}"] = {}
             chats["chats"][f"{iniciador.id}"]["dest"] = destinatario.id
+            chats["chats"][f"{iniciador.id}"]["ultimo_mensage"] = ""
             chats["chats"][f"{destinatario.id}"] = {}
-            chats["chats"][f"{destinatario.id}"]["dest"] = iniciador.id
+            chats["chats"][f"{destinatario.id}"]["ultimo_mensage"] = ""
         else:
             if chats["chats"][f"{iniciador.id}"] == {}:
                 return "Usuario ya en chat"

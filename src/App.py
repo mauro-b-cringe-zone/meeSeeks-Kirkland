@@ -94,6 +94,9 @@ class App(commands.Bot):
         await run_middleware_stack(message)
         await self.process_commands(message)
 
+    async def on_command_completion(ctx):
+        self.command_uses += 1
+
     async def reaction(self, context, msg_error):
         def _check(reaction, user):
             return (

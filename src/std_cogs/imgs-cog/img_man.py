@@ -94,8 +94,6 @@ class Img(commands.Cog):
             txt1, txt2 = self.urlify(str(ctx.message.content).split('[')[1][:-1]), self.urlify(str(ctx.message.content).split('[')[2][:-1])
             url='https://api.alexflipnote.dev/didyoumean?top='+str(txt1)+'&bottom='+str(txt2)
             await ctx.send(file=discord.File(self.urltoimage(url), 'didyoumean.png'))
-                
-
 
 
     @commands.command(description="TU ERES {texto}", usage="texto")
