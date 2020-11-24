@@ -1,7 +1,8 @@
-# Activar el enviroment
-# # py -m venv env
-# ".\env\Scripts\activate"
-# "deactivate"
+
+# ? Activar el enviroment
+# ? py -m venv env
+# ? ".\env\Scripts\activate"
+# ? "deactivate"
 
 import sys, os
 from pathlib import Path
@@ -66,6 +67,8 @@ def preparar():
     # ----------------------------------------------------------------------------------------------------------------------
 
     cogs = StdCogs()
+
+    # Chequeamos si es prueva
     prueva = "TOKEN"
     try:
         pruevas = env.get("PRUEVA")

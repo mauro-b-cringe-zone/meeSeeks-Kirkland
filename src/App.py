@@ -179,11 +179,11 @@ class App(commands.Bot):
                 if i in str(exception):
                     return
             await context.send(embed=discord.Embed(
-                              title="Como sabes, los robots no son perfectos", 
-                              description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
-                              color=self.color).set_footer(
-                                  text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
-                              ))
+                               title="Como sabes, los robots no son perfectos", 
+                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
+                               color=self.color).set_footer(
+                                   text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
+                               ))
             Logger.error(f'ERROR: {str(exception)}')
             async with aiohttp.ClientSession() as session:
                 webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))

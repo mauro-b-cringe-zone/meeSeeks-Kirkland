@@ -1,5 +1,4 @@
 FROM python:3.7
 ADD . .
 RUN pip3 install -r requirements.txt
-WORKDIR "/src"
 RUN python3 ./src/main.py --cmd run
