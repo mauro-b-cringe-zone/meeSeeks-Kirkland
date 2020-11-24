@@ -152,6 +152,7 @@ class App(commands.Bot):
             elif isinstance(exception, commands.MissingRequiredArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Escribe todos los argumentos requeridos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
+                embed.add_field(name="Argumento:", value=exception.args[0])
                 embed.set_footer(text='\n-- ERROR')
                 msg_error = await context.send(embed=embed)
                 await msg_error.add_reaction('❌')
