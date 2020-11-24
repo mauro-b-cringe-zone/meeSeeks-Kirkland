@@ -172,7 +172,7 @@ class App(commands.Bot):
                 await msg_error.add_reaction('❌')
                 await self.reaction(context, msg_error)
 
-        excepciones = ["You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
+        excepciones = ["", "You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
         if env.get('DEBUG'):
             for i in excepciones:

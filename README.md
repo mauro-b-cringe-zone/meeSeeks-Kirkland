@@ -87,9 +87,15 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 # Chats
 * Maubot esta equipado con unos chats integrados que se podran activar poniendo `m.startchat <@usuario>` y ya estaria
+* Si **no** quieres tener vida social puedes poner `m.opt-out`
+* Para banear a alguien puedes poner `m.banchat`
+* Para cerrar el chat puedes poner
+ * En el servidor `m.finishchat`
+ * En el chat solamente pon `cerrarchat`
 
 # Web
-* Aqui esta la [http://maubot.mooo.com](http://maubot.mooo.com)
+* Aqui esta la [web](http://maubot.mooo.com)
+* Tambien hay un [compilador](http://maubot.mooo.com/compilador.html)
 * `m.links`
 
 ## Por supuesto mucho maaasss.....
