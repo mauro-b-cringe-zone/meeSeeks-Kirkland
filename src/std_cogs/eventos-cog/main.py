@@ -168,14 +168,6 @@ class Servidor(commands.Cog):
     async def on_guild_remove(self, guild):
         eliminar_prefix(guild)
         bots = [member for member in guild.members if member.bot]
-        with open(env["JSON_DIR"] + "servers.json", "r") as f:
-            s = json.load(f)
-        try:
-            del s[str(guild.id)]
-        except:
-            pass
-        with open(env["JSON_DIR"] + "servers.json", "w") as f:
-            json.dump(s, f)
 
         async with aiohttp.ClientSession() as session:
             webhook = discord.Webhook.from_url(env["WEBHOOK_URL_SALIDA"], adapter = discord.AsyncWebhookAdapter(session))
