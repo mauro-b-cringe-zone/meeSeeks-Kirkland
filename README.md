@@ -1,6 +1,6 @@
 # Maubot
 
-Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos.
+Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
 Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y aparte de eso es un bot maravilloso
 
 `m.help [Cog]`
