@@ -1,5 +1,29 @@
 # Español
 
+# Política de privacidad
+
+Maubot se toma en serio su privacidad. Para proteger mejor su privacidad, Maubot proporciona este aviso de política de privacidad que explica la forma en que se recopila y utiliza su información personal.
+
+
+## Recopilación de información de rutina
+
+Este Maubot rastrea información básica sobre sus usuarios. Esta información incluye: ID, nombres
+
+## Seguridad
+
+La seguridad de su información personal es importante para Maubot, pero recuerde que ningún método de transmisión a través de Internet o método de almacenamiento electrónico es 100% seguro. Si bien Maubot se esfuerza por utilizar medios comercialmente aceptables para proteger su información personal, Maubot no puede garantizar su seguridad absoluta.
+
+
+## Cambios a esta política de privacidad
+
+Esta Política de privacidad entra en vigor a partir de 2020 y permanecerá en vigor excepto con respecto a cualquier cambio en sus disposiciones en el futuro, que entrará en vigor inmediatamente después de su publicación en esta página.
+
+Maubot se reserva el derecho de actualizar o cambiar la Política de privacidad de Maubot en cualquier momento y debe consultar esta Política de privacidad periódicamente. Si Maubot realiza cambios sustanciales en esta Política de privacidad, Maubot le notificará a través de la dirección de correo electrónico que ha proporcionado Maubot, o colocando un aviso destacado en Maubot.
+
+
+## Información del contacto
+
+Para cualquier pregunta o inquietud con respecto a la política de privacidad, envíeme un correo electrónico a maubg2007@gmail.com.
 
 # English
 
@@ -21,7 +45,7 @@ The security of your personal information is important to Maubot, but remember t
 
 This Privacy Policy is effective as of 2020 and will remain in effect except with respect to any changes in its provisions in the future, which will be in effect immediately after being posted on this page.
 
-Maubot reserve the right to update or change Maubot Privacy Policy at any time and you should check this Privacy Policy periodically. If Maubot make any material changes to this Privacy Policy, Maubot will notify you either through the email address you have provided [["us" or "me"]], or by placing a prominent notice on Maubot.
+Maubot reserve the right to update or change Maubot Privacy Policy at any time and you should check this Privacy Policy periodically. If Maubot make any material changes to this Privacy Policy, Maubot will notify you either through the email address you have provided Maubot, or by placing a prominent notice on Maubot.
 
 
 ## Contact Information
