@@ -109,5 +109,5 @@ class Help(commands.Cog):
             return cprint(f"[Log] Un error ha ocurrido:  {e}", 'red')
 
 
-def setup(bot):
+def setup(bot): 
     bot.add_cog(Help(bot))

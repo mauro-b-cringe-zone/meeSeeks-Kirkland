@@ -362,11 +362,12 @@ class General(commands.Cog):
     @commands.command(description="Historias de mi dia a dia")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def fml(self, ctx):
-        response = requests.get('https://api.alexflipnote.dev/fml')
-        json_data = json.loads(response.text)
-        trans = Translator()
-        translated_response = trans.translate(json_data['text'], src='en', dest='es')
-        await ctx.send(translated_response.text)
+        async with ctx.channel.typing():
+            response = requests.get('https://api.alexflipnote.dev/fml', headers=[env["API_FLEX"]])
+            json_data = json.loads(response.text)
+            trans = Translator()
+            translated_response = trans.translate(json_data['text'], src='en', dest='es')
+            await ctx.send(translated_response.text)
 
     # @commands.command()
     # async def youtube(self, ctx, *, query):
