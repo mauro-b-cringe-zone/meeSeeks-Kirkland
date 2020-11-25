@@ -11,7 +11,6 @@ import asyncio
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    bot = self.bot
 
     async def ayuda(self, ctx, cog, cogs, paginasTotales, embed):
         cog = int(cog)
@@ -46,7 +45,7 @@ class Help(commands.Cog):
 
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
-    @commands.command(description="Ayuda para los comandos", usage="[cog]", aliases=[c for c in bot.cogs.keys().lower()])
+    @commands.command(description="Ayuda para los comandos", usage="[cog")
     async def help(self, ctx, cog="0"):
         if ctx.mesage.content == "{ctx.prefix}help":
             try:
