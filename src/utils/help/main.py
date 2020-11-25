@@ -45,68 +45,69 @@ class Help(commands.Cog):
 
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
-    @commands.command(description="Ayuda para los comandos", usage="[cog]")
+    @commands.command(description="Ayuda para los comandos", usage="[cog]", aliases=[c for c in self.bot.cogs.keys().lower()])
     async def help(self, ctx, cog="0"):
-        try:
-            if cog == "0":
-                embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
+        if ctx.mesage.content == "{ctx.prefix}help":
+            try:
+                if cog == "0":
+                    embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
+                    cogs = [c for c in self.bot.cogs.keys()]
+                    paginasTotales = math.ceil(len(cogs) / 6)
+                    embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://maubot.gitbook.io/maubot/)"
+                    embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
+                    embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
+                    cogsL = ""
+                    for i in cogs:
+                        cogsL += f"`{i.lower()}` **|** "
+                    embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"{cogsL[:-6]}", inline=False)
+                    return await ctx.send(embed=embedhs)
+                embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
+
                 cogs = [c for c in self.bot.cogs.keys()]
+                cprint(f"[Log] Cogs: {len(cogs)}", 'yellow')
                 paginasTotales = math.ceil(len(cogs) / 6)
-                embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://maubot.gitbook.io/maubot/)"
-                embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
-                embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
-                cogsL = ""
-                for i in cogs:
-                    cogsL += f"`{i.lower()}` **|** "
-                embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"{cogsL[:-6]}", inline=False)
-                return await ctx.send(embed=embedhs)
-            embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
 
-            cogs = [c for c in self.bot.cogs.keys()]
-            cprint(f"[Log] Cogs: {len(cogs)}", 'yellow')
-            paginasTotales = math.ceil(len(cogs) / 6)
+                if re.search(r"\d", str(cog)):
 
-            if re.search(r"\d", str(cog)):
+                    embedh = await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
 
-                embedh = await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
+                    msg = await ctx.send(embed=embedh)
+                    
 
-                msg = await ctx.send(embed=embedh)
-                
+                elif re.search(r"[a-zA-Z]", str(cog)):
+                    congMinusculas = [c.lower() for c in cogs]
+                    if cog.lower() not in congMinusculas:
+                        return await ctx.send(f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]")
 
-            elif re.search(r"[a-zA-Z]", str(cog)):
-                congMinusculas = [c.lower() for c in cogs]
-                if cog.lower() not in congMinusculas:
-                    return await ctx.send(f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]")
+                    embed.set_footer(
+                        text=f"Puedes poner @Maubot#6247 para mas info | Cog {congMinusculas.index(cog.lower())+1} de {len(congMinusculas)}"
+                    )
 
-                embed.set_footer(
-                    text=f"Puedes poner @Maubot#6247 para mas info | Cog {congMinusculas.index(cog.lower())+1} de {len(congMinusculas)}"
-                )
+                    textoDeAyuda = ""
 
-                textoDeAyuda = ""
+                    for comando in self.bot.get_cog(cogs[congMinusculas.index(cog.lower())]).walk_commands():
+                        if comando.hidden:
+                            continue
+                    
+                        textoDeAyuda += f"** {comando.name} ║** {comando.description}\n"
+                    
+                        if len(comando.aliases) > 0:
+                            c = ""
+                            for i in comando.aliases:
+                                c += f"`{i}` **|** "
+                            textoDeAyuda += f"**Aliados ║** {c}\n"
+                        textoDeAyuda += ''
+                    
 
-                for comando in self.bot.get_cog(cogs[congMinusculas.index(cog.lower())]).walk_commands():
-                    if comando.hidden:
-                        continue
-                
-                    textoDeAyuda += f"** {comando.name} ║** {comando.description}\n"
-                
-                    if len(comando.aliases) > 0:
-                        c = ""
-                        for i in comando.aliases:
-                            c += f"`{i}` **|** "
-                        textoDeAyuda += f"**Aliados ║** {c}\n"
-                    textoDeAyuda += ''
-                
+                        prefijo = ctx.prefix
 
-                    prefijo = ctx.prefix
+                        textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name}{ ' ' + comando.usage if comando.usage is not None else ''}`\n\n"
+                    embed.description = textoDeAyuda
 
-                    textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name}{ ' ' + comando.usage if comando.usage is not None else ''}`\n\n"
-                embed.description = textoDeAyuda
-
-                await ctx.send(embed=embed)
-        except Exception as e:
-            await ctx.send("Upsss.... Un error **Reportando al creador**")
-            return cprint(f"[Log] Un error ha ocurrido:  {e}", 'red')
+                    await ctx.send(embed=embed)
+            except Exception as e:
+                await ctx.send("Upsss.... Un error **Reportando al creador**")
+                return cprint(f"[Log] Un error ha ocurrido:  {e}", 'red')
 
 
 def setup(bot):
