@@ -11,6 +11,7 @@ import asyncio
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+    bot = self.bot
 
     async def ayuda(self, ctx, cog, cogs, paginasTotales, embed):
         cog = int(cog)
