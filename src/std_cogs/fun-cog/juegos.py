@@ -463,7 +463,7 @@ class Juegos(commands.Cog):
         except asyncio.TimeoutError:
             return await msg.edit(embed=discord.Embed(title="Se acavo el tiempo", desciprion="Has tardado mas de `15 segundos` a la proxima intenta responder mas rapido\n\nLa respuesta era {}".format(answer),colour=color))
         if str(trying.content)==str(answer):
-            await msg.edit(embed=discord.Embed(title="¡Muy bien!", description=f"Esta correcto.\n Si quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help fun`", colour=color))
+            await msg.edit(embed=discord.Embed(title="¡Muy bien!", description=f"Esta correcto.\n Si quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help juegos`", colour=color))
             user = ctx.author
             diamantes_dados = random.randint(10, 30)
             with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
@@ -473,7 +473,7 @@ class Juegos(commands.Cog):
                 json.dump(users, f)            
             await ctx.send(f"Y se te ha {diamantes_dados} diamantes dinero a tu cuenta")
         else:
-            await msg.edit(embed=discord.Embed(title="¡Mal!", desciprion=f"La respuesta era {answer}\n\nSi quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help fun`",colour=color))
+            await msg.edit(embed=discord.Embed(title="¡Mal!", desciprion=f"La respuesta era {answer}\n\nSi quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help juegos`",colour=color))
 
     def api(self, url):
         return jsonify(getapi(url).read())

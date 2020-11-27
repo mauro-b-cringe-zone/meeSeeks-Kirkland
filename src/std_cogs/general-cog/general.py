@@ -363,16 +363,16 @@ class General(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def fml(self, ctx):
         async with ctx.channel.typing():
-            response = requests.get('https://api.alexflipnote.dev/fml', headers=[env["API_FLEX"]])
+            response = requests.get('https://api.alexflipnote.dev/fml', headers={"Authorization": env["API_FLEX"]})
             json_data = json.loads(response.text)
             trans = Translator()
             translated_response = trans.translate(json_data['text'], src='en', dest='es')
             await ctx.send(translated_response.text)
-
-    # @commands.command()
+ 
+    # @commands.command()                    
     # async def youtube(self, ctx, *, query):
     #     from concurrent.futures import ThreadPoolExecutor
-    #     def ytsync(query=query):
+    #     def ytsync(query=query):           
     #         r = 0
     #         search = urllib.parse.quote(query)
     #         url = f"https://www.youtube.com/results?search_query={search}"
@@ -404,13 +404,15 @@ class General(commands.Cog):
     @commands.command(aliases=["ltr", "letra", "repetida"], description="Mira haver si hay una letra repetida en tu texto", usage="<palabra>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def letra_repetida(self, ctx, palabra):
+        embed = discord.Embed(title=f"Nada encontrado", description=f"Inserta una palabra con letras repetidas",colour=color)
+        try:
+            longituz_palabra = Counter(palabra)
 
-
-        longituz_palabra = Counter(palabra)
-
-        for m, v in longituz_palabra.items():
-            if v > 1:
-                embed = discord.Embed(title=f"Encontrado", description=f"La **{m}** esta **{v}** veces en **{palabra}**",colour=color)
+            for m, v in longituz_palabra.items():
+                if v > 1:
+                    embed = discord.Embed(title=f"Encontrado", description=f"La **{m}** esta **{v}** veces en **{palabra}**",colour=color)
+        except:
+            pass
         await ctx.send(embed=embed)
 
 

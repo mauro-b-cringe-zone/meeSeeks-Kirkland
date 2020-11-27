@@ -1,5 +1,5 @@
 
-import aiohttp
+import aiohttp, requests
 from discord import User, Message, File
 
 from discord.ext import commands
@@ -13,8 +13,9 @@ import urllib
 from os import environ as env
 
 import legofy
-import requests
 import io
+
+import base64
 
 color = int(env["COLOR"])
 
@@ -131,15 +132,30 @@ class ImgAvatarUser(commands.Cog):
             await ctx.send(file=File(await invert_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
             f"invert_{ctx.message.author}.gif"))
 
+    def buffer(self, data):
+        arr = BytesIO()
+        data.save(arr, format='PNG')
+        arr.seek(0)
+        return arr
+
+    def urltoimage(self, url):
+        image = self.imagefromURL(url)
+        return self.buffer(image)
 
     @commands.command(aliases=['truthscroll', 'truth-scroll'], description="Una legenda dijo", usage="[texto]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def scroll(self, ctx, *, text):
-        text = urllib.parse.quote(text)
-        # await ctx.send(f'https://api.alexflipnote.dev/scroll?text={text}') 
-        embed = discord.Embed(colour=color)
-        embed.set_image(url=f'https://api.alexflipnote.dev/scroll?text={text}')
-        await ctx.send(embed=embed)
+        async with ctx.channel.typing():
+            try:
+                text = urllib.parse.quote(text)
+                # await ctx.send(f'https://api.alexflipnote.dev/scroll?text={text}') 
+                embed = discord.Embed(colour=color)
+                resp = requests.get(f"https://api.alexflipnote.dev/scroll?text={text}", timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+                file=discord.File(BytesIO(resp.content), "archivo.png")
+                embed.set_image(url="attachment://archivo.png")
+                await ctx.send(embed=embed, file=file)
+            except Exception as e:
+                await ctx.send(e)
 
     @commands.command(description="Interesante...", usage="[texto]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -147,8 +163,10 @@ class ImgAvatarUser(commands.Cog):
         text = urllib.parse.quote(text)
         # await ctx.send(f'https://api.alexflipnote.dev/facts?text={text}')
         embed = discord.Embed(colour=color)
-        embed.set_image(url=f'https://api.alexflipnote.dev/facts?text={text}')
-        await ctx.send(embed=embed)
+        resp = requests.get(f'https://api.alexflipnote.dev/facts?text={text}', timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+        file=discord.File(BytesIO(resp.content), "archivo.png")
+        embed.set_image(url="attachment://archivo.png")
+        await ctx.send(embed=embed, file=file)
 
 
 

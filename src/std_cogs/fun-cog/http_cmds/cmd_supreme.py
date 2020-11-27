@@ -19,7 +19,7 @@ class Supreme(commands.Cog):
 
     async def api_img_creator(self, ctx, url, filename, content=None):
         async with ctx.channel.typing():
-            req = await http.get(url, res_method="read")
+            req = await http.get(url, res_method="read", headers={"Authorization": env["API_FLEX"]})
 
             if req is None:
                 return await ctx.send("No pude crear la imagen ;-;")

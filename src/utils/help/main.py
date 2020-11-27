@@ -9,6 +9,7 @@ from termcolor import cprint
 import asyncio
 
 class Help(commands.Cog):
+    
     def __init__(self, bot):
         self.bot = bot
 
@@ -45,7 +46,7 @@ class Help(commands.Cog):
 
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
-    @commands.command(description="Ayuda para los comandos", usage="[cog")
+    @commands.command(description="Ayuda para los comandos", usage="[cog]")
     async def help(self, ctx, cog="0"):
         try:
             if cog == "0":
@@ -58,7 +59,7 @@ class Help(commands.Cog):
                 cogsL = ""
                 for i in cogs:
                     cogsL += f"`{i.lower()}` **|** "
-                embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"{cogsL[:-6]}", inline=False)
+                embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"-> E.X: `{ctx.prefix}help [Cog]`\n{cogsL[:-6]}", inline=False)
                 return await ctx.send(embed=embedhs)
             embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
 
@@ -71,7 +72,6 @@ class Help(commands.Cog):
                 embedh = await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
 
                 msg = await ctx.send(embed=embedh)
-                
 
             elif re.search(r"[a-zA-Z]", str(cog)):
                 congMinusculas = [c.lower() for c in cogs]

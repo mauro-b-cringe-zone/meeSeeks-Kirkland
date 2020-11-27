@@ -4,6 +4,7 @@ from discord.ext import commands
 import sys
 from io import BytesIO
 from requests import get
+import requests
 from aiohttp import ClientSession
 from urllib.parse import quote_plus as urlencode
 from PIL import Image, ImageFont, ImageDraw, GifImagePlugin, ImageOps, ImageFilter
@@ -93,7 +94,11 @@ class Img(commands.Cog):
         async with ctx.message.channel.typing():
             txt1, txt2 = self.urlify(str(ctx.message.content).split('[')[1][:-1]), self.urlify(str(ctx.message.content).split('[')[2][:-1])
             url='https://api.alexflipnote.dev/didyoumean?top='+str(txt1)+'&bottom='+str(txt2)
-            await ctx.send(file=discord.File(self.urltoimage(url), 'didyoumean.png'))
+            embed=discord.Embed(color=color)
+            resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+            file=discord.File(BytesIO(resp.content), "archivo.png")
+            embed.set_image(url="attachment://archivo.png")
+            await ctx.send(embed=embed, file=file)
 
 
     @commands.command(description="TU ERES {texto}", usage="texto")
@@ -115,15 +120,22 @@ class Img(commands.Cog):
             av = ctx.message.author.avatar_url
             toTrash = getUserAvatar(ctx, args)
             url='https://api.alexflipnote.dev/trash?face='+str(av).replace('webp', 'png')+'&trash='+str(toTrash).replace('webp', 'png')
-            data = self.urltoimage(url)
-            await ctx.send(file=discord.File(data, 'trashed.png'))
+            embed=discord.Embed(color=color)
+            resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+            file=discord.File(BytesIO(resp.content), "archivo.png")
+            embed.set_image(url="attachment://archivo.png")
+            await ctx.send(embed=embed, file=file)
 
     @commands.command(description="¿Soy una broma para ti?", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def amiajoke(self, ctx, *args):
         source = getUserAvatar(ctx, args)
         url = 'https://api.alexflipnote.dev/amiajoke?image='+str(source)
-        await ctx.send(file=discord.File(self.urltoimage(url), 'maymays.png'))
+        embed=discord.Embed(color=color)
+        resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+        file=discord.File(BytesIO(resp.content), "archivo.png")
+        embed.set_image(url="attachment://archivo.png")
+        await ctx.send(embed=embed, file=file)
 
     @commands.command(description="El bot te dice algo", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -145,7 +157,11 @@ class Img(commands.Cog):
             async with ctx.message.channel.typing():
                 txt = '+'.join(args)
                 url='https://api.alexflipnote.dev/achievement?text='+str(txt)
-                await ctx.send(file=discord.File(self.urltoimage(url), 'minecraft_notice.png'))
+                embed=discord.Embed(color=color)
+                resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+                file=discord.File(BytesIO(resp.content), "archivo.png")
+                embed.set_image(url="attachment://archivo.png")
+                await ctx.send(embed=embed, file=file)
 
     @commands.command(description="Llama ha alguien", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -156,7 +172,11 @@ class Img(commands.Cog):
             async with ctx.message.channel.typing():
                 txt = '+'.join(args)
                 url='https://api.alexflipnote.dev/calling?text='+str(txt)
-                await ctx.send(file=discord.File(self.urltoimage(url), 'minecraft_notice.png'))
+                embed=discord.Embed(color=color)
+                resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+                file=discord.File(BytesIO(resp.content), "archivo.png")
+                embed.set_image(url="attachment://archivo.png")
+                await ctx.send(embed=embed, file=file)
 
     def urlify(self, word):
         return urlencode(word).replace('+', '%20')
@@ -177,8 +197,11 @@ class Img(commands.Cog):
                 txt1 = self.urlify(unprefixed.split('[')[1][:-1])
                 txt2 = self.urlify(unprefixed.split('[')[2][:-1])
                 url='https://api.alexflipnote.dev/drake?top='+str(txt1)+'&bottom='+str(txt2)
-                data = self.urltoimage(url)
-                await ctx.send(file=discord.File(data, 'drake.png'))
+                embed=discord.Embed(color=color)
+                resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+                file=discord.File(BytesIO(resp.content), "archivo.png")
+                embed.set_image(url="attachment://archivo.png")
+                await ctx.send(embed=embed, file=file)
 
 
     @commands.command(description="Maubot no era el impostor", usage="<usuario>")
@@ -201,8 +224,11 @@ class Img(commands.Cog):
         async with ctx.message.channel.typing():
             av = getUserAvatar(ctx, args)
             url = 'https://api.alexflipnote.dev/jokeoverhead?image='+str(av)
-            data = self.urltoimage(url)
-            await ctx.send(file=discord.File(data, 'salty.png'))
+            embed=discord.Embed(color=color)
+            resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+            file=discord.File(BytesIO(resp.content), "archivo.png")
+            embed.set_image(url="attachment://archivo.png")
+            await ctx.send(embed=embed, file=file)
 
     @commands.command(description="NIÑO MALO", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -210,8 +236,11 @@ class Img(commands.Cog):
         async with ctx.message.channel.typing():
             av = getUserAvatar(ctx, args)
             url = 'https://api.alexflipnote.dev/bad?image='+str(av)
-            data = self.urltoimage(url)
-            await ctx.send(file=discord.File(data, 'salty.png'))
+            embed=discord.Embed(color=color)
+            resp = requests.get(url, timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+            file=discord.File(BytesIO(resp.content), "archivo.png")
+            embed.set_image(url="attachment://archivo.png")
+            await ctx.send(embed=embed, file=file)
 
 
     @commands.command(description="Suelo es lava LOL", usage="[usuario]")
@@ -228,8 +257,11 @@ class Img(commands.Cog):
                     text = str(ctx.message.content).split('> ')[1]
                 else:
                      text = 'Lo siento no he puesto argumentos'
-            await ctx.send(file=discord.File(self.urltoimage('https://api.alexflipnote.dev/floor?image='+auth+'&text='+self.urlify(text)), 'floor.png'))
-
+            embed=discord.Embed(color=color)
+            resp = requests.get('https://api.alexflipnote.dev/floor?image='+auth+'&text='+self.urlify(text), timeout=10.0, headers={'Authorization': env["API_FLEX"]}) 
+            file=discord.File(BytesIO(resp.content), "archivo.png")
+            embed.set_image(url="attachment://archivo.png")
+            await ctx.send(embed=embed, file=file)
 
     @commands.command(description="¿Quieres ha alguien?", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)

@@ -24,7 +24,7 @@ class General(commands.Cog):
         async with ctx.channel.typing():
 
             try:
-                r = await http.get(f"https://api.alexflipnote.dev/steam/user/{user}", res_method="json", no_cache=True)
+                r = await http.get(f"https://api.alexflipnote.dev/steam/user/{user}", res_method="json", no_cache=True, headers={"Authorization": env["API_FLEX"]})
             except aiohttp.ClientConnectorError:
                 return await ctx.send("La API parece estar inactiva...")
             except aiohttp.ContentTypeError:

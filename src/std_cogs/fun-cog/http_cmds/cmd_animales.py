@@ -9,7 +9,10 @@ import re
 from io import BytesIO
 from discord.ext import commands 
 from . import http
-color =   0x75aef5
+
+from os import environ as env
+
+color =   int(env["COLOR"])
 class Animales(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -17,11 +20,11 @@ class Animales(commands.Cog):
 
     async def randomimageapi(self, ctx, url, endpoint):
         try:
-            r = await http.get(url, res_method="json", no_cache=True)
+            r = await http.get(url, res_method="json", headers={"Authorization": env["API_FLEX"]})
         except aiohttp.ClientConnectorError:
-            return await ctx.send("The API seems to be down...")
+            return await ctx.send("La api esta abajo...")
         except aiohttp.ContentTypeError:
-            return await ctx.send("The API returned an error or didn't return JSON...")
+            return await ctx.send("La Api no devolvio un JSON...")
             
         embed = discord.Embed(colour=color)
         embed.set_image(url=r[endpoint])

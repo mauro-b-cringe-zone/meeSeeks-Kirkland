@@ -31,9 +31,8 @@ class General(commands.Cog):
 
             if not re.search(r'^(?:[0-9a-fA-F]{3}){1,2}$', colour):
                 return await ctx.send("Solo se le permite ingresar a HEX (0-9 & A-F)")
-
             try:
-                r = await http.get(f"https://api.alexflipnote.dev/colour/{colour}", res_method="json", no_cache=True)
+                r = await http.get(f"https://api.alexflipnote.dev/colour/{colour}", res_method="json", no_cache=True, headers={"Authorization": env["API_FLEX"]})
             except aiohttp.ClientConnectorError:
                 return await ctx.send("La API parece estar inactiva...")
             except aiohttp.ContentTypeError:

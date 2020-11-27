@@ -22,6 +22,7 @@ class AfkCmd(commands.Cog):
             users[str(user.id)] = {}
             users[str(user.id)]["afk"] = "1"
             users[str(user.id)]["status"] = "False"
+            users[str(user.id)]["razon"] = razon
 
         with open(env["JSON_DIR"] + "afk.json", "w") as f:
             json.dump(users,f)        
@@ -32,9 +33,15 @@ class AfkCmd(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         user = message.author
+        menciones = []
+        if len(message.mentions) > 0:
+            for i in message.mentions: menciones.appen(i)
 
         with open(env["JSON_DIR"] + "afk.json", "r") as f:
             users = json.load(f)
+
+        for i in menciones:
+            if str(i.id) in users: await message.channel.send(embed=discord.Embed(title="¿No saves leer?", description=f"{user.mention}, Como dice bien **mi** mensage {i.mention} esta AFK\n\n**Razon:** {users[str(i.id)]['razon']}"))
 
         if str(user.id) in users:   
     
@@ -43,7 +50,6 @@ class AfkCmd(commands.Cog):
                 users[str(user.id)]["status"] = "False"
 
                 await message.channel.send(embed=discord.Embed(title="Mira quien ha vuelto", description=f"{user.mention} ha vuelto de su descanso. **bienvenido**",colour=color))
-
 
             if users[str(user.id)]["afk"] == "1":
                 users[str(user.id)]["status"] = "True"
