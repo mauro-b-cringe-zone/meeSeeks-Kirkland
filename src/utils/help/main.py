@@ -49,10 +49,10 @@ class Help(commands.Cog):
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
     async def ayuda_reaccionada(self, ctx, cog, cogs, paginasTotales, embed):
-        if int(cog) > int(paginasTotales) :
-            int(cog) = paginasTotales
+        if int(cog) > int(paginasTotales):
+            cog = paginasTotales
         if int(cog) < 1: 
-            int(cog) = 1
+            cog = 1
         return await self.ayuda(ctx, str(cog), cogs, paginasTotales, embed)
 
     @commands.command(description="Ayuda para los comandos", usage="[cog]")
