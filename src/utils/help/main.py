@@ -38,10 +38,10 @@ class Help(commands.Cog):
                 if comando.hidden:
                     continue
 
-                ListaDeComandos += f"`{ctx.prefix}{comando.name}` **|** "
+                ListaDeComandos += f"`{ctx.prefix}{comando.name}` **⦂** "
             ListaDeComandos = ListaDeComandos[:-6]
             ListaDeComandos += "\n"
-            embed.add_field(name=f"->  {cog}\n", value=ListaDeComandos, inline=False)
+            embed.add_field(name=f"{cog} | (`{len(self.bot.get_cog(cog).walk_commands())}`)", value=ListaDeComandos, inline=False)
         return embed
 
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')

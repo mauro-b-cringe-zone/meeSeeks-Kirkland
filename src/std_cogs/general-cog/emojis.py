@@ -55,7 +55,6 @@ class Emoji(commands.Cog):
 
     @commands.command(pass_context=True, aliases=['emote'], invoke_without_command=True, description="Mira un emoji como una imagen", usage="[s (Literalmente pones s)] <emoji>")
     async def emoji(self, ctx, *, msg):
-        await ctx.message.delete()
         emojis = msg.split()
         if msg.startswith('s '):
             emojis = emojis[1:]

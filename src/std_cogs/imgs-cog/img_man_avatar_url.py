@@ -132,16 +132,6 @@ class ImgAvatarUser(commands.Cog):
             await ctx.send(file=File(await invert_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
             f"invert_{ctx.message.author}.gif"))
 
-    def buffer(self, data):
-        arr = BytesIO()
-        data.save(arr, format='PNG')
-        arr.seek(0)
-        return arr
-
-    def urltoimage(self, url):
-        image = self.imagefromURL(url)
-        return self.buffer(image)
-
     @commands.command(aliases=['truthscroll', 'truth-scroll'], description="Una legenda dijo", usage="[texto]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def scroll(self, ctx, *, text):
