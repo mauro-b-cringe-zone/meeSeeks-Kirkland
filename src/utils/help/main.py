@@ -49,7 +49,10 @@ class Help(commands.Cog):
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
     async def ayuda_reaccionada(self, ctx, cog, cogs, paginasTotales, embed):
-        if int(cog) > int(paginasTotales) or int(cog) < 1: return
+        if int(cog) > int(paginasTotales) :
+            int(cog) = paginasTotales
+        if int(cog) < 1: 
+            int(cog) = 1
         return await self.ayuda(ctx, str(cog), cogs, paginasTotales, embed)
 
     @commands.command(description="Ayuda para los comandos", usage="[cog]")
@@ -107,8 +110,8 @@ class Help(commands.Cog):
                             cogsR = int(cogsR) + 1
                             await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
                         if reaction.emoji == self.emojis[4]:
-                            cogsR = int(cogsR) + 1
-                            await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(paginasTotales), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                            cogsR = paginasTotales
+                            await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
 
 
             elif re.search(r"[a-zA-Z]", str(cog)):
