@@ -41,6 +41,7 @@ class Help(commands.Cog):
                 ListaDeComandos += f"`{ctx.prefix}{comando.name}` **⦂** "
             ListaDeComandos = ListaDeComandos[:-6]
             ListaDeComandos += "\n"
+            await ctx.send(len(self.bot.get_cog(cog).walk_commands()))
             embed.add_field(name=f"{cog} {len(self.bot.get_cog(cog).walk_commands())}", value=ListaDeComandos, inline=False)
         return embed
 
