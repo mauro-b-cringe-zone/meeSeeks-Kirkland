@@ -59,7 +59,7 @@ class Help(commands.Cog):
                 cogsL = ""
                 for i in cogs:
                     cogsL += f"`{i.lower()}` **|** "
-                embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"-> E.X: `{ctx.prefix}help [Cog]`\n{cogsL[:-6]}", inline=False)
+                embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"**-> e.x:** `{ctx.prefix}help [Cog]`\n\n{cogsL[:-6]}", inline=False)
                 return await ctx.send(embed=embedhs)
             embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
 
