@@ -33,16 +33,16 @@ class Help(commands.Cog):
             
         for cog in CogsNecesitados:
             ListaDeComandos = ""
+            cmds = 0
             for comando in self.bot.get_cog(cog).walk_commands():
         
                 if comando.hidden:
                     continue
 
                 ListaDeComandos += f"`{ctx.prefix}{comando.name}` **⦂** "
+                cmds += 1
             ListaDeComandos = ListaDeComandos[:-6]
-            ListaDeComandos += "\n"
-            await ctx.send(len(self.bot.get_cog(cog).walk_commands()))
-            embed.add_field(name=f"{cog} {len(self.bot.get_cog(cog).walk_commands())}", value=ListaDeComandos, inline=False)
+            embed.add_field(name=f"{cog} | (`{cmds}`)", value=ListaDeComandos, inline=False)
         return embed
 
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
