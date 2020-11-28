@@ -66,9 +66,11 @@ class Tags(commands.Cog):
                 vis = tags[nombre_de_tag]["visitas"]
                 embed = discord.Embed(title=f"Tag: {nombre}", color=color)
                 embed.add_field(name="Id del creador:", value=creador, inline=True)
+                c = self.bot.get_user(int(creador))
+                embed.add_field(name="Mencion del creador:", value=c.mention, inline=True)
                 embed.add_field(name="Visitas:", value=vis+1, inline=True)
+                await ctx.send(f"**Descripcion de la tag:**\n\n{desc}")
                 await ctx.send(embed=embed)
-                await ctx.send(f"**Descripcion de la tag**\n\n{desc}")
                 tags[nombre_de_tag]["visitas"] += 1
                 self.cerrar_json(tags)
             else:
