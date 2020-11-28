@@ -35,7 +35,7 @@ class AfkCmd(commands.Cog):
         user = message.author
         menciones = []
         if len(message.mentions) > 0:
-            for i in message.mentions: menciones.appen(i)
+            for i in message.mentions: menciones.append(i)
 
         with open(env["JSON_DIR"] + "afk.json", "r") as f:
             users = json.load(f)
