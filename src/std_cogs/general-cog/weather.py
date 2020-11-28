@@ -5,10 +5,10 @@ from discord.utils import get
 from requests import get as rget
 from datetime import datetime, timedelta
 
-from utils.Environment import env
+from os import environ as env
 
-color = int(env.get("COLOR"))
-WEATHER_KEY = env.get("WEATHER_KEY")
+color = int(env["COLOR"])
+WEATHER_KEY = env["WEATHER_KEY"]
 
 from googletrans import Translator
 
