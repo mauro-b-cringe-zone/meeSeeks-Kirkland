@@ -43,7 +43,7 @@ class Weather(commands.Cog):
         data = Weather.get_cast(city)
         embed = Embed(title=f":white_sun_small_cloud: Clima en {data['City']}:", colour=color)
         for key, value in data.items():
-            translated_key = Translator().translate(key, src='en', dest='es')
+            # translated_key = Translator().translate(key, src='en', dest='es')
             embed.add_field(name=translated_key.text, value=value)
 
         data = Weather.get_cast(city, True)
