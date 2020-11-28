@@ -42,9 +42,10 @@ class Weather(commands.Cog):
     async def weather(self, ctx,  *, city):
         data = Weather.get_cast(city)
         embed = Embed(title=f":white_sun_small_cloud: Clima en {data['City']}:", colour=color)
+        trans = Translator()
         for key, value in data.items():
-            # translated_key = Translator().translate(key, src='en', dest='es')
-            embed.add_field(name=key, value=value)
+            translated_key = trans.translate(key, dest='es').text
+            embed.add_field(name=translated_key, value=value)
 
         data = Weather.get_cast(city, True)
         days = {entry['dt_txt'][:10]: [] for entry in data['list']}
