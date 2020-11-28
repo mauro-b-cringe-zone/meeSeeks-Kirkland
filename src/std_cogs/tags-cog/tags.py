@@ -201,6 +201,7 @@ class Tags(commands.Cog):
             tags = self.abrir_json()
             try:
                 if not num >= 50:    
+                    if num > len(tags): return await ctx.send(embed=discord.Embed(title="No hay tantas tags", description=f"{ctx.author.mention} No hay tantas tangs, Las tags que hay actualmente son: **{len(tags)}**", color=color))
                     for tag in tags:
 
                         visitas_totales = tags[tag]['visitas']
@@ -213,7 +214,7 @@ class Tags(commands.Cog):
 
                     for i in total:
                         creador = self.bot.get_user(tabla_lista[i]['creador'])
-                        embed.add_field(name=f"{index}. {tabla_lista[i]['titulo']} | Visitas: {tabla_lista[i]['visitas']}", value=f"> Creador: {creador.mention}\n> Invocacion: {ctx.prefix}{tabla_lista[i]['titulo']}", inline=False)
+                        embed.add_field(name=f"{index}. {tabla_lista[i]['titulo']} | Visitas: {tabla_lista[i]['visitas']}", value=f"> Creador: {creador.mention}\n> Invocacion: {ctx.prefix}tag {tabla_lista[i]['titulo']}", inline=False)
 
                         if index == num:
                             break

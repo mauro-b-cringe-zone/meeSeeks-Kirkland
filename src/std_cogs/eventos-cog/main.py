@@ -246,6 +246,7 @@ class Servidor(commands.Cog):
             Puedes verme en:
             -> **[top.gg](https://top.gg/bot/730124969132163093)**
             -> **[bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)**
+            -> **[Web de Maubot](https://maubot.maucode.com)
             """, colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
 
