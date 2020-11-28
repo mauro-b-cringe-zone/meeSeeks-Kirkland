@@ -196,7 +196,7 @@ class Help(commands.Cog):
 
                 await ctx.send(embed=embed)
         except Exception as e:
-            await ctx.send("Upsss.... Un error **Reportando al creador**, \n```{e}```")
+            await ctx.send(f"Upsss.... Un error **Reportando al creador**, \n```{e}```")
             return cprint(f"[Log] Un error ha ocurrido:  {e}", 'red')
 
 
