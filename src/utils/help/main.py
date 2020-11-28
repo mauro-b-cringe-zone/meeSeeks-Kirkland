@@ -17,12 +17,12 @@ class Help(commands.Cog):
     async def ayuda(self, ctx, cog, cogs, paginasTotales, embed):
         cog = int(cog)
         if cog > paginasTotales or cog < 1:
-            return await ctx.send(f"Numero invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]")
+            return await ctx.send(f"Numero invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]") 
 
         embed.set_footer(
             text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
         )
-        embed.description = "Maubot tiene una pagina web, si quieres visitarla dale **[aqui](http://maubot.mooo.com)**"
+        embed.description = "Maubot tiene una pagina web, si quieres visitarla dale **[aqui](https://maubot.maucode.com)**"
 
         CogsNecesitados = []
         for i in range(4):

@@ -1,7 +1,7 @@
 # Maubot
 
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
-Maubot tambien tiene un [compilador](http://maubot.mooo.com/maucompilador) y aparte de eso es un bot maravilloso
+Maubot tambien tiene un [compilador](https://maubot.maucode.com/maucompilador) y aparte de eso es un bot maravilloso
 
 `m.help [Cog]`
 
@@ -69,7 +69,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
   * Maubot esta disponible con un sistema de economia con comandos como:
     * `m.balance [@usuario]`, `m.rob <@usuario>`, `m.slots`, `m.shop [pagina]`, `m.buy <objeto>`, `m.sell <objeto>`, ...
 * Maubot tiene tambien un compilador lo podeis usar poniendo `m.[lenguage]` <- O -> `m.run --list` para ver los idiomas
-  * Si quereis podeis usarlo desde la [web](http://maubot.mooo.com/maucompilador)
+  * Si quereis podeis usarlo desde la [web](https://maubot.maucode.com/maucompilador)
 * Y MUCO MASSSSS......
 
 # Sugerencias
@@ -94,8 +94,8 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
  * En el chat solamente pon `cerrarchat`
 
 # Web
-* Aqui esta la [web](http://maubot.mooo.com)
-* Tambien hay un [compilador](http://maubot.mooo.com/compilador.html)
+* Aqui esta la [web](https://maubot.maucode.com)
+* Tambien hay un [compilador](https://maubot.maucode.com/compilador.html)
 * `m.links`
 
 ## Por supuesto mucho maaasss.....

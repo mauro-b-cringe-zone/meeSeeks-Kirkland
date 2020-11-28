@@ -429,14 +429,14 @@ class Execution(commands.Cog):
         Esto evita el abuso de salida grande que molesta a los usuarios en el chat.
         """
         if len(output) > 300 or output.count("\n") > 10:
-            embed.description = f"Salida demasiado grande - [Salida completa](http://maubot.mooo.com/compilador.html?{token})"
+            embed.description = f"Salida demasiado grande - [Salida completa](https://maubot.maucode.com/compilador.html?{token})"
 
             if output.count("\n") > 10:
                 output = "\n".join(output.split("\n")[:10]) + "\n(...)"
             else:
                 output = output[:300] + "\n(...)"
         else:
-            embed.description = f"Edite este código en un IDE en línea - [Aqui](http://maubot.mooo.com/compilador.html?{token})"
+            embed.description = f"Edite este código en un IDE en línea - [Aqui](https://maubot.maucode.com/compilador.html?{token})"
 
         embed.add_field(name="Salida:", value=f"```yaml\n{output}```", inline=False)
         return embed

@@ -30,7 +30,7 @@ class App(commands.Bot):
         self.__github__ = "https://github.com/maubg-debug/"
         self.__repo__ = "https://github.com/maubg-debug/maubot"
         self.__version__ = "1.0.0"      
-        self.__web__ = "http://maubot.mooo.com"
+        self.__web__ = "https://maubot.maucode.com"
 
         self.__cogs = cogs
         self.color = int(env.get("COLOR"))
@@ -387,7 +387,7 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def links(self, ctx):
 
-        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/mwDBgubwdP)\n**Web**: [Link](http://maubot.mooo.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
+        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/mwDBgubwdP)\n**Web**: [Link](https://maubot.maucode.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
         embed.set_author(name="INVITACIONES", icon_url="https://img.icons8.com/color/48/000000/share.png")
         embed.set_image(url="https://top.gg/api/widget/730124969132163093svg?usernamecolor=FFFFFF&topcolor=000000")
         embed.set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-share-icon.png")

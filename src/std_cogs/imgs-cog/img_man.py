@@ -411,7 +411,7 @@ class ImgSecundario(commands.Cog):
     @commands.command(asliases=['ft'], description="Mira la tienda de fortnite")
     @commands.cooldown(1, 21600, commands.BucketType.user)
     async def fortnite(self, ctx):
-        await ctx.send(embed=discord.Embed(color=color).set_image(url='https://api.nitestats.com/v1/shop/image?footer=%20Consigue%20APIs%20gratis%20Codigo-en:%20http://maubot.mooo.com&background=00000014.png&header=Tienda%20de%20fortnite'))
+        await ctx.send(embed=discord.Embed(color=color).set_image(url='https://api.nitestats.com/v1/shop/image?footer=%20Consigue%20APIs%20gratis%20Codigo-en:%20https://maubot.maucode.com&background=00000014.png&header=Tienda%20de%20fortnite'))
 
     @commands.command(description="Mira el avatar de alguien descontrolarse", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)

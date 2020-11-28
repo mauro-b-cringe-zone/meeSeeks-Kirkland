@@ -18,7 +18,7 @@ __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
 __repo__ = "https://github.com/maubg-debug/maubot/"
 __version__ = "1.0.0"
-__web__ = "http://maubot.mooo.com"
+__web__ = "https://maubot.maucode.com"
 
 def cargar(texto, t):
     for i in tqdm(range(1, 100), desc=texto, leave=False): 
