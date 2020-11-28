@@ -98,7 +98,7 @@ class App(commands.Bot):
     async def reaction(self, context, msg_error):
         def _check(reaction, user):
             return (
-                reaction.emoji in '❌'
+                reaction.emoji == '❌'
                 and user == context.author
                 and reaction.message.id == msg_error.id
             )
