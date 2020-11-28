@@ -1,4 +1,4 @@
- 
+
 # ? Activar el enviroment
 # ? py -m venv env
 # ? ".\env\Scripts\activate"
