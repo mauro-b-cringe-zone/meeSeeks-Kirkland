@@ -7,6 +7,8 @@
         {"name":"Pistola", "price":100000,"description":"**Solo se venden a los mallores de edad  :underage:**  Sirve para hacer pium pium a los malos que quieran robar"},
         {"name":"Teclado", "price":1500,"description":"Gran velocidad de respuesta con teclas personalizables."},
         {"name":"Martillo", "price":25,"description":"Por si quieres construir algo"},
+        {"name":"Television", "price":2050,"description":"Puedes ver los dubujos animados y las noticias"},
+        {"name":"Movil", "price":490,"description":"Con este movil puedes llamar a tu compañero de el instituto"},
         {"name":"1 clase de programacion", "price":100000,"description":"¿Te apeteze haquear a la nasa?"}
     ]
 }
