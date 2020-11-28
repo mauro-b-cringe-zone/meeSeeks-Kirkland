@@ -41,7 +41,7 @@ class AfkCmd(commands.Cog):
             users = json.load(f)
 
         for i in menciones:
-            if str(i.id) in users: await message.channel.send(embed=discord.Embed(title="¿No saves leer?", description=f"{user.mention}, Como dice bien **mi** mensage {i.mention} esta AFK\n\n**Razon:** {users[str(i.id)]['razon']}"))
+            if str(i.id) in users: await message.channel.send(embed=discord.Embed(title="¿No saves leer?", color=color, description=f"{user.mention}, Como dice bien **mi** mensage {i.mention} esta AFK\n\n**Razon:** {users[str(i.id)]['razon']}"))
 
         if str(user.id) in users:   
     
