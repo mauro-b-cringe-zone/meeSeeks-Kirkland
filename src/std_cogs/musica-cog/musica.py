@@ -174,12 +174,12 @@ class Player(wavelink.Player):
             self.queue.add(*tracks.tracks)
         elif len(tracks) == 1:
             self.queue.add(tracks[0])
-            await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color, url=tracks[0].uri).add_field(name="Autor", value=tracks[0].author).add_field(name="Duracion", value=f"{int(tracks[0].duration) / 60}  Minutos").add_field(name="Musica puesta por", value=ctx.author.mention).set_footer(icon_url=ctx.author.avatar_url).set_image(url=tracks[0].thumb))
+            await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **{tracks[0].title}** a la cola", color=color, url=tracks[0].uri).add_field(name="Autor", value=tracks[0].author).add_field(name="Duracion", value=f"{int(tracks[0].duration) / 60}  Minutos").add_field(name="Musica puesta por", value=ctx.author.mention).set_footer(icon_url=ctx.author.avatar_url).set_thumbnail(url=tracks[0].thumb))
         else:
             track = await self.choose_track(ctx, tracks)
             if track is not None:
                 self.queue.add(track)
-                await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **[{tracks[0].title}]({tracks[0].uri})** a la cola", color=color, url=tracks[0].uri).add_field(name="Autor", value=tracks[0].author).add_field(name="Duracion", value=f"{int(int(tracks[0].duration) / 60)}  Minutos").add_field(name="Musica puesta por", value=ctx.author.mention).set_footer(icon_url=ctx.author.avatar_url).set_image(url=tracks[0].thumb))
+                await ctx.send(embed=discord.Embed(title="Añadido a la cola", description=f"{ctx.author.mention}, se ha añadido **[{tracks[0].title}]({tracks[0].uri})** a la cola", color=color, url=tracks[0].uri).add_field(name="Autor", value=tracks[0].author).add_field(name="Duracion", value=f"{int(int(tracks[0].duration) / 60)}  Minutos").add_field(name="Musica puesta por", value=ctx.author.mention).set_footer(icon_url=ctx.author.avatar_url).set_thumbnail(url=tracks[0].thumb))
 
         if not self.is_playing and not self.queue.is_empty:
             await self.start_playback()
