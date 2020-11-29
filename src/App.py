@@ -85,54 +85,53 @@ class App(commands.Bot):
 
             if isinstance(exception, CommandOnCooldown):
                 embed = discord.Embed(title="Tranquilo...", description=f"{context.author.mention} Este comando esta en reposo\n Ahora tienes que esperar **{exception.retry_after:,.2f}** segundos", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.DisabledCommand):
                 embed = discord.Embed(title="404", description=f"{context.author.mention} Este comando esta **desactivado** intentalo mas tarde", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.NotOwner):
                 embed = discord.Embed(title="....", description=f"{context.author.mention} Este comando es para mi creador\n\nVete y consigue una vida.", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.NoPrivateMessage):
                 embed = discord.Embed(title="NO", description=f"{context.author.mention} Este comando no es para canale de DM", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.TooManyArguments):
                 embed = discord.Embed(description=f"{context.author.mention} Escribe menos argumentos por favor.", colour=0xf15069)
                 embed.set_author(name="Demasiado", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-
-                await self.reaction(context, embed)
+                return await self.reaction(context, embed)
 
             elif isinstance(exception, commands.BadArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Escribe un argumento valido", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                await self.reaction(context, embed)
+                return await self.reaction(context, embed)
 
             elif isinstance(exception, commands.MissingRequiredArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Escribe todos los argumentos requeridos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                await self.reaction(context, embed)
+                return await self.reaction(context, embed)
 
 
             elif isinstance(exception, commands.MissingPermissions):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name=f"Necesitas permisos para hacer esto", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.add_field(name="\uFEFF", value=f"Permisos necesarios: `{Translator().translate(str([perm.replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]), src='en', dest='es').text}`")
-                await self.reaction(context, embed)
+                return await self.reaction(context, embed)
 
             elif isinstance(exception, commands.MissingRole):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Tienes que tener los roles correctos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                await self.reaction(context, embed)
+                return await self.reaction(context, embed)
 
 
-        excepciones = ["", "You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
+        excepciones = ["You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
         if env.get('DEBUG'):
             for i in excepciones:
-                if i in str(exception):
+                if i in str(exception) or i == "":
                     return
             await context.send(embed=discord.Embed(
                                title="Como sabes, los robots no son perfectos", 
