@@ -61,9 +61,12 @@ class App(commands.Bot):
 
 
     async def reaction(self, context, msg_error):
+        msg_error.set_footer(text='\n-- ERROR')
+        msg_error = await context.send(embed=msg_error)
+        await msg_error.add_reaction('❌')
         def _check(reaction, user):
             return (
-                reaction.emoji == '❌'
+                reaction.emoji in '❌'
                 and user == context.author
                 and reaction.message.id == msg_error.id
             )
@@ -99,44 +102,31 @@ class App(commands.Bot):
             elif isinstance(exception, commands.TooManyArguments):
                 embed = discord.Embed(description=f"{context.author.mention} Escribe menos argumentos por favor.", colour=0xf15069)
                 embed.set_author(name="Demasiado", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                embed.set_footer(text='\n-- ERROR')
-                msg_error = await context.send(embed=embed)
-                await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+
+                await self.reaction(context, embed)
 
             elif isinstance(exception, commands.BadArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Escribe un argumento valido", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                embed.set_footer(text='\n-- ERROR')
-                msg_error = await context.send(embed=embed)
-                await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                await self.reaction(context, embed)
 
             elif isinstance(exception, commands.MissingRequiredArgument):
-                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=color)
+                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Escribe todos los argumentos requeridos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                embed.add_field(name="Argumento:", value=exception.args[0])
-                msg_error = await context.send(embed=embed)
-                await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                await self.reaction(context, embed)
 
 
             elif isinstance(exception, commands.MissingPermissions):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name=f"Necesitas permisos para hacer esto", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 embed.add_field(name="\uFEFF", value=f"Permisos necesarios: `{Translator().translate(str([perm.replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]), src='en', dest='es').text}`")
-                embed.set_footer(text='\n-- ERROR')
-                msg_error = await context.send(embed=embed)
-                await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                await self.reaction(context, embed)
 
             elif isinstance(exception, commands.MissingRole):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Tienes que tener los roles correctos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                embed.set_footer(text='\n-- ERROR')
-                msg_error = await context.send(embed=embed)
-                await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                await self.reaction(context, embed)
+
 
         excepciones = ["", "You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
