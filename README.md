@@ -95,7 +95,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 # Web
 * Aqui esta la [web](https://maubot.maucode.com)
-* Tambien hay un [compilador](https://maubot.maucode.com/compilador.html)
+* Tambien hay un [compilador](https://maubot.maucode.com/compilador)
 * `m.links`
 
 ## Por supuesto mucho maaasss.....
