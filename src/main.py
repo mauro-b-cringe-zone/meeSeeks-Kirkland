@@ -11,7 +11,7 @@ from consola.main import Consola
 
 from tqdm import tqdm 
 from time import sleep 
-import threading
+import threading, discord
 from termcolor import cprint
 
 __autor__ = "Maubg"
