@@ -82,19 +82,19 @@ class App(commands.Bot):
 
             if isinstance(exception, CommandOnCooldown):
                 embed = discord.Embed(title="Tranquilo...", description=f"{context.author.mention} Este comando esta en reposo\n Ahora tienes que esperar **{exception.retry_after:,.2f}** segundos", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.DisabledCommand):
                 embed = discord.Embed(title="404", description=f"{context.author.mention} Este comando esta **desactivado** intentalo mas tarde", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.NotOwner):
                 embed = discord.Embed(title="....", description=f"{context.author.mention} Este comando es para mi creador\n\nVete y consigue una vida.", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.NoPrivateMessage):
                 embed = discord.Embed(title="NO", description=f"{context.author.mention} Este comando no es para canale de DM", color=self.color)
-                await context.send(embed=embed)
+                return await context.send(embed=embed)
 
             elif isinstance(exception, commands.TooManyArguments):
                 embed = discord.Embed(description=f"{context.author.mention} Escribe menos argumentos por favor.", colour=0xf15069)
@@ -102,7 +102,7 @@ class App(commands.Bot):
                 embed.set_footer(text='\n-- ERROR')
                 msg_error = await context.send(embed=embed)
                 await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                return await self.reaction(context, msg_error)
 
             elif isinstance(exception, commands.BadArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
@@ -110,7 +110,7 @@ class App(commands.Bot):
                 embed.set_footer(text='\n-- ERROR')
                 msg_error = await context.send(embed=embed)
                 await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                return await self.reaction(context, msg_error)
 
             elif isinstance(exception, commands.MissingRequiredArgument):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=color)
@@ -118,7 +118,7 @@ class App(commands.Bot):
                 embed.add_field(name="Argumento:", value=exception.args[0])
                 msg_error = await context.send(embed=embed)
                 await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                return await self.reaction(context, msg_error)
 
 
             elif isinstance(exception, commands.MissingPermissions):
@@ -128,7 +128,7 @@ class App(commands.Bot):
                 embed.set_footer(text='\n-- ERROR')
                 msg_error = await context.send(embed=embed)
                 await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                return await self.reaction(context, msg_error)
 
             elif isinstance(exception, commands.MissingRole):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
@@ -136,7 +136,7 @@ class App(commands.Bot):
                 embed.set_footer(text='\n-- ERROR')
                 msg_error = await context.send(embed=embed)
                 await msg_error.add_reaction('❌')
-                await self.reaction(context, msg_error)
+                return await self.reaction(context, msg_error)
 
         excepciones = ["", "You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
