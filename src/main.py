@@ -25,6 +25,7 @@ def cargar(texto, t):
         sleep(t)
 
 def preparar():
+
     from App import App
 
     from models.StdModels import StdModels

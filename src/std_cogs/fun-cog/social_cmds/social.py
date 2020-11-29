@@ -127,6 +127,7 @@ class Social(commands.Cog):
                        .set_image(url=f"{await get_random_gif_by_theme('anime cry')}"))
                          
 
+
 def setup(bot):
     bot.add_cog(Social(bot))
 

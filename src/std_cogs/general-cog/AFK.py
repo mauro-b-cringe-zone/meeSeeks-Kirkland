@@ -46,8 +46,7 @@ class AfkCmd(commands.Cog):
         if str(user.id) in users:   
     
             if users[str(user.id)]["status"] == "True":
-                users[str(user.id)]["afk"] = "0"
-                users[str(user.id)]["status"] = "False"
+                del users[str(user.id)]
 
                 await message.channel.send(embed=discord.Embed(title="Mira quien ha vuelto", description=f"{user.mention} ha vuelto de su descanso. **bienvenido**",colour=color))
 
