@@ -526,7 +526,8 @@ class ImgSecundario(commands.Cog):
     async def captcha(self, ctx, *args):
         async with ctx.channel.typing():
             capt = 'Maubot' if len(list(args))==0 else '+'.join(list(args))
-            await ctx.send(embed=discord.Embed(title="Captcha",).set_image(url='https://useless-api.vierofernando.repl.co/captcha?text={}'.format(capt)))
+            file = discord.File(BytesIO(requests.get("https://api.alexflipnote.dev/captcha?text=" + capt, headers={"Authorization": env["API_FLEX"]}).content), "captcha.png")
+            await ctx.send(embed=discord.Embed(title="Captcha", color=color).set_image(url="filename://captcha.png"), file=file)
 
     @commands.command(description="QUEMALO")
     @commands.cooldown(1, 5, commands.BucketType.user)

@@ -130,9 +130,9 @@ class App(commands.Bot):
         excepciones = ["You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
         if env.get('DEBUG'):
-            for i in excepciones:
-                if i in str(exception) or i == "":
-                    return
+            if exception == "": return 
+            for i in excepciones: 
+                if i in str(exception): return
             await context.send(embed=discord.Embed(
                                title="Como sabes, los robots no son perfectos", 
                                description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
