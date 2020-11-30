@@ -100,6 +100,7 @@ class Help(commands.Cog):
                         if int(cogsR) < 1: cogsR = 1
                         await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))                        
                     if reaction.emoji == self.emojis[2]:
+                        await ctx.message.delete()
                         await msg.delete()
                         # await ctx.author.message.delete()
                         return                       
@@ -149,6 +150,7 @@ class Help(commands.Cog):
                         if int(cogsR) < 1: cogsR = 1
                         await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))                        
                     if reaction.emoji == self.emojis[2]:
+                        await ctx.message.delete()
                         await msg.delete()
                         # await ctx.author.message.delete()
                         return                       
