@@ -1,6 +1,6 @@
 # Maubot
 
- [![Blist](https://blist.xyz/api/bot/730124969132163093/widget/?type=normal)](https://blist.xyz/bots/730124969132163093)
+ <!-- [![Blist](https://blist.xyz/api/bot/730124969132163093/widget/?type=normal)](https://blist.xyz/bots/730124969132163093) -->
 
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
 Maubot tambien tiene un [compilador](https://maubot.maucode.com/maucompilador) y aparte de eso es un bot maravilloso
