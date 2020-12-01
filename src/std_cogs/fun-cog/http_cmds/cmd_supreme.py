@@ -12,6 +12,7 @@ from io import BytesIO
 from discord.ext import commands
 from . import argparser, http
 
+from os import environ as env
 
 class Supreme(commands.Cog):
     def __init__(self, bot):
