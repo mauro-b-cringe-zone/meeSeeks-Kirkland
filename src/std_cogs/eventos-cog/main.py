@@ -247,7 +247,7 @@ class Servidor(commands.Cog):
             -> **[top.gg](https://top.gg/bot/730124969132163093)**
             -> **[blist.xyz](https://blist.xyz/bot/730124969132163093/)**
             -> **[bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)**
-            -> **[Web de Maubot](https://maubot.maucode.com)
+            -> **[Web de Maubot](https://maubot.maucode.com)**
             """, colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
 

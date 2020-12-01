@@ -17,6 +17,7 @@ class AntiSpam(commands.Cog):
     @commands.command(description="Se cambia automaticamente y añade un anti espam. EG: !seguridad = Verdadero, !seguridad = Falso")
     @commands.has_permissions(manage_channels=True)
     async def seguridad(self, ctx):
+        if ctx.message.guild is None: return
         with open(str(env["JSON_DIR"] + "ext/seguridad.json"), "r") as f:
             guild = json.load(f)
 

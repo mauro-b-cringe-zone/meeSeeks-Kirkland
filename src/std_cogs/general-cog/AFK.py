@@ -44,18 +44,22 @@ class AfkCmd(commands.Cog):
             if str(i.id) in users: await message.channel.send(embed=discord.Embed(title="¿No saves leer?", color=color, description=f"{user.mention}, Como dice bien **mi** mensage {i.mention} esta AFK\n\n**Razon:** {users[str(i.id)]['razon']}"))
 
         if str(user.id) in users:   
-            try:
-                if users[str(user.id)]["status"] == "True":
-                    del users[str(user.id)]
+            if users[str(user.id)]["status"] == "True":
+                del users[str(user.id)]
 
-                    await message.channel.send(embed=discord.Embed(title="Mira quien ha vuelto", description=f"{user.mention} ha vuelto de su descanso. **bienvenido**",colour=color))
-
-                if users[str(user.id)]["afk"] == "1":
-                    users[str(user.id)]["status"] = "True"
+                await message.channel.send(embed=discord.Embed(title="Mira quien ha vuelto", description=f"{user.mention} ha vuelto de su descanso. **bienvenido**",colour=color))
 
                 with open(env["JSON_DIR"] + "afk.json", "w") as f:
+                    json.dump(users,f)
+                return
+
+            if users[str(user.id)]["afk"] == "1":
+                users[str(user.id)]["status"] = "True"
+                with open(env["JSON_DIR"] + "afk.json", "w") as f:
                     json.dump(users,f)    
-            except: pass
+
+            with open(env["JSON_DIR"] + "afk.json", "w") as f:
+                json.dump(users,f)    
 
 def setup(bot):
     bot.add_cog(AfkCmd(bot))
