@@ -50,6 +50,7 @@ class Eventos():
             chats["chats"][f"{iniciador.id}"] = {}
             chats["chats"][f"{iniciador.id}"]["dest"] = destinatario.id
             chats["chats"][f"{iniciador.id}"]["ultimo_mensage"] = ""
+            
             chats["chats"][f"{destinatario.id}"] = {}
             chats["chats"][f"{destinatario.id}"]["dest"] = iniciador.id
             chats["chats"][f"{destinatario.id}"]["ultimo_mensage"] = ""
