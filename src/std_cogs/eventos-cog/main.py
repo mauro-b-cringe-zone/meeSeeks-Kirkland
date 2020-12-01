@@ -45,9 +45,10 @@ class Servidor(commands.Cog):
                         if "http://" in message.content or "https://" in message.content:
                             return await message.author.send(embed=discord.Embed(title="NADA DE LINKS", description=f"{message.author.mention} NO SE ACEPTAN LINKS", color=color))
                         if message.content == "cerrarchat":
+                            await cerrar(message.author, destid)
                             await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
                             await dest.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{dest.mention}, **{message.author.mention}** Ha cerrado la conexion con el chat.", color=color))
-                            return await cerrar(message.author, destid)
+                            return
                         else: 
                             cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
                             return await dest.send(f"**{message.author.name}:** {message.content}")
