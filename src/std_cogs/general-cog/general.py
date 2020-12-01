@@ -461,7 +461,7 @@ class General(commands.Cog):
         trans = Translator()
 
         if len(list(args))==0:
-            await ctx.send(embed=discord.Embed(title='Aquí tienes una receta para no cocinar nada:', description='1. No haga nada'))
+            await ctx.send(embed=discord.Embed(title='Aquí tienes una receta para no cocinar nada:', description='1. No haga nada', color=color))
         else:
             data = self.jsonisp("http://www.recipepuppy.com/api/?q={}".format(self.urlify(' '.join(list(args)))))
             if len(data['results'])==0: 
