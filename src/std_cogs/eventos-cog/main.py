@@ -17,8 +17,8 @@ async def cerrar(iniciador=None, destinatario:int=None):
         del chats["chats"][f"{iniciador.id}"]
         del chats["chats"][f"{destinatario}"]
 
-    with open(env["JSON_DIR"] + "chats.json", "w") as f:
-        json.dump(chats, f)
+        with open(env["JSON_DIR"] + "chats.json", "w") as f:
+            json.dump(chats, f)
 
 color = int(env["COLOR"])
 
