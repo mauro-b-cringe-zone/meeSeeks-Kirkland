@@ -20,7 +20,7 @@ class Eventos():
             if str(dest.id) in chats["baneos"][str(iniciador.id)]: 
                 return "a"
         if str(dest.id) in chats["baneos"]:
-            if dest.id in chats["baneos"][str(dest.id)]:
+            if iniciador.id in chats["baneos"][str(iniciador.id)]:
                 return "b"
         else:
             return "c"
