@@ -127,7 +127,7 @@ class App(commands.Bot):
                 return await self.reaction(context, embed)
 
 
-        excepciones = ["You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
+        excepciones = ["Unknown Message", "You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
         if env.get('DEBUG'):
             if exception == "": return 
@@ -425,7 +425,12 @@ class Feedback(commands.Cog):
 
             feedbackCh = self.bot.get_channel(777598645725167618)
             embed_feed_CH = discord.Embed(title=f"Nueva reseña", colour=color)
-            embed_feed_CH.add_field(name="Calificacion:", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}")
+            s = ""
+            for i in range(0, NUMBERS[reaction.emoji]):
+                s += "⭐"
+            s += "⭐"
+            embed_feed_CH.add_field(name="Calificacion:", value=f"estrellas:  **{s} ({reaction.emoji})**\n\n**Descripcion:**\n{texto}")
+            embed_feed_CH.set_footer(text="Puedes poner m.rp <id> <res> | para responder a la reseña")
             await feedbackCh.send('<@700812754855919667>, Usuario con ID: '+str(ctx.message.author.id)+f' Ha enviado una reseña', embed=embed_feed_CH)
 
     @commands.command()

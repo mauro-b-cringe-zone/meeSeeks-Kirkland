@@ -56,7 +56,7 @@ class Eventos():
             chats["chats"][f"{destinatario.id}"]["ultimo_mensage"] = ""
         else:
             if chats["chats"][f"{iniciador.id}"] == {}:
-                return "Usuario ya en chat"
+                return False
 
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
@@ -83,7 +83,7 @@ class Eventos():
                     return await ctx.send(embed=discord.Embed(title="Te ha baneado", description=f"{iniciador.mention}, **No** puedes hablar con el porque {dest.mention} te tiene baneado", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
                 elif b == "c":
                     j = await self.abrir(iniciador, dest)
-                    if j == "Usuario ya en chat":
+                    if not j:
                         return await ctx.send("Ese usuario ya esta en un chat...")
                     await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).add_field(name="comandos", value="**-** m.banchat @usuario **|** Banear ha alguien de los DMs\n**-** m.opt-out **|** No reciviras Dms de ningun usuario").set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
                     await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).add_field(name="comandos", value="**-** m.banchat @usuario **|** Banear ha alguien de los DMs\n**-** m.opt-out **|** No reciviras Dms de ningun usuario").set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
@@ -91,6 +91,7 @@ class Eventos():
         else: return await ctx.send("Ese usuario no existe. Creo...")
 
 class ChatApp(commands.Cog):
+    
     def __init__(self, bot):
         self.bot = bot
 

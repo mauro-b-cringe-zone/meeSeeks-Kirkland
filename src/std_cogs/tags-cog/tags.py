@@ -50,12 +50,12 @@ class Tags(commands.Cog):
         with open(env["JSON_DIR"] + 'tags.json', "w") as f:
             json.dump(tags, f)
 
-    @commands.group(invoke_without_command=True, description="Buscar una tag", usage="[nombre]")
+    @commands.group(invoke_without_command=True, aliases=["tags"], description="Buscar una tag", usage="[nombre]")
     async def tag(self, ctx, *, nombre_de_tag=None):
         if nombre_de_tag is None:
-            embed=discord.Embed(title="Ayuda con los tags", description="Aqui tienes unos comandos para los tags", color=color)
+            embed=discord.Embed(title="❯ Tags", description="Aqui tienes unos comandos para los tags", color=color)
             for index in self.comandos:
-                embed.add_field(name=self.comandos[index]['nombre'], value=self.comandos[index]['desc'])
+                embed.add_field(name="• " + self.comandos[index]['nombre'], value=self.comandos[index]['desc'], inline=False)
             return await ctx.send(embed=embed)
         else:
             tags = self.abrir_json()
