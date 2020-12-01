@@ -46,7 +46,7 @@ class Eventos():
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
-        if not str(iniciador.id) in chats:
+        if not str(iniciador.id) in chats["chats"]:
             chats["chats"][f"{iniciador.id}"] = {}
             chats["chats"][f"{iniciador.id}"]["dest"] = destinatario.id
             chats["chats"][f"{iniciador.id}"]["ultimo_mensage"] = ""
