@@ -173,7 +173,7 @@ class Help(commands.Cog):
                 
                 textoDeAyuda += "\n"
 
-                textoDeAyuda += f"**--> {comando.name} ** (`{comando.description}`)\n"
+                textoDeAyuda += f"**-> {comando.name} ** (`{comando.description}`)\n"
 
                 if len(comando.aliases) > 0:
                     c = ""
