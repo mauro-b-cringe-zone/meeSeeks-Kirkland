@@ -325,7 +325,7 @@ class Img(commands.Cog):
     async def inspirobot(self, ctx):
         async with ctx.message.channel.typing():
             img = self.insp('https://inspirobot.me/api?generate=true')
-            await ctx.send(file=discord.File(self.urltoimage(img), 'inspirobot.png'))
+            await ctx.send(embed=discord.Embed(color=color).set_image(url=img))
 
     @commands.command(description="DOODLY GOOGLY")
     @commands.cooldown(1, 5, commands.BucketType.user)

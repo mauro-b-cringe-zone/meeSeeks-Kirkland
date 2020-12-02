@@ -1,6 +1,11 @@
 from discord.ext import commands
 import asyncio
 
+from os import environ as env
+import discord
+
+color = int(env["COLOR"])
+
 def to_emoji(c):
     base = 0x1f1e6
     return chr(base + c)
@@ -42,7 +47,7 @@ class Preguntas(commands.Cog):
             pass 
 
         answer = '\n'.join(f'{keycap}: {content}' for keycap, content in answers)
-        actual_poll = await ctx.send(f'{ctx.author.mention} pregunta: {question}\n\n{answer}')
+        actual_poll = await ctx.send(embed=discord.Embed(color=color, title="Una nueva pregunta", description=f"{ctx.author.mention} pregunta: {question}").add_field(name="Respuestas:", value=answer))
         for emoji, _ in answers:
             await actual_poll.add_reaction(emoji)
 

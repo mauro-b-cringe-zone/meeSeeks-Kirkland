@@ -473,8 +473,8 @@ class General(commands.Cog):
 
                 total = random.choice([i for i in data['results'] if i['thumbnail']!=''])
 
-                translated_title = trans.translate(total['title'], src='en', dest='es')
-                translated_ingredients = trans.translate(total['ingredients'], src='en', dest='es')
+                translated_title = gtr.translate(total['title'], src='en', dest='es')
+                translated_ingredients = gtr.translate(total['ingredients'], src='en', dest='es')
 
 
                 embed = discord.Embed(title=translated_title.text, url=total['href'], description='Ingredientes:\n{}'.format(translated_ingredients.text), colour=color)

@@ -61,6 +61,17 @@ class Juegos(commands.Cog):
         self.games = {}
         self.words = []
 
+    async def sumar_pastuca(self, usr, d):
+        with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
+            users = json.load(f)
+        if not str(usr.id) in users:
+            users[str(user.id)] = {}
+            users[str(user.id)]["wallet"] = 0
+            users[str(user.id)]["bank"] = 0    
+        users[str(usr.id)]["wallet"] += d
+        with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
+            json.dump(users, f)      
+
 
     @commands.command(description="Piedra, Papel o tijera...")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -451,8 +462,8 @@ class Juegos(commands.Cog):
     @commands.command(description="Questionario de matematicas")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def mathquiz(self, ctx):
-        arrayId, num1, num2, symArray = random.randint(0, 4), random.randint(1, 100), random.randint(1, 100), ['+', '-', 'x', ':', '^']
-        ansArray = [num1+num2, num1-num2, num1*num2, num1/num2, num1**num2]
+        arrayId, num1, num2, symArray = random.randint(0, 4), random.randint(1, 100), random.randint(1, 100), ['+', '-', 'x', ':']
+        ansArray = [num1+num2, num1-num2, num1*num2, num1/num2]
         sym = symArray[arrayId]
         msg = await ctx.send(embed=discord.Embed(title="Pregunta de mates (15 segundos)", description=f"{str(num1)} {str(sym)} {str(num2)} = ???", colour=color))
         def is_correct(m):
@@ -466,14 +477,10 @@ class Juegos(commands.Cog):
             await msg.edit(embed=discord.Embed(title="¡Muy bien!", description=f"Esta correcto.\n Si quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help juegos`", colour=color))
             user = ctx.author
             diamantes_dados = random.randint(10, 30)
-            with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
-                users = json.load(f)
-            users[str(user.id)]["wallet"] += diamantes_dados
-            with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-                json.dump(users, f)            
+            await self.sumar_pastuca(user, diamantes_dados)    
             await ctx.send(f"Y se te ha {diamantes_dados} diamantes dinero a tu cuenta")
         else:
-            await msg.edit(embed=discord.Embed(title="¡Mal!", desciprion=f"La respuesta era {answer}\n\nSi quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help juegos`",colour=color))
+            await msg.edit(embed=discord.Embed(title="¡Mal!", description=f"La respuesta era {answer}\n\nSi quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help juegos`", color=color))
 
     def api(self, url):
         return jsonify(getapi(url).read())
@@ -517,11 +524,7 @@ class Juegos(commands.Cog):
             # await wait.clear_reactions()
             user = ctx.author
             diamantes_dados = random.randint(10, 30)
-            with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
-                users = json.load(f)
-            users[str(user.id)]["wallet"] += diamantes_dados
-            with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-                json.dump(users, f)            
+            await self.sumar_pastuca(user, diamantes_dados)  
             await ctx.send(f"Y se te ha {diamantes_dados} diamantes dinero a tu cuenta")
      
         else:
@@ -568,11 +571,7 @@ class Juegos(commands.Cog):
             
                     user = ctx.author
                     diamantes_dados = random.randint(10, 30)
-                    with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
-                        users = json.load(f)
-                    users[str(user.id)]["wallet"] += diamantes_dados
-                    with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-                        json.dump(users, f)            
+                    await self.sumar_pastuca(user, diamantes_dados)   
                     await ctx.send(f"Y se te ha **{diamantes_dados}** diamantes dinero a tu cuenta")
         
                     gameplay = False
@@ -584,14 +583,14 @@ class Juegos(commands.Cog):
         if len(ctx.message.guild.members)>500:
             await ctx.send('Lo sentimos, para proteger la privacidad de algunas personas, este comando no está disponible para servidores grandes. (más de 500 miembros)')
         else:
-            wait = await ctx.send(' | Espere... generando una pregunta... \nEste proceso puede tardar más si su servidor tiene más miembros.')
+            wait = await ctx.send(content=' | Espere... generando una pregunta... \nEste proceso puede tardar más si su servidor tiene más miembros.')
             avatarAll, nameAll = [], []
             for ppl in ctx.guild.members:
                 if ctx.guild.get_member(int(ppl.id)).status.name!='offline':
                     avatarAll.append(str(ppl.avatar_url).replace('webp', 'png'))
                     nameAll.append(ppl.display_name)
             if len(avatarAll)<=4:
-                await ctx.send(' | ¡Necesitas mas miembros online! :x:')
+                return await wait.edit(content=' | ¡Necesitas mas miembros online! :x:')
             else:
                 numCorrect = random.randint(0, len(avatarAll)-1)
                 corr_avatar, corr_name = avatarAll[numCorrect], nameAll[numCorrect]
@@ -626,11 +625,7 @@ class Juegos(commands.Cog):
                     diamantes_dados = random.randint(10, 30)
                     await main.edit(content="", embed=discord.Embed(title="¡Correcto!", description=' | <@'+str(ctx.message.author.id)+f'>, Estas correcto! :tada:\n\nY se te ha añadido **{diamantes_dados}** diamantes a tu cuenta', colour=color))
                     user = ctx.author
-                    with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
-                        users = json.load(f)
-                    users[str(user.id)]["wallet"] += diamantes_dados
-                    with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-                        json.dump(users, f)     
+                    await self.sumar_pastuca(user, diamantes_dados)
                 else:
                     await main.edit(content="", embed=discord.Embed(title="¡Incorrecto!", description=' | <@'+str(ctx.message.author.id)+'>, Incorrecto. La respuesta era '+str(corr_order)+'. '+str(corr_name), colour=color))
 
@@ -683,11 +678,7 @@ class Juegos(commands.Cog):
             await wait.edit(content='', embed=discord.Embed(title="¡Correcto!", description=' | <@'+str(guy.id)+'>, felizidades! Estas correcto. :partying_face:\n\nY se te han añadido diamantes a tu cuenta', colour=color))
             diamantes_dados = random.randint(10, 30)
             user = ctx.author
-            with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
-                users = json.load(f)
-            users[str(user.id)]["wallet"] += diamantes_dados
-            with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-                json.dump(users, f)             
+            await self.sumar_pastuca(user, diamantes_dados)        
         else:
             await wait.edit(content='', embed=discord.Embed(title="¡Incorrecto!", description=' | <@'+str(guy.id)+f'>, Estas **incorrecto**. La respuesta era {translated_corr_order.text}', colour=color))
 
@@ -722,11 +713,7 @@ class Juegos(commands.Cog):
             await main.clear_reactions()
             diamantes_dados = random.randint(10, 30)
             user = ctx.author
-            with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
-                users = json.load(f)
-            users[str(user.id)]["wallet"] += diamantes_dados
-            with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-                json.dump(users, f)    
+            await self.sumar_pastuca(user, diamantes_dados)
             await ctx.send(f"Se te an añadido **{diamantes_dados}** diamantes")
 
 
