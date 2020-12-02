@@ -170,20 +170,22 @@ class Help(commands.Cog):
             for comando in self.bot.get_cog(cogs[congMinusculas.index(cog.lower())]).walk_commands():
                 if comando.hidden:
                     continue
+                
+                textoDeAyuda += "\n"
 
-                textoDeAyuda += f"** {comando.name} ║** {comando.description}\n"
+                textoDeAyuda += f"**--> {comando.name} ** (`{comando.description}`)\n"
 
                 if len(comando.aliases) > 0:
                     c = ""
                     for i in comando.aliases:
                         c += f"`{i}` **|** "
-                    textoDeAyuda += f"**Aliados ║** {c}\n"
+                    textoDeAyuda += f"**Aliados -> ** {c}\n"
                 textoDeAyuda += ''
 
 
                 prefijo = ctx.prefix
 
-                textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name}{ ' ' + comando.usage if comando.usage is not None else ''}`\n\n"
+                textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name}{ ' ' + comando.usage if comando.usage is not None else ''}`\n"
             embed.description = textoDeAyuda
 
             await ctx.send(embed=embed)
