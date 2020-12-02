@@ -85,35 +85,31 @@ class Help(commands.Cog):
                 return m == ctx.author
             cogsR = int(cog)
             while True:
-                try:
-                    reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
-                except asyncio.TimeoutError:
+                reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
+
+                await reaction.remove(ctx.author)
+                if reaction.emoji == self.emojis[0]:
+                    cogsR = 1
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                if reaction.emoji == self.emojis[1]:
+                    cogsR = int(cogsR) - 1
+                    if int(cogsR) < 1: cogsR = 1
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))                        
+                if reaction.emoji == self.emojis[2]:
+                    await ctx.message.delete()
                     await msg.delete()
-                    return
-                else:
-                    await reaction.remove(ctx.author)
-                    if reaction.emoji == self.emojis[0]:
-                        cogsR = 1
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                    if reaction.emoji == self.emojis[1]:
-                        cogsR = int(cogsR) - 1
-                        if int(cogsR) < 1: cogsR = 1
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))                        
-                    if reaction.emoji == self.emojis[2]:
-                        await ctx.message.delete()
-                        await msg.delete()
-                        # await ctx.author.message.delete()
-                        return                       
-                    if reaction.emoji == self.emojis[3]:
-                        cogsR = int(cogsR) + 1
-                        if int(cogsR) > paginasTotales: cogsR = paginasTotales
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                    if reaction.emoji == self.emojis[4]:
-                        cogsR = paginasTotales
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                    if reaction.emoji == self.emojis[5]:
-                        cogsR = 0
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, None))
+                    # await ctx.author.message.delete()
+                    return                       
+                if reaction.emoji == self.emojis[3]:
+                    cogsR = int(cogsR) + 1
+                    if int(cogsR) > paginasTotales: cogsR = paginasTotales
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                if reaction.emoji == self.emojis[4]:
+                    cogsR = paginasTotales
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                if reaction.emoji == self.emojis[5]:
+                    cogsR = 0
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, None))
             return
 
         embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
@@ -135,35 +131,30 @@ class Help(commands.Cog):
                 return m == ctx.author
             cogsR = int(cog)
             while True:
-                try:
-                    reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
-                except asyncio.TimeoutError:
+                reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
+                await reaction.remove(ctx.author)
+                if reaction.emoji == self.emojis[0]:
+                    cogsR = 1
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                if reaction.emoji == self.emojis[1]:
+                    cogsR = int(cogsR) - 1
+                    if int(cogsR) < 1: cogsR = 1
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))                        
+                if reaction.emoji == self.emojis[2]:
+                    await ctx.message.delete()
                     await msg.delete()
-                    return
-                else:
-                    await reaction.remove(ctx.author)
-                    if reaction.emoji == self.emojis[0]:
-                        cogsR = 1
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                    if reaction.emoji == self.emojis[1]:
-                        cogsR = int(cogsR) - 1
-                        if int(cogsR) < 1: cogsR = 1
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))                        
-                    if reaction.emoji == self.emojis[2]:
-                        await ctx.message.delete()
-                        await msg.delete()
-                        # await ctx.author.message.delete()
-                        return                       
-                    if reaction.emoji == self.emojis[3]:
-                        cogsR = int(cogsR) + 1
-                        if int(cogsR) > 9: cogsR = 9
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                    if reaction.emoji == self.emojis[4]:
-                        cogsR = paginasTotales
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                    if reaction.emoji == self.emojis[5]:
-                        cogsR = 0
-                        await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, None))
+                    # await ctx.author.message.delete()
+                    return                       
+                if reaction.emoji == self.emojis[3]:
+                    cogsR = int(cogsR) + 1
+                    if int(cogsR) > 9: cogsR = 9
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                if reaction.emoji == self.emojis[4]:
+                    cogsR = paginasTotales
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                if reaction.emoji == self.emojis[5]:
+                    cogsR = 0
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, None))
 
         elif re.search(r"[a-zA-Z]", str(cog)):
             congMinusculas = [c.lower() for c in cogs]
