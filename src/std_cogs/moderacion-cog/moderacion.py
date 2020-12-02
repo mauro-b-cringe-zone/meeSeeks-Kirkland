@@ -18,7 +18,7 @@ class Moderation(commands.Cog):
     async def clear(self, ctx, amount=10):
         await ctx.message.delete()
         await ctx.channel.purge(limit=amount)
-        msg = await ctx.send(f'Se an borrado {amount} mensajes')
+        msg = await ctx.send(embed=discord.Embed(color=color, description=f'Se an borrado {amount} mensajes'))
         time.sleep(1.2)
         await msg.delete()
 
