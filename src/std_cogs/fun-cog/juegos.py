@@ -65,9 +65,9 @@ class Juegos(commands.Cog):
         with open(env["JSON_DIR"] + "mainbank.json", "r") as f:
             users = json.load(f)
         if not str(usr.id) in users:
-            users[str(user.id)] = {}
-            users[str(user.id)]["wallet"] = 0
-            users[str(user.id)]["bank"] = 0    
+            users[str(usr.id)] = {}
+            users[str(usr.id)]["wallet"] = 0
+            users[str(usr.id)]["bank"] = 0    
         users[str(usr.id)]["wallet"] += d
         with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
             json.dump(users, f)      
@@ -675,10 +675,10 @@ class Juegos(commands.Cog):
         except asyncio.TimeoutError:
             await wait.add_reaction('😔')
         if str(reaction.emoji)==str(corr_order):
-            await wait.edit(content='', embed=discord.Embed(title="¡Correcto!", description=' | <@'+str(guy.id)+'>, felizidades! Estas correcto. :partying_face:\n\nY se te han añadido diamantes a tu cuenta', colour=color))
             diamantes_dados = random.randint(10, 30)
             user = ctx.author
             await self.sumar_pastuca(user, diamantes_dados)        
+            await wait.edit(content='', embed=discord.Embed(title="¡Correcto!", description=' | <@'+str(guy.id)+f'>, felizidades! Estas correcto. :partying_face:\n\nY se te han añadido {diamantes_dados} diamantes a tu cuenta', colour=color))
         else:
             await wait.edit(content='', embed=discord.Embed(title="¡Incorrecto!", description=' | <@'+str(guy.id)+f'>, Estas **incorrecto**. La respuesta era {translated_corr_order.text}', colour=color))
 
