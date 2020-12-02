@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands
-import sys
-sys.path.append('/home/runner/hosting601/modules')
 import astroid.brain.brain_numpy_random_mtrand
 from aiohttp import ClientSession
 from io import BytesIO
