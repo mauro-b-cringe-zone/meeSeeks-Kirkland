@@ -35,7 +35,8 @@ class Eventos():
             2. En el chat escribe `cerrarchat`
             3. Luego intenta escribir algo
 
-            　a. Si pone un mensage de que no se pueden enviar mesages es que ha funcionado.
+            　a. Si pone un mensage de que no
+            　　　se pueden enviar mesages es que ha funcionado.
 
             　b. Si no porfavor anuncialo [aqui](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG) 
         """
