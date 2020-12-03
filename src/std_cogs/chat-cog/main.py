@@ -38,6 +38,7 @@ class Eventos():
 
                 b. Si no porfavor anuncialo [aqui](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG) 
         """
+        await ctx.send(embed=embed)
 
     async def abrir(self, iniciador, destinatario):
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
