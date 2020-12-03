@@ -63,10 +63,13 @@ class App(commands.Bot):
     async def reaction(self, context, msg_error, debug: bool = False):
         if not debug: msg_error.set_footer(text='\n-- ERROR')
         msg_error = await context.send(embed=msg_error)
-        await msg_error.add_reaction('❌')
+        emojiR = ""
+        if debug: emojiR = "🇽"
+        else: emojiR = "❌"
+        await msg_error.add_reaction(str(emojiR))
         def _check(reaction, user):
             return (
-                reaction.emoji in '❌'
+                reaction.emoji in str(emojiR)
                 and user == context.author
                 and reaction.message.id == msg_error.id
             )
