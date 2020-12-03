@@ -130,7 +130,7 @@ class ChatApp(commands.Cog):
         Ev = Eventos(self.bot)
         await Ev.inicio(ctx, iniciador, destinatario)
 
-    @commands.command(aliases="finish_chat,chatfinish".split(","), description="Finaliza un chat con una persona", name="finishchat")
+    @commands.command(aliases="finish_chat,chatfinish,cerrarchat".split(","), description="Finaliza un chat con una persona", name="finishchat")
     async def __finish_chat(self, ctx):
         """
         Cerramos el chat con el usuario con el que este conectado y le enviamos que el chat se ha terminado
