@@ -18,7 +18,7 @@ class Tts(commands.Cog):
         if len(list(args))>5:
             return await ctx.send("El maximo de el tts es **5**")
         res = BytesIO()
-        tts = gTTS(text=' '.join(list(args)), lang='es', slow=False)
+        tts = gTTS(text=' '.join(list(args)), slow=False)
         tts.write_to_fp(res)
         res.seek(0)
         await ctx.send(content="Dale al archivo que pone **tts.mp3** para descargartelo", file=discord.File(fp=res, filename='tts.mp3'))

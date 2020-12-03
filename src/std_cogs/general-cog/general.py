@@ -160,7 +160,6 @@ class General(commands.Cog):
         if region == "europe":
             region = "europa"
 
-
         roles = len(ctx.guild.roles)
         member_count = ctx.guild.member_count
         channel_counts = self.get_channel_type_counts(ctx.guild)

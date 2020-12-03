@@ -29,18 +29,15 @@ class Eventos():
             json.dump(chats, f)
 
     async def cerrar(self, iniciador=None):
-        with open(env["JSON_DIR"] + "chats.json", "r") as f:
-            chats = json.load(f)
+        embed = discord.Embed(color=color, title="Intrucciones para cerrar un chat")
+        embed.description = """
+            1. Ve a [mi DM](https://discord.com/channels/@me/733245517890584590)
+            2. En el chat escribe `cerrarchat`
+            3. Luego intenta escribir algo
+                a. Si pone un mensage de que no se pueden enviar mesages es que ha funcionado.
 
-        if str(iniciador.id) in chats["chats"]:
-            destinatario, us = int(chats["chats"][str(iniciador.id)]["dest"]), self.bot.get_user(int(chats["chats"][str(iniciador.id)]["dest"]))
-            await iniciador.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{iniciador.mention} se ha cerrado la conexion con **{us.mention}**", color=self.color_c))
-            await us.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{us.mention}, **{iniciador.mention}** Ha cerrado la conexion con el chat.", color=self.color_c))
-            del chats["chats"][f"{iniciador.id}"]
-            del chats["chats"][f"{destinatario}"]
-
-            with open(env["JSON_DIR"] + "chats.json", "w") as f:
-                json.dump(chats, f)
+                b. Si no porfavor anuncialo [aqui](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG) 
+        """
 
     async def abrir(self, iniciador, destinatario):
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
@@ -56,7 +53,7 @@ class Eventos():
             chats["chats"][f"{destinatario.id}"]["ultimo_mensage"] = ""
         else:
             if chats["chats"][f"{iniciador.id}"] == {}:
-                return False
+                return True
 
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
@@ -83,7 +80,7 @@ class Eventos():
                     return await ctx.send(embed=discord.Embed(title="Te ha baneado", description=f"{iniciador.mention}, **No** puedes hablar con el porque {dest.mention} te tiene baneado", color=self.color_c).set_footer(text="Puedes poner m.unbanchat <@usuario> para quitarlo de la lista"))
                 elif b == "c":
                     j = await self.abrir(iniciador, dest)
-                    if not j:
+                    if j:
                         return await ctx.send("Ese usuario ya esta en un chat...")
                     await iniciador.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {iniciador.mention} se ha creado un chat con **{dest.mention}**",color=color).add_field(name="comandos", value="**-** m.banchat @usuario **|** Banear ha alguien de los DMs\n**-** m.opt-out **|** No reciviras Dms de ningun usuario").set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
                     await dest.send(embed=discord.Embed(title="Se ha iniciado un chat", description=f"Hola, {dest.mention} **{iniciador.mention}** ha creado un chat para hablar",color=color).add_field(name="comandos", value="**-** m.banchat @usuario **|** Banear ha alguien de los DMs\n**-** m.opt-out **|** No reciviras Dms de ningun usuario").set_footer(text="Pon 'cerrarchat' para terminar la conversacion"))
@@ -139,7 +136,6 @@ class ChatApp(commands.Cog):
         """
         Ev = Eventos(self.bot)
         await Ev.cerrar(ctx.author)
-        await ctx.send(embed=discord.Embed(title="Se cerro el chat", description="Se ha cerrado la conexion", color=color))
 
     @commands.command(aliases="banchat,chatban".split(","), description="banea a una persona", name="banfromchat")
     async def __banear_usuario(self, ctx):
