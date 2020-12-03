@@ -28,7 +28,7 @@ class Eventos():
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
-    async def cerrar(self, iniciador=None):
+    async def cerrar(self, ctx=None):
         embed = discord.Embed(color=color, title="Intrucciones para cerrar un chat")
         embed.description = """
             1. Ve a [mi DM](https://discord.com/channels/@me/733245517890584590)
@@ -136,7 +136,7 @@ class ChatApp(commands.Cog):
         Cerramos el chat con el usuario con el que este conectado y le enviamos que el chat se ha terminado
         """
         Ev = Eventos(self.bot)
-        await Ev.cerrar(ctx.author)
+        await Ev.cerrar(ctx)
 
     @commands.command(aliases="banchat,chatban".split(","), description="banea a una persona", name="banfromchat")
     async def __banear_usuario(self, ctx):
