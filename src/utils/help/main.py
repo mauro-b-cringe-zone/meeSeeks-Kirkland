@@ -6,7 +6,7 @@ from os import environ as env
 import math
 
 from termcolor import cprint
-import asyncio
+import asyncio, json
 
 class Help(commands.Cog):
     
@@ -22,7 +22,7 @@ class Help(commands.Cog):
         embed.set_footer(
             text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
         )
-        embed.description = "Maubot tiene una pagina web, si quieres visitarla dale **[aqui](https://maubot.maucode.com)**"
+        embed.description = f"**Prefijos:** `{json.load(open(env['JSON_DIR'] + 'prefix.json'))[str(ctx.guild.id)]}, m., m-`\nMaubot tiene una pagina web, si quieres visitarla dale **[aqui](https://maubot.maucode.com)**\n-=-=-=-=-=-=-=-=-=-="
 
         CogsNecesitados = []
         for i in range(4):
