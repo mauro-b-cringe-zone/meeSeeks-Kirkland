@@ -31,12 +31,13 @@ class Eventos():
     async def cerrar(self, ctx=None):
         embed = discord.Embed(color=color, title="Intrucciones para cerrar un chat")
         embed.description = """
-            1. Ve a [mi DM](https://discord.com/channels/@me/733245517890584590)
+            1. Ve a mi **[DM](https://discord.com/channels/@me/733245517890584590)**
             2. En el chat escribe `cerrarchat`
             3. Luego intenta escribir algo
-                a. Si pone un mensage de que no se pueden enviar mesages es que ha funcionado.
 
-                b. Si no porfavor anuncialo [aqui](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG) 
+            　　a. Si pone un mensage de que no se pueden enviar mesages es que ha funcionado.
+
+            　　b. Si no porfavor anuncialo [aqui](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG) 
         """
         await ctx.send(embed=embed)
 
