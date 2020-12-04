@@ -47,6 +47,7 @@ class Preguntas(commands.Cog):
             pass 
 
         answer = '\n'.join(f'{keycap}: {content}' for keycap, content in answers)
+        await ctx.send(f"Una **nueva**, **fresca** pregunta")
         actual_poll = await ctx.send(embed=discord.Embed(color=color, title="Una nueva pregunta", description=f"{ctx.author.mention} pregunta: {question}").add_field(name="Respuestas:", value=answer))
         for emoji, _ in answers:
             await actual_poll.add_reaction(emoji)
