@@ -133,7 +133,7 @@ class App(commands.Bot):
         excepciones = ["Command raised an exception: TimeoutError:", "Unknown Message", "You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
         if env.get('DEBUG'):
-            if exception == "": return 
+            if str(exception) is "": return 
             for i in excepciones: 
                 if i in str(exception): return
             embed=discord.Embed(
