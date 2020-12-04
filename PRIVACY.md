@@ -1,5 +1,14 @@
 # Español
 
+# ¿Que hacemos con tu perfil?
+### ¿Quien tiene acceso?
+    La informacion que guarda Maubot es muy confidencial. SOLO MAUBOT PUEDE TENER ACCESO A LA INFO. (A no ser que lo hackeen)
+### ¿Que guardamos?
+    Maubot solamente coge tu id, nada de nombres ni nada.
+### ¿Que hacemos con ellos?
+    Lo que hacemos con tu id es basicamente para guardar lo para los Tags, Economia, todo eso.
+###  ¿I si quiero que no se guarde nada?
+    Puedes poner en tu servidor `m.request Hola, me gustaria que no salgara mi id en tu bot (id)`, Y te lo eliminaremos de todas las bases de datos.
 # Política de privacidad
 
 Maubot se toma en serio su privacidad. Para proteger mejor su privacidad, Maubot proporciona este aviso de política de privacidad que explica la forma en que se recopila y utiliza su información personal.
@@ -26,6 +35,16 @@ Maubot se reserva el derecho de actualizar o cambiar la Política de privacidad 
 Para cualquier pregunta o inquietud con respecto a la política de privacidad, envíeme un correo electrónico a maubg2007@gmail.com.
 
 # English
+
+# What do we do with your profile?
+### Who has access?
+    The information that Maubot keeps is very confidential. ONLY MAUBOT CAN HAVE ACCESS TO THE INFO. (Unless they hack it)
+### What do we keep?
+    Maubot just takes your id, no names or anything.
+### What do we do with them?
+    What we do with your id is basically to save it for Tags, Economy, all that.
+### If I want nothing to be saved?
+    You can put on your server `m.request Hello, I would like my id not to appear in your bot (id)`, And we will remove it from all databases.
 
 # Privacy Policy
 
