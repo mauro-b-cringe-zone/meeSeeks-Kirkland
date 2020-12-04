@@ -51,7 +51,7 @@ class Servidor(commands.Cog):
                             return
                         else: 
                             cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
-                            return await dest.send(f"**{message.author.name}**#{message.author.discriminator}**:**  {message.content}")
+                            return await dest.send(f"**{message.author.name}**`#{message.author.discriminator}`**:**  {message.content}")
                 else:
                     return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien m-help ChatApp)**", color=0xf15069))
         except Exception as e:
