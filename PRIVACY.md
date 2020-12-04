@@ -8,7 +8,7 @@
 ### ¿Que hacemos con ellos?
     Lo que hacemos con tu id es basicamente para guardar lo para los Tags, Economia, todo eso.
 ###  ¿I si quiero que no se guarde nada?
-    Puedes poner en tu servidor `m.request Hola, me gustaria que no salgara mi id en tu bot (id)`, Y te lo eliminaremos de todas las bases de datos.
+    Puedes poner en tu servidor [m.request Hola, me gustaria que no salgara mi id en tu bot (id)], Y te lo eliminaremos de todas las bases de datos.
 # Política de privacidad
 
 Maubot se toma en serio su privacidad. Para proteger mejor su privacidad, Maubot proporciona este aviso de política de privacidad que explica la forma en que se recopila y utiliza su información personal.
@@ -44,7 +44,7 @@ Para cualquier pregunta o inquietud con respecto a la política de privacidad, e
 ### What do we do with them?
     What we do with your id is basically to save it for Tags, Economy, all that.
 ### If I want nothing to be saved?
-    You can put on your server `m.request Hello, I would like my id not to appear in your bot (id)`, And we will remove it from all databases.
+    You can put on your server [m.request Hello, I would like my id not to appear in your bot (id)], And we will remove it from all databases.
 
 # Privacy Policy
 
