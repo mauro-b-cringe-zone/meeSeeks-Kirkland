@@ -31,7 +31,7 @@ class Eventos():
     async def cerrar(self, ctx=None):
         embed = discord.Embed(color=color, title="Intrucciones para cerrar un chat")
         embed.description = """
-            1. Ve a mi **[DM](https://discord.com/channels/@me/733245517890584590)**
+            1. Ve a mi **[DM](https://discord.com/channels/@me/)**
             2. En el chat escribe `cerrarchat`
             3. Luego intenta escribir algo
 

@@ -26,8 +26,8 @@ class Contraseñas(commands.Cog):
     @commands.cooldown(1, 7, commands.BucketType.user)
     async def pass_guess(self, ctx, *, password):
         # print(user_pass)
-        if len(list(password)) > 10:
-            return await ctx.send("No mas de 10")
+        if len(list(password)) > 20:
+            return await ctx.send("No mas de 20")
         msg = await ctx.send("Porfavor espera esto puede tardar un rato **Sobre todo si las contraseñas son largas**")
 
         embed = discord.Embed(colour=color)
