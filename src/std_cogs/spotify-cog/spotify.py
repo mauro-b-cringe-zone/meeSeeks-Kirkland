@@ -123,7 +123,6 @@ class Spotify(commands.Cog):
         DESC_FONT = self.get_font("NotoSansDisplay-Bold", 10, otf=True)
         COVER_URL = icon if not SPOTIFY else spt.album_cover_url
         COVER = self.buffer_from_url(COVER_URL).resize((100, 100))
-        SPOTIFY_ICON = self.buffer_from_url("https://cdn.iconscout.com/icon/free/png-256/spotify-2690370-2232873.png").resize((50, 50))
         BACKGROUND_COLOR = self.get_color_accent(COVER_URL, right=True)
         FOREGROUND_COLOR = self.invert(BACKGROUND_COLOR)
 
@@ -163,8 +162,6 @@ class Spotify(commands.Cog):
         DRAW.text((MARGIN_LEFT, MARGIN_TOP + 40), DESC_TEXT, font=DESC_FONT, fill=FOREGROUND_COLOR)
 
         MAIN.paste(COVER, (25, 10))
-        SPI = SPOTIFY_ICON.rotate(-10)
-        MAIN.paste(SPI, (400, 10), SPI)
         
         return self.buffer(MAIN)
 
