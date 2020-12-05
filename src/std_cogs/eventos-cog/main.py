@@ -48,7 +48,7 @@ class Servidor(commands.Cog):
                     if str(dest) in chats["chats"]:
                         destid, dest = int(dest), self.bot.get_user(int(dest))
                         if len(message.attachments) > 0:
-                            return await message.author.send(embed=discord.Embed(title="No se pueden los adjuntos", description="Las imagenes, tts, etc no estan permitidos en el chat de {self.bot.mention}"))
+                            return await message.author.send(embed=discord.Embed(title="No se pueden los adjuntos", color=color, description=f"Las imagenes, tts, etc no estan permitidos en el chat de {self.bot.mention}"))
                         if EncontrarUrl(message.content):
                             await message.author.send(embed=discord.Embed(color=color, desription="Se le ha enviado el link al usuario de forma como spoiler"))
                             return await dest.send(embed=discord.Embed(title="Un link", description=f"{message.author.mention} Se ha enviado un link, esta en modo spoiler por si acaso", color=color).add_field(name="Url:", value=f"||{EncontrarUrl(message.content)}||"))
