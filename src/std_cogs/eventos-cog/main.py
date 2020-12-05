@@ -127,6 +127,7 @@ class Servidor(commands.Cog):
                 users[str(user.id)]['level'] = lvl_end
         
     @commands.command(description="Cambia los si quieres recivir notificaciones de niveles")
+    @commands.has_permissions(manage_channels=True)
     async def levels(self, ctx):
         with open(env["JSON_DIR"] + "userslvl.json", "r") as f:
             guilds = json.load(f)
