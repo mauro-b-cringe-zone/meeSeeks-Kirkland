@@ -48,6 +48,7 @@ class Servidor(commands.Cog):
                     if str(dest) in chats["chats"]:
                         destid, dest = int(dest), self.bot.get_user(int(dest))
                         if EncontrarUrl(message.content):
+                            await message.author.send(embed=discord.Embed(color=color, desription="Se le ha enviado el link al usuario de forma como spoiler"))
                             return await dest.send(embed=discord.Embed(title="Un link", description=f"{message.author.mention} Se ha enviado un link, esta en modo spoiler por si acaso", color=color).add_field(name="Url:", value=f"||{EncontrarUrl(message.content)}||"))
                         if message.content == "cerrarchat":
                             await cerrar(message.author, destid)
