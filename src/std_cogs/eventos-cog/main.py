@@ -5,7 +5,7 @@ import time
 from os import environ as env
 import aiohttp
 from App import eliminar_prefix
-import asyncio
+import asyncio, re
 from termcolor import cprint
 from discord.utils import get
 
@@ -19,6 +19,11 @@ async def cerrar(iniciador=None, destinatario:int=None):
 
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
+
+def EncontrarUrl(string: str = None):
+    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+    url = re.findall(regex, string)
+    return [x[0] for x in url]
 
 color = int(env["COLOR"])
 
@@ -42,8 +47,8 @@ class Servidor(commands.Cog):
                     # print(dest)
                     if str(dest) in chats["chats"]:
                         destid, dest = int(dest), self.bot.get_user(int(dest))
-                        if "http://" in message.content or "https://" in message.content:
-                            return await message.author.send(embed=discord.Embed(title="NADA DE LINKS", description=f"{message.author.mention} NO SE ACEPTAN LINKS", color=color))
+                        if EncontrarUrl(message.content):
+                            return await dest.send(embed=discord.Embed(title="Un link", description=f"{message.author.mention} Se ha enviado un link, esta en modo spoiler por si acaso", color=color).add_field(name="Url:", value=f"||{EncontrarUrl(message.content)}||"))
                         if message.content == "cerrarchat":
                             await cerrar(message.author, destid)
                             await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))
@@ -51,7 +56,7 @@ class Servidor(commands.Cog):
                             return
                         else: 
                             cprint(f"[Log] Mensage de ({message.author.name}) | ({dest.name}): {message.content}", "cyan")
-                            return await dest.send(f"**{message.author.name}**`#{message.author.discriminator}`**:**  {message.content}")
+                            return await dest.send(f"**{message.author.name}**#{message.author.discriminator}**:**  {message.content}")
                 else:
                     return await message.author.send(embed=discord.Embed(title="No...", description=f"{message.author.mention} not puedes usar comandos dentro de los mensages de MD o hablar por aqui **(Solo puedes si estas en un chat con alguien m-help ChatApp)**", color=0xf15069))
         except Exception as e:
@@ -163,7 +168,7 @@ class Servidor(commands.Cog):
             embed.add_field(name="exp", value=users[str(user.id)]["experience"], inline=True)
             # embed.set_image(url=url)
             await ctx.send(embed=embed)
-    
+
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
