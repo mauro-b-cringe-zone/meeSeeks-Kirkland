@@ -198,31 +198,6 @@ LANGUAGES = {
 }
 
 
-@dataclass
-class Emoji:
-    """
-    Representa el almacenamiento de emojis personalizados y externos.
-    """
-    class Workers:
-        """
-        Representa emojis para el control de salud de los trabajadores.
-        (comando en bot.cogs.information)
-        """
-        total= "<:total:620744869429641236>"
-        available = "<:available:620705066604560405>"
-        idle = "<:idle:620702759414661120>"
-        working = "<:working:620704067672342528>"
-        paused = "<:paused:620704067479666688>"
-        failed = "<:failed:620704067525672980>"
-
-    class Execution:
-        loading = "<a:typing:705421984141672470>"
-        error = "<:dnd:705421983952666674>"
-        successful = "<:online:705421983927763055>"
-        offline = "<:offline:705421983873105920>"
-        idle = "<:idle:705421983906660454>"
-
-
 class Execution(commands.Cog):
     """
     Representa un Cog para ejecutar códigos fuente.
