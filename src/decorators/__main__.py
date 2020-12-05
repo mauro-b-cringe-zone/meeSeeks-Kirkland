@@ -52,6 +52,7 @@ class Decoradores(ayuda):
         seguridad = self.j(str(env["JSON_DIR"] + "ext/seguridad.json"), "r", seguridad).JsonM()
         
         async def decorador(ctx):
+            if not ctx.guild: False
             if str(ctx.guild.id) in seguridad: 
                 if seguridad[str(ctx.guild.id)] == True: 
                     return True
