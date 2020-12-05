@@ -245,6 +245,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if not member.bot and after.channel is None:
             if not [m for m in before.channel.members if not m.bot]:
                 await self.get_player(member.guild).teardown()
+                # await ctx.send(embed=discord.Embed(title="¿Se acabo la fiesta?", color=color, description="Me he salido de el canal porque "))
 
     def cargar(self, texto, t):
         for i in tqdm(range(1, 100), desc=texto, leave=False): 

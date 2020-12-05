@@ -24,6 +24,13 @@ def cargar(texto, t):
     for i in tqdm(range(1, 100), desc=texto, leave=False): 
         sleep(t)
 
+# class Env():
+#     def coger_prefijo_compat(self):
+#         return getattr(sys, "base_prefix", None) or getattr(sys, "real_prefix", None) or sys.prefix
+
+#     def es_virtualenv(self):
+#         return self.coger_prefijo_compat() != sys.prefix
+
 def preparar():
 
     from App import App
@@ -141,6 +148,9 @@ if __name__ == "__main__":
         except Exception as e:
             print(e)
     else:
+        # envy = Env().es_virtualenv
+        # if envy:
+        #     cprint("No tienes el virtual enviroment activado, es recomendable activarlo",  "red")
         cprint("\nPuedes poner help para ver la lista de comando\n", "green")
         while True:
             try:
