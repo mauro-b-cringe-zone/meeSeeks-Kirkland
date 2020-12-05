@@ -278,9 +278,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
         nodes = {
             "MAIN": {
-                "host": "127.0.0.1",
+                "host": "maubot.maucode.com",
                 "port": 2333,
-                "rest_uri": "http://127.0.0.1:2333",
+                "rest_uri": "http://maubot.maucode.com:2333/",
                 "password": "youshallnotpass",
                 "identifier": "MAIN",
                 "region": "europe",
