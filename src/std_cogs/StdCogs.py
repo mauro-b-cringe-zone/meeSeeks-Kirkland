@@ -27,7 +27,10 @@ class StdCogs(Cogs):
                         if not nombre_archivo.startswith("__py"):
                             if not nombre_archivo.endswith(".txt"):
                                 if not nombre_archivo.endswith("_cmds"):
-                                    self.__cogs.append(f'std_cogs.{archivo}.{nombre_archivo[:-3]}')
+                                    if not nombre_archivo == "listexe": 
+                                        self.__cogs.append(f'std_cogs.{archivo}.{nombre_archivo[:-3]}')
+                                    else:
+                                        continue
                                 else:
                                     continue
                             else:
