@@ -73,12 +73,9 @@ class App(commands.Bot):
                 and user == context.author
                 and reaction.message.id == msg_error.id
             )
-        try:
-            reaction, user = await self.wait_for("reaction_add", timeout=9999999, check=_check)
-        except  asyncio.TimeoutError:
-            await msg_error.delete()
-        else:
-            await msg_error.delete()
+
+        reaction, user = await self.wait_for("reaction_add", check=_check)
+        await msg_error.delete()
 
     async def on_command_error(self, context, exception):
         env = Environment()
@@ -337,7 +334,7 @@ class Maubot(commands.Cog):
     @commands.command(description="Mira el token del bot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def token(self, ctx):
-        embed = discord.Embed(title="".join([random.choice(list('abcdefghijklmnopqrstuvwxyz._=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.')) for i in range(59)]), colour=color)
+        embed = discord.Embed(title="".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(24)]) + "." + "".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(6)]) + "." + "".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(25)]), colour=color)
         await ctx.send(embed=embed)
 
     @commands.command(asliases=['link', 'links'], description="Los links del bot")

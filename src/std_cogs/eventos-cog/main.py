@@ -165,7 +165,6 @@ class Servidor(commands.Cog):
             await ctx.send(f"El usuario {user} aun no tiene un rango.")
         else:
             embed = discord.Embed(colour=color)
-            # embed.description = f"{user.mention} te queda"
             embed.set_author(name=f"nivel - {user.name}", icon_url=user.avatar_url)
             embed.add_field(name="nivel", value=users[str(user.id)]["level"], inline=True)
             embed.add_field(name="exp", value=users[str(user.id)]["experience"], inline=True)
@@ -182,8 +181,7 @@ class Servidor(commands.Cog):
             webhook = discord.Webhook.from_url(env["WEBHOOK_URL_SALIDA"], adapter = discord.AsyncWebhookAdapter(session))
             await webhook.send(content = ':outbox_tray: **Quitado de un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**')
 
-
-    @commands.Cog.listener()
+    @commands.Cog.listener() 
     async def on_ready(self):
     	for guild in self.bot.guilds:
     		if guild.member_count > 20:
@@ -207,20 +205,6 @@ class Servidor(commands.Cog):
     		result = (len(bots) / member.guild.member_count) * 100
     		if result > 70.0:
     			await member.guild.leave()
-
-    # @commands.Cog.listener()
-    # async def on_command(self, ctx):
-
-    #     with open(env["JSON_DIR"] + "servers.json", "r") as f:
-    #         s = json.load(f)
-    #     if not ctx.message.content == f"{ctx.prefix}verify":
-    #         if str(ctx.guild.id) in s:
-    #             command = self.bot.get_command(ctx.message.content.split(f"{ctx.prefix}")[1])
-    #             print(command)
-    #             command.update(enabled=False)
-    #             await ctx.send(embed=discord.Embed(title="No estais verificados", description="Para poder verificar el server poner `m.verify`", color=0x00fbff))
-    #     command = self.bot.get_command(ctx.message.content.split(f"{ctx.prefix}")[1])
-    #     command.update(enabled=True)
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
@@ -280,43 +264,6 @@ class Servidor(commands.Cog):
         async with aiohttp.ClientSession() as session:
             webhook = discord.Webhook.from_url(env["WEBHOOK_URL_ENTRADA"], adapter = discord.AsyncWebhookAdapter(session))
             await webhook.send(content = ':inbox_tray: **Añadido a un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**' + '<:maubot:774967705831997501>')
-
-
-
-    # @commands.command(description="Verifica que eres humano")
-    # async def verify(self, ctx):
-    #     embed5 = discord.Embed(title="Verifica que eres humano", description="En estos tiempos Discord cadavez tiene mas atackes de bots por lo que para mas seguridad verificar que no soy robots. \n\n porfavor dale al ✅ para comfirmar que no eres un robot", colour=0x1cce52)
-    #     embed5.set_footer(text='Maubot | Verifica que eres humano')
-        
-    #     embed = discord.Embed(title="Bien eres humano", description="Ya puedes comenzar a usar el bot... pero cuidado. ajajaja solo bromeaba disfruta", colour=color)
-    #     embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
-
-
-    #     msg = await ctx.send(embed=embed5)
-    #     await msg.add_reaction('✅')
-    #     guild = self.bot.get_guild(ctx.guild.id)
-    #     def _check(reaction, user):
-    #         return (
-    #             reaction.emoji in '✅'
-    #             and user == ctx.author
-    #             and reaction.message.id == msg.id
-    #         )
-    #     try:
-    #         reaction, user = await self.bot.wait_for("reaction_add", timeout=600, check=_check)
-    #     except asyncio.TimeoutError:
-    #         pass
-    #     else:
-    #         with open(env["JSON_DIR"] + "servers.json", "r") as f:
-    #             s = json.load(f)
-    #         try:
-    #             del s[str(ctx.guild.id)]
-    #         except:
-    #             pass
-    #         with open(env["JSON_DIR"] + "servers.json", "w") as f:
-    #             json.dump(s, f)
-    #         await msg.clear_reactions()
-    #         await msg.edit(embed=embed)
-
 
 def setup(bot):
     bot.add_cog(Servidor(bot))
