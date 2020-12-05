@@ -222,10 +222,6 @@ class Emoji:
         offline = "<:offline:705421983873105920>"
         idle = "<:idle:705421983906660454>"
 
-@dataclass
-class Color:
-    difficulties = [5025872, 9225035, 13491257, 16772154, 16761352, 16750593, 16668450, 16073527]
-
 
 class Execution(commands.Cog):
     """
