@@ -420,11 +420,17 @@ class Feedback(commands.Cog):
 
 
         except asyncio.TimeoutError:
-            await msg.clear_reactions()
+            try:
+                await msg.clear_reactions()
+            except:
+                pass    
             await msg.edit(embed=embed_time_out)
 
         else:
-            await msg.clear_reactions()
+            try:
+                await msg.clear_reactions()
+            except:
+                pass
             await msg.edit(embed=embed_done)    
 
             feedbackCh = self.bot.get_channel(777598645725167618)
