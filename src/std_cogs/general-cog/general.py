@@ -206,7 +206,9 @@ class General(commands.Cog):
             await msg.add_reaction("🍻")
             await self.bot.wait_for('raw_reaction_add', timeout=10.0, check=reaction_check)
             await msg.edit(content=f"**{user.mention}** y **{ctx.author.mention}** Estan veviendo una encantadora 🍻")
-            await msg.clear_reactions()
+            try:
+                await msg.clear_reactions()
+            except: pass
         except asyncio.TimeoutError:
             await msg.delete()
             await ctx.send(f"bueno, parece que **{user.name}** no queria una cerbeza con **{ctx.author.name}** ;-;")
