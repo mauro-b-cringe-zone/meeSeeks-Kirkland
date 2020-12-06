@@ -290,25 +290,17 @@ class Execution(commands.Cog):
 
         if code == None:
             await ctx.send(embed=self.__create_how_to_pass_embed(lang))
-            await ctx.message.add_reaction(Emoji.Execution.idle)
             return
 
         if code.startswith("-v") or code.startswith("--version"):
             await ctx.send(embed=Embed(title=f"Version para {lang['command']}", color=int(env["COLOR"])).set_thumbnail(url=lang["icon"]).add_field(name="\uFEFF", value=f"> {lang['version']}"))
             cprint(f"[Log] Se ha pedido la version de {lang['command']}, Version: {lang['version']}", "green")
-            # await ctx.author.message.add_reaction(Emoji.Execution.idle)
             return
-
-        # await ctx.author.message.add_reaction(Emoji.Execution.loading)
         code = self.strip_source_code(code)
         submission = await self.get_submission(code, lang['id'])
 
-        if isinstance(submission, str):  # it is error code
-            await ctx.message.add_reaction(Emoji.Execution.offline)
+        if isinstance(submission, str): 
             await ctx.send(submission)
-            await ctx.message.remove_reaction(
-                Emoji.Execution.loading, self.bot.user
-            )
             return
 
         await ctx.send(
@@ -329,12 +321,9 @@ class Execution(commands.Cog):
             )
         )
         if submission["status"]["description"] == "Aceptado":
-            await ctx.message.add_reaction(Emoji.Execution.successful)
+            await ctx.message.add_reaction("<:online:774982837354496021>")
         else:
-            await ctx.message.add_reaction(Emoji.Execution.error)
-        await ctx.message.remove_reaction(
-            Emoji.Execution.loading, self.bot.user
-        )
+            await ctx.message.add_reaction("<:dnd:774983232541163541>")
 
     @commands.group(pass_context=True, aliases=list(LANGUAGES['ids'].keys()), usage="[codigo]")
     async def run(self, ctx, *, code: Optional[str]):
