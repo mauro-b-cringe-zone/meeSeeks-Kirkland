@@ -32,7 +32,7 @@ class Google(commands.Cog):
 
         async with ctx.typing():
             gasync = await self.bot.loop.run_in_executor(ThreadPoolExecutor(), gsync)
-            await ctx.send(gasync)
+            await ctx.send(embed=discord.Embed(description="||" + gasync + "||", color=color))
 
 
     @commands.command(description="Busca algo en google", usage="<Busqueda>")
