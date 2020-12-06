@@ -82,12 +82,14 @@ class Help(commands.Cog):
             for m in self.emojis: 
                 await msg.add_reaction(m)
             def _check(r, m):
-                return m == ctx.author
+                return m == ctx.message.author
             cogsR = int(cog)
             while True:
                 reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
-
-                await reaction.remove(ctx.author)
+                try:
+                    await reaction.remove(ctx.author)
+                except commands.errors.BotMissingPermissions:
+                    pass
                 if reaction.emoji == self.emojis[0]:
                     cogsR = 1
                     await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
@@ -98,7 +100,6 @@ class Help(commands.Cog):
                 if reaction.emoji == self.emojis[2]:
                     await ctx.message.delete()
                     await msg.delete()
-                    # await ctx.author.message.delete()
                     return                       
                 if reaction.emoji == self.emojis[3]:
                     cogsR = int(cogsR) + 1

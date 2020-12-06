@@ -47,7 +47,7 @@ class AfkCmd(commands.Cog):
             if users[str(user.id)]["status"] == "True":
                 del users[str(user.id)]
 
-                await message.channel.send(embed=discord.Embed(title="Mira quien ha vuelto", description=f"{user.mention} ha vuelto de su descanso. **bienvenido**",colour=color))
+                await message.channel.send(embed=discord.Embed(title="Mira quien ha vuelto", description=f"{user.mention} ha vuelto de su descanso. **bienvenido**", colour=color), delete_after=10.0)
 
                 with open(env["JSON_DIR"] + "afk.json", "w") as f:
                     json.dump(users,f)
