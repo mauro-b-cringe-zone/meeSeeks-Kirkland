@@ -83,7 +83,7 @@ class Tags(commands.Cog):
             return await ctx.send(f"Porfavor escribe tu numbre de tag y separado por un | **Ej: {ctx.prefix}tag crear nombre|descripcion**")
         else:
             if "|" in args:
-                titulo = args.split('|')[0]
+                titulo = args.split('|')[0].strip()
                 desc = args.split('|')[1]
                 creador = ctx.author.id
                 nombre = titulo
