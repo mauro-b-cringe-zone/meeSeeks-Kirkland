@@ -136,7 +136,6 @@ class Help(commands.Cog):
                 return m == ctx.author
             cogsR = int(cog)
             while True:
-                if reaction.emoji == self.emojis[2]:
                     try:
                     reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
                 except asyncio.TimeoutError:
