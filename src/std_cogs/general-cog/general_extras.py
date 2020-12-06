@@ -338,6 +338,7 @@ class GeneralSecExtra(commands.Cog):
     @commands.command(description="egasnem nu", usage="<texto>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def reverse(self, ctx, *, msg:str):
+        if msg == "@everyone" or msg == "@here" or msg == "@someone": return await ctx.send(embed=discord.Embed(color=color, title="Te pille", description="No puedes mencionarlos xdddd"))
         await ctx.send("🔁 " + msg[::-1])
 
     @commands.command(description="awldkhjAWOLIHDWOAIHDalkwjdKjdaldj", usage="<texto>")
