@@ -88,7 +88,7 @@ class Help(commands.Cog):
                 reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
                 try:
                     await reaction.remove(ctx.author)
-                except commands.errors.BotMissingPermissions:
+                except:
                     pass
                 if reaction.emoji == self.emojis[0]:
                     cogsR = 1
