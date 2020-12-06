@@ -49,7 +49,7 @@ class Help(commands.Cog):
         cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
     async def ayuda_reaccionada(self, ctx, cog, cogs, paginasTotales, embed):
-        if int(cog) == 0 and embed is None:
+        if int(cog) == 0:
             embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
             embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://discord.gg/mwDBgubwdP)"
             embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
