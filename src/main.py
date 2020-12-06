@@ -122,7 +122,7 @@ def preparar():
 
     x = threading.Thread(target=cargar, args=("Cargando cogs", .01,))
     x.start()
-    app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None, activity=discord.Activity(type=5, name="2020 campeonato mundial | Roblox"))
+    app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None, activity=discord.Activity(type=5, name="███████╗███████╗ ██╔════╝╚════██║ █████╗░░░░███╔═╝ ██╔══╝░░██╔══╝░░ ███████╗███████╗ ╚══════╝╚══════╝"))
     x.join()
     Logger.success("Las opciones del robot estan cargadas")
 

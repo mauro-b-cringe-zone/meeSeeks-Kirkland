@@ -23,6 +23,7 @@ class App(commands.Bot):
     __activity: Activity
     __cogs: Cogs
 
+
     def __init__(self, cogs: Cogs, **options):
         super().__init__(**options)
 
@@ -31,6 +32,8 @@ class App(commands.Bot):
         self.__repo__ = "https://github.com/maubg-debug/maubot"
         self.__version__ = "1.0.0"      
         self.__web__ = "https://maubot.maucode.com"
+
+        self.__estado = "███████╗███████╗ ██╔════╝╚════██║ █████╗░░░░███╔═╝ ██╔══╝░░██╔══╝░░ ███████╗███████╗ ╚══════╝╚══════╝"
 
         self.__cogs = cogs
         self.color = int(env.get("COLOR"))
