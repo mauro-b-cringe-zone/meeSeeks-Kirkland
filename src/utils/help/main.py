@@ -85,32 +85,35 @@ class Help(commands.Cog):
                 return m == ctx.message.author
             cogsR = int(cog)
             while True:
-                reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
                 try:
-                    await reaction.remove(ctx.author)
-                except:
-                    pass
-                if reaction.emoji == self.emojis[0]:
-                    cogsR = 1
+                    reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
+                except asyncio.TimeoutError:
+                    return await msg.edit(embed=discord.Embed(color=int(env["COLOR"]), title="Ayuda cerrada", description="Se ha cerrado la ayuda por limite de tiempo"))
+                else:
+                    try:
+                        await reaction.remove(ctx.author)
+                    except:
+                        pass
+                    if reaction.emoji == self.emojis[0]:
+                        cogsR = 1
+                    if reaction.emoji == self.emojis[1]:
+                        cogsR = int(cogsR) - 1
+                        if int(cogsR) < 1: cogsR = 1
+                    if reaction.emoji == self.emojis[2]:
+                        try:
+                            await ctx.message.delete()
+                        except:
+                            pass
+                        await msg.delete()
+                        return                       
+                    if reaction.emoji == self.emojis[3]:
+                        cogsR = int(cogsR) + 1
+                        if int(cogsR) > paginasTotales: cogsR = paginasTotales
+                    if reaction.emoji == self.emojis[4]:
+                        cogsR = paginasTotales
+                    if reaction.emoji == self.emojis[5]:
+                        cogsR = 0
                     await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                if reaction.emoji == self.emojis[1]:
-                    cogsR = int(cogsR) - 1
-                    if int(cogsR) < 1: cogsR = 1
-                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))                        
-                if reaction.emoji == self.emojis[2]:
-                    await ctx.message.delete()
-                    await msg.delete()
-                    return                       
-                if reaction.emoji == self.emojis[3]:
-                    cogsR = int(cogsR) + 1
-                    if int(cogsR) > paginasTotales: cogsR = paginasTotales
-                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                if reaction.emoji == self.emojis[4]:
-                    cogsR = paginasTotales
-                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
-                if reaction.emoji == self.emojis[5]:
-                    cogsR = 0
-                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, None))
             return
 
         embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
