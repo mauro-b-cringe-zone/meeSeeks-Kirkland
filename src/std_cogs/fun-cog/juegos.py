@@ -704,13 +704,19 @@ class Juegos(commands.Cog):
             reaction, user = await self.bot.wait_for('reaction_add', timeout=15.0, check=check)
         except asyncio.TimeoutError:
             await main.edit(content='', embed=embedType(1))
-            await main.clear_reactions()
+            try:
+                await main.clear_reactions()
+            except: pass
         if str(reaction.emoji)!=correct:
             await main.edit(content='', embed=embedType(1))
-            await main.clear_reactions()
+            try:
+                await main.clear_reactions()
+            except: pass
         else:
             await main.edit(content='', embed=embedType(2))
-            await main.clear_reactions()
+            try:
+                await main.clear_reactions()
+            except: pass
             diamantes_dados = random.randint(10, 30)
             user = ctx.author
             await self.sumar_pastuca(user, diamantes_dados)
