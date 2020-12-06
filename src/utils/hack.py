@@ -2,7 +2,7 @@ import random
 
 def history(a):
     arr = [
-        'Cómo crear un bot como Username601 sin codificación gratis',
+        'Cómo crear un bot como Maubot sin codificación gratis',
         'Cómo evitar un bloqueo por parte del gobierno',
         'Cómo borrar el historial de navegación de mis padres',
         'Cómo conseguir más personas en mi servidor',
@@ -56,7 +56,7 @@ def password(a):
         'DankMemerFan42069',
         'Swag69',
         'UWU69',
-        '601SUCKS',
+        'MauSUCKS',
         'epicgamer123'
     ]
     return random.choice(arr)
@@ -73,7 +73,7 @@ def lastmsg(a):
         'Amo mi vida',
         'bruh',
         'mama Mia',
-        'Username601 apesta',
+        'Maubot apesta',
         'OwO',
         '¿Cuál es el apellido de obama por favor?'
         'Oye, soy gay',
@@ -94,8 +94,8 @@ def email(a):
         a+'OwO',
         'señor'+a,
         a+'juegafortnite',
-        a+'votóelnombredeusuario601',
-        a+'601'
+        a+'votóelnombredeusuarioMaubot',
+        a+'Mau'
     ]
     return random.choice(arr)
 
@@ -124,7 +124,7 @@ def hackflow(tohack):
         '4"hecho".\nULTIMO MENSAJE: "'+lastmsg(tohack.name)+'"\nÚLTIMA HISTORIA DE NAVEGACIÓN: "'+history(tohack.name)+'"\n[hack.exe] DISTRIBUCIÓN DE INFORMACIÓN AL FBI Y NSA... ',
         '3"hecho".',
         '0\n[hack.exe] HACK COMPLETADO.',
-        '0\n\nC:\\Users\\Anonymous601>'
+        '0\n\nC:\\Users\\Anonymous>'
     ]
     return flow
 
