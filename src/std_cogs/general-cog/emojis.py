@@ -69,7 +69,7 @@ class Emoji(commands.Cog):
         for emoji in emojis:
             name, url, id, guild = self.find_emoji(emoji)
             if url == "":
-                await ctx.send("Could not find {}. Skipping.".format(emoji))
+                await ctx.send("No se ha podido encontrar **{}**.".format(emoji))
                 continue
             response = requests.get(url, stream=True)
             if response.status_code == 404:
