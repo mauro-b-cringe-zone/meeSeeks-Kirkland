@@ -422,52 +422,59 @@ class GeneralSecExtra(commands.Cog):
     async def sha512(self, ctx, *, msg:str):
         await ctx.send("`{}`".format(hashlib.sha512(bytes(msg.encode("utf-8"))).hexdigest()))
 
-class GeneralMasExtras(commands.Cog):
-    
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.command(description="HOLA", usage="<texto>")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def uppercase(self, ctx, *, msg:str):
-        await ctx.send(msg.upper())
-
-    @commands.command(description="hola", usage="<texto>")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def lowercase(self, ctx, *, msg:str):
-        await ctx.send(msg.lower())
-
-
     @commands.command(description="NO TU")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def notu(self, ctx):
         await ctx.message.delete()
         await ctx.send("no tu")
 
-    # @commands.command()
-    # @commands.cooldown(1, 5, commands.BucketType.user)
-    # async def fortune(ctx):
-    #     await ctx.send("```{}```".format(random.choice(fortunes)))
 
-    # @commands.command()
-    # async def owo(ctx, *, text:str):
-    #     # RE
-    #     print(owofy(text))
-    #     await ctx.send(owoify(text))
+# class GeneralMasExtras(commands.Cog):
+    
+#     def __init__(self, bot):
+#         self.bot = bot
+
+#     # @commands.command(description="HOLA", usage="<texto>")
+#     # @commands.cooldown(1, 5, commands.BucketType.user)
+#     # async def uppercase(self, ctx, *, msg:str):
+#     #     await ctx.send(msg.upper())
+
+#     # @commands.command(description="hola", usage="<texto>")
+#     # @commands.cooldown(1, 5, commands.BucketType.user)
+#     # async def lowercase(self, ctx, *, msg:str):
+#     #     await ctx.send(msg.lower())
+
+
+#     @commands.command(description="NO TU")
+#     @commands.cooldown(1, 5, commands.BucketType.user)
+#     async def notu(self, ctx):
+#         await ctx.message.delete()
+#         await ctx.send("no tu")
+
+#     # @commands.command()
+#     # @commands.cooldown(1, 5, commands.BucketType.user)
+#     # async def fortune(ctx):
+#     #     await ctx.send("```{}```".format(random.choice(fortunes)))
+
+#     # @commands.command()
+#     # async def owo(ctx, *, text:str):
+#     #     # RE
+#     #     print(owofy(text))
+#     #     await ctx.send(owoify(text))
 
 
 
 
-    @commands.command(description="(PRAISE INTENSE)")
-    async def praise(self, ctx):
-        await ctx.send('https://i.imgur.com/K8ySn3e.gif')
+#     # @commands.command(description="(PRAISE INTENSE)")
+#     # async def praise(self, ctx):
+#     #     await ctx.send('https://i.imgur.com/K8ySn3e.gif')
 
-    @commands.command(description="Que lio")
-    async def css(self, ctx):
-        await ctx.send('http://i.imgur.com/TgPKFTz.gif')
+#     # @commands.command(description="Que lio")
+#     # async def css(self, ctx):
+#     #     await ctx.send('http://i.imgur.com/TgPKFTz.gif')
 
 
 def setup(bot):
     bot.add_cog(GeneralExtra(bot))
-    bot.add_cog(GeneralMasExtras(bot))
+    # bot.add_cog(GeneralMasExtras(bot))
     bot.add_cog(GeneralSecExtra(bot))
