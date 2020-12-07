@@ -320,7 +320,7 @@ class Execution(commands.Cog):
                 author_icon=ctx.message.author.avatar_url,
             )
         )
-        if submission["status"]["description"] == "Aceptado":
+        if submission["status"]["description"] == "Accepted":
             await ctx.message.add_reaction("<:online:774982837354496021>")
         else:
             await ctx.message.add_reaction("<:dnd:774983232541163541>")
