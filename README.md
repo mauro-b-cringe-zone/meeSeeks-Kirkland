@@ -1,5 +1,6 @@
 # Maubot
 
+[![Discord.boats](https://discord.boats/api/widget/730124969132163093?type=png)](https://discord.boats/bot/730124969132163093)
  <!-- [![Blist](https://blist.xyz/api/bot/730124969132163093/widget/?type=normal)](https://blist.xyz/bots/730124969132163093) -->
 
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
