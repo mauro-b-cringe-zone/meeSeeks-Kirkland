@@ -35,6 +35,7 @@ from collections import Counter
 from googletrans import Translator, LANGUAGES
 
 from os import environ as env
+import re
 
 color = int(env["COLOR"])
 gtr = Translator()
