@@ -26,12 +26,18 @@ from dataclasses import dataclass
 from datetime import datetime as dt
 
 AUTH_HEADER = 'X-RapidAPI-Key'
-AUTH_KEY = env['COMP_KEY'] # Llave
 BASE_URL = 'https://judge0.p.rapidapi.com'
 PREFIX = 'm.'
 NEWLINES_LIMIT = 10 
 CHARACTERS_LIMIT = 300
 
+def CogerLlave():
+    AUTH_KEY = env['COMP_KEY']
+    try:
+        AUTH_KEY2 = env["COMP_KEY2"]
+    except EnvironmentError:
+        return AUTH_KEY
+    return random.choice([AUTH_KEY, AUTH_KEY2])
 
 START_TIME = dt.utcnow()
 
@@ -427,7 +433,7 @@ class Execution(commands.Cog):
         payload = Execution.prepare_paylad(source_code, language_id, stdin)
         headers = {
             'X-RapidAPI-Host': 'judge0.p.rapidapi.com',
-            AUTH_HEADER: AUTH_KEY,
+            AUTH_HEADER: CogerLlave(),
             }    
         
         async with aiohttp.ClientSession() as cs:
