@@ -25,6 +25,8 @@ from os import environ as env
 from dataclasses import dataclass
 from datetime import datetime as dt
 
+import random
+
 AUTH_HEADER = 'X-RapidAPI-Key'
 BASE_URL = 'https://judge0.p.rapidapi.com'
 PREFIX = 'm.'
