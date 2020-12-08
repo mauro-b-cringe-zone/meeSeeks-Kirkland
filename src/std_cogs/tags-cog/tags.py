@@ -142,12 +142,12 @@ class Tags(commands.Cog):
             args = args.split("|")
             # print(args[0])
             # print(tags[args[0]])
-            if str(args[0]) in str(tags):
-                if not eliminador == tags[str(args[0])]['creador']:
+            if str(args[0].strip()) in str(tags):
+                if not eliminador == tags[str(args[0].strip())]['creador']:
                     return await ctx.send("¡TU NO ERES EL CREADOR DE ESTE TAG!") 
                 else:
                     try:
-                        tags[args[0]]["desc"] = args[1]
+                        tags[args[0].strip()]["desc"] = args[1]
                         await ctx.send(embed=discord.Embed(title="Editado", description=f"{ctx.author.mention} Se ha editado la descripcion de **{args[0]}** correctamente", color=color))
                         self.cerrar_json(tags)
                     except Exception as e:
@@ -170,17 +170,17 @@ class Tags(commands.Cog):
             # print(args[0])
             # print(tags[args[0]])
             try:
-                if str(args[0]) in str(tags):
-                    if not eliminador == tags[str(args[0])]['creador']:
+                if str(args[0].strip()) in str(tags):
+                    if not eliminador == tags[str(args[0].strip())]['creador']:
                         return await ctx.send("¡TU NO ERES EL CREADOR DE ESTE TAG!") 
                     else:
                         try:
                             tags[args[1]] = {}
                             tags[args[1]]["titulo"] = args[1]
-                            tags[args[1]]["desc"] = tags[args[0]]["desc"]
-                            tags[args[1]]["creador"] = tags[args[0]]["creador"]
-                            tags[args[1]]["visitas"] = int(tags[args[0]]["visitas"])
-                            del tags[args[0]]
+                            tags[args[1]]["desc"] = tags[args[0].strip()]["desc"]
+                            tags[args[1]]["creador"] = tags[args[0].strip()]["creador"]
+                            tags[args[1]]["visitas"] = int(tags[args[0].strip()]["visitas"])
+                            del tags[args[0].strip()]
                             await ctx.send(embed=discord.Embed(title="Renombrado", description=f"{ctx.author.mention} Se ha renombrado la tag **{args[0]}** correctamente a **{args[1]}**", color=color))
                             self.cerrar_json(tags)
                         except Exception as e:
