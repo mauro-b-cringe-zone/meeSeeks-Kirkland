@@ -88,6 +88,10 @@ class Help(commands.Cog):
                 try:
                     reaction, user = await self.bot.wait_for('reaction_add', check=_check, timeout=120.0)
                 except asyncio.TimeoutError:
+                    try:
+                        await msg.clear_reactions()
+                    except:
+                        pass
                     return await msg.edit(embed=discord.Embed(color=int(env["COLOR"]), title="Ayuda cerrada", description="Se ha cerrado la ayuda por limite de tiempo"))
                 else:
                     try:
