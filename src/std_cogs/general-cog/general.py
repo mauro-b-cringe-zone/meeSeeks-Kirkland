@@ -435,7 +435,7 @@ class General(commands.Cog):
         msg = await ctx.send('...')
         if len(list(args))==0 or '|' not in ' '.join(list(args)):
             return await msg.edit(content='Porfavor usa | Donde quieras que el \u202b valla.')
-        await msg.edit(content=' '.join(list(args)).replace('|', '\u202b')+' \u202b')
+        await msg.edit(content=' '.join(list(args)).replace('|', '\u202b').replace('@everyone', '`@everyone`').replace('@here', '`@here`')+' \u202b')
 
     def urlify(self, word):
         from urllib.parse import quote_plus as urlencode
