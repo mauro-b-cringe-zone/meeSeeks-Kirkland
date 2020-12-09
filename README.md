@@ -16,6 +16,16 @@
 
 ---
 
+<p align="center">
+ <a href="https://github.com/maubg-debug/maubot/#caracteristicas">Caracteristicas</a> 
+ ·
+ <a href="https://github.com/maubg-debug/maubot/#sugerencias">Sugerencias</a> 
+ ·
+ <a href="https://github.com/maubg-debug/maubot/#por-si-quieres-instalarlo">Instalar</a> 
+ ·
+ <a href="https://github.com/maubg-debug/maubot/#licencia">Licencia</a> 
+</p>
+
 `m.help [Cog]`
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/maubg-debug/maubot?style=for-the-badge)
@@ -120,5 +130,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)
 
 * `m.copyright`
+
+# Widgets
 
 [![Discord.boats](https://discord.boats/api/widget/730124969132163093?type=png)](https://discord.boats/bot/730124969132163093)
