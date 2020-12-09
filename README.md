@@ -16,11 +16,11 @@
 
 <p align="center">
  <a href="https://github.com/maubg-debug/maubot/#caracteristicas">Caracteristicas</a> 
- <strong>·</strong>
+ <strong>•</strong>
  <a href="https://github.com/maubg-debug/maubot/#sugerencias">Sugerencias</a> 
- <strong>·</strong>
+ <strong>•</strong>
  <a href="https://github.com/maubg-debug/maubot/#por-si-quieres-instalarlo">Instalar</a> 
- <strong>·</strong>
+ <strong>•</strong>
  <a href="https://github.com/maubg-debug/maubot/#licencia">Licencia</a> 
 </p>
 
