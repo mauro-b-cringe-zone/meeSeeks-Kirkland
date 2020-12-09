@@ -14,17 +14,17 @@
  [![Website](https://img.shields.io/website?up_message=%C2%A1Funciona%21&url=https%3A%2F%2Fmaubot.maucode.com)](https://maubot.maucode.com)
  [![Website](https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7-blue)](https://python.org)
 
----
-
 <p align="center">
  <a href="https://github.com/maubg-debug/maubot/#caracteristicas">Caracteristicas</a> 
- ·
+ <strong>·</strong>
  <a href="https://github.com/maubg-debug/maubot/#sugerencias">Sugerencias</a> 
- ·
+ <strong>·</strong>
  <a href="https://github.com/maubg-debug/maubot/#por-si-quieres-instalarlo">Instalar</a> 
- ·
+ <strong>·</strong>
  <a href="https://github.com/maubg-debug/maubot/#licencia">Licencia</a> 
 </p>
+
+---
 
 `m.help [Cog]`
 
