@@ -3,7 +3,6 @@
 <p align="center">Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
  Maubot tambien tiene un <a href="https://maubot.maucode.com/maucompilador">compilador</a> y aparte de eso es un bot maravilloso</p>
 
----
 
  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/23d3ec7ad1b843f89af7df0da3cb06bc)](https://www.codacy.com/gh/maubg-debug/maubot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maubg-debug/maubot&amp;utm_campaign=Badge_Grade)
  [![Maubot servidor](https://discordapp.com/api/guilds/774577061893242930/widget.png?style=shield)](https://discord.gg/mwDBgubwdP)
@@ -13,6 +12,7 @@
  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
  ![GitHub last commit](https://img.shields.io/github/last-commit/maubg-debug/maubot)
  [![Website](https://img.shields.io/website?up_message=%C2%A1Funciona%21&url=https%3A%2F%2Fmaubot.maucode.com)](https://maubot.maucode.com)
+ [![Website](https://img.shields.io/badge/python-3.5%20%7C%203.6%20%7C%203.7-blue)](https://python.org)
 
 ---
 
