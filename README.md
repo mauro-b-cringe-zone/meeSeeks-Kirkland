@@ -1,7 +1,6 @@
-# Maubot
+<h1 align="center">Maubot</h1>
 
-[![Discord.boats](https://discord.boats/api/widget/730124969132163093?type=png)](https://discord.boats/bot/730124969132163093)
- <!-- [![Blist](https://blist.xyz/api/bot/730124969132163093/widget/?type=normal)](https://blist.xyz/bots/730124969132163093) -->
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/23d3ec7ad1b843f89af7df0da3cb06bc)](https://www.codacy.com/gh/maubg-debug/maubot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maubg-debug/maubot&amp;utm_campaign=Badge_Grade)
 
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
 Maubot tambien tiene un [compilador](https://maubot.maucode.com/maucompilador) y aparte de eso es un bot maravilloso
@@ -110,3 +109,5 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)
 
 * `m.copyright`
+
+[![Discord.boats](https://discord.boats/api/widget/730124969132163093?type=png)](https://discord.boats/bot/730124969132163093)
