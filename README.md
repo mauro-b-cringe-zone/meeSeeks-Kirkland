@@ -11,7 +11,10 @@
  [![Github open issues](https://img.shields.io/github/issues/maubg-debug/maubot)](https://github.com/maubg-debug/maubot/issues)
  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/maubg-debug/maubot)
  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+ ![GitHub last commit](https://img.shields.io/github/last-commit/maubg-debug/maubot)
+ [![Website](https://img.shields.io/website?up_message=%C2%A1Funciona%21&url=https%3A%2F%2Fmaubot.maucode.com)](https://maubot.maucode.com)
 
+---
 
 `m.help [Cog]`
 
