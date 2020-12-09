@@ -1,5 +1,6 @@
 # Maubot
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1c4325e10faf4bdd8c9371306f8a5516)](https://app.codacy.com/gh/maubg-debug/maubot?utm_source=github.com&utm_medium=referral&utm_content=maubg-debug/maubot&utm_campaign=Badge_Grade)
 [![Discord.boats](https://discord.boats/api/widget/730124969132163093?type=png)](https://discord.boats/bot/730124969132163093)
  <!-- [![Blist](https://blist.xyz/api/bot/730124969132163093/widget/?type=normal)](https://blist.xyz/bots/730124969132163093) -->
 
