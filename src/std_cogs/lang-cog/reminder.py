@@ -1,13 +1,8 @@
-import discord, asyncio
+import discord, asyncio, time
 from discord.ext import commands
 
 from os import environ as env
 
-async def embedType(tipo, color: str, ctx, t = None, texto = None):
-    if tipo is 1:
-        return discord.Embed(color=color, title="No has puesto el tiempo bien", description=f"{ctx.author.mention} no has puesto el tiempo correctamente\n**eg: m.reminder [minutos] <texto>**")
-    if tipo is 2:
-        return discord.Embed(color=color, title="RECORDATORIO", description=f"{ctx.author.mention} Has iniciado un recordatorio hace **{t}** minutos. ").add_field(name="Recordatorio", value=texto)
 
 
 class Reminder(commands.Cog):
@@ -23,11 +18,15 @@ class Reminder(commands.Cog):
     async def reminder(self, ctx: commands.Context, tiempo: float, *, texto):
         autor = ctx.author
         if tiempo is None and texto is None:
-            return await ctx.send(embed=await embedType(1, self.color, ctx))
+            return await ctx.send(embed=discord.Embed(color=self.color, title="No has puesto el tiempo bien", description=f"{ctx.author.mention} no has puesto el tiempo correctamente\n**eg: m.reminder [minutos] <texto>**"))
         t = self.CalcularTiempo(tiempo)
         await ctx.send(embed=discord.Embed(color=self.color, title="Recordatorio añadido", description=f"{autor.mention} se te recordara en dentro de **{tiempo}** minuto/s"))
         await asyncio.sleep(t)
-        await autor.send(embed=await embedType(2, self.color, ctx, tiempo, texto))
+        start = time.perf_counter()
+        recormsg = await autor.send(embed=discord.Embed(color=self.color, title="RECORDATORIO", description=f"{ctx.author.mention} Has iniciado un recordatorio hace **{tiempo}** minutos. ").add_field(name="Recordatorio", value=texto))
+        end = time.perf_counter()
+        speed = round((end - start) * 1000)
+        await recormsg.edit(embed=discord.Embed(color=self.color, title="RECORDATORIO", description=f"{ctx.author.mention} Has iniciado un recordatorio hace **{tiempo}** minutos. ").add_field(name="Recordatorio", value=texto).add_field(name="tardanza", description=speed + "ms", inline=False))
 
 
 def setup(bot):
