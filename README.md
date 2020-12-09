@@ -3,7 +3,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/23d3ec7ad1b843f89af7df0da3cb06bc)](https://www.codacy.com/gh/maubg-debug/maubot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maubg-debug/maubot&amp;utm_campaign=Badge_Grade)
 [![Maubot servidor](https://discordapp.com/api/guilds/774577061893242930/widget.png?style=shield)](https://discord.gg/mwDBgubwdP)
 [![Discord.py](https://img.shields.io/badge/discord-py-blue.svg)](https://github.com/Rapptz/discord.py)
-[!Github open issues(https://img.shields.io/github/issues/maubg-debug/maubot)](https://github.com/maubg-debug/maubot/issues)
+[![Github open issues](https://img.shields.io/github/issues/maubg-debug/maubot)](https://github.com/maubg-debug/maubot/issues)
 
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
 Maubot tambien tiene un [compilador](https://maubot.maucode.com/maucompilador) y aparte de eso es un bot maravilloso
