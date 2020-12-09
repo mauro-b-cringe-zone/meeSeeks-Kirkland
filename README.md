@@ -5,6 +5,8 @@
 [![Discord.py](https://img.shields.io/badge/discord-py-blue.svg)](https://github.com/Rapptz/discord.py)
 [![Github open issues](https://img.shields.io/github/issues/maubg-debug/maubot)](https://github.com/maubg-debug/maubot/issues)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/maubg-debug/maubot)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 
 Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
 Maubot tambien tiene un [compilador](https://maubot.maucode.com/maucompilador) y aparte de eso es un bot maravilloso
