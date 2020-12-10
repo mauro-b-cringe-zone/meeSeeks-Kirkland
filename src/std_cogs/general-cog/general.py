@@ -118,7 +118,7 @@ class General(commands.Cog):
         embed.set_footer(text=f"Tiempo total estimado transcurrido: {round(sum(times))}ms")
         await msg.edit(content=f":ping_pong: **{round((round(sum(times)) + round(self.bot.latency * 1000))/4)}ms**", embed=embed)
 
-    @commands.command(aliases='useless,uselesssites,uselessweb,uselesswebsites,uselesswebsite'.split(","))
+    @commands.command(aliases='useless,uselesssites,uselessweb,uselesswebsites,uselesswebsite'.split(","), description="https://maubot.maucode.com/")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def uselesswebs(self, ctx):
         try:
