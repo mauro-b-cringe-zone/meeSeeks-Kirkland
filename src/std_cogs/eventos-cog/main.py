@@ -76,13 +76,11 @@ class Servidor(commands.Cog):
             await message.delete()
 
         if message.content == f"<@!{self.bot.user.id}>":
-            # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
             await message.channel.send(embed=discord.Embed(title="Deja que me presente", 
                                                            description="<:maubot:774967705831997501> Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **m.help**", 
                                                            colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `m.help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `&rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**"))
                         
         if message.content == f"<@!{self.bot.user.id}> prefijos":
-                    # file = discord.File("assets/Maubot_tutorial.gif", filename="Maubot_tutorial.gif")
                     await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
                                                 description="<:maubot:774967705831997501> Mis prefijos son `& (O custom m.prefix [prefijo])`, `m-`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
                                                 colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-prefix.png"))
@@ -169,7 +167,6 @@ class Servidor(commands.Cog):
             embed.set_author(name=f"nivel - {user.name}", icon_url=user.avatar_url)
             embed.add_field(name="nivel", value=users[str(user.id)]["level"], inline=True)
             embed.add_field(name="exp", value=users[str(user.id)]["experience"], inline=True)
-            # embed.set_image(url=url)
             await ctx.send(embed=embed)
 
 
@@ -237,6 +234,9 @@ class Servidor(commands.Cog):
             -> **[top.gg](https://top.gg/bot/730124969132163093)**
             -> **[blist.xyz](https://blist.xyz/bot/730124969132163093/)**
             -> **[bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)**
+            -> **[Discord.Bots.gg](https://discord.bots.gg/bots/730124969132163093)**
+            -> **[discord.boats](https://discord.boats/bot/730124969132163093)**
+            
             -> **[Web de Maubot](https://maubot.maucode.com)**
             """, colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
