@@ -56,7 +56,19 @@ class Animales(commands.Cog):
         await self.randomimageapi(ctx, 'https://coffee.alexflipnote.dev/random.json', 'file')
 
 
+    @commands.command(description="Imagenes random de zorros")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def fox(self, ctx):
+        async with ctx.channel.typing():
+            async with aiohttp.ClientSession() as cs:
+                async with cs.get("https://randomfox.ca/floof/") as r:
+                    data = await r.json()
 
+                    embed = discord.Embed(title="Floof", colour=color)
+                    embed.set_image(url=data['image'])
+                    embed.set_footer(text="https://randomfox.ca/")
+
+                    await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Animales(bot))
