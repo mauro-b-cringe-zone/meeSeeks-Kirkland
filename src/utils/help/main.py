@@ -44,9 +44,9 @@ class Help(commands.Cog):
                 cmds += 1
             ListaDeComandos = ListaDeComandos[:-6]
             embed.add_field(name=f"{cog} | (`{cmds}`)", value=ListaDeComandos, inline=False)
+        cprint(f"[Log] caracteres de 'help':  {cmds}", 'yellow')
         return embed
 
-        cprint(f"[Log] caracteres de 'help':  {len(ListaDeComandos)}", 'yellow')
 
     async def ayuda_reaccionada(self, ctx, cog, cogs, paginasTotales, embed):
         if int(cog) == 0:
