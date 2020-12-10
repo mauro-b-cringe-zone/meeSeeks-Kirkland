@@ -49,6 +49,34 @@ class Social(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command(description="Hackea ha alguien", usage="[usuario]")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def hack(self, ctx, *args):
+        foundArgs, tohack = False, None
+        try:
+            tohack = ctx.guild.get_member(int(list(args)[0]))
+            assert tohack!=None
+            foundArgs = True
+        except: 
+            pass
+        if len(ctx.message.mentions)<1 and not foundArgs:
+            await ctx.send(f'Porfavor pon a alguien!\nejemplo: {ctx.prefix}hack <@'+str(ctx.message.author.id)+'>')
+        if tohack==None: 
+            tohack = ctx.message.mentions[0]
+        console = 'maubot@HACKERMAN:/$ '
+        if len(ctx.message.mentions)>0 or foundArgs:
+            main = await ctx.send('Abriendo consola...\n```bash\nCargando...```')
+            flow = hackflow(tohack)
+            for i in range(0, len(flow)):
+                console = console + flow[i][1:]
+                await main.edit(content=f"```bash\n{console}```")
+                await asyncio.sleep(random.randint(5, 6))
+        else:
+            console += 'ERROR: TAG INVALIDP.\nACCESO DENEGADO.\n\nCódigo cifrado en base64 con codificación hash:\n'+bin(ctx.message.author.name)+ '\n' + console
+            await ctx.send(f'```bash\n{console}```')
+
+
+                               
     @commands.command(name='wasted', description="Bruhh...")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def wasted(self, ctx, target: User):
