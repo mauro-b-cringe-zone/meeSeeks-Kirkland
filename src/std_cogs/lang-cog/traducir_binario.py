@@ -1,23 +1,28 @@
 import discord
 from discord.ext import commands
-import binascii
-import asyncio
 from os import environ as env
 color = int(env["COLOR"])
 
-def int2bytes(i):
-    hex_string = '%x' % i
-    n = len(hex_string)
-    return binascii.unhexlify(hex_string.zfill(n + (n & 1)))
+def textToBinary(text: str, sep: str=' '):
+    list = []
 
-def texto_a_binario(text, encoding='utf-8', errors='surrogatepass'):
-    bits = bin(int(binascii.hexlify(text.encode(encoding, errors)), 16))[2:]
-    return bits.zfill(8 * ((len(bits) + 7) // 8))
+    for i in text:
+        asc = ord(i)
+        list.append("{0:b}".format(asc))
 
-def binario_a_texto(bits, encoding='utf-8', errors='surrogatepass'):
-    bits = bits.replace(' ')
-    n = int(bits, 2)
-    return int2bytes(n).decode(encoding, errors)
+    return(sep.join(list))
+
+def binaryToText(text: str, sep: str=' '):
+    list = text.split(sep)
+
+    newList = []
+
+    for i in list:
+        bits = i
+        n = int(bits, 2)
+        newList.append(n.to_bytes((n.bit_length() + 7) // 8, 'big').decode())
+
+    return (''.join(newList))
 
 class Binario(commands.Cog):
     def __init__(self, bot):
@@ -28,7 +33,7 @@ class Binario(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def binario(self, ctx, *, texto = "PON TEXTO IDIOTA"):
         
-        resultado = texto_a_binario(texto)
+        resultado = textToBinary(texto)
 
         embed = discord.Embed(title="Traducido del texto a binario", colour=color)
         embed.add_field(name="Texto original", value=texto)
@@ -38,9 +43,9 @@ class Binario(commands.Cog):
         
     @commands.command(description="Hola, mundo", usage="[text]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def bin2texto(self, ctx, *, texto = "PON TEXTO IDIOTA"):
+    async def bin2texto(self, ctx, *, texto = "0010010101010 0101010 1010010101"):
         
-        resultado = binario_a_texto(texto)
+        resultado = binaryToText(texto)
 
         embed = discord.Embed(title="Traducido del binario a texto", colour=color)
         embed.add_field(name="Binario original", value=texto)
