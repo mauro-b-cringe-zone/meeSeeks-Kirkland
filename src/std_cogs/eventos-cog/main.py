@@ -51,7 +51,8 @@ class Servidor(commands.Cog):
                             return await message.author.send(embed=discord.Embed(title="No se pueden los adjuntos", color=color, description=f"Las imagenes, tts, etc no estan permitidos en el chat de <@730124969132163093>"))
                         if EncontrarUrl(message.content):
                             await message.author.send(embed=discord.Embed(color=color, description="Se le ha enviado el link al usuario de forma como spoiler"))
-                            return await dest.send(embed=discord.Embed(title="Un link", description=f"{message.author.mention} Se ha enviado un link, esta en modo spoiler por si acaso", color=color).add_field(name="Url:", value=f"||{EncontrarUrl(message.content)[0]}||"))
+                            msg = await dest.send(embed=discord.Embed(title="Un link", description=f"{message.author.mention} Se ha enviado un link, esta en modo spoiler por si acaso", color=color).add_field(name="Url:", value=f"||{EncontrarUrl(message.content)[0]}||"))
+                            return
                         if message.content == "cerrarchat":
                             await cerrar(message.author, destid)
                             await message.author.send(embed=discord.Embed(title="El chat esta cerrado", description=f"{message.author.mention} se ha cerrado la conexion con **{dest.mention}**", color=color))

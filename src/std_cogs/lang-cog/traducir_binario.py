@@ -15,7 +15,7 @@ def texto_a_binario(text, encoding='utf-8', errors='surrogatepass'):
     return bits.zfill(8 * ((len(bits) + 7) // 8))
 
 def binario_a_texto(bits, encoding='utf-8', errors='surrogatepass'):
-    bits = bits.replace(' ', '')
+    bits = bits.replace(' ')
     n = int(bits, 2)
     return int2bytes(n).decode(encoding, errors)
 
