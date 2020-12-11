@@ -37,7 +37,7 @@ class Binario(commands.Cog):
 
         embed = discord.Embed(title="Traducido del texto a binario", colour=color)
         embed.add_field(name="Texto original", value=texto)
-        embed.add_field(name="Traducido", value=resultado, inline=False) 
+        embed.add_field(name="Traducido", value="```yaml" + resultado + "```", inline=False) 
 
         await ctx.send(embed=embed)
         
