@@ -5,10 +5,13 @@ import asyncio
 from os import environ as env
 import json
 
+# AI
+from googletrans import Translator
 from chatbot import Chat
 
 color = int(env["COLOR"])
 chat=Chat("./src/utils/chat/chatbottemplate.template")
+trans = Translator()
 
 class Eventos():
     def __init__(self, bot):
@@ -190,8 +193,10 @@ class ChatApp(commands.Cog):
             json.dump(chats, f)
 
     @commands.command(description="Habla con Maubot", usage="<Texto>")
-    async def chatbot(self, ctx,*,message):
+    async def chatbot(self, ctx,*, message):
+        message = trans.translate(message, dest="en").text
         result = chat.respond(message)
+        result = trans.translate(result, src="en", dest="es").text
         if(len(result)<=2048):
             embed=discord.Embed(title="Maubot AI", description = result, color = color)
             await ctx.send(embed=embed)
