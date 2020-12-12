@@ -60,3 +60,4 @@ tqdm
 wavelink
 uselessapi
 legofy
+chatbot

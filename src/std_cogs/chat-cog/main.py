@@ -5,7 +5,10 @@ import asyncio
 from os import environ as env
 import json
 
+from chatbot import Chat
+
 color = int(env["COLOR"])
+chat=Chat("./src/utils/chat/chatbottemplate.template")
 
 class Eventos():
     def __init__(self, bot):
@@ -185,6 +188,26 @@ class ChatApp(commands.Cog):
 
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
+
+    @commands.command(description="Habla con Maubot", usage="<Texto>")
+    async def chatbot(self, ctx,*,message):
+        result = chat.respond(message)
+        if(len(result)<=2048):
+            embed=discord.Embed(title="Maubot AI", description = result, color = color)
+            await ctx.send(embed=embed)
+        else:
+            embedList = []
+            n=2048
+            embedList = [result[i:i+n] for i in range(0, len(result), n)]
+            for num, item in enumerate(embedList, start = 1):
+                if(num == 1):
+                    embed = discord.Embed(title="Maubot AI", description = item, color = color)
+                    embed.set_footer(text="Pagina {}".format(num))
+                    await ctx.send(embed = embed)
+                else:
+                    embed = discord.Embed(description = item, color = (0xF48D1))
+                    embed.set_footer(text = "Pagina {}".format(num))
+                    await ctx.send(embed = embed)
 
 def setup(bot):
     bot.add_cog(ChatApp(bot))
