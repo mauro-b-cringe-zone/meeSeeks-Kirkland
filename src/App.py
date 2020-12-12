@@ -50,13 +50,10 @@ class App(commands.Bot):
             sys.exit(1)
 
         self.add_command(App.__reload_cogs)
-    
-
+        
     async def on_ready(self):
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
         Logger.success(f'Maubot esta online como "{self.user}".', separador=True)
-        
-            
 
     async def on_message(self, message):
         await run_middleware_stack(message)
