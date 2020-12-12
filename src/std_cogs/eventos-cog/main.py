@@ -237,7 +237,12 @@ class Servidor(commands.Cog):
             -> **[bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)**
             -> **[Discord.Bots.gg](https://discord.bots.gg/bots/730124969132163093)**
             -> **[discord.boats](https://discord.boats/bot/730124969132163093)**
-            
+            -> **[botlist.space](https://botlist.space/bot/730124969132163093)**
+            -> **[botsdatabase](https://botsdatabase.com/bot/730124969132163093)**    
+            -> **[arcane](https://arcane-center.xyz/bot/730124969132163093)**    
+            -> **[Delly](https://discordextremelist.xyz/bots/730124969132163093)**    
+
+
             -> **[Web de Maubot](https://maubot.maucode.com)**
             """, colour=color))
         await msg_ent.add_reaction("<:maubot:774967705831997501>")
