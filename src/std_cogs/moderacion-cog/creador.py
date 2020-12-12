@@ -91,10 +91,10 @@ class Creador(commands.Cog):
 
     @commands.command(aliases=['ex','eval'], description="Evalua lo que quieras", usage="<texto>")
     async def evaluate(self, ctx, *args):
-        unprefixed = ' '.join(list(args))
+        unprefixed = ' '.join(list(args.replace('"', "'")))
         if int(ctx.message.author.id)==700812754855919667:
             try:
-                res = eval(unprefixed.replace('"', "'"))
+                res = eval(unprefixed)
                 if isawaitable(res): 
                     await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 **Input:**```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(await res)+'```**Typo de objeto:**```py\n'+str(type(await res))+'```', color=color))
                 else: 
