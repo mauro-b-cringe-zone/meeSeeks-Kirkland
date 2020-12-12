@@ -90,7 +90,7 @@ class Creador(commands.Cog):
 
 
     @commands.command(aliases=['ex','eval'], description="Evalua lo que quieras", usage="<texto>")
-    async def evaluate(self, ctx, *args):
+    async def evaluate(self, ctx, *, args):
         unprefixed = ' '.join(list(args.replace('"', "'")))
         if int(ctx.message.author.id)==700812754855919667:
             try:
