@@ -295,14 +295,11 @@ class Img(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def philosoraptor(self, ctx, *args):
         async with ctx.message.channel.typing():
-            try:
-                top = self.urlify(str(ctx.message.content).split('[')[1].split(']')[0])
-                bott = self.urlify(str(ctx.message.content).split('[')[2].split(']')[0])
-                name = str(ctx.message.content).split(ctx.prefix)[1].split(' ')[0]
-                url='https://memegen.link/'+str(name)+'/'+str(top)+'/'+str(bott)+'.jpg?watermark=none'
-                await ctx.send(file=discord.File(self.memegen(url), args[0][1:]+'.png'))
-            except Exception as e:
-                await ctx.send(f' | Error!\n```{e}```Parametro invalido.')
+            top = self.urlify(str(ctx.message.content).split('[')[1].split(']')[0])
+            bott = self.urlify(str(ctx.message.content).split('[')[2].split(']')[0])
+            name = str(ctx.message.content).split(ctx.prefix)[1].split(' ')[0]
+            url='https://memegen.link/'+str(name)+'/'+str(top)+'/'+str(bott)+'.jpg?watermark=none'
+            await ctx.send(file=discord.File(self.memegen(url), args[0][1:]+'.png'))
 
 
 

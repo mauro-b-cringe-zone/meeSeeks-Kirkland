@@ -56,6 +56,7 @@ def preparar():
     # ---------------------------------------------------------------------------------------------------------------------- #
     #       COMPRUEBE LA VERSION 3.X DE PYTHON
     # ---------------------------------------------------------------------------------------------------------------------- #
+    print("Discord: " + str(discord.__version__))
     if not is_min_python_3_6:
         Logger.error('Maubot fue desarrollado para Python 3. Utilice la version 3.6 o superior.')
         sys.exit(1)

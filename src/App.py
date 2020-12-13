@@ -79,6 +79,7 @@ class App(commands.Bot):
 
     async def on_command_error(self, context, exception):
         env = Environment()
+        # print(exception)
 
         exception_type = exception.__class__
         if exception_type:
@@ -142,7 +143,7 @@ class App(commands.Bot):
             Logger.error(f'ERROR: {str(exception)}')
             async with aiohttp.ClientSession() as session:
                 webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
-                await webhook.send(content = f'<:lightno:774581319367655424>  **Un error** | {exception}')
+                await webhook.send(content = f'<:lightno:774581319367655424>  **Un error** (`{context.invoked_with}`) | {exception}')
             await self.reaction(context, embed, True)
 
 
