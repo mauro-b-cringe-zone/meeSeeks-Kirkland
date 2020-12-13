@@ -85,7 +85,7 @@ class General(commands.Cog):
     async def url(self, ctx: commands.Context, *, url: str):
         url = EncontrarUrl(url)[0]
         codigo = requests.get(f"https://maubot.maucode.com/api/redir/crear?url={url}").json()
-        await ctx.send(embed=discord.Embed(color=color, title=f"Se te ha creado una url | {codigo['codigo']}", description=f"Puedes visitarlo dandole a este [link](https://maubot.maucode.com/api/redir?codigo={codigo['codigo']})"))
+        await ctx.send(embed=discord.Embed(color=color, title=f"Se te ha creado una url | {codigo['codigo']}", description=f"Puedes visitarlo dandole al link \n-> **https://maubot.maucode.com/api/redir?codigo={codigo['codigo']}**"))
 
     @commands.command(description="Mira la tardanza de respuesta")
     @commands.cooldown(1, 5, commands.BucketType.user)
