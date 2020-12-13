@@ -21,6 +21,9 @@ from discord.ext.commands import MissingRequiredArgument, BadArgument
 
 from discord import Embed
 from discord.ext import commands
+import asyncio
+
+from utils.hack import hackflow
 
 async def fetch(session, url):
     async with session.get(url) as response:

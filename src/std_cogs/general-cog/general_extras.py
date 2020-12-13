@@ -8,7 +8,6 @@ import re
 import random
 import aiohttp
 import json
-from utils.hack import hackflow
 from utils.fun.lists import drunkaf, fight_results, insults, honkhonkfgt
 import hashlib
 from os import environ as env
