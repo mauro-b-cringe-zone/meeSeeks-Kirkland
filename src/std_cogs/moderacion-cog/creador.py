@@ -59,36 +59,6 @@ class Creador(commands.Cog):
         except Exception as e:
             await ctx.send(f' | Error: `{e}`')
 
-    # @commands.command()
-    # async def reiniciar(self, ctx):
-    #     id = str(ctx.author.id)
-    #     if id == '700812754855919667':
-    #         embed = discord.Embed(title="Reiniciando...", colour=color)
-    #         msg = await ctx.send(embed=embed)
-    #         await msg.add_reaction('✅')
-    #         await self.bot.close()
-    #     else:
-    #         await ctx.send("¡No tienes permisos para hacer esta accion!")
-
-
-    # @commands.command(aliases=['sh'])
-    # async def bash(self, ctx, *args):
-    #     unprefixed = ' '.join(list(args))
-    #     if int(ctx.message.author.id)==700812754855919667:
-    #         try:
-    #             if len(list(args))==0: 
-    #                 raise OSError('Eres idiota')
-    #             if len(unprefixed.split())==1: 
-    #                 data = run([unprefixed], stdout=PIPE).stdout.decode('utf-8')
-    #             else: 
-    #                 data = run([unprefixed.split()[0], ' '.join(unprefixed.split()[1:len(unprefixed)])], stdout=PIPE).stdout.decode('utf-8')
-    #             await ctx.send(embed=discord.Embed(title='Terminal', description='Input:```sh\n'+str(unprefixed)+'```**Output:**```sh\n'+str(data)+'```', color=color))
-    #         except Exception as e:
-    #             await ctx.send(embed=discord.Embed(title='Error en la execucion', description='Input:```sh\n'+str(unprefixed)+'```**Error:**```py\n'+str(e)+'```', color=color))
-    #     else:
-    #         await ctx.send(embed=discord.Embed(title='Error en la execucion', description='Input:```sh\n'+str(unprefixed)+'```**Error:**```py\nDenegado por Maubot.py```', color=color))
-
-
     @commands.command(aliases=['ex','eval'], description="Evalua lo que quieras", usage="<texto>")
     async def evaluate(self, ctx, *, args):
         unprefixed = args.replace('"', "'")
@@ -106,29 +76,10 @@ class Creador(commands.Cog):
         else:
             await ctx.send(embed=discord.Embed(description=f'No... | ¿Estás buscando el token de Maubot? Bueno aqui esta: `daowihdawasdawpdua.dawd.awdawdd`', color=color))
 
-    @commands.command(aliases=['bots'], description="Mira los bots")
-    async def botmembers(self, ctx):
-        botmembers, off, on, warning = "", 0, 0, 'Triángulos hacia abajo significa que el bot está caído. Y los triángulos arriba significan que el bot está bien'
-        for i in range(0, int(len(ctx.message.guild.members))):
-            if i > 20: break
-            if len(botmembers)>1900:
-                warning = str(' | Error: Muchos bots algunos estan alistados arriba.')
-                break
-            if ctx.message.guild.members[i].bot==True:
-                if str(ctx.message.guild.members[i].status)=='offline':
-                    off += 1
-                    botmembers += ':small_red_triangle_down: '+ ctx.message.guild.members[i].name + '\n'
-                else:
-                    on += 1
-                    botmembers += ':small_red_triangle: ' + ctx.message.guild.members[i].name + '\n'
-        embed = discord.Embed( title = 'Bots de '+ctx.message.guild.name+':', description = '**Online: '+str(on)+' ('+str(round(on/(off+on)*100))+'%)\nOffline: '+str(off)+' ('+str(round(off/(off+on)*100))+'%)**\n\n'+str(botmembers), colour = color)
-        embed.set_footer(text=warning)
-        await ctx.send(embed=embed)
 
     @commands.command(description="Logout")
     @commands.is_owner()
     async def restart(self, ctx):
-        # await ctx.send('Hasta luego!')
         embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **10s**")
         embed.set_author(name="Reiniciando...")
         try:
