@@ -343,6 +343,18 @@ class Maubot(commands.Cog):
     async def links(self, ctx):
 
         embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/mwDBgubwdP)\n**Web**: [Link](https://maubot.maucode.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
+        l = """
+            -> **[top.gg](https://top.gg/bot/730124969132163093)**
+            -> **[blist.xyz](https://blist.xyz/bot/730124969132163093/)**
+            -> **[bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)**
+            -> **[Discord.Bots.gg](https://discord.bots.gg/bots/730124969132163093)**
+            -> **[discord.boats](https://discord.boats/bot/730124969132163093)**
+            -> **[botlist.space](https://botlist.space/bot/730124969132163093)**
+            -> **[botsdatabase](https://botsdatabase.com/bot/730124969132163093)**    
+            -> **[arcane](https://arcane-center.xyz/bot/730124969132163093)**    
+            -> **[Delly](https://discordextremelist.xyz/bots/730124969132163093)**    
+        """
+        embed.add_field(name="Puedes verme en:", value=l)
         embed.set_author(name="INVITACIONES", icon_url="https://img.icons8.com/color/48/000000/share.png")
         embed.set_image(url="https://top.gg/api/widget/730124969132163093svg?usernamecolor=FFFFFF&topcolor=000000")
         embed.set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-share-icon.png")

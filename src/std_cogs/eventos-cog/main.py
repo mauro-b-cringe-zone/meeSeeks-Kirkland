@@ -273,7 +273,6 @@ class Servidor(commands.Cog):
         embed1.add_field(name="¿Aun no te has enterado?", value=f"Puedes ver un tutorial de como usar Maubot poniendo <@730124969132163093>", inline=False)
         embed1.set_footer(text="Maubot - Puedes escribir @Maubot para mas info")
 
-
         msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://discord.gg/mwDBgubwdP)**", embed=embed1)
 
 def setup(bot):
