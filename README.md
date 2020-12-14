@@ -135,4 +135,4 @@ Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob
 
 [![Discord.boats](https://discord.boats/api/widget/730124969132163093?type=png)](https://discord.boats/bot/730124969132163093)
 [![Discord Bots](https://top.gg/api/widget/730124969132163093.svg)](https://top.gg/bot/730124969132163093)
-
+[![Maubot's Widget](https://api.botlist.space/widget/730124969132163093/5 "Maubot's Widget")](https://botlist.space/bot/730124969132163093?utm_source=bls&utm_medium=widget&utm_campaign=730124969132163093)
