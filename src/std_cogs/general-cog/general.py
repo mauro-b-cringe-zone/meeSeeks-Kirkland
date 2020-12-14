@@ -639,57 +639,6 @@ class GeneralSecundario(commands.Cog):
             return ctx.guild.get_member(int(list(args)[0]))
         return ctx.author
 
-    # @commands.command(description="Mira tu posicion en la que te unistes", usage="[usuario]")
-    # @commands.cooldown(1, 5, commands.BucketType.user)
-    # async def joinposition(self, ctx, *args):
-    #     from datetime import datetime as t
-    #     try:
-    #         wait = await ctx.send(" | Hang tight... collecting data...")
-    #         current_time, members, user_index, desc = t.now().timestamp(), ctx.guild.members, None, ""
-    #         full_arr = [{'ja': i.joined_at.timestamp(), 'da': i} for i in members]
-    #         raw_unsorted_arr = [i['ja'] for i in full_arr]
-    #         sorted_arr = sorted(raw_unsorted_arr)
-    #         if len(args) > 0 and args[0].isnumeric() and ((int(args[0])-1) in range(len(members))):
-    #             user_index, title = int(args[0]) - 1, f'User join position for order: #{args[0]}'
-    #         else:
-    #             user = self.getUser(ctx, args)
-    #             user_join_date = user.joined_at.timestamp()
-    #             user_index, title = sorted_arr.index(user_join_date), str(user)+'\'s join position for '+ctx.guild.name
-    #         for i in range(user_index - 10, user_index + 11):
-    #             if i < 0: continue
-    #             try: key = sorted_arr[i]
-    #             except: continue
-    #             index = raw_unsorted_arr.index(key)
-    #             name = str(full_arr[index]['da']).replace('_', '\_').replace('*', '\*').replace('`', '\`')
-    #             string = "{}. {} ({} ago)\n" if i != user_index else "**__{}. {} ({} ago)__**\n"
-    #             desc += string.format(
-    #                 i + 1, name, self.client.utils.lapsed_time_from_seconds(current_time - full_arr[index]['ja'])
-    #             )
-    #         return await wait.edit(content='', embed=discord.Embed(title=title, description=desc, color=ctx.guild.me.roles[::-1][0].color))
-    #     except Exception as e:
-    #         cprint(f"[Log] Un error con el m.joinposition {e}", "red")
-
-    @commands.command(description="Un uo")
-    @commands.cooldown(1, 10, commands.BucketType.user)
-    async def ufo(self, ctx):
-        num = str(random.randint(50, 100))
-        wait = await ctx.send(content="> Espera un poco esto puede tardar...")
-        data = self.api('http://ufo-api.herokuapp.com/api/sightings/search?limit='+num)
-        if data['status']!='OK':
-            await ctx.send(' | Hubo un problema al recuperar la información. \nEl servidor dijo: "'+str(data['status'])+'" :eyes:')
-        else:
-            trans = Translator()
-            ufo = random.choice(data['sightings'])
-            traducted_summary = trans.translate(ufo['summary'], src="en", dest='es')
-            traducted_city = trans.translate(ufo['city'], src="en", dest='es')
-            traducted_state = trans.translate(ufo['state'], src="en", dest='es')
-            traducted_shape = trans.translate(ufo['shape'], src="en", dest='es')
-            traducted_duration = trans.translate(ufo['duration'], src="en", dest='es')
-            embed = discord.Embed(title='Avistamiento de ovnis en: '+str(traducted_city.text)+' | '+str(traducted_state.text), description='**Descripcion:** '+str(traducted_summary.text)+'\n\n**Forma:** '+str(traducted_shape.text)+'\n**Fecha de avistamiento: **'+str(ufo['date'])[:-8].replace('T', ' ')+'\n**Duración: **'+str(traducted_duration.text)+'\n\n[Articulo]('+str(ufo['url'])+')', colour=color)
-            embed.set_footer(text='¡Maubot asalto el área 51 y encontro esto!')
-            await wait.edit(content="", embed=embed)
-
-
 
     def limitto(self, text, limitcount):
         a = text
