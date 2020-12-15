@@ -462,8 +462,8 @@ class Juegos(commands.Cog):
     @commands.command(description="Questionario de matematicas")
     @commands.cooldown(1, 15, commands.BucketType.user)
     async def mathquiz(self, ctx):
-        arrayId, num1, num2, symArray = random.randint(0, 4), random.randint(1, 100), random.randint(1, 100), ['+', '-', 'x', ':']
-        ansArray = [num1+num2, num1-num2, num1*num2, num1/num2]
+        arrayId, num1, num2, symArray = random.randint(0, 4), random.randint(1, 100), random.randint(1, 100), ['+', '-', 'x', ':', num1**num2]
+        ansArray = [num1+num2, num1-num2, num1*num2, num1/num2, num1**num2]
         sym = symArray[arrayId]
         msg = await ctx.send(embed=discord.Embed(title="Pregunta de mates (15 segundos)", description=f"{str(num1)} {str(sym)} {str(num2)} = ???", colour=color))
         def is_correct(m):
