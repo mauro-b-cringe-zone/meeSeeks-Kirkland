@@ -829,7 +829,7 @@ class Juegos(commands.Cog):
         percentage = round(percentage, 2)
 
         embed = discord.Embed(title='\U0001F642 Buscaminas \U0001F635', colour=color)
-        embed.add_field(name="Tablero", value=f"\U0000FEFF\n{final}", inline=False)
+        embed.add_field(name="Tablero", value=f"{final}", inline=False)
         embed.add_field(name='Columnas:', value=columns, inline=True)
         embed.add_field(name='Filas:', value=rows, inline=True)
         embed.add_field(name='\U0001F4A3 Cuentas:', value=bombs, inline=True)
