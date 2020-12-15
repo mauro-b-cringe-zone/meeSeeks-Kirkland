@@ -407,7 +407,7 @@ class ImgSecundario(commands.Cog):
 
     @commands.command(description="Pon un comentario en youtube", usage="<Video>")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def fortnite(self, ctx: commands.Context, *, msg):
+    async def youtube(self, ctx: commands.Context, *, msg):
         await ctx.send(embed=discord.Embed(color=0xf03d3d, title="<:youtube:788458771223150603> Comentario de youtube genrado").set_image(url=f'https://some-random-api.ml/canvas/youtube-comment?username={ctx.author.display_name}&avatar={ctx.author.avatar_url}&comment={msg}'))
 
     @commands.command(asliases=['ft'], description="Mira la tienda de fortnite")
