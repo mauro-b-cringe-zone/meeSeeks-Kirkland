@@ -405,10 +405,18 @@ class ImgSecundario(commands.Cog):
         from requests import get as decodeurl
         return decodeurl(url).json()
 
+    async def fetch_media(self, session, url):
+        async with session.get(url) as response:
+            return io.BytesIO(await response.read())
+
     @commands.command(description="Pon un comentario en youtube", usage="<Video>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def youtube(self, ctx: commands.Context, *, msg):
-        await ctx.send(embed=discord.Embed(color=0xf03d3d, title="<:youtube:788458771223150603> Comentario de youtube genrado").set_image(url=f'https://some-random-api.ml/canvas/youtube-comment?username={ctx.author.display_name}&avatar={ctx.author.avatar_url_as(static_format="png")}&comment={msg}.png'))
+        embed = discord.Embed(color=0xf03d3d, title="<:youtube:788458771223150603> Comentario de youtube genrado")
+        resp = requests.get(f'https://some-random-api.ml/canvas/youtube-comment?username={ctx.author.display_name}&avatar={ctx.author.avatar_url_as(static_format="png")}&comment={msg}')
+        file=discord.File(BytesIO(resp.content), "youtube.png")
+        embed.set_image(url="attachment://youtube.png")
+        await ctx.send(embed=embed, file=file)
 
     @commands.command(asliases=['ft'], description="Mira la tienda de fortnite")
     @commands.cooldown(1, 21600, commands.BucketType.user)

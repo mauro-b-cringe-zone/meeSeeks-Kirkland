@@ -359,27 +359,6 @@ class General(commands.Cog):
             translated_response = trans.translate(json_data['text'], src='en', dest='es')
             await ctx.send(translated_response.text)
  
-    # @commands.command()                    
-    # async def youtube(self, ctx, *, query):
-    #     from concurrent.futures import ThreadPoolExecutor
-    #     def ytsync(query=query):           
-    #         r = 0
-    #         search = urllib.parse.quote(query)
-    #         url = f"https://www.youtube.com/results?search_query={search}"
-    #         response = urllib.request.urlopen(url)
-    #         html = response.read()
-    #         soup = BeautifulSoup(html, "html.parser")
-    #         for vid in soup.findAll(attrs={"class": "yt-uix-tile-link"}):
-    #             while r == 0:
-    #                 return f"https://www.youtube.com{vid['href']}"
-    #                 r = r + 1
-
-    #     async with ctx.typing():
-    #         ytasync = await self.bot.loop.run_in_executor(
-    #             ThreadPoolExecutor(), ytsync
-    #         )
-    #         await ctx.send(ytasync)
-
 
     @commands.command(aliases=["cpr", "copy"], description="NO COPIES")
     @commands.cooldown(1, 5, commands.BucketType.user)
