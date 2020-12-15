@@ -9,6 +9,7 @@ from _io import BytesIO
 from gtts import gTTS
 import discord
 from googletrans import Translator
+import requests
 color = int(env["COLOR"])
 
 @dataclass
@@ -57,6 +58,14 @@ class Fun(commands.Cog):
         res.seek(0)
         await ctx.send(content="Dale al archivo que pone **tts.mp3** para descargartelo", file=discord.File(fp=res, filename='tts.mp3'))
 
+    @commands.command(description="Pon un comentario en youtube", usage="<Video>")
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def meme(self, ctx):
+        resp = requests.get(f'https://some-random-api.ml/meme').json()
+        embed = discord.Embed(color=0xea9e1a, title=resp["caption"], url=resp["image"])
+        embed.set_image(url=resp["image"])
+        embed.set_footer(text="ID: " + str(resp["id"]) + ", categoria: " + str(resp["category"]))
+        await ctx.send(embed=embed)
 
     @commands.command(name='urban', description="Busca algo en el diccionario de 'urban'", usage="<palabra>")
     @commands.cooldown(1, 5, commands.BucketType.user)
