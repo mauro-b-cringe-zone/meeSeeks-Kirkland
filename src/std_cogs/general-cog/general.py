@@ -606,6 +606,7 @@ class GeneralSecundario(commands.Cog):
             description = '||'+str(translated_punch.text)+'||',
             colour = color
         )
+        embed.set_thumbnail(url=random.choice(["https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/joypixels/257/rolling-on-the-floor-laughing_1f923.png", "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/263/face-with-tears-of-joy_1f602.png"]))
         await ctx.send(embed=embed)        
 
     def time_encode(self, sec):
