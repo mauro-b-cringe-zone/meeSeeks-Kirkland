@@ -118,7 +118,7 @@ class App(commands.Bot):
             elif isinstance(exception, commands.MissingPermissions):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name=f"Necesitas permisos para hacer esto", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                embed.add_field(name="\uFEFF", value=f"Permisos necesarios: `{Translator().translate(str([perm.replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]), src='en', dest='es').text}`")
+                embed.add_field(name="\uFEFF", value=f"Permisos necesarios: `{Translator().translate(str([perm.replace('_', ' ').replace('guild', 'server').title()[0] for perm in exception.missing_perms]), src='en', dest='es').text}`")
                 return await self.reaction(context, embed)
 
             elif isinstance(exception, commands.MissingRole):
