@@ -196,7 +196,7 @@ class ChatApp(commands.Cog):
         message = trans.translate(message, dest="en").text
         key = env["CHAT_AI_BOT"]
         url = requests.get("http://api.brainshop.ai/get?bid=154295&key={key}&uid=154295&msg={message}").json()["cnt"]
-        result = trans.translate(result, src="en", dest="es").text
+        result = trans.translate(url, src="en", dest="es").text
         embed=discord.Embed(color=color, title="Maubot | AI", description=result)
         await ctx.send(embed=embed)
 
