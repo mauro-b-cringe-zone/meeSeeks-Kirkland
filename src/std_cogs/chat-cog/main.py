@@ -7,6 +7,7 @@ import json
 
 # AI
 from googletrans import Translator
+import requests
 
 color = int(env["COLOR"])
 trans = Translator()
@@ -194,7 +195,7 @@ class ChatApp(commands.Cog):
     async def chatbot(self, ctx,*, message):
         message = trans.translate(message, dest="en").text
         key = env["CHAT_AI_BOT"]
-        url = "http://api.brainshop.ai/get?bid=154295&key={key}&uid=154295&msg={message}"
+        url = requests.get("http://api.brainshop.ai/get?bid=154295&key={key}&uid=154295&msg={message}").json()["cnt"]
         result = trans.translate(result, src="en", dest="es").text
         embed=discord.Embed(color=color, title="Maubot | AI", description=result)
         await ctx.send(embed=embed)
