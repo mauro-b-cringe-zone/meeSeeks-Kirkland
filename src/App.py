@@ -79,7 +79,6 @@ class App(commands.Bot):
 
     async def on_command_error(self, context, exception):
         env = Environment()
-        # print(exception)
 
         exception_type = exception.__class__
         if exception_type:
@@ -135,15 +134,15 @@ class App(commands.Bot):
             for i in excepciones: 
                 if i in str(exception): return
             embed=discord.Embed(
-                               title="Como sabes, los robots no son perfectos", 
-                               description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\nError: \n```{str(exception)}```",
-                               color=self.color).set_footer(
-                                   text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
-                               )
+                                title="Como sabes, los robots no son perfectos", 
+                                description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** p `m.report <error/bug>` \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\n**Error:** \n```{str(exception)}```",
+                                color=self.color).set_footer(
+                                    text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
+                                )
             Logger.error(f'ERROR: {str(exception)}')
             async with aiohttp.ClientSession() as session:
                 webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
-                await webhook.send(content = f'<:lightno:774581319367655424>  **Un error** (`{context.invoked_with}`) | {exception}')
+                await webhook.send(content = f'<:lightno:774581319367655424>  **Un error** (`{context.invoked_with}`) [`{context.guild.name}`] | {exception}')
             await self.reaction(context, embed, True)
 
 
@@ -321,7 +320,7 @@ class Maubot(commands.Cog):
     async def palmadas(self, ctx, *, message):
         msg = message.replace(" ", " 👏 ")
 
-        await ctx.send(msg)
+        await ctx.send(embed=discord.Embed(color=color, description=msg))
 
 
     @commands.command(description="Mira el avatar de alguien")
