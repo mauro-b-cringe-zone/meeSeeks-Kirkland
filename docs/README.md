@@ -37,7 +37,7 @@ b) Completa los valores
 ```shell
 python ./src/main.py
 ```
-
+---
 #### 4. archivo.env
 Todo esta en el [.example.env](https://github.com/maubg-debug/maubot/blob/main/.example.env)
 ```txt
@@ -47,11 +47,14 @@ TOKEN =
 # https://openweathermap.org/api
 WEATHER_KEY =
 
-# https://github.com/maubg-debug/maubot#4-archivoenv 
-COMP_KEY = Visitar (https://rapidapi.com/hermanzdosilovic/api/judge0)
+# https://github.com/maubg-debug/maubot/blob/main/docs/README.md#4-archivoenv 
+COMP_KEY =
 
-# https://github.com/maubg-debug/maubot#instrucciones-para-el-color-del-env 
+# https://github.com/maubg-debug/maubot/blob/main/docs/README.md#instrucciones-para-el-color-del-env 
 COLOR = 
+
+# https://screenshotapi.net/home/query-builder
+WEB_KEY =
 
 # Esto ya esta rellenado
 USER_STATISTICS_THROTTLE_DURATION=10
@@ -60,8 +63,8 @@ USER_STATISTICS_INCREMENT=5
 # True|False
 DEBUG=
 
-# https://screenshotapi.net/home/query-builder
-WEB_KEY =
+# https://brainshop.ai/
+CHAT_AI_BOT = 
 
 # Las instrucciones se pueden ver aqui https://github.com/maubg-debug/maubot/tree/main/data#instalacion-de-data
 JSON_DIR=Tu direccion para los json
@@ -72,11 +75,13 @@ DB_DIR=Tu direccion para la DB
 WEBHOOK_URL_ENTRADA=
 WEBHOOK_URL_SALIDA=
 WEBHOOK_URL_ERRORES=
+
 ```
 #### Instrucciones para el color del .env
 ```shell
 pip install envparse <- O -> pip install git+https://github.com/rconradharris/envparse.git
 ```
+---
 Luego en la consola de python pondreis
 ```python
 C:\> python
