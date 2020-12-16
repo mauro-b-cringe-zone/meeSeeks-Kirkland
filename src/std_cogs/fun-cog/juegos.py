@@ -726,7 +726,7 @@ class Juegos(commands.Cog):
 
 
 
-    @commands.command(description="Un busca minas (NO VALE HACER TRAMPAS)")
+    @commands.command(description="Un busca minas (NO VALE HACER TRAMPAS)", enabled=False)
     async def minesweeper(self, ctx, columns = None, rows = None, bombs = None):
         if columns is None or rows is None and bombs is None:
             if columns is not None or rows is not None or bombs is not None:
