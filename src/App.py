@@ -122,7 +122,7 @@ class App(commands.Bot):
                 return await self.reaction(context, embed)
 
             elif isinstance(exception, commands.MissingRole):
-                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
+                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Tienes que tener los roles correctos", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 return await self.reaction(context, embed)
 
