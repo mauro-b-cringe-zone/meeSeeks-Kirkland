@@ -192,10 +192,10 @@ class ChatApp(commands.Cog):
             json.dump(chats, f)
 
     @commands.command(description="Habla con Maubot", usage="<Texto>")
-    async def chatbot(self, ctx,*, message):
+    async def chatbot(self, ctx, *, message):
         message = trans.translate(message, dest="en").text
         key = env["CHAT_AI_BOT"]
-        url = requests.get("http://api.brainshop.ai/get?bid=154295&key={key}&uid=154295&msg={message}").json()["cnt"]
+        url = requests.get(f"http://api.brainshop.ai/get?bid=154295&key={key}&uid=154295&msg={message}").json()["cnt"]
         result = trans.translate(url, src="en", dest="es").text
         embed=discord.Embed(color=color, title="Maubot | AI", description=result)
         await ctx.send(embed=embed)
