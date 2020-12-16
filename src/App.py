@@ -95,17 +95,13 @@ class App(commands.Bot):
                 embed = discord.Embed(title="....", description=f"{context.author.mention} Este comando es para mi creador\n\nVete y consigue una vida.", color=self.color)
                 return await context.send(embed=embed)
 
-            elif isinstance(exception, commands.NoPrivateMessage):
-                embed = discord.Embed(title="NO", description=f"{context.author.mention} Este comando no es para canale de DM", color=self.color)
-                return await context.send(embed=embed)
-
             elif isinstance(exception, commands.TooManyArguments):
                 embed = discord.Embed(description=f"{context.author.mention} Escribe menos argumentos por favor.", colour=0xf15069)
                 embed.set_author(name="Demasiado", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 return await self.reaction(context, embed)
 
             elif isinstance(exception, commands.BadArgument):
-                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help" ** para mas informacion', colour=0xf15069)
+                embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** {context.prefix}help ** para mas informacion', colour=0xf15069)
                 embed.set_author(name="Escribe un argumento valido", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
                 return await self.reaction(context, embed)
 
@@ -118,7 +114,7 @@ class App(commands.Bot):
             elif isinstance(exception, commands.MissingPermissions):
                 embed = discord.Embed(description=f'> {context.author.mention} Puedes escribir ** "{context.prefix}help" ** para mas informacion', colour=0xf15069)
                 embed.set_author(name=f"Necesitas permisos para hacer esto", icon_url="https://img.icons8.com/color/48/000000/do-not-disturb.png")
-                embed.add_field(name="\uFEFF", value=f"Permisos necesarios: `{Translator().translate(str([perm.replace('_', ' ').replace('guild', 'server').title()[0] for perm in exception.missing_perms]), src='en', dest='es').text}`")
+                embed.add_field(name="\uFEFF", value=f"Permisos necesarios: `{Translator().translate(str([perm[0].replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]), src='en', dest='es').text}`")
                 return await self.reaction(context, embed)
 
             elif isinstance(exception, commands.MissingRole):
