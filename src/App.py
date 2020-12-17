@@ -183,9 +183,6 @@ class App(commands.Bot):
         await ctx.send(message_success)
 
 
-
-
-
 def eliminar_prefix(guild):
     with open(env.get("JSON_DIR") + 'prefix.json', 'r') as f:
         prefixes = json.load(f)

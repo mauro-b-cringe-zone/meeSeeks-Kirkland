@@ -37,7 +37,7 @@ def CogerLlave():
     AUTH_KEY = env['COMP_KEY']
     try:
         AUTH_KEY2 = env["COMP_KEY2"]
-    except EnvironmentError:
+    except:
         return AUTH_KEY
     return random.choice([AUTH_KEY, AUTH_KEY2])
 
