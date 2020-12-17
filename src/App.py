@@ -332,7 +332,7 @@ class Maubot(commands.Cog):
     @commands.command(description="Mira el token del bot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def token(self, ctx):
-        embed = discord.Embed(title="🗝️ ¡Toma tu llave!", description="".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(24)]) + "." + "".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(6)]) + "." + "".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(25)]), colour=color)
+        embed = discord.Embed(title="🗝️ ¡Toma tu llave!", description="".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(24)]) + "." + "".join([random.choice(list('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(4)]) + "." + "".join([random.choice(list('-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')) for i in range(25)]), colour=color)
         await ctx.send(embed=embed)
 
     @commands.command(asliases=['link', 'links'], description="Los links del bot")
