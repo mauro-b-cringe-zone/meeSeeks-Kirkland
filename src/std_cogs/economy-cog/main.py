@@ -6,12 +6,10 @@ from os import environ as env
 import random
 
 from utils.Logger.Logger import Logger
+from termcolor import cprint
 
 color = int(env["COLOR"])
 C_NAMES = "diamantes"
-
-
-# HYPERFUNCIONES
 
 
 mainshop = []
