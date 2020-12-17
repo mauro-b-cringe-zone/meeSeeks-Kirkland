@@ -222,6 +222,7 @@ class Maubot(commands.Cog):
     @commands.command(name="bot", usage="[info | config]", description="Mira la info del bot o la config (m._bot info | m._bot config)")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def _bot(self, ctx, inf_con=None):
+        inf_con = inf_con.lower()
         if inf_con == 'info':
             em = discord.Embed(timestamp=datetime.datetime.utcnow(), colour=color)
             em.title = 'Info de Maubot'
