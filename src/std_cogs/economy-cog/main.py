@@ -9,7 +9,7 @@ from utils.Logger.Logger import Logger
 from termcolor import cprint
 
 color = int(env["COLOR"])
-C_NAMES = "<:maubotcoin:789149908426817557>"
+C_NAMES = "🪙"
 
 
 mainshop = []
