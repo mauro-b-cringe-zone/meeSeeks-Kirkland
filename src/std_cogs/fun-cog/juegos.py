@@ -720,7 +720,7 @@ class Juegos(commands.Cog):
             diamantes_dados = random.randint(10, 30)
             user = ctx.author
             await self.sumar_pastuca(user, diamantes_dados)
-            await ctx.send(f"Se te an añadido **{diamantes_dados}** MauDiamantes <:maubotcoin:789149908426817557>")
+            await ctx.send(f"Se te an añadido **{diamantes_dados}** MauDi<:maubotcoin:789149908426817557>mantes")
 
 
 
