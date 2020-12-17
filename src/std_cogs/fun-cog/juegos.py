@@ -478,7 +478,7 @@ class Juegos(commands.Cog):
             user = ctx.author
             diamantes_dados = random.randint(10, 30)
             await self.sumar_pastuca(user, diamantes_dados)    
-            await ctx.send(f"Y se te ha {diamantes_dados} MauDiamantes <:maubotcoin:789149908426817557> dinero a tu cuenta")
+            await ctx.send(f"Y se te ha {diamantes_dados} <:maubotcoin:789149908426817557>dinero a tu cuenta")
         else:
             await msg.edit(embed=discord.Embed(title="¡Mal!", description=f"La respuesta era {answer}\n\nSi quieres jugar a otra cosa como un trivia no ter olvides de poner `{ctx.prefix}help juegos`", color=color))
 
@@ -525,7 +525,7 @@ class Juegos(commands.Cog):
             user = ctx.author
             diamantes_dados = random.randint(10, 30)
             await self.sumar_pastuca(user, diamantes_dados)  
-            await ctx.send(f"Y se te ha {diamantes_dados} MauDiamantes <:maubotcoin:789149908426817557> dinero a tu cuenta")
+            await ctx.send(f"Y se te ha {diamantes_dados} <:maubotcoin:789149908426817557>dinero a tu cuenta")
      
         else:
             translated_corr = trans.translate(corr, src="en", dest='es')
@@ -572,7 +572,7 @@ class Juegos(commands.Cog):
                     user = ctx.author
                     diamantes_dados = random.randint(10, 30)
                     await self.sumar_pastuca(user, diamantes_dados)   
-                    await ctx.send(f"Y se te ha **{diamantes_dados}** MauDiamantes <:maubotcoin:789149908426817557> dinero a tu cuenta")
+                    await ctx.send(f"Y se te ha **{diamantes_dados}** <:maubotcoin:789149908426817557>dinero a tu cuenta")
         
                     gameplay = False
                     break
@@ -623,7 +623,7 @@ class Juegos(commands.Cog):
                     return await main.edit(content=':pensive: ¿Ninguno? Bien entonces, la respuesta es: '+str(corr_order)+'. '+str(corr_name), embed=None)
                 if str(reaction.emoji)==str(corr_order):
                     diamantes_dados = random.randint(10, 30)
-                    await main.edit(content="", embed=discord.Embed(title="¡Correcto!", description=' | <@'+str(ctx.message.author.id)+f'>, Estas correcto! :tada:\n\nY se te ha añadido **{diamantes_dados}** MauDiamantes <:maubotcoin:789149908426817557> a tu cuenta', colour=color))
+                    await main.edit(content="", embed=discord.Embed(title="¡Correcto!", description=' | <@'+str(ctx.message.author.id)+f'>, Estas correcto! :tada:\n\nY se te ha añadido **{diamantes_dados}** <:maubotcoin:789149908426817557>a tu cuenta', colour=color))
                     user = ctx.author
                     await self.sumar_pastuca(user, diamantes_dados)
                 else:
