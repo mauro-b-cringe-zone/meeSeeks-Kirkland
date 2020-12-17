@@ -256,8 +256,9 @@ class Maubot(commands.Cog):
                 em.description = self.bot.psa + '[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
             except AttributeError:
                 em.description = '[¡Unete a que esperas!](https://discord.gg/mwDBgubwdP)'
-            em.add_field(name="Prefix", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix <prefijo>**")
-            em.add_field(name='rename_bot', value=f'Puedes usar este comando para ponerle in __nickname__ a Maubot.', inline=True)
+            em.add_field(name="Prefijo", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix <prefijo>**")
+            em.add_field(name="Niveles", value=f"Se es para activar los niveles **ej: {ctx.prefix}levels**")
+            em.add_field(name="Seguridad", value=f"Maubot eliminara links, spam, etc **ej: {ctx.prefix}seguridad**")
 
 
             em.set_footer(text="Maubot | Echo por Maubg")

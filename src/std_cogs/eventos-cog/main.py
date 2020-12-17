@@ -268,7 +268,7 @@ class Servidor(commands.Cog):
 
         channel = discord.utils.get(guild.text_channels)
 
-        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="<:maubot:774967705831997501> Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y al igual ponerle un **__nickname__** , muchas cosas mas. Si quieres saber mas tu solo pon `m.help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
+        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="<:maubot:774967705831997501> Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y **mas** cosas, muchas cosas mas. Si quieres saber mas tu solo pon `m.help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
         embed1.set_author(name='Maubot', icon_url="https://img.icons8.com/nolan/64/launched-rocket.png")
         embed1.add_field(name="¿Necesitas ayuda?", value=f"Puedes poner **m.help** para conseguir una lista de los comandos mas guays del mundo desde diversion hasta musica y economia. La lista de comandos estan separadas por secciones asi que podrias poner `m.help [seccion]` para descubrir mas comandos super chulos. o si no puedes poner **<@730124969132163093>** .", inline=True)
         embed1.add_field(name="Diversion atope", value=f"Maubot tiene muchos comando para divertirse con manipulacion de imagenes a juegos como el `conecta4`, `rps` y mucho mas. Maubot tambien tiene un sistema de economia muy avanzado para ser millonarios y dominar el mundo 🤤...", inline=True)
