@@ -149,9 +149,6 @@ if __name__ == "__main__":
         except Exception as e:
             print(e)
     else:
-        # envy = Env().es_virtualenv
-        # if envy:
-        #     cprint("No tienes el virtual enviroment activado, es recomendable activarlo",  "red")
         cprint("\nPuedes poner help para ver la lista de comando\n", "green")
         while True:
             try:
@@ -162,5 +159,3 @@ if __name__ == "__main__":
             c = Consola(comando).procesar_comandos(directorio=Path(__file__).parent.parent)
             if c == "preparacion":
                 preparar()
-            else:
-                continue
