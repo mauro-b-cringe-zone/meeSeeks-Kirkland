@@ -145,7 +145,7 @@ class App(commands.Bot):
                 embed2 = discord.Embed(title=f'<:lightno:774581319367655424>  Un error', color=14362664)
                 embed2.add_field(name="Comando:", value="` " + str(context.invoked_with) + " `")
                 embed2.add_field(name="Servidor:", value="` " + str(context.guild.name) + " `")
-                embed2.add_field(name="Hora:", value="` " + datetime.datetime.utcnow() + " `")
+                embed2.add_field(name="Hora:", value="` " + str(datetime.datetime.utcnow()) + " `")
                 embed2.add_field(name="Error:", value=f"```\n{exception}\n```", inline=False)
                 await webhook.send(embed = embed2)   
             await self.reaction(context, embed, True)
