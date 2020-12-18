@@ -74,7 +74,7 @@ class ImgAvatarUser(commands.Cog):
             await ctx.send(file=File(await trigger_pic(str(target.avatar_url_as(static_format='png'))),
                            f"trigger_{target}.gif"))
         else:
-            await ctx.send(file=File(await trigger_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://trigger_{ctx.message.author}.gif"), file=File(await trigger_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"trigger_{ctx.message.author}.gif"))
 
     @commands.command(description="Pon ha alguien gris", usage="[usuario]")
