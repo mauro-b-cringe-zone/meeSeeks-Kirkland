@@ -7,12 +7,14 @@ from requests import get
 import requests
 from aiohttp import ClientSession
 from urllib.parse import quote_plus as urlencode
-from PIL import Image, ImageFont, ImageDraw, GifImagePlugin, ImageOps, ImageFilter
+from PIL import Image
 import re, requests
 import random
 from os import environ as env
 import datetime
 import os
+
+from uselessapi import UselessAPI
 
 color =   int(env["COLOR"]) 
 
@@ -544,7 +546,6 @@ class ImgSecundario(commands.Cog):
     async def burn(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
-        from uselessapi import UselessAPI
         api = UselessAPI()
         async with ctx.channel.typing():
             img = member.avatar_url_as(static_format='png')
@@ -556,7 +557,6 @@ class ImgSecundario(commands.Cog):
     async def door(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
-        from uselessapi import UselessAPI
         api = UselessAPI()
         async with ctx.channel.typing():
             img = member.avatar_url_as(static_format='png')
@@ -564,31 +564,14 @@ class ImgSecundario(commands.Cog):
             await ctx.send(embed=discord.Embed(title="Me das miedo", color=color).set_image(url=img.full_response.url))
 
 
-    # @commands.command(aliases="webcapt,captureweb,web,webcapture".split(","), description="Mira una web sin tener que ir ha eya", usage="<web>", enabled=False)
-    # @commands.cooldown(1, 30, commands.BucketType.user)
-    # async def websitecapture(self, ctx, web):
-    #     main = await ctx.send(content="Porfavor espera...")
-    #     web = web.replace("https://", "").replace("http://", "")
-    #     key = str(env["WEB_KEY"])
-    #     try:
-    #         url = requests.get(f"https://screenshotapi.net/api/v1/screenshot?token={key}&url={web}&full_page=false&fresh=true").json()
-    #         url = url["screenshot"]
-    #     except:
-    #         return await ctx.send("No No No...")
-    #     embed = discord.Embed(title=f"http://{web}", url=f"http://{web}", color=color)
-    #     embed.set_image(url=str(url))
-    #     embed.add_field(name="¿No te sale la imagen?", value=f"-> Puedes clickear **[aqui]({str(url)})**")
-    #     await main.edit(content="", embed=embed)
-
     @commands.command(description="Mira a un usuario desde un pimplode", usage="[Usuario]")
     async def pimplode(self, ctx, member: discord.Member = None):
         if member is None:
             member = ctx.author
         async with ctx.typing():
-            from uselessapi import UselessAPI
             img = member.avatar_url_as(static_format='png')
             img = UselessAPI().implode(image=img)
-            await ctx.send(embed=discord.Embed(title="...", color=color).set_image(url=img.full_response.url))
+            await ctx.send(embed=discord.Embed(title="hmmm...", color=color).set_image(url=img.full_response.url))
 
 def setup(bot):
     bot.add_cog(Img(bot))
