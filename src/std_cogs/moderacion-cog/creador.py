@@ -68,7 +68,17 @@ class Creador(commands.Cog):
                 if isawaitable(res): 
                     await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 **Input:**```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(await res)+'```**Typo de objeto:**```py\n'+str(type(await res))+'```', color=color))
                 else: 
-                    await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 **Input:**```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(res)+'```**Typo de objeto:**```py\n'+str(type(res))+'```', color=color))
+                    msg = await ctx.send(embed=discord.Embed(title='Éxito de la evaluación', description='📥 **Input:**```py\n'+unprefixed+'```**📤 Output:**```py\n'+str(res)+'```**Typo de objeto:**```py\n'+str(type(res))+'```', color=color))
+                    await msg.add_reaction(str("<:redtick:774983128581668875>"))
+                    def _check(reaction, user):
+                        return (
+                            reaction.emoji in str("<:redtick:774983128581668875>")
+                            and user == ctx.author
+                            and reaction.message.id == msg.id
+                        )
+
+                    reaction, user = await self.wait_for("reaction_add", check=_check)
+                    await msg.delete()
             except Exception as e:
                 if 'cannot reuse already awaited coroutine' in str(e): 
                     return
