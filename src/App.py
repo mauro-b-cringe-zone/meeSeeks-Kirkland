@@ -151,7 +151,7 @@ class App(commands.Bot):
             webhook_url = env.get("WEBHOOK_URL_ERRORES")
             options = {
                 "application_name": "Maubot | Errores",
-                "service_name": "https://maubot.maucode.com",
+                "service_name": "Error de comando",
                 "service_environment": "Produccion",
                 "default_level": "info",
             }
@@ -161,7 +161,7 @@ class App(commands.Bot):
                 title="Un error con Maubot",
                 description=f"¡Un error en el comando `{context.invoked_with}`!",
                 error=exception,
-                metadata={"host": "127.0.0.1:5000"},
+                metadata={"host": "maubot.maucode.com:5000"},
             )
 
             response = logger.send()
