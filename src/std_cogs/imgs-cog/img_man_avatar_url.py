@@ -71,21 +71,21 @@ class ImgAvatarUser(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def trigger(self, ctx, target: User):
         if ctx.message.author != target:
-            await ctx.send(file=File(await trigger_pic(str(target.avatar_url_as(static_format='png'))),
-                           f"trigger_{target}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await trigger_pic(str(target.avatar_url_as(static_format='png'))),
+                           f"{ctx.invoked_with}.gif"))
         else:
-            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://trigger.gif"), file=File(await trigger_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await trigger_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
                            f"trigger.gif"))
 
     @commands.command(description="Pon ha alguien gris", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def gray(self, ctx, target: User):
         if ctx.message.author != target:
-            await ctx.send(file=File(await gray_scale_pic(str(target.avatar_url_as(static_format='png'))),
-                           f"gray_scale_{target}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await gray_scale_pic(str(target.avatar_url_as(static_format='png'))),
+                           f"{ctx.invoked_with}.gif"))
         else:
-            await ctx.send(file=File(await gray_scale_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
-                           f"gray_scale_{ctx.message.author}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await gray_scale_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
+                           f"trigger.gif"))
 
     @commands.command(description="Estas cuadrado", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -106,31 +106,31 @@ class ImgAvatarUser(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def sepia(self, ctx, target: User):
         if ctx.message.author != target:
-            await ctx.send(file=File(await sepia_pic(str(target.avatar_url_as(static_format='png'))),
-                           f"sepia_{target}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await sepia_pic(str(target.avatar_url_as(static_format='png'))),
+                           f"{ctx.invoked_with}.gif"))
         else:
-            await ctx.send(file=File(await sepia_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
-                           f"sepia_{ctx.message.author}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await sepia_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
+                           f"trigger.gif"))
 
     @commands.command(description=".....................", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def gay(self, ctx, target: User):
         if ctx.message.author != target:
-            await ctx.send(file=File(await gay_pic(str(target.avatar_url_as(static_format='png'))),
-                           f"gay_{target}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await gay_pic(str(target.avatar_url_as(static_format='png'))),
+                           f"{ctx.invoked_with}.gif"))
         else:
-            await ctx.send(file=File(await gay_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
-                           f"gay_{ctx.message.author}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await gay_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
+                           f"trigger.gif"))
 
     @commands.command(description="Invierte los colores del usuario", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def invert(self, ctx, target: User):
         if ctx.message.author != target:
-            await ctx.send(file=File(await invert_pic(str(target.avatar_url_as(static_format='png'))),
-                           f"invert_{target}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await invert_pic(str(target.avatar_url_as(static_format='png'))),
+                           f"{ctx.invoked_with}.gif"))
         else:
-            await ctx.send(file=File(await invert_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
-            f"invert_{ctx.message.author}.gif"))
+            await ctx.send(embed=discord.Embed(title=f"{ctx.invoked_with}", color=color).set_image(url=f"attachment://{ctx.invoked_with}.gif"), file=File(await invert_pic(str(ctx.message.author.avatar_url_as(static_format='png'))),
+                           f"trigger.gif"))
 
     @commands.command(aliases=['truthscroll', 'truth-scroll'], description="Una legenda dijo", usage="[texto]")
     @commands.cooldown(1, 5, commands.BucketType.user)
