@@ -17,6 +17,8 @@ import random
 import datetime
 import aiohttp
 
+from discord_logger import DiscordLogger
+
 from socket import gethostname
 
 color = int(env.get("COLOR"))
@@ -140,14 +142,29 @@ class App(commands.Bot):
                                     text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
                                 )
             Logger.error(f'ERROR: {str(exception)}')
-            async with aiohttp.ClientSession() as session:
-                webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
-                embed2 = discord.Embed(title=f'<:lightno:774581319367655424>  Un error', color=14362664)
-                embed2.add_field(name="Comando:", value="` " + str(context.invoked_with) + " `")
-                embed2.add_field(name="Servidor:", value="` " + str(context.guild.name) + " `")
-                embed2.add_field(name="Hora:", value="` " + str(datetime.datetime.utcnow()) + " `")
-                embed2.add_field(name="Error:", value=f"```\n{exception}\n```", inline=False)
-                await webhook.send(embed = embed2)   
+            embed2 = discord.Embed(title=f'<:lightno:774581319367655424>  Un error', color=14362664)
+            embed2.add_field(name="Comando:", value="` " + str(context.invoked_with) + " `")
+            embed2.add_field(name="Servidor:", value="` " + str(context.guild.name) + " `")
+            embed2.add_field(name="Hora:", value="` " + str(datetime.datetime.utcnow()) + " `")
+            embed2.add_field(name="Error:", value=f"```\n{exception}\n```", inline=False)
+
+            webhook_url = env.get("WEBHOOK_URL_ERRORES")
+            options = {
+                "application_name": "Maubot | Errores",
+                "service_name": "https://maubot.maucode.com",
+                "service_environment": "Produccion",
+                "default_level": "info",
+            }
+
+            logger = DiscordLogger(webhook_url=webhook_url, **options)
+            logger.construct(
+                title="Un error con Maubot",
+                description=f"¡Un error en el comando `{context.invoked_with}`!",
+                error=exception,
+                metadata={"host": "127.0.0.1:5000"},
+            )
+
+            response = logger.send()
             await self.reaction(context, embed, True)
  
 
