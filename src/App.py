@@ -452,8 +452,8 @@ class Feedback(commands.Cog):
     async def request(self, ctx: commands.Context, *, feature):
         creator = await self.bot.fetch_user(700812754855919667)
         authors_name = str(ctx.author)
-        await creator.send(discord.Embed(title="Nueva propuesta", description=f':pencil: {authors_name}: {feature}', color=color))
-        await ctx.send(discord.Embed(title="Gracias", description=f''':pencil: Gracias, Se ha solicitado tu idea!''', color=color))
+        await creator.send(embed=discord.Embed(title="Nueva propuesta", description=f':pencil: {authors_name}: {feature}', color=color))
+        await ctx.send(embed=discord.Embed(title="Gracias", description=f''':pencil: Gracias, Se ha solicitado tu idea!''', color=color))
 
     @commands.command()
     async def report(self, ctx: commands.Context, *, error_report):

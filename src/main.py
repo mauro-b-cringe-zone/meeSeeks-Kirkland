@@ -102,7 +102,6 @@ def preparar():
         "WEBHOOK_URL_SALIDA",
         "WEBHOOK_URL_ERRORES",
         "DEBUG",
-        "WEB_KEY",
         "JSON_DIR",
         "DB_DIR",
         "USER_STATISTICS_THROTTLE_DURATION",
