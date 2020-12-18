@@ -18,14 +18,12 @@ from os import environ as env
 
 from datetime import datetime as dt
 
-from discord import Colour
 from termcolor import cprint
 
-from os import environ as env
 from dataclasses import dataclass
-from datetime import datetime as dt
 
 import random
+from discord.colour import Colour
 
 AUTH_HEADER = 'X-RapidAPI-Key'
 BASE_URL = 'https://judge0.p.rapidapi.com'
@@ -242,9 +240,9 @@ class Execution(commands.Cog):
             Nombre, icono y versión del idioma.
             Fecha y hora de la ejecución.
         """
-        color =   Colour.green() if description == "Aceptado" else Colour.red()
+        color =   Colour.green() if description == "Accepted" else Colour.red()
 
-        embed = Embed(color=0x75aef5, timestamp=datetime.utcnow())
+        embed = Embed(color=color, timestamp=datetime.utcnow())
         embed.set_author(name=f"Codigo de ejecucion de {author_name}", icon_url=author_icon)
 
 

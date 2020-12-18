@@ -31,7 +31,7 @@ class Binario(commands.Cog):
 
     @commands.command(description="0010010101010 0101010 1010010101", usage="[text]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def binario(self, ctx, *, texto = "PON TEXTO IDIOTA"):
+    async def binario(self, ctx, *, texto: str = "PON TEXTO IDIOTA"):
         
         resultado = textToBinary(texto)
 
@@ -43,7 +43,7 @@ class Binario(commands.Cog):
         
     @commands.command(description="Hola, mundo", usage="[text]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def bin2texto(self, ctx, *, texto = "0010010101010 0101010 1010010101"):
+    async def bin2texto(self, ctx, *, texto: str = "0010010101010 0101010 1010010101"):
         
         resultado = binaryToText(texto)
 
@@ -52,8 +52,6 @@ class Binario(commands.Cog):
         embed.add_field(name="Traducido", value=resultado, inline=False)
 
         await ctx.send(embed=embed)
-    
-
 
 def setup(bot):
     bot.add_cog(Binario(bot))
