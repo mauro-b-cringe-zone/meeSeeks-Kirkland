@@ -24,13 +24,6 @@ def cargar(texto, t):
     for i in tqdm(range(1, 100), desc=texto, leave=False): 
         sleep(t)
 
-# class Env():
-#     def coger_prefijo_compat(self):
-#         return getattr(sys, "base_prefix", None) or getattr(sys, "real_prefix", None) or sys.prefix
-
-#     def es_virtualenv(self):
-#         return self.coger_prefijo_compat() != sys.prefix
-
 def preparar():
 
     from App import App
@@ -56,7 +49,6 @@ def preparar():
     # ---------------------------------------------------------------------------------------------------------------------- #
     #       COMPRUEBE LA VERSION 3.X DE PYTHON
     # ---------------------------------------------------------------------------------------------------------------------- #
-    print("Discord: " + str(discord.__version__))
     if not is_min_python_3_6:
         Logger.error('Maubot fue desarrollado para Python 3. Utilice la version 3.6 o superior.')
         sys.exit(1)
@@ -122,15 +114,16 @@ def preparar():
 
     x = threading.Thread(target=cargar, args=("Cargando cogs", .01,))
     x.start()
+
     app = App(cogs, command_prefix=prefix.get_prefix, description="Maubot | El mejor bot para divertirse", help_command=None, activity=discord.Game(name="███████╗███████╗ ██╔════╝╚════██║ █████╗░░░░███╔═╝ ██╔══╝░░██╔══╝░░ ███████╗███████╗ ╚══════╝╚══════╝", afk=True))
+    
     x.join()
+
     Logger.success("Las opciones del robot estan cargadas")
 
-    y = threading.Thread(target=cargar, args=("Haciendo login", .01,))
-    y.start()
+    cargar("Haciendo login", .01)
     try:
         app.run(token)
-        y.join()
     except Exception as e:
         y.join()
         cprint(f"Un error con el login: {e}", "red")

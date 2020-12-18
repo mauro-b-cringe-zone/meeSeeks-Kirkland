@@ -179,11 +179,6 @@ class Environment:
 
             return debug
 
-        def is_cmd(self):
-            cmd = self.get('CMD') == "run"
-
-            return cmd
-
 
     __instance = None
 

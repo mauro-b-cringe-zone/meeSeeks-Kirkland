@@ -17,6 +17,8 @@ import random
 import datetime
 import aiohttp
 
+from socket import gethostname
+
 color = int(env.get("COLOR"))
 
 class App(commands.Bot):
@@ -140,10 +142,12 @@ class App(commands.Bot):
             Logger.error(f'ERROR: {str(exception)}')
             async with aiohttp.ClientSession() as session:
                 webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
-                await webhook.send(content = f'<:lightno:774581319367655424>  **Un error** (`{context.invoked_with}`) [`{context.guild.name}`] | {exception}')
+                await webhook.send(embed = discord.Embed(f'<:lightno:774581319367655424>  Un error', color=14362664)
+                                  .add_field(name="Comando:", value=context.invoked_with)
+                                  .add_field(name="Servidor:", value=context.guild.name)
+                                  .add_field(name="Error:", value=f"```\n{exception}\n```"))   
             await self.reaction(context, embed, True)
-
-
+ 
 
     def __load_cogs(self):
         """
