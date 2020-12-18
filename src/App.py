@@ -142,10 +142,11 @@ class App(commands.Bot):
             Logger.error(f'ERROR: {str(exception)}')
             async with aiohttp.ClientSession() as session:
                 webhook = discord.Webhook.from_url(env.get("WEBHOOK_URL_ERRORES"), adapter = discord.AsyncWebhookAdapter(session))
-                await webhook.send(embed = discord.Embed(f'<:lightno:774581319367655424>  Un error', color=14362664)
-                                  .add_field(name="Comando:", value=context.invoked_with)
-                                  .add_field(name="Servidor:", value=context.guild.name)
-                                  .add_field(name="Error:", value=f"```\n{exception}\n```"))   
+                embed = discord.Embed(f'<:lightno:774581319367655424>  Un error', color=14362664)
+                embed.add_field(name="Comando:", value=context.invoked_with)
+                embed.add_field(name="Servidor:", value=context.guild.name)
+                embed.add_field(name="Error:", value=f"```\n{exception}\n```")
+                await webhook.send(embed = embed)   
             await self.reaction(context, embed, True)
  
 
