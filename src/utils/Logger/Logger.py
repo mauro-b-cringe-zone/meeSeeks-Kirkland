@@ -43,7 +43,7 @@ class Logger:
         : param nueva línea: alternar nueva línea.
         :return:
         """
-        Logger.print("🛈   INFO: "+mensage, colorama.Fore.RESET, separador, newline)
+        Logger.print(mensage, colorama.Fore.RESET, separador, newline)
 
     @staticmethod
     def warning(mensage: str, separador: bool = False, newline: bool = True):
@@ -54,7 +54,7 @@ class Logger:
         : param nueva línea: alternar nueva línea.
         :return:
         """
-        Logger.print("⚠️   WARNICION: " + mensage, colorama.Fore.YELLOW, separador, newline)
+        Logger.print(mensage, colorama.Fore.YELLOW, separador, newline)
 
     @staticmethod
     def print(mensage: str, color: str, separador: bool = False, newline: bool = True):
