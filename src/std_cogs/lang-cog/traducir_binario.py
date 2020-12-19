@@ -1,30 +1,31 @@
 import discord
 from discord.ext import commands
 from os import environ as env
-color = int(env["COLOR"])
+color = int(env["COLOR"]) # Un int de un hex
 
-def textToBinary(text: str, sep: str=' '):
-    list = []
+def textToBinary(texto: str, sep: str=' '):
+    lista = []
 
-    for i in text:
+    for i in texto:
         asc = ord(i)
-        list.append("{0:b}".format(asc))
+        lista.append("{0:b}".format((asc)))
 
-    return(sep.join(list))
+    return(sep.join(lista))
 
-def binaryToText(text: str, sep: str=' '):
-    list = text.split(sep)
+def binaryToText(texto: str, sep: str=' '):
+    lista = texto.split(sep)
 
-    newList = []
+    nuevaLista = []
 
-    for i in list:
+    for i in lista:
         bits = i
         n = int(bits, 2)
-        newList.append(n.to_bytes((n.bit_length() + 7) // 8, 'big').decode())
+        nuevaLista.append(n.to_bytes((n.bit_length() + 7) // 8, 'big').decode())
 
-    return (''.join(newList))
+    return (''.join(nuevaLista))
 
 class Binario(commands.Cog):
+    # La clase del robot de Discord
     def __init__(self, bot):
         self.bot = bot
 
@@ -49,7 +50,7 @@ class Binario(commands.Cog):
 
         embed = discord.Embed(title="Traducido del binario a texto", colour=color)
         embed.add_field(name="Binario original", value=texto)
-        embed.add_field(name="Traducido", value=resultado, inline=False)
+        embed.add_field(name="Traducido", value="```yml\n" + resultado  + " \n```", inline=False)
 
         await ctx.send(embed=embed)
 
