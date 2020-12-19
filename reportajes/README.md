@@ -1,5 +1,7 @@
 # Reportages
 
+## Siempre que quieras usarlo (Da igual si ya lo has hecho)
+
 Para ver los errores en Maubot:
 
 * Vacia el archivo (`CTRL + A`) (`ELIMINAR`)
