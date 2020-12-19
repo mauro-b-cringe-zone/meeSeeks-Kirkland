@@ -42,5 +42,5 @@
     },
     "servidor": 774577061893242930,
     "inicio": "python ./src/main.py --cmd run",
-    "web": "http://maubot.mooo.com"
+    "web": "http://maubot.maucode.com"
 }

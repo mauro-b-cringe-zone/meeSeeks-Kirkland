@@ -52,6 +52,7 @@ class App(commands.Bot):
         self.add_command(App.__reload_cogs)
         
     async def on_ready(self):
+        await self.change_presence(activity=discord.Game(name=self.__estado), status=discord.Status.do_not_disturb)
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
         Logger.success(f'Maubot esta online como "{self.user}".', separador=True)
 
@@ -128,7 +129,7 @@ class App(commands.Bot):
         excepciones = ["Command raised an exception: TimeoutError:", "Unknown Message", "You do not own this bot", 'command is disabled', 'Command "cancelar" is not found', 'You are on cooldown.', "KeyError: 'run'", "Unknown Emoji", "AttributeError: 'NoneType' object has no attribute 'id'", "AttributeError: 'ClientUser' object has no attribute 'send'", "is not found"]
 
         if env.get('DEBUG'):
-            if str(exception) is "": return 
+            if str(exception) == "": return 
             for i in excepciones: 
                 if i in str(exception): return
             embed=discord.Embed(

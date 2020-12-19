@@ -14,4 +14,3 @@ def task_flake():
         'actions': [(create_folders, [], {}), 'flake8 --exit-zero --output-file=reportajes/flake8.txt src'],
         'clean': True
     }
-    
