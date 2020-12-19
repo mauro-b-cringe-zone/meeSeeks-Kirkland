@@ -77,7 +77,7 @@ class Creador(commands.Cog):
                         )
 
                     reaction, user = await self.bot.wait_for("reaction_add", check=_check)
-                    if reaction == "<:redtick:774983128581668875>":
+                    if reaction.emoji.name == "redtick":
                         await msg.delete()
             except Exception as e:
                 if 'cannot reuse already awaited coroutine' in str(e): 
