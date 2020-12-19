@@ -72,7 +72,7 @@ class Creador(commands.Cog):
                     await msg.add_reaction(str("<:redtick:774983128581668875>"))
                     def _check(reaction, user):
                         return (
-                            reaction.emoji == "<:redtick:774983128581668875>"
+                            reaction.emoji in ["<:redtick:774983128581668875>"]
                             and user == ctx.author
                             and reaction.message.id == msg.id
                         )
