@@ -6,7 +6,6 @@ from os import environ as env
 color = int(env["COLOR"])
 
 import random
-import time
 import json
 
 from googletrans import Translator

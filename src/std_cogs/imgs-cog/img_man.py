@@ -1,18 +1,14 @@
 
 import discord
 from discord.ext import commands
-import sys
 from io import BytesIO
 from requests import get
 import requests
-from aiohttp import ClientSession
 from urllib.parse import quote_plus as urlencode
 from PIL import Image
-import re, requests
+import requests
 import random
 from os import environ as env
-import datetime
-import os
 
 from uselessapi import UselessAPI
 
