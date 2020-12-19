@@ -2,7 +2,7 @@
 
 Para ver los errores en Maubot:
 
-* Vacia el archivo (CTRL + A) (ELIMINAR)
+* Vacia el archivo (`CTRL + A`) (`ELIMINAR`)
 
 * Para ver los reportages/errores en Maubot:
 ```sh
