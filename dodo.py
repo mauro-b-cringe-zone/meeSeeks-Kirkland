@@ -15,4 +15,3 @@ def task_flake():
         'clean': True
     }
     
-create_folders()
