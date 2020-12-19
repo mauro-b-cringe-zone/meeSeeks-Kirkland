@@ -11,7 +11,8 @@ def create_folders():
 def task_flake():
     return {
         'targets': ['reportajes/flake8.txt', 'src/'],
-        'actions': [(create_folders, [], {}), 'flake8 --exit-zero --output-file=reports/flake8.txt src'],
+        'actions': [(create_folders, [], {}), 'flake8 --exit-zero --output-file=reportajes/flake8.txt src'],
         'clean': True
     }
     
+create_folders()

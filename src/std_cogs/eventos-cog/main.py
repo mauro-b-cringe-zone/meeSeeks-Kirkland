@@ -3,11 +3,9 @@ from discord.ext import commands
 import json
 import time
 from os import environ as env
-import aiohttp
 from App import eliminar_prefix
-import asyncio, re
+import re
 from termcolor import cprint
-from discord.utils import get
 
 async def cerrar(iniciador=None, destinatario:int=None):
     with open(env["JSON_DIR"] + "chats.json", "r") as f:

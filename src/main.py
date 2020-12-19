@@ -4,7 +4,7 @@
 # ? ".\env\Scripts\activate"
 # ? "deactivate"
 
-import sys, os
+import sys
 from pathlib import Path
 
 from consola.main import Consola

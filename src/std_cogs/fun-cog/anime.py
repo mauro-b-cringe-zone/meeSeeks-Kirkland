@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 
 import aiohttp
-from discord.ext.commands import MissingRequiredArgument, BadArgument, CommandOnCooldown
 from discord.ext import commands
 from discord import Embed
 

@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import asyncio
 
 from os import environ as env
 import json

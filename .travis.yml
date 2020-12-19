@@ -12,6 +12,3 @@ install:
 script:
   - python ./src/main.py --cmd run
   - python ./src/main.py
-
-notifications:
-  email: false

@@ -2,7 +2,6 @@
 import json
 
 from os import environ as env
-import inspect
 
 """
 Un Cog de anti espam

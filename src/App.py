@@ -1,7 +1,7 @@
 import sys, json, asyncio
 
 import discord
-from discord import Activity, ActivityType
+from discord import Activity
 from discord.ext import commands
 
 from utils.Environment import Environment, env
@@ -9,21 +9,17 @@ from utils.Logger.Logger import Logger
 from cogs.Cogs import Cogs
 from middleware import run_middleware_stack
 
-from discord.ext.commands.errors import BotMissingPermissions, CommandNotFound, CommandOnCooldown, MissingPermissions, MissingRequiredArgument, NotOwner
-
 from googletrans import Translator
 
 import random
 import datetime
-import aiohttp
 
 from discord_logger import DiscordLogger
-
-from socket import gethostname
 
 color = int(env.get("COLOR"))
 
 class App(commands.Bot):
+
     __activity: Activity
     __cogs: Cogs
 
@@ -87,7 +83,7 @@ class App(commands.Bot):
         exception_type = exception.__class__
         if exception_type:
 
-            if isinstance(exception, CommandOnCooldown):
+            if isinstance(exception, commands.CommandOnCooldown):
                 embed = discord.Embed(title="Tranquilo...", description=f"{context.author.mention} Este comando esta en reposo\n Ahora tienes que esperar **{exception.retry_after:,.2f}** segundos", color=self.color)
                 return await context.send(embed=embed)
 
