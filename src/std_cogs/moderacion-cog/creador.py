@@ -72,13 +72,13 @@ class Creador(commands.Cog):
                     await msg.add_reaction(str("<:redtick:774983128581668875>"))
                     def _check(reaction, user):
                         return (
-                            reaction.emoji in ["<:redtick:774983128581668875>"]
-                            and user == ctx.author
+                            user == ctx.author
                             and reaction.message.id == msg.id
                         )
 
                     reaction, user = await self.bot.wait_for("reaction_add", check=_check)
-                    await msg.delete()
+                    if reaction == "<:redtick:774983128581668875>":
+                        await msg.delete()
             except Exception as e:
                 if 'cannot reuse already awaited coroutine' in str(e): 
                     return
