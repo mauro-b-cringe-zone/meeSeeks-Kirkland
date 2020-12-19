@@ -77,7 +77,7 @@ class Creador(commands.Cog):
                             and reaction.message.id == msg.id
                         )
 
-                    reaction, user = await self.wait_for("reaction_add", check=_check)
+                    reaction, user = await self.bot.wait_for("reaction_add", check=_check)
                     await msg.delete()
             except Exception as e:
                 if 'cannot reuse already awaited coroutine' in str(e): 

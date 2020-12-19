@@ -491,12 +491,13 @@ class ImgSecundario(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def npc(self, ctx: commands.Context, *, args):
         if "|" in args:
-            args = args.split(" | ")
+            args = args.split("|")
             t1 = args[0]
             t2 = args[1]
             url = f"https://vacefron.nl/api/npc?text1={t1}&text2={t2}".replace(" ", "%20")
             await ctx.send(embed=discord.Embed(color=color).set_image(url=url))
-        else: return await ctx.send("Escribe el segundo texto o pon **m.help imgsecundario**")
+        else: 
+            return await ctx.send("Escribe el segundo texto o pon **m.help imgsecundario**")
 
     @commands.command(description="COME COME COME @usuario", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
