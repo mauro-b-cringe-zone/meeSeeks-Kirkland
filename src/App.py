@@ -14,7 +14,6 @@ from googletrans import Translator
 import random
 import datetime
 
-import websockets
 
 from discord_logger import DiscordLogger
 
