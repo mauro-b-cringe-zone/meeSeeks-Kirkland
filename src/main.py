@@ -119,8 +119,8 @@ def preparar():
 
     intents = discord.Intents.default()
 
-    # for i in intents.VALID_FLAGS:
-    #     intents.i = True
+    intents.presences = True
+    intents.members = True
 
     app = App(cogs, 
               command_prefix=prefix.get_prefix, 
