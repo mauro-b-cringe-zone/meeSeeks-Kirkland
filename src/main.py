@@ -119,15 +119,13 @@ def preparar():
 
     intents = discord.Intents.default()
 
-    typing = intents.typing
-    presences = intents.presences
+    intents.typing = True
+    intents.presences = True
 
     app = App(cogs, 
               command_prefix=prefix.get_prefix, 
               description="Maubot | El mejor bot de la historia", 
               help_command=None, 
-              presences=True, 
-              typing=True
             )
     
     x.join()
