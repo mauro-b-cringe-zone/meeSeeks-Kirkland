@@ -119,8 +119,8 @@ def preparar():
 
     intents = discord.Intents.default()
 
-    # intents.typing = True
-    # intents.presences = True
+    # for i in intents.VALID_FLAGS:
+    #     intents.i = True
 
     app = App(cogs, 
               command_prefix=prefix.get_prefix, 
