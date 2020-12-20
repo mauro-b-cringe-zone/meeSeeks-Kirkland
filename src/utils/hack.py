@@ -124,7 +124,7 @@ def hackflow(tohack):
         '4"hecho".\nULTIMO MENSAJE: "'+lastmsg(tohack.name)+'"\nÚLTIMA HISTORIA DE NAVEGACIÓN: "'+history(tohack.name)+'"\n[hack.exe] DISTRIBUCIÓN DE INFORMACIÓN AL FBI Y NSA... ',
         '3"hecho".',
         '0\n[hack.exe] HACK COMPLETADO.',
-        '0\n\nC:\\Users\\Anonymous>'
+        '0\n\nC:\\Users\\Maubot\hack>'
     ]
     return flow
 
