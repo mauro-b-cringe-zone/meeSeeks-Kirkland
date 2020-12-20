@@ -14,6 +14,8 @@ from googletrans import Translator
 import random
 import datetime
 
+import websockets
+
 from discord_logger import DiscordLogger
 
 color = int(env.get("COLOR"))
@@ -51,8 +53,10 @@ class App(commands.Bot):
 
         self.add_command(App.__reload_cogs)
         
+        
+        
     async def on_ready(self):
-        await self.change_presence(activity=discord.Game(name=self.__estado), status=discord.Status.do_not_disturb, afk=True)
+        await self.change_presence(activity=discord.Game(name=self.__estado), status=discord.Status.do_not_disturb)
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
         Logger.success(f'Maubot esta online como "{self.user}".', separador=True)
 

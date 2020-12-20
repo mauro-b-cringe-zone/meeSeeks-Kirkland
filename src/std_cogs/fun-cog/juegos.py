@@ -131,7 +131,7 @@ class Juegos(commands.Cog):
             await ctx.send(embed=em)
             return
         #----------------------------------------------#
-        await ctx.message.delete()
+        # await ctx.message.delete()
         
         zrw = ""
 
