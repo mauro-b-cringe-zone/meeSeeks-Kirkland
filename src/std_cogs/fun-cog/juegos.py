@@ -150,7 +150,7 @@ class Juegos(commands.Cog):
         
         player1 = ctx.message.mentions[0].name
         player2 = ctx.message.author.name
-        s = ':black_circle:'
+        s = '⬛'
         p1 = ':blue_circle:'
         p2 = ':red_circle:'
         board = []
@@ -345,7 +345,9 @@ class Juegos(commands.Cog):
             while not gotValidInput:
                 try:
                     msg = await self.bot.wait_for('message',check=lambda message: message.author.name == currentPlayer, timeout=30)
-                    await ctx.channel.delete_messages(await self.getMessages(ctx,1))
+                    try:
+                        await ctx.channel.delete_messages(await self.getMessages(ctx,1))
+                    except: pass
                     slot = int(msg.content)
 
                     if(msg.content=='rechazar'):
