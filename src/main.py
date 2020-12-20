@@ -117,10 +117,10 @@ def preparar():
     x = threading.Thread(target=cargar, args=("Cargando cogs", .01,))
     x.start()
 
-    intents = discord.Intents.default()
+    intents = discord.Intents(typing = True, presences = True)
 
-    intents.typing = True
-    intents.presences = True
+    # intents.typing = True
+    # intents.presences = True
 
     app = App(cogs, 
               command_prefix=prefix.get_prefix, 
