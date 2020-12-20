@@ -6,6 +6,7 @@ from os import environ as env
 from App import eliminar_prefix
 import re
 from termcolor import cprint
+import aiohttp
 
 async def cerrar(iniciador=None, destinatario:int=None):
     with open(env["JSON_DIR"] + "chats.json", "r") as f:
