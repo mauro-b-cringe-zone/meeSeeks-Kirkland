@@ -386,7 +386,7 @@ class Juegos(commands.Cog):
                     gotValidInput=True
                     turns+=1
                     break
-                except asyncio.exceptions.TimeoutError:
+                except asyncio.TimeoutError:
                     winner=otherPlayer
                     winningComment=f"{currentPlayer} tomó demasiado tiempo"
                     gameLoop = False
