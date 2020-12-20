@@ -1,6 +1,12 @@
 import sys, json, asyncio
 
 import discord
+
+intents = discord.Intents.default()
+
+intents.typing = True
+intents.presences = True
+
 from discord import Activity
 from discord.ext import commands
 

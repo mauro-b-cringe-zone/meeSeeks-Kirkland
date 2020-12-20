@@ -14,8 +14,6 @@ from time import sleep
 import threading, discord
 from termcolor import cprint
 
-import discord
-
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
 __repo__ = "https://github.com/maubg-debug/maubot/"
@@ -116,11 +114,6 @@ def preparar():
 
     x = threading.Thread(target=cargar, args=("Cargando cogs", .01,))
     x.start()
-
-    intents = discord.Intents.default()
-
-    intents.typing = True
-    intents.presences = True
 
     app = App(cogs, 
               command_prefix=prefix.get_prefix, 
