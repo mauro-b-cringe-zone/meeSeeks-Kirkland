@@ -137,7 +137,6 @@ def preparar():
     try:
         app.run(token)
     except Exception as e:
-        y.join()
         cprint(f"Un error con el login: {e}", "red")
 
 if __name__ == "__main__":
