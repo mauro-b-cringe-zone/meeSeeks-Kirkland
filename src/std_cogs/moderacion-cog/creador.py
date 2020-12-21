@@ -96,7 +96,7 @@ class Creador(commands.Cog):
 
         c = 55
         for i in range(5):
-            embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **{c-i}}s**")
+            embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **{c-i}s**")
             embed.set_author(name="Reiniciando...")
             await msg.edit(embed=embed)
             time.sleep(1)
