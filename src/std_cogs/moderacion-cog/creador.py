@@ -103,7 +103,5 @@ class Creador(commands.Cog):
 
         os.system("python ./src/main.py --cmd run")
 
-
-
 def setup(bot):
     bot.add_cog(Creador(bot))
