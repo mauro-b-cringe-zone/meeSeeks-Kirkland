@@ -1,8 +1,6 @@
 import discord 
-import asyncio
-import datetime as dt  
-from discord.ext import commands        
-from datetime import datetime
+import asyncio, time
+from discord.ext import commands   
 from os import environ as env
 color = 7712501
 import discord
@@ -90,17 +88,18 @@ class Creador(commands.Cog):
     @commands.command(description="Logout")
     @commands.is_owner()
     async def restart(self, ctx):
-        embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **10s**")
+        embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **5s**")
         embed.set_author(name="Reiniciando...")
 
         msg = await ctx.send(embed=embed)
         await bot.close()
 
-        c = 10
-        for i in range(10):
+        c = 55
+        for i in range(5):
             embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **{c-i}}s**")
             embed.set_author(name="Reiniciando...")
             await msg.edit(embed=embed)
+            time.sleep(1)
 
         os.system("python ./src/main.py --cmd run")
 
