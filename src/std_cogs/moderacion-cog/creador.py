@@ -92,13 +92,17 @@ class Creador(commands.Cog):
     async def restart(self, ctx):
         embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **10s**")
         embed.set_author(name="Reiniciando...")
-        try:
-            await ctx.send(embed=embed)
-            await bot.close()
-        except:
-            pass
-        finally:
-            os.system("python ./src/main.py --cmd run")
+
+        msg = await ctx.send(embed=embed)
+        await bot.close()
+
+        c = 10
+        for i in range(10):
+            embed = discord.Embed(color=color, description=f"{ctx.author.mention} El robot se estara reiniciando y estara listo en **{c-i}}s**")
+            embed.set_author(name="Reiniciando...")
+            await msg.edit(embed=embed)
+
+        os.system("python ./src/main.py --cmd run")
 
 
 
