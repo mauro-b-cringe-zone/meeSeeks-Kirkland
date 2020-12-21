@@ -137,17 +137,11 @@ class App(commands.Bot):
             for i in excepciones: 
                 if i in str(exception): return
             embed=discord.Embed(
-                                title="Como sabes, los robots no son perfectos", 
-                                description=f"Se ha producido un error, Visita: **[Nuestro github]({self.help_url})** p `m.report <error/bug>` \npara mencionarnos el error y enviarnos una captura de pantalla con el comando\n\n**Error:** \n```{str(exception)}```",
-                                color=self.color).set_footer(
-                                    text="Maubot help | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
+                                title="¡Ha ocurrido un error!", 
+                                description=f"Se ha reportado a nuestro servidor. ¿Necesitas mas ayuda? [Unete a nuestro servidor](https://discord.gg/mwDBgubwdP)\n```Error:\n{str(exception)}```",
+                                color=15750742).set_footer(
+                                    text="Maubot error | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
                                 )
-            Logger.error(f'ERROR: {str(exception)}')
-            embed2 = discord.Embed(title=f'<:lightno:774581319367655424>  Un error', color=14362664)
-            embed2.add_field(name="Comando:", value="` " + str(context.invoked_with) + " `")
-            embed2.add_field(name="Servidor:", value="` " + str(context.guild.name) + " `")
-            embed2.add_field(name="Hora:", value="` " + str(datetime.datetime.utcnow()) + " `")
-            embed2.add_field(name="Error:", value=f"```\n{exception}\n```", inline=False)
 
             webhook_url = env.get("WEBHOOK_URL_ERRORES")
             options = {
