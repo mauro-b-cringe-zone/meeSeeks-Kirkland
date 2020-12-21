@@ -98,7 +98,7 @@ class Creador(commands.Cog):
             embed.set_author(name="Reiniciando...")
             await msg.edit(embed=embed)
             time.sleep(1)       
-        await ctx.send("🎂 ¡Maubot esta reiniciado!") 
+        await msg.edit("🎂 ¡Maubot esta reiniciado!") 
         await self.bot.close()
 
         os.system("python ./src/main.py --cmd run")
