@@ -300,7 +300,9 @@ class General(commands.Cog):
             elif len(args)>1:
                 destination = args[0]
                 toTrans = ' '.join(args[1:len(args)])
-                translation = gtr.translate(toTrans, dest=destination)
+                try:
+                    translation = gtr.translate(toTrans, dest=destination)
+                except: return await ctx.send("Porfavor pon `m.translate --lista` para ver todos los idiomas")
                 embed = discord.Embed(description=translation.text, colour=color)
                 embed.set_footer(text=f'Traducido {LANGUAGES[translation.src]} al {LANGUAGES[translation.dest]}.')
                 await wait.edit(content='', embed=embed)

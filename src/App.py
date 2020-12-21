@@ -138,7 +138,7 @@ class App(commands.Bot):
                                 title="¡Ha ocurrido un error!", 
                                 description=f"Se ha reportado a [nuestro servidor](https://discord.gg/mwDBgubwdP). Tambien puedes poner `m.report <error>` \n```Error:\n{str(exception)}```",
                                 color=15750742).set_footer(
-                                    text="Maubot error | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
+                                    text="Maubot error | Solo envia bugs a github si son importantes | m.help [seccion]"
                                 )
 
             webhook_url = env.get("WEBHOOK_URL_ERRORES")
