@@ -85,6 +85,8 @@ class Juegos(commands.Cog):
 
         eleccion = ["tijera", "papel", "piedra"]
 
+        if respuesta not in eleccion: return await ctx.send("Escoje entre **piedra**, **papel**, **tijera**")
+
 
         # 1: Ganas
         # 2: Empatas

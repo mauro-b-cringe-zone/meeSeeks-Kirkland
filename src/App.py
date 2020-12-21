@@ -66,7 +66,7 @@ class App(commands.Bot):
 
 
     async def reaction(self, context, msg_error):
-        if not debug: msg_error.set_footer(text='\n-- ERROR')
+        # msg_error.set_footer(text='\n-- ERROR')
         msg_error = await context.send(embed=msg_error)
         emojiR = "❌"
         await msg_error.add_reaction(str(emojiR))
