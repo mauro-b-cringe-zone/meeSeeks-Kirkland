@@ -65,12 +65,10 @@ class App(commands.Bot):
         await self.process_commands(message)
 
 
-    async def reaction(self, context, msg_error, debug: bool = False):
+    async def reaction(self, context, msg_error):
         if not debug: msg_error.set_footer(text='\n-- ERROR')
         msg_error = await context.send(embed=msg_error)
-        emojiR = ""
-        if debug: emojiR = "🇽"
-        else: emojiR = "❌"
+        emojiR = "❌"
         await msg_error.add_reaction(str(emojiR))
         def _check(reaction, user):
             return (
@@ -138,7 +136,7 @@ class App(commands.Bot):
                 if i in str(exception): return
             embed=discord.Embed(
                                 title="¡Ha ocurrido un error!", 
-                                description=f"Se ha reportado a nuestro servidor. ¿Necesitas mas ayuda? [Unete a nuestro servidor](https://discord.gg/mwDBgubwdP)\n```Error:\n{str(exception)}```",
+                                description=f"Se ha reportado a [nuestro servidor](https://discord.gg/mwDBgubwdP). Tambien puedes poner `m.report <error>` \n```Error:\n{str(exception)}```",
                                 color=15750742).set_footer(
                                     text="Maubot error | Solo envia bugs a github si son importantes, Si es un error de argumentos pon m.help [seccion]"
                                 )
@@ -156,11 +154,11 @@ class App(commands.Bot):
                 title="Un error con Maubot",
                 description=f"¡Un error en el comando `{context.invoked_with}`!",
                 error=exception,
-                metadata={"host": "maubot.maucode.com:5000"},
+                metadata={"host": 5000},
             )
 
             response = logger.send()
-            await self.reaction(context, embed, True)
+            await self.reaction(context, embed)
  
 
     def __load_cogs(self):
