@@ -124,7 +124,7 @@ class Help(commands.Cog):
         embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
 
         cogs = [c for c in self.bot.cogs.keys()]
-        cprint(f"[Log] Cogs: {len(cogs)}", 'yellow')
+        # cprint(f"[Log] Cogs: {len(cogs)}", 'yellow')
         paginasTotales = math.ceil(len(cogs) / 6)
 
         if re.search(r"\d", str(cog)):
@@ -188,22 +188,19 @@ class Help(commands.Cog):
                 
                 textoDeAyuda += "\n"
 
-                if int(len(comando.description)) > 2:
-                    textoDeAyuda += f"**-> {comando.name} ** (`{comando.description}`)\n"
-                else:
-                    textoDeAyuda += f"**-> {comando.name}**\n"
 
+                prefijo = ctx.prefix
+                textoDeAyuda += f"`{prefijo}{comando.name}{ ' ' + comando.usage if comando.usage is not None else ''}`\n"
+                if int(len(comando.description)) > 2:
+                    textoDeAyuda += f"- {comando.description}\n"
+                else:
+                    pass
                 if len(comando.aliases) > 0:
                     c = ""
                     for i in comando.aliases:
                         c += f"`{i}` **|** "
-                    textoDeAyuda += f"**Aliados -> ** {c}\n"
-                textoDeAyuda += ''
+                    textoDeAyuda += f"- {c}\n\n"
 
-
-                prefijo = ctx.prefix
-
-                textoDeAyuda += f"**Formateo:** `{prefijo}{comando.name}{ ' ' + comando.usage if comando.usage is not None else ''}`\n"
             embed.description = textoDeAyuda
 
             await ctx.send(embed=embed)
