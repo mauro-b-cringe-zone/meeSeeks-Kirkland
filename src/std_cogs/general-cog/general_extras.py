@@ -154,7 +154,7 @@ class GeneralSecExtra(commands.Cog):
             await ctx.send(f"{ctx.message.author.mention} a girado el dado {dice_amount} veces y {sides} caras. "
                         f"Total: {total}")
         except:
-            await ctx.send("Soy una computadora que conozco, ¡pero eso es mucho incluso para mí!")
+            await ctx.send("Soy una computadora que yo conozca, ¡pero eso es mucho incluso para mí!")
 
     @commands.command(description="9cdfb439c7876e703e307864c9167a15", usage="<mensage>")
     @commands.cooldown(1, 5, commands.BucketType.user)
