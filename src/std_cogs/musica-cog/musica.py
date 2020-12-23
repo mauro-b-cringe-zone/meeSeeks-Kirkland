@@ -315,9 +315,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="disconnect", aliases=["leave"], description="Maubot se ira a un canal de voz")
     async def disconnect_command(self, ctx):
+        player = self.get_player(ctx)
         if not player.is_connected:
             return await ctx.send("No estoy conectado a ningun canal")
-        player = self.get_player(ctx)
         await player.teardown()
         embed = discord.Embed(title=f"Me he ido de el canal", colour=color)
         await ctx.send(embed=embed)
@@ -381,6 +381,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def stop_command(self, ctx):
         player = self.get_player(ctx)
         player.queue.empty()
+        q = player.queue
         if len(player.queue) == 0:
             return await ctx.send("Maubot ya se ha parado")
         await player.stop()
