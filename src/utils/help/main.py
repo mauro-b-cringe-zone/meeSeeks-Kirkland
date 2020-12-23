@@ -17,7 +17,7 @@ class Help(commands.Cog):
     async def ayuda(self, ctx, cog, cogs, paginasTotales, embed):
         cog = int(cog)
         if cog > paginasTotales or cog < 1:
-            return await ctx.send(f"Numero invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]") 
+            return await ctx.send(embed=discord.Embed(color=color, description=f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]"))
 
         embed.set_footer(
             text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
@@ -174,7 +174,7 @@ class Help(commands.Cog):
         elif re.search(r"[a-zA-Z]", str(cog)):
             congMinusculas = [c.lower() for c in cogs]
             if cog.lower() not in congMinusculas:
-                return await ctx.send(f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]")
+                return await ctx.send(embed=discord.Embed(color=color, description=f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]"))
 
             embed.set_footer(
                 text=f"Puedes poner @Maubot#6247 para mas info | Cog {congMinusculas.index(cog.lower())+1} de {len(congMinusculas)}"
