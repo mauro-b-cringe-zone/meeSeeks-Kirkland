@@ -15,10 +15,30 @@ from googletrans import Translator
 import random
 import datetime
 
+from discord import Embed, Color, File, __version__, Forbidden, AllowedMentions, gateway
+
 
 from discord_logger import DiscordLogger
 
 color = int(env.get("COLOR"))
+
+def mobile_indicator():
+
+    def source(o):
+        s = __import__("inspect").getsource(o).split('\n')
+        indent = len(s[0]) - len(s[0].lstrip())
+        return '\n'.join(i[indent:] for i in s)
+
+    source_ = source(gateway.DiscordWebSocket.identify)
+    source_ = __import__("re").sub(r'([\'"]\$browser[\'"]:\s?[\'"]).+([\'"])', r'\1Discord Android\2', source_)  # hh this regex
+    m = __import__("ast").parse(source_)
+    
+    loc = {}
+    exec(compile(m, '<string>', 'exec'), gateway.__dict__, loc)
+    
+    gateway.DiscordWebSocket.identify = loc['identify']
+    del m, loc, source, source_
+    __import__("gc").collect()
 
 class App(commands.Bot):
 
@@ -27,6 +47,7 @@ class App(commands.Bot):
 
 
     def __init__(self, cogs: Cogs, **options):
+        mobile_indicator()
         super().__init__(**options)
 
         self.__autor__ = "Maubg"
@@ -53,10 +74,8 @@ class App(commands.Bot):
 
         self.add_command(App.__reload_cogs)
         
-        
-        
     async def on_ready(self):
-        await self.change_presence(activity=discord.Game(name=self.__estado), status=discord.Status.do_not_disturb)
+        await self.change_presence(activity=discord.Activity(type=5, name=self.__estado))
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
         Logger.success(f'Maubot esta online como "{self.user}".', separador=True)
 
