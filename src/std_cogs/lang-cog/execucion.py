@@ -240,7 +240,7 @@ class Execution(commands.Cog):
             Nombre, icono y versión del idioma.
             Fecha y hora de la ejecución.
         """
-        color =   Colour.green() if description == "Accepted" else Colour.red()
+        color =   5626022 if description == "Accepted" else 0xf08a90
 
         embed = Embed(color=color, timestamp=datetime.utcnow())
         embed.set_author(name=f"Codigo de ejecucion de {author_name}", icon_url=author_icon)

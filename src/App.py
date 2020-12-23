@@ -30,7 +30,7 @@ def mobile_indicator():
         return '\n'.join(i[indent:] for i in s)
 
     source_ = source(gateway.DiscordWebSocket.identify)
-    source_ = __import__("re").sub(r'([\'"]\$browser[\'"]:\s?[\'"]).+([\'"])', r'\1Discord Android\2', source_)  # hh this regex
+    source_ = __import__("re").sub(r'([\'"]\$browser[\'"]:\s?[\'"]).+([\'"])', r'\1Discord Android\2', source_)
     m = __import__("ast").parse(source_)
     
     loc = {}
