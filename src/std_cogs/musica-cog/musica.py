@@ -325,8 +325,11 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @commands.command(name="resume", description="Continua la musica")
     async def resume_command(self, ctx):
         player = self.get_player(ctx)
-        await player.set_pause(False)
-        await ctx.send(embed=discord.Embed(title="Reproducción reanudada.", color=color))
+        if player.is_paused:
+            await player.set_pause(False)
+            await ctx.send(embed=discord.Embed(title="Reproducción reanudada.", color=color))
+        else:
+            await ctx.send("Maubot no esta parado")
 
     @commands.command(name="play", description="Si Maubot no esta conectado a un canal se unira, Maubot añadira una cancion a la cola si ya hay una por lo contrario reproducira la cancion. Si no hay cancion Maubot resumira la cancion", usage="[cancion]")
     async def play_command(self, ctx, *, query: t.Optional[str]):
@@ -382,8 +385,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         player = self.get_player(ctx)
         player.queue.empty()
         q = player.queue
-        if len(player.queue) == 0:
-            return await ctx.send("Maubot ya se ha parado")
+        if not player.is_connected: return await ctx.send("Maubot no esta conectado a un canal de voz")
+        if q.is_empty and not player.is_playing:
+            return await ctx.send("Maubot ya esta parado")
         await player.stop()
         await ctx.message.add_reaction('⏹')
 
