@@ -375,6 +375,8 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def stop_command(self, ctx):
         player = self.get_player(ctx)
         player.queue.empty()
+        if player.queue.is_empty:
+            return await ctx.send("Maubot ya se ha parado")
         await player.stop()
         await ctx.message.add_reaction('⏹')
 

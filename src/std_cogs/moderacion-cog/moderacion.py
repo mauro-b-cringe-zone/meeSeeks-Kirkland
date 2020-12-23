@@ -26,23 +26,30 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(kick_members=True)    
     async def kick(self, ctx, member : discord.Member, *, reason=None):
+
+        if ctx.author.top_role.position > member.top_role.position:
         
-        await member.kick(reason=reason)
-        embed = discord.Embed(title=f"Eliminado", description=f"Se a eliminado a {member.mention} del servidor",colour=color)
-        await ctx.send(embed=embed)
+            await member.kick(reason=reason)
+            embed = discord.Embed(title=f"Eliminado", description=f"Se a eliminado a {member.mention} del servidor",colour=color)
+            await ctx.send(embed=embed)
+        
+        else: await ctx.send(f"Tu role es mas bajo que el de {member.mention}")
 
     @commands.command(description="Banea ha alguien", usage="<usuario> [razon]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member : discord.Member, *, razon=None):
+        if ctx.author.top_role.position > member.top_role.position:
 
-        if razon is None:
+            if razon is None:
+                await member.ban(reason=razon)
+                embed = discord.Embed(title=f"Baneado", description=f"Se a baneado a {member.mention} del servidor",colour=color)
+                return await ctx.send(embed=embed)
             await member.ban(reason=razon)
-            embed = discord.Embed(title=f"Baneado", description=f"Se a baneado a {member.mention} del servidor",colour=color)
-            return await ctx.send(embed=embed)
-        await member.ban(reason=razon)
-        embed = discord.Embed(title=f"Baneado", description=f"Se a baneado a {member.mention} del servidor\n\n**Razon** {razon}",colour=color)
-        await ctx.send(embed=embed)
+            embed = discord.Embed(title=f"Baneado", description=f"Se a baneado a {member.mention} del servidor\n\n**Razon** {razon}",colour=color)
+            await ctx.send(embed=embed)
+
+        else: await ctx.send(f"Tu role es mas bajo que el de {member.mention}")
         
 
     @commands.command(description="Desbanea a un baneado **uso: m.unban <id del usuario>**", usage="<id del usuario>")
@@ -61,53 +68,57 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def warn(self, ctx, member: discord.Member, *, razon="Sin especificar"):
-        with open(env["JSON_DIR"] + 'warnings.json', 'r') as f:
-            warns = json.load(f)
-        # print(warns)
-        try:
-            if not str(ctx.guild.id) in warns:
-                warns[str(ctx.guild.id)] = {}
-            if str(member.id) in warns[str(ctx.guild.id)]:
-                warns[str(ctx.guild.id)][str(member.id)]["warns"] += 1
-                warns[str(ctx.guild.id)][str(member.id)]["razones"].append(razon)          
-            else:
-                warns[str(ctx.guild.id)][str(member.id)] = {}
-                warns[str(ctx.guild.id)][str(member.id)]["warns"] = 1
-                warns[str(ctx.guild.id)][str(member.id)]["razones"] = []
-                warns[str(ctx.guild.id)][str(member.id)]["razones"].append(razon)
-        except Exception as e:
-            cprint(f"[log] Un problema:  {e}", 'red')
-        if warns[str(ctx.guild.id)][str(member.id)]["warns"] >= 5:
+        if ctx.author.top_role.position > member.top_role.position:
+            with open(env["JSON_DIR"] + 'warnings.json', 'r') as f:
+                warns = json.load(f)
+            # print(warns)
             try:
-                await member.kick(reason="Mas de 5 warniciones")
-                embed = discord.Embed(title="Expulsado", description=f"{member.mention} ha sido expulsado  Razon: Mas de 5 warniciones", colour=color)   
-                del warns[str(ctx.guild.id)][str(member.id)]
-                return await ctx.send(embed=embed)
-            except:
-                cprint('[Log] Un error intentando eliminar a alguien por 5 warniciones', 'red')
-                return await ctx.send(f"En error intentando eliminar a {member.mention}, Razon: Mas de 5 warniciones")
-        with open(env["JSON_DIR"] + "warnings.json","w") as f:
-            json.dump(warns,f)    
-        embed = discord.Embed(title="Warnicion", description=f"{member.mention}  Razon: {razon}\n\nLe quedan {5-warns[str(ctx.guild.id)][str(member.id)]['warns']} warniciones", colour=color)   
-        await ctx.send(embed=embed)
+                if not str(ctx.guild.id) in warns:
+                    warns[str(ctx.guild.id)] = {}
+                if str(member.id) in warns[str(ctx.guild.id)]:
+                    warns[str(ctx.guild.id)][str(member.id)]["warns"] += 1
+                    warns[str(ctx.guild.id)][str(member.id)]["razones"].append(razon)          
+                else:
+                    warns[str(ctx.guild.id)][str(member.id)] = {}
+                    warns[str(ctx.guild.id)][str(member.id)]["warns"] = 1
+                    warns[str(ctx.guild.id)][str(member.id)]["razones"] = []
+                    warns[str(ctx.guild.id)][str(member.id)]["razones"].append(razon)
+            except Exception as e:
+                cprint(f"[log] Un problema:  {e}", 'red')
+            if warns[str(ctx.guild.id)][str(member.id)]["warns"] >= 5:
+                try:
+                    await member.kick(reason="Mas de 5 warniciones")
+                    embed = discord.Embed(title="Expulsado", description=f"{member.mention} ha sido expulsado  Razon: Mas de 5 warniciones", colour=color)   
+                    del warns[str(ctx.guild.id)][str(member.id)]
+                    return await ctx.send(embed=embed)
+                except:
+                    cprint('[Log] Un error intentando eliminar a alguien por 5 warniciones', 'red')
+                    return await ctx.send(f"En error intentando eliminar a {member.mention}, Razon: Mas de 5 warniciones")
+            with open(env["JSON_DIR"] + "warnings.json","w") as f:
+                json.dump(warns,f)    
+            embed = discord.Embed(title="Warnicion", description=f"{member.mention}  Razon: {razon}\n\nLe quedan {5-warns[str(ctx.guild.id)][str(member.id)]['warns']} warniciones", colour=color)   
+            await ctx.send(embed=embed)
+        else: await ctx.send(f"Tu role es mas bajo que el de {member.mention}")
 
     @commands.command(pass_context=True, description="Quitale el aviso ha alguien", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def unwarn(self, ctx, member: discord.Member):
-        with open(env["JSON_DIR"] + 'warnings.json', 'r') as f:
-            warns = json.load(f)
-        if str(member.id) in warns[str(ctx.guild.id)]:
-            warns[str(ctx.guild.id)][str(member.id)]["warns"] -= 1
-            warns[str(ctx.guild.id)][str(member.id)]["razones"].remove(warns[str(ctx.guild.id)][str(member.id)]["razones"][warns[str(ctx.guild.id)][str(member.id)]["warns"]])
-        if warns[str(ctx.guild.id)][str(member.id)]["warns"] == 0:
-            del warns[str(ctx.guild.id)][str(member.id)]
-        if warns[str(ctx.guild.id)] == {}:
-            del warns[str(ctx.guild.id)]
-        with open(env["JSON_DIR"] + "warnings.json","w") as f:
-            json.dump(warns,f)    
-        embed = discord.Embed(title="Warnicion quitada", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan warniciones, ({ctx.prefix}warnlist @usuario para ver la lista)", colour=color)   
-        await ctx.send(embed=embed)
+        if ctx.author.top_role.position > member.top_role.position:
+            with open(env["JSON_DIR"] + 'warnings.json', 'r') as f:
+                warns = json.load(f)
+            if str(member.id) in warns[str(ctx.guild.id)]:
+                warns[str(ctx.guild.id)][str(member.id)]["warns"] -= 1
+                warns[str(ctx.guild.id)][str(member.id)]["razones"].remove(warns[str(ctx.guild.id)][str(member.id)]["razones"][warns[str(ctx.guild.id)][str(member.id)]["warns"]])
+            if warns[str(ctx.guild.id)][str(member.id)]["warns"] == 0:
+                del warns[str(ctx.guild.id)][str(member.id)]
+            if warns[str(ctx.guild.id)] == {}:
+                del warns[str(ctx.guild.id)]
+            with open(env["JSON_DIR"] + "warnings.json","w") as f:
+                json.dump(warns,f)    
+            embed = discord.Embed(title="Warnicion quitada", description=f"{member.mention}  Se le a quitado una guarnicion\n\nLe quedan warniciones, ({ctx.prefix}warnlist @usuario para ver la lista)", colour=color)   
+            await ctx.send(embed=embed)
+        else: await ctx.send(f"Tu role es mas bajo que el de {member.mention}")
 
     @commands.command(pass_context=True, description="La lista de warniciones que alguien tendra", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
