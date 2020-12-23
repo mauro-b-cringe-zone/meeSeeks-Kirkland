@@ -27,7 +27,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(kick_members=True)    
     async def kick(self, ctx, member : discord.Member, *, reason=None):
 
-        if ctx.author.top_role.position > member.top_role.position:
+        if ctx.author.top_role.position > member.top_role.position or int(ctx.author.id) == int(ctx.guild.owner.id):
         
             await member.kick(reason=reason)
             embed = discord.Embed(title=f"Eliminado", description=f"Se a eliminado a {member.mention} del servidor",colour=color)
@@ -39,7 +39,7 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(ban_members=True)
     async def ban(self, ctx, member : discord.Member, *, razon=None):
-        if ctx.author.top_role.position > member.top_role.position:
+        if ctx.author.top_role.position > member.top_role.position or int(ctx.author.id) == int(ctx.guild.owner.id):
 
             if razon is None:
                 await member.ban(reason=razon)
@@ -68,7 +68,7 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def warn(self, ctx, member: discord.Member, *, razon="Sin especificar"):
-        if ctx.author.top_role.position > member.top_role.position:
+        if ctx.author.top_role.position > member.top_role.position or int(ctx.author.id) == int(ctx.guild.owner.id):
             with open(env["JSON_DIR"] + 'warnings.json', 'r') as f:
                 warns = json.load(f)
             # print(warns)
@@ -104,7 +104,7 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def unwarn(self, ctx, member: discord.Member):
-        if ctx.author.top_role.position > member.top_role.position:
+        if ctx.author.top_role.position > member.top_role.position or int(ctx.author.id) == int(ctx.guild.owner.id): 
             with open(env["JSON_DIR"] + 'warnings.json', 'r') as f:
                 warns = json.load(f)
             if str(member.id) in warns[str(ctx.guild.id)]:
