@@ -279,8 +279,10 @@ class Img(commands.Cog):
     @commands.command(aliases=['programmerhumor','programmermeme','programming','programmer'], description="Solo los programadores lo entienden")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def programmingmeme(self, ctx):
-        data = self.jsonisp('https://useless-api.vierofernando.repl.co/programmermeme')['url']
-        return await ctx.send(embed=discord.Embed(title='Meme de programadores', color=color).set_image(url=data))
+        try:
+            data = self.jsonisp('https://useless-api.vierofernando.repl.co/programmermeme')['url']
+            return await ctx.send(embed=discord.Embed(title='Meme de programadores', color=color).set_image(url=data))
+        except: self.programmingmeme(ctx)
 
     def memegen(self, url):
         image = self.imagefromURL(url)

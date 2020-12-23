@@ -21,26 +21,29 @@ class Weather(commands.Cog):
         if forecast:
             return rget(f"http://api.openweathermap.org/data/2.5/forecast?q={city}&units=metric&APPID={WEATHER_KEY}").json()
         data  = rget(f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&APPID={WEATHER_KEY}").json()
-        cleared_data = {
-            'City': data['name'],
-            'Time': (datetime.utcfromtimestamp(data['dt']) + timedelta(hours=2)).strftime('%H:%M:%S'),
-            'Weather': f"{data['weather'][0]['main']} - {data['weather'][0]['description']}",
-            'Temperature': f"{data['main']['temp']}°C",
-            'Feels like': f"{data['main']['feels_like']}°C",
-            'Min temperature': f"{data['main']['temp_min']}°C",
-            'Max temperature': f"{data['main']['temp_max']}°C",
-            'Humidity': f"{data['main']['humidity']}%",
-            'Pressure': f"{data['main']['pressure']} Pa",
-            'Clouds': f"{data['clouds']['all']}%",
-            'Wind': f"{data['wind']['speed']} km/h",
-            'Sunset': (datetime.utcfromtimestamp(data['sys']['sunset']) + timedelta(hours=2)).strftime('%H:%M:%S'),
-            'Sunrise': (datetime.utcfromtimestamp(data['sys']['sunrise']) + timedelta(hours=2)).strftime('%H:%M:%S'),
-        }
+        try:
+            cleared_data = {
+                'City': data['name'],
+                'Time': (datetime.utcfromtimestamp(data['dt']) + timedelta(hours=2)).strftime('%H:%M:%S'),
+                'Weather': f"{data['weather'][0]['main']} - {data['weather'][0]['description']}",
+                'Temperature': f"{data['main']['temp']}°C",
+                'Feels like': f"{data['main']['feels_like']}°C",
+                'Min temperature': f"{data['main']['temp_min']}°C",
+                'Max temperature': f"{data['main']['temp_max']}°C",
+                'Humidity': f"{data['main']['humidity']}%",
+                'Pressure': f"{data['main']['pressure']} Pa",
+                'Clouds': f"{data['clouds']['all']}%",
+                'Wind': f"{data['wind']['speed']} km/h",
+                'Sunset': (datetime.utcfromtimestamp(data['sys']['sunset']) + timedelta(hours=2)).strftime('%H:%M:%S'),
+                'Sunrise': (datetime.utcfromtimestamp(data['sys']['sunrise']) + timedelta(hours=2)).strftime('%H:%M:%S'),
+            }
+        except: return False
         return cleared_data
 
     @commands.command(description="Busca el tiempo en tu cioudad", usage="<ciudad>")
     async def weather(self, ctx,  *, city):
         data = Weather.get_cast(city)
+        if not data: return ctx.send("Ese país/localicacion no es reconocido o no existe")
         embed = Embed(title=f":white_sun_small_cloud: Clima en {data['City']}:", colour=color)
         trans = Translator()
         for key, value in data.items():

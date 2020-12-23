@@ -206,7 +206,9 @@ class Juegos(commands.Cog):
                 slot = int(msg.content)
                 if(slot<1 or slot>width):
                     raise ValueError
-                await ctx.channel.delete_messages(await self.getMessages(ctx,1))
+                try:
+                    await ctx.channel.delete_messages(await self.getMessages(ctx,1))
+                except: pass
                 board[height-1][slot-1] = p1
                 gameLoop = True
                 currentPlayer = player2

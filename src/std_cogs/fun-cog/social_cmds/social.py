@@ -63,7 +63,7 @@ class Social(commands.Cog):
         except: 
             pass
         if len(ctx.message.mentions)<1 and not foundArgs:
-            await ctx.send(f'Porfavor pon a alguien!\nejemplo: {ctx.prefix}hack <@'+str(ctx.message.author.id)+'>')
+            return await ctx.send(f'Porfavor pon a alguien!\nejemplo: {ctx.prefix}hack <@'+str(ctx.message.author.id)+'>')
         if tohack==None: 
             tohack = ctx.message.mentions[0]
         console = 'maubot@HACKERMAN:/$ '

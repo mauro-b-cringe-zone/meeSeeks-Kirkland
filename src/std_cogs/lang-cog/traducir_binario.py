@@ -34,6 +34,8 @@ class Binario(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def binario(self, ctx, *, texto: str = "PON TEXTO IDIOTA"):
         
+        if len(texto) > 70: return await ctx.send("No pongas tanto texto")
+
         resultado = textToBinary(texto)
 
         embed = discord.Embed(title="Traducido del texto a binario", colour=color)
