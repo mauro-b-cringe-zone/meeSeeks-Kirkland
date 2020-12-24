@@ -1,9 +1,10 @@
 #!/bin/bash
 
-if [$1] == "i" 
-then
-    pwd
-    pip3 install -r requirements.txt
-fi
+pwd
+
+python3 -m venv pyenv
+source pyvenv/bin/activate
+
+pip3 install -r requirements.txt
 
 python3 ./src/main.py --cmd run

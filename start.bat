@@ -1,5 +1,8 @@
 @echo off
 
-if(%1 == "i") pip install -r requirements.txt
+python -m venv env
+.\env\Scripts\activate
+
+pip install -r requirements.txt
 
 python ./src/main.py --cmd run
