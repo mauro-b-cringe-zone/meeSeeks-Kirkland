@@ -434,18 +434,20 @@ class Economia(commands.Cog):
         embed.add_field(name=f"#1 | Maubot (yo)", value=f"**∞** {C_NAMES}", inline=False)
         index = 2
         for amt in total:
-            id_ = leader_board[amt]
-            member = self.bot.get_user(int(id_))
-            name = member.name
-            if not member.id == ctx.author.id:
-                embed.add_field(name=f"#{index} | {name}", value=f"{amt} {C_NAMES}", inline=False)
-            else:
-                embed.add_field(name=f"#{index} | {name} (Tu)", value=f"{amt} {C_NAMES}", inline=False)
+            try:
+                id_ = leader_board[amt]
+                member = self.bot.get_user(int(id_))
+                name = member.name
+                if not member.id == ctx.author.id:
+                    embed.add_field(name=f"#{index} | {name}", value=f"{amt} {C_NAMES}", inline=False)
+                else:
+                    embed.add_field(name=f"#{index} | {name} (Tu)", value=f"{amt} {C_NAMES}", inline=False)
 
-            if index == x:
-                break
-            else:
-                index += 1
+                if index == x:
+                    break
+                else:
+                    index += 1
+            except: continue
         await ctx.send(embed=embed)
 
 def setup(bot):
