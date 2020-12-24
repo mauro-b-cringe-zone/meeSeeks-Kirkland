@@ -301,8 +301,14 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
         player = self.get_player(ctx)
         channel = await player.connect(ctx, channel)
-        embed = discord.Embed(title=f"Me he unido a {channel.name}", colour=color)
-        await ctx.send(embed=embed)
+        p = channel.permissions_for(ctx.me)
+        if p.connect:
+            embed = discord.Embed(description=f"Me he unido a {channel.mention}", colour=color)
+            await ctx.send(embed=embed)
+        else:
+            await ctx.send("No tengo los permisos para hacer esto.")
+
+
 
     @connect_command.error
     async def connect_command_error(self, ctx, exc):
@@ -310,8 +316,6 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             await ctx.send("Ya estoy en un canal.")
         elif isinstance(exc, NoVoiceChannel):
             await ctx.send("No se ha encontrado ningun canal de voz.")
-        elif isinstance(exc, commands.BotMissingPermissions):
-            await ctx.send("No tengo los permisos para hacer esto.")
 
     @commands.command(name="disconnect", aliases=["leave"], description="Maubot se ira a un canal de voz")
     async def disconnect_command(self, ctx):
