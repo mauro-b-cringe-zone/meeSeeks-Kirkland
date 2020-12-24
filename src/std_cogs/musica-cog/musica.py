@@ -325,7 +325,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @commands.command(name="resume", description="Continua la musica")
     async def resume_command(self, ctx):
         player = self.get_player(ctx)
-        if player.is_paused:
+        if player.is_paused or player.is_connected:
             await player.set_pause(False)
             await ctx.send(embed=discord.Embed(title="Reproducción reanudada.", color=color))
         else:
@@ -358,14 +358,14 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             await ctx.send("No hay canciones para reproducir porque la cola está vacía.")
         elif isinstance(exc, NoVoiceChannel):
             await ctx.send("No se proporcionó ningún canal de voz adecuado.")
-        if isinstance(exception, commands.BotMissingPermissions):
+        if isinstance(exc, commands.BotMissingPermissions):
             await ctx.send("No tengo los permisos para hacer esto.")
 
     @commands.command(name="pause", description="Pausa la musica")
     async def pause_command(self, ctx):
         player = self.get_player(ctx)
 
-        if player.is_paused:
+        if player.is_paused or not player.is_connected:
             raise PlayerIsAlreadyPaused
 
         await player.set_pause(True)
