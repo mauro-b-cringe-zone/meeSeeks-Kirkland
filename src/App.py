@@ -381,7 +381,6 @@ class Maubot(commands.Cog):
         l = """
             -> **[top.gg](https://top.gg/bot/730124969132163093)**
             -> **[blist.xyz](https://blist.xyz/bot/730124969132163093/)**
-            -> **[bots.ondiscord.xyz](https://bots.ondiscord.xyz/bots/730124969132163093/)**
             -> **[Discord.Bots.gg](https://discord.bots.gg/bots/730124969132163093)**
             -> **[discord.boats](https://discord.boats/bot/730124969132163093)**
             -> **[botlist.space](https://botlist.space/bot/730124969132163093)**

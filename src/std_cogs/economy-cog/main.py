@@ -205,7 +205,7 @@ class Economia(commands.Cog):
 
     @commands.command(description="Deposita tu dinero al banko (Tienes que tener dinero en la cartera)", usage="[cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def deposit(self, ctx, amount=None):
+    async def deposit(self, ctx, amount: int=None):
         await open_acount(ctx.author)
 
         if amount is None:

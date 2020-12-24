@@ -56,7 +56,9 @@ class Moderation(commands.Cog):
     @commands.has_permissions(ban_members=True)
     async def unban(self, ctx, member=None):
         if not member is None:
-            member = await self.bot.fetch_user(int(member))
+            try:
+                member = await self.bot.fetch_user(int(member))
+            except: return await ctx.send("no se encontro nada | **uso: m.unban <id del usuario>**")
             await ctx.guild.unban(user=member, reason="Se le a quitado el baneo")
             embed = discord.Embed(title=f"Desbaneado", description=f"Se a desbaneado a {member.mention} del servidor",colour=color)
             return await ctx.send(embed=embed)
