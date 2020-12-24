@@ -303,7 +303,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         channel = await player.connect(ctx, channel)
         p = channel.permissions_for(ctx.me)
         if p.connect:
-            embed = discord.Embed(description=f"Me he unido a {channel.mention}", colour=color)
+            embed = discord.Embed(description=f"Me he unido a **{channel.mention}**", colour=color)
             await ctx.send(embed=embed)
         else:
             await ctx.send("No tengo los permisos para hacer esto.")
