@@ -435,7 +435,7 @@ class Economia(commands.Cog):
         index = 2
         for amt in total:
             id_ = leader_board[amt]
-            member = self.bot.get_user(id_)
+            member = self.bot.get_user(int(id_))
             name = member.name
             if not member.id == ctx.author.id:
                 embed.add_field(name=f"#{index} | {name}", value=f"{amt} {C_NAMES}", inline=False)
