@@ -105,7 +105,7 @@ class App(commands.Bot):
         exception_type = exception.__class__
         if exception_type:
 
-            if isinstance(exception, commands.BotMissingPermissions):
+            if isinstance(exception, discord.Forbidden):
                 embed = discord.Embed(title="No se puede hacer esta opcion", description=f"{context.author.mention} Maubot necesita permisos para hacer esta accion", color=self.color)
                 return await context.send(embed=embed)
 
