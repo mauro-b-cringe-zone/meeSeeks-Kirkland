@@ -310,7 +310,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             await ctx.send("Ya estoy en un canal.")
         elif isinstance(exc, NoVoiceChannel):
             await ctx.send("No se ha encontrado ningun canal de voz.")
-        if isinstance(exc, commands.BotMissingPermissions):
+        elif isinstance(exc, commands.BotMissingPermissions):
             await ctx.send("No tengo los permisos para hacer esto.")
 
     @commands.command(name="disconnect", aliases=["leave"], description="Maubot se ira a un canal de voz")
