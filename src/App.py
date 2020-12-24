@@ -105,9 +105,15 @@ class App(commands.Bot):
         exception_type = exception.__class__
         if exception_type:
 
-            if isinstance(exception, discord.Forbidden):
-                embed = discord.Embed(title="No se puede hacer esta opcion", description=f"{context.author.mention} Maubot necesita permisos para hacer esta accion", color=self.color)
-                return await context.send(embed=embed)
+            if isinstance(exception, commands.BotMissingPermissions):
+                missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_perms]
+                if len(missing) > 2:
+                    fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
+                else:
+                    fmt = ' and '.join(missing)
+                _message = 'I need the **{}** permission(s) to run this command.'.format(fmt)
+                await context.send(_message)
+                return
 
             if isinstance(exception, commands.CommandOnCooldown):
                 embed = discord.Embed(title="Tranquilo...", description=f"{context.author.mention} Este comando esta en reposo\n Ahora tienes que esperar **{exception.retry_after:,.2f}** segundos", color=self.color)
