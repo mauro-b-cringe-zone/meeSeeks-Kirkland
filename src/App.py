@@ -106,12 +106,12 @@ class App(commands.Bot):
         if exception_type:
 
             if isinstance(exception, commands.BotMissingPermissions):
-                missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in error.missing_perms]
+                missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]
                 if len(missing) > 2:
                     fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
                 else:
                     fmt = ' and '.join(missing)
-                _message = 'I need the **{}** permission(s) to run this command.'.format(fmt)
+                _message = 'necesito este/os **{}** permniso(s) para correr este commando.'.format(fmt)
                 await context.send(_message)
                 return
 
