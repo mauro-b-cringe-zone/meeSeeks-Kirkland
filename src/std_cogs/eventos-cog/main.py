@@ -150,7 +150,7 @@ class Servidor(commands.Cog):
 
         if not str(ctx.guild.id) in users["active"]:
             users["active"][str(ctx.guild.id)] = False
-        if users["active"][str(ctx.guild.id)] is None or users["active"][str(ctx.guild.id)] is False:
+        if users["active"][str(ctx.guild.id)] is False:
             return await ctx.send(embed=discord.Embed(title="No se permiten los niveles", description=f"{ctx.author.mention} En este servidor no se admiten los niveles", color=color).set_footer(text="puedes poner m.levels para activarlo".capitalize()))
 
         if user is None:
@@ -265,6 +265,16 @@ class Servidor(commands.Cog):
 
         with open(env["JSON_DIR"] + 'prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
+
+        # Niveles
+        with open(env["JSON_DIR"] + "userslvl.json", "r") as f:
+            users = json.load(f)
+
+        if not str(guild.id) in users["active"]:
+            users["active"][str(guild.id)] = False
+
+        with open(env["JSON_DIR"] + "userslvl.json", "w") as f:
+            json.dump(users, f)
 
         channel = discord.utils.get(guild.text_channels)
 
