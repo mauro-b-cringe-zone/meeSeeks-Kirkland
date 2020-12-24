@@ -300,9 +300,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
     @commands.command(name="connect", aliases=["join"], description="Maubot se unira a un canal de voz", usage="[canal]")
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
         player = self.get_player(ctx)
-        channel = await player.connect(ctx, channel)
-        p = channel.permissions_for(ctx.me)
-        if p.connect:
+        perms = getattr(ctx.author.voice, "channel", channel).permissions_for(ctx.me)
+        if perms.connect:
+            channel = await player.connect(ctx, channel)
             embed = discord.Embed(description=f"Me he unido a **{channel.mention}**", colour=color)
             await ctx.send(embed=embed)
         else:
