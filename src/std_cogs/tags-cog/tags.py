@@ -83,7 +83,7 @@ class Tags(commands.Cog):
             return await ctx.send(f"Porfavor escribe tu numbre de tag y separado por un | **Ej: {ctx.prefix}tag crear nombre|descripcion**")
         else:
             if "|" in args:
-                if '@everyone' in args or '@here' in args: return await ctx.send("No puedes mencionar a `@everyone` y a `@here`")
+                if '@everyone' in args or '@here' in args or len(ctx.message.channel_mentions) > 0 or ctx.message.mention_everyone or len(ctx.message.mentions) >= 1 or len(ctx.message.role_mentions) >= 1: return await ctx.send("No puedes mencionar")
                 titulo = args.split('|')[0].strip()
                 desc = args.split('|')[1]
                 creador = ctx.author.id

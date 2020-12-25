@@ -342,6 +342,10 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         if not player.is_connected:
             await player.connect(ctx)
 
+        perms = getattr(ctx.author.voice, "channel").permissions_for(ctx.me)
+        if not perms.speak:
+            return await ctx.send("No tengo los permisos para hacer esto.")
+
         if query is None:
             if player.queue.is_empty:
                 raise QueueIsEmpty
