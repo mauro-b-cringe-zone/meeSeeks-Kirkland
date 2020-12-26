@@ -251,6 +251,7 @@ class Servidor(commands.Cog):
                 -> **[arcane](https://arcane-center.xyz/bot/730124969132163093)**    
                 -> **[Delly](https://discordextremelist.xyz/bots/730124969132163093)**    
                 -> **[botsfordiscord](https://botsfordiscord.com/bot/730124969132163093)**
+                -> **[infinitybots](https://infinitybots.xyz/730124969132163093)**
 
 
                 -> **[Web de Maubot](https://maubot.maucode.com)**

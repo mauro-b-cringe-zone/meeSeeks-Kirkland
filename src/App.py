@@ -392,8 +392,9 @@ class Maubot(commands.Cog):
             -> **[botlist.space](https://botlist.space/bot/730124969132163093)**
             -> **[botsdatabase](https://botsdatabase.com/bot/730124969132163093)**    
             -> **[arcane](https://arcane-center.xyz/bot/730124969132163093)**    
-            -> **[Delly](https://discordextremelist.xyz/bots/730124969132163093)**    
+            -> **[Delly](https://discordextremelist.xyz/bots/730124969132163093)**   
             -> **[botsfordiscord](https://botsfordiscord.com/bot/730124969132163093)**
+            -> **[infinitybots](https://infinitybots.xyz/730124969132163093)**
         """
         embed.add_field(name="Puedes verme en:", value=l)
         embed.set_author(name="INVITACIONES", icon_url="https://img.icons8.com/color/48/000000/share.png")
