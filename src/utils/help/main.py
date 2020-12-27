@@ -40,7 +40,7 @@ class Help(commands.Cog):
                 if comando.hidden:
                     continue
 
-                ListaDeComandos += f"`{ctx.prefix}{comando.name}` **⦂** "
+                ListaDeComandos += f"`{ctx.prefix}{comando.name}` ** • ** "
                 cmds += 1
             ListaDeComandos = ListaDeComandos[:-6]
             embed.add_field(name=f"{cog} | (`{cmds}`)", value=ListaDeComandos, inline=False)
