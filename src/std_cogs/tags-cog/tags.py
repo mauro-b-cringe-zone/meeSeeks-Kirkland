@@ -95,7 +95,7 @@ class Tags(commands.Cog):
                 tags = self.abrir_json()
 
                 if nombre in tags:
-                    return await ctx.send(f"Esa tag ya existe **{ctx.prefix}tag {nombre}**")
+                    return await ctx.send(f"Esa tag **ya** existe **{ctx.prefix}tag {nombre}**")
                 tags[nombre] = {}
                 tags[nombre]["titulo"] = titulo
                 tags[nombre]["desc"] = desc
@@ -123,12 +123,12 @@ class Tags(commands.Cog):
                     try:
                         # print(tags[args])
                         del tags[str(args)]
-                        await ctx.send(embed=discord.Embed(title="Eliminado", description=f"{ctx.author.mention} Se ha eliminado {args} correctamente", color=color))
+                        await ctx.send(embed=discord.Embed(title="Eliminado", description=f"{ctx.author.mention} Se ha eliminado **{args}** correctamente", color=color))
                         self.cerrar_json(tags)
                     except Exception as e:
                         cprint(str("[Log] Un error ha ocurrido:  " + e), 'red')
             else:
-                return await ctx.send(f"{ctx.author.mention} ¡¡¡Esa tag no existe!!!")
+                return await ctx.send(f"{ctx.author.mention} ¡Esa tag **no** existe!")
             self.cerrar_json(tags)
             
     @tag.command(description="Editar una tag", usage="<nombre de la tag>|<descripcion nueva>") # enabled=False
