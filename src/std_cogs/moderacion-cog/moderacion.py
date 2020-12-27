@@ -147,38 +147,44 @@ class Moderation(commands.Cog):
         if member.bot is True:
             return await ctx.send(embed=discord.Embed(color=color, title="Es un robot", description=f"{ctx.author.mention} Yo no puede banear bots"))
 
-        with open(env["JSON_DIR"] + "mute.json", "r") as f:
-            user = json.load(f)
+        if ctx.author.top_role.position > member.top_role.position or int(ctx.author.id) == int(ctx.guild.owner.id):
+
+            with open(env["JSON_DIR"] + "mute.json", "r") as f:
+                user = json.load(f)
 
 
-        if not str(member.id) in user:
-            user[str(member.id)] = {}
-            user[str(member.id)]["razon"] = reason
-        else:
-            return await ctx.send("Ese usuario ya estra muteado")
+            if not str(member.id) in user:
+                user[str(member.id)] = {}
+                user[str(member.id)]["razon"] = reason
+            else:
+                return await ctx.send("Ese usuario ya estra muteado")
 
-        with open(env["JSON_DIR"] + "mute.json", "w") as f:
-            json.dump(user, f)
+            with open(env["JSON_DIR"] + "mute.json", "w") as f:
+                json.dump(user, f)
 
-        await ctx.send(embed=discord.Embed(title="Muteado", description=f"{ctx.author.mention}, se ha muteado a {member.mention}", color=color).add_field(name="Razon:", value=reason if reason is not None else "Sin especificar"))
+            await ctx.send(embed=discord.Embed(title="Muteado", description=f"{ctx.author.mention}, se ha muteado a {member.mention}", color=color).add_field(name="Razon:", value=reason if reason is not None else "Sin especificar"))
+        else: await ctx.send(f"Tu role es mas bajo que el de {member.mention}")
 
     @commands.command(description="Desmutea ha alguien", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def unmute(self, ctx, member: discord.Member):
+
+        if ctx.author.top_role.position > member.top_role.position or int(ctx.author.id) == int(ctx.guild.owner.id):
         
-        with open(env["JSON_DIR"] + "mute.json", 'r') as f:
-            user = json.load(f)
+            with open(env["JSON_DIR"] + "mute.json", 'r') as f:
+                user = json.load(f)
 
-        if str(member.id) in user:
-            del user[str(member.id)]
-        else:
-            return await ctx.send("Ese usuario no esta muteado")
+            if str(member.id) in user:
+                del user[str(member.id)]
+            else:
+                return await ctx.send("Ese usuario no esta muteado")
 
-        with open(env["JSON_DIR"] + "mute.json", "w") as f:
-            json.dump(user, f)
+            with open(env["JSON_DIR"] + "mute.json", "w") as f:
+                json.dump(user, f)
 
-        await ctx.send(embed=discord.Embed(title="Desmuteado", description=f"{ctx.author.mention}, se ha desmuteado a {member.mention}", color=color))
+            await ctx.send(embed=discord.Embed(title="Desmuteado", description=f"{ctx.author.mention}, se ha desmuteado a {member.mention}", color=color))
+        else: await ctx.send(f"Tu role es mas bajo que el de {member.mention}")
 
     @commands.command(description="Crea una nueba categoria", usage="<nombre>")
     @commands.cooldown(1, 5, commands.BucketType.user)
