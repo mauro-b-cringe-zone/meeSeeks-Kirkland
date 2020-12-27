@@ -136,6 +136,7 @@ class Tags(commands.Cog):
         if len(str(args)) <= 2:
             return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)** | **EJ: {ctx.prefix}tag editar `nombre de la tag`|Descripcion que quieras editar**")
         else:
+            if '@everyone' in args or '<@&' in args and '>' in args or '@here' in args or len(ctx.message.channel_mentions) > 0 or ctx.message.mention_everyone or len(ctx.message.mentions) >= 1 or len(ctx.message.role_mentions) >= 1: return await ctx.send("No puedes mencionar, o es posible que ayamos detectado alguna pista de mencion\nintenta no poner **<@&** o **<@**, ya saves  ")
             tags = self.abrir_json()
 
             eliminador = ctx.author.id
@@ -164,6 +165,7 @@ class Tags(commands.Cog):
         if len(str(args)) <= 2:
             return await ctx.send(f"Escribe tu tag que quieras editar **(Tienes que haverla creado tu)** \n **EJ: {ctx.prefix}tag renombrar nombre|nombre2**")
         else:
+            if '@everyone' in args or '<@&' in args and '>' in args or '@here' in args or len(ctx.message.channel_mentions) > 0 or ctx.message.mention_everyone or len(ctx.message.mentions) >= 1 or len(ctx.message.role_mentions) >= 1: return await ctx.send("No puedes mencionar, o es posible que ayamos detectado alguna pista de mencion\nintenta no poner **<@&** o **<@**, ya saves  ")
             tags = self.abrir_json()
 
             eliminador = ctx.author.id
@@ -176,6 +178,7 @@ class Tags(commands.Cog):
                         return await ctx.send("¡TU NO ERES EL CREADOR DE ESTE TAG!") 
                     else:
                         try:
+                            
                             tags[args[1]] = {}
                             tags[args[1]]["titulo"] = args[1]
                             tags[args[1]]["desc"] = tags[args[0].strip()]["desc"]
