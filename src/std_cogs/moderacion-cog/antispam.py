@@ -40,6 +40,9 @@ class AntiSpam(commands.Cog):
         ctx = await self.bot.get_context(msg)
         d = await Decoradores().EsEspam(ctx=ctx)
         if d:
+            if "discord.gg" in msg:
+                await msg.delete()
+                return await ctx.send("No puedes poner invitaciones")
             if len(msg.raw_mentions) >= 10:
                 await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 10** menciones", color=color).set_footer(text="m.seguridad | Para desactivarlo"), delete_after=30.0)
                 await msg.delete()
