@@ -42,9 +42,10 @@ class Help(commands.Cog):
 
                 ListaDeComandos += f"`{ctx.prefix}{comando.name}` ** • ** "
                 cmds += 1
-            ListaDeComandos = ListaDeComandos[:-6]
+            if cmds == 0: continue
+            ListaDeComandos = ListaDeComandos[:-8]
             embed.add_field(name=f"{cog} | (`{cmds}`)", value=ListaDeComandos, inline=False)
-        cprint(f"[Log] caracteres de 'help':  {cmds}", 'yellow')
+            cprint(f"[Log] caracteres de 'help':  {cmds}", 'yellow')
         return embed
 
 
