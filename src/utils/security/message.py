@@ -35,8 +35,8 @@ async def Seguridad(bot, msg: Message):
             await msg.delete()
             await ctx.send("No puedes poner invitaciones")
             return True
-        if len(msg.raw_mentions) >= 10:
-            await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 10** menciones", color=color).set_footer(text="m.seguridad | Para desactivarlo"), delete_after=30.0)
+        if len(msg.raw_mentions) >= 5:
+            await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 5** menciones", color=color).set_footer(text="m.seguridad | Para desactivarlo"), delete_after=30.0)
             await msg.delete()
             return True
         if len(msg.content) >= 1400:
