@@ -20,7 +20,7 @@ class Mc(commands.Cog):
             try:
                 u = await GetUuid(user)
                 r = await http.get(f"https://mcapi.ca/player/profile/{u}", res_method="json", no_cache=True)
-                s = f"https://crafatar.com/renders/body/{u}"
+                s = f"https://crafatar.com/renders/body/{u}" + ".png"
                 # print(s)
             except aiohttp.ClientConnectorError:
                 return await ctx.send("La API parece estar inactiva...")
