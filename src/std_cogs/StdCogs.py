@@ -8,14 +8,6 @@ class StdCogs(Cogs):
     __cogs: list
     __cog_path: str
 
-    def __mas_cmds(self, archivo, nombre_archivo):
-        if nombre_archivo == "http_cmds":
-            for i in os.listdir(f"{self.__cog_path}/{archivo}/{nombre_archivo}"):
-                if i.startswith("cmd_"):
-                    self.__cogs.append(f"std_cogs.fun-cog.http_cmds.{i[:-3]}")
-                return True
-        return False
-
     def __init__(self):
         self.__cog_path = f'{env.get("BOT_ROOT_PATH")}/{self.__STD_COG_PATH}'
         self.__cogs = []
@@ -36,3 +28,11 @@ class StdCogs(Cogs):
 
     def get(self):
         return self.__cogs
+
+    def __mas_cmds(self, archivo, nombre_archivo):
+        if nombre_archivo == "http_cmds":
+            for i in os.listdir(f"{self.__cog_path}/{archivo}/{nombre_archivo}"):
+                if i.startswith("cmd_"):
+                    self.__cogs.append(f"std_cogs.fun-cog.http_cmds.{i[:-3]}")
+            return True
+        return False
