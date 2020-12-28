@@ -105,16 +105,6 @@ class App(commands.Bot):
         exception_type = exception.__class__
         if exception_type:
 
-            if isinstance(exception, commands.BotMissingPermissions):
-                missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]
-                if len(missing) > 2:
-                    fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
-                else:
-                    fmt = ' and '.join(missing)
-                _message = 'necesito este/os **{}** permniso(s) para correr este commando.'.format(fmt)
-                await context.send(_message)
-                return
-
             if isinstance(exception, commands.CommandOnCooldown):
                 embed = discord.Embed(title="Tranquilo...", description=f"{context.author.mention} Este comando esta en reposo\n Ahora tienes que esperar **{exception.retry_after:,.2f}** segundos", color=self.color)
                 return await context.send(embed=embed)
@@ -163,6 +153,17 @@ class App(commands.Bot):
             if str(exception) == "": return 
             for i in excepciones: 
                 if i in str(exception): return
+
+            if "missing permissions" in str(exception):
+                missing = [perm.replace('_', ' ').replace('guild', 'server').title() for perm in exception.missing_perms]
+                if len(missing) > 2:
+                    fmt = '{}, and {}'.format("**, **".join(missing[:-1]), missing[-1])
+                else:
+                    fmt = ' and '.join(missing)
+                _message = 'necesito este/os **{}** permniso(s) para correr este commando.'.format(fmt)
+                await context.send(_message)
+                return
+
             embed=discord.Embed(
                                 title="¡Ha ocurrido un error!", 
                                 description=f"Se ha reportado a [nuestro servidor](https://discord.gg/mwDBgubwdP). Tambien puedes poner `m.report <error>` \n```Error:\n{str(exception)}```",
@@ -177,6 +178,8 @@ class App(commands.Bot):
                 "service_environment": "Produccion",
                 "default_level": "info",
             }
+
+            Logger.error(exception)
 
             logger = DiscordLogger(webhook_url=webhook_url, **options)
             logger.construct(

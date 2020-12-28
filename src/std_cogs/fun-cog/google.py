@@ -23,22 +23,25 @@ class Google(commands.Cog):
 
     @commands.command(description="Busca algo en google", usage="<Busqueda>")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def gl(self, ctx, *, query):
+    async def google(self, ctx, *, query):
 
         def gsync(query=query):
-            name = str(ctx.message.author)
-            for j in search(query):
-                return j
+            lista = ""
+            for i, j in enumerate(search(query)):
+                lista += str(j) + "\n"
+                if i == 4:
+                    break
+            return lista
 
         async with ctx.typing():
-            gasync = await self.bot.loop.run_in_executor(ThreadPoolExecutor(), gsync)
-            await ctx.send(embed=discord.Embed(description="||" + gasync + "||", color=color))
+            # gasync = await self.bot.loop.run_in_executor(ThreadPoolExecutor(), gsync)
+            await ctx.send(embed=discord.Embed(description=gsync(), color=color).set_author(name="Busquedas de google", icon_url="https://www.shareicon.net/data/512x512/2015/10/04/111650_google-icon_512x512.png"))
 
 
-    @commands.command(description="Busca algo en google", usage="<Busqueda>")
+    @commands.command(description="Busca algo en lmgtfy con una animacion", usage="<Busqueda>")
     @commands.cooldown(1, 5, commands.BucketType.user)
-    async def google(self, ctx, *, term: str):
-        embed= discord.Embed(title="Busqueda de google", url=f"https://lmgtfy.com/?q={term.replace(' ', '+')}", colour=color)
+    async def lmgtfy(self, ctx, *, term: str):
+        embed= discord.Embed(description=f"[Aqui](https://lmgtfy.com/?q={term.replace(' ', '+')}) tienes tu busqueda de google", colour=color)
         await ctx.send(embed=embed)
 
 def setup(bot):
