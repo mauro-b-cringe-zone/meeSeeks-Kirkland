@@ -403,11 +403,17 @@ class Economia(commands.Cog):
 
         await ctx.send(embed=em)   
 
+    def GetUse(self, item):
+        for i in mainshop:
+            if i["name"].lower() == item:
+                return i["uso"]
+        return "*No se encontro uso*"
+
     @commands.command(description="Vende un objeto de tu inventario", usage="<objeto> [@usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def use(self, ctx, obj: str = None, usr: discord.Member = None):
 
-        return await ctx.send("Este comando esta en reparaciones, vuelve mas tarde")
+        # return await ctx.send("Este comando esta en reparaciones, vuelve mas tarde")
 
         if obj is None: return await ctx.send("Porfavor incluye un objeto")
 
@@ -426,11 +432,22 @@ class Economia(commands.Cog):
         for thing in users[str(ctx.author.id)]["bag"]:
             item = obj.lower()
             if thing["item"].lower() == item:
-                del thing
-                with open(env["JSON_DIR"] + "mainbank.json","w") as f:
-                    json.dump(users, f, indent=4)
-                return await ctx.send(f"{ctx.author.mention} as usado un/a {item} para {usr.mention if usr.id != ctx.author.id else 'si mismo'}: desc")
-
+                try:
+                    for ind, it in enumerate(users[str(ctx.author.id)]["bag"]):
+                        if it["item"] == item:
+                            num = ind
+                    users[str(ctx.author.id)]["bag"][num]["amount"] -= 1
+                    if users[str(ctx.author.id)]["bag"][num]["amount"] == 0:
+                        del users[str(ctx.author.id)]["bag"][num]
+                    with open(env["JSON_DIR"] + "mainbank.json","w") as f:
+                        json.dump(users, f, indent=4)
+                    desc = self.GetUse(item)
+                    embed = discord.Embed(color=color, title=random.choice(["¡Saves usar algo!", f"{ctx.author.name} ha usado un objeto"]))
+                    embed.description = f"{ctx.author.mention} as usado un/a {item} para {usr.mention if usr.id != ctx.author.id else 'si mismo'}"
+                    embed.add_field(name="Uso:", value=desc)
+                    return await ctx.send(embed=embed)
+                except Exception as e: 
+                    return await ctx.send(f"Un pequeño error ha ocurrido\n``` {e} ```")
         await ctx.send("Tu no tienes ese objeto")
 
 
