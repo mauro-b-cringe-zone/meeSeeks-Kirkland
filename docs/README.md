@@ -5,40 +5,23 @@
 #### 0. Instalar python 3.6.0 - 3.9.x
 Las versiones inferiores o superiores no son compatibles oficialmente
 
-#### 1. Instalar dependencias de Python
+#### 1. Crearse un enviroment
+```
+C\> python3 -m venv env
+C\> windows (.\env\Scripts\activate) | linux (source .\env\bin\activate)
+```
+
+#### 2. Instalar dependencias de Python (Con el enviroment ya activado)
 ```
 pip install -r requirements.txt
 ```
-
-#### 2. Instalar dependencias adicionales
-- [ffmpeg binary (windows)](https://ffmpeg.org/download.html) (para charlas de voz)  
-(haga clic en el enlace para ver la página de descarga)
-
-- [macOS (homebrew)](https://formulae.brew.sh/formula/ffmpeg#default)  
-```brew install wget```
-
-- [debian (ubuntu, mint, deepin, zorin, pop!_os,...)](https://wiki.debian.org/ffmpeg)  
-```apt-get install libav-tools ffmpeg```
-
-- [arch (manjaro,...)](https://www.archlinux.org/packages/extra/x86_64/ffmpeg/)  
-```pacman -S ffmpeg```
-
-- [centOS (yum)](https://linuxize.com/post/how-to-install-ffmpeg-on-centos-8/)  
-(haga clic en el enlace para ver la documentación)
-
-- [rpm (Todo lo demas)](https://rpmfind.net/linux/rpm2html/search.php?query=ffmpeg)  
-(haga clic en el enlace para ver la página de descarga)
 
 #### 3. Editar el entorno
 a) Copie el archivo `.env.example` y cámbiele el nombre a `.env`
 b) Completa los valores
 
-#### 3. Correr el bot
-```shell
-python ./src/main.py
-```
 ---
-#### 4. archivo.env
+#### 5. archivo.env
 Todo esta en el [.example.env](https://github.com/maubg-debug/maubot/blob/main/.example.env)
 ```txt
 # https://discord.com/developers/applications
@@ -72,6 +55,11 @@ DB_DIR=Tu direccion para la DB
 WEBHOOK_URL_ENTRADA=
 WEBHOOK_URL_SALIDA=
 WEBHOOK_URL_ERRORES=
+
+#### 4. Correr el bot
+```shell
+python ./src/main.py
+```
 
 ```
 #### Instrucciones para el color del .env
