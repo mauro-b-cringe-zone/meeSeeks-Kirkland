@@ -62,13 +62,8 @@ WEBHOOK_URL_ERRORES=
 python ./src/main.py
 ```
 
-```
+
 #### Instrucciones para el color del .env
-```shell
-pip install envparse <- O -> pip install git+https://github.com/rconradharris/envparse.git
-```
----
-Luego en la consola de python pondreis
 ```python
 C:\> python
 >>>
