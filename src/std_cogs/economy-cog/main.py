@@ -60,7 +60,7 @@ async def buy_this(user,item_name,amount):
         users[str(user.id)]["bag"] = [obj]        
 
     with open(env["JSON_DIR"] + "mainbank.json","w") as f:
-        json.dump(users,f)
+        json.dump(users,f, indent=4)
 
     await update_bank(user, cost*-1, "wallet")
 
@@ -110,7 +110,7 @@ async def sell_this(user,item_name,amount,price=None):
         del users[str(user.id)]["bag"][index]
 
     with open(env["JSON_DIR"] + "mainbank.json","w") as f:
-        json.dump(users,f)
+        json.dump(users,f, indent=4)
 
     await update_bank(user,cost,"wallet")
 
@@ -138,7 +138,7 @@ async def open_acount(user):
         users[str(user.id)]["bank"] = 0
 
     with open(env["JSON_DIR"] + "mainbank.json","w") as f:
-        json.dump(users, f) 
+        json.dump(users, f, indent=4) 
     return True
 
 async def update_bank(user, change=0, mode="wallet"):
@@ -147,7 +147,7 @@ async def update_bank(user, change=0, mode="wallet"):
     users[str(user.id)][mode] += change
 
     with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-        json.dump(users, f)        
+        json.dump(users, f, indent=4)        
     
     bal = [users[str(user.id)]["wallet"],users[str(user.id)]["bank"]]
     return bal
@@ -201,7 +201,7 @@ class Economia(commands.Cog):
         users[str(user.id)]["wallet"] += earnings
 
         with open(env["JSON_DIR"] + "mainbank.json", "w") as f:
-            json.dump(users, f)         
+            json.dump(users, f, indent=4)         
 
     @commands.command(description="Deposita tu dinero al banko (Tienes que tener dinero en la cartera)", usage="[cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -378,6 +378,7 @@ class Economia(commands.Cog):
     @commands.command(description="Mira tu inventario")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def bag(self, ctx):
+
         await open_acount(ctx.author)
         user = ctx.author
         users = await get_bank_data()
@@ -391,13 +392,47 @@ class Economia(commands.Cog):
 
         em = discord.Embed(colour=color)
         em.set_author(name="Inventario", icon_url="https://img.icons8.com/color/48/000000/chalk-bag.png")
+        inv = ""
         for item in bag:
             name = item["item"]
             amount = item["amount"]
 
-            em.add_field(name=name, value=amount, inline=True)    
+            inv += f"{name}: {amount}\n"    
+        
+        em.add_field(name="Objetos:", value=inv)
 
-        await ctx.send(embed=em)    
+        await ctx.send(embed=em)   
+
+    @commands.command(description="Vende un objeto de tu inventario", usage="<objeto> [@usuario]", ena)
+    @commands.cooldown(1, 5, commands.BucketType.user)
+    async def use(self, ctx, obj: str = None, usr: discord.Member = None):
+
+        return await ctx.send("Este comando esta en reparaciones, vuelve mas tarde")
+
+        if obj is None: return await ctx.send("Porfavor incluye un objeto")
+
+        usr = ctx.author if usr is None else usr
+        await open_acount(ctx.author)
+
+        users = await get_bank_data()
+        
+        if not str(ctx.author.id) in users: return await ctx.send("Tu no tuenes una cuenta. `m.balance` para crearse una")
+
+        try:
+            users[str(ctx.author.id)]["bag"]
+        except:
+            return await ctx.send("No tienes una bolsa pon `m.balance` para crearte una")
+
+        for thing in users[str(ctx.author.id)]["bag"]:
+            item = obj.lower()
+            if thing["item"].lower() == item:
+                del thing
+                with open(env["JSON_DIR"] + "mainbank.json","w") as f:
+                    json.dump(users, f, indent=4)
+                return await ctx.send(f"{ctx.author.mention} as usado un/a {item} para {usr.mention if usr.id != ctx.author.id else 'si mismo'}: desc")
+
+        await ctx.send("Tu no tienes ese objeto")
+
 
     @commands.command(description="Vende un objeto de tu inventario", usage="<objeto> [cantidad]")
     @commands.cooldown(1, 5, commands.BucketType.user)

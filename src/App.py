@@ -179,7 +179,7 @@ class App(commands.Bot):
                 "default_level": "info",
             }
 
-            Logger.error(exception)
+            Logger.error(str(exception))
 
             logger = DiscordLogger(webhook_url=webhook_url, **options)
             logger.construct(
