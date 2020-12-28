@@ -523,7 +523,7 @@ class Juegos(commands.Cog):
         try:
             reaction, user = await self.bot.wait_for('reaction_add', timeout=60.0, check=check)
         except asyncio.TimeoutError:
-            await wait.add_reaction('😔')
+            return await wait.add_reaction('😔')
         if str(reaction.emoji)==str(corr):
             await wait.edit(embed=discord.Embed(title="Bien hecho", description=' | <@'+str(guy.id)+'>, Felicidades! Estas correcto. :partying_face:', colour=color))
             # await wait.clear_reactions()
