@@ -403,7 +403,7 @@ class Economia(commands.Cog):
 
         await ctx.send(embed=em)   
 
-    @commands.command(description="Vende un objeto de tu inventario", usage="<objeto> [@usuario]", ena)
+    @commands.command(description="Vende un objeto de tu inventario", usage="<objeto> [@usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def use(self, ctx, obj: str = None, usr: discord.Member = None):
 
