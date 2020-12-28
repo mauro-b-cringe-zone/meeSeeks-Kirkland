@@ -176,9 +176,6 @@ class Img(commands.Cog):
                 embed.set_image(url="attachment://archivo.png")
                 await ctx.send(embed=embed, file=file)
 
-    def urlify(self, word):
-        return urlencode(word).replace('+', '%20')
-
     @commands.command(description="m.drake [hola][ola]", usage="<[texto1]><[texto2]>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def drake(self, ctx, *args):

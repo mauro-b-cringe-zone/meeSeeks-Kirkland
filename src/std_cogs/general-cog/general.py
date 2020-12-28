@@ -485,9 +485,6 @@ class General(commands.Cog):
         image = self.imagefromURL(url)
         return self.buffer(image)
 
-    def urlify(self, word):
-        from urllib.parse import quote_plus as urlencode
-        return urlencode(word).replace('+', '%20')
 
 class GeneralSecundario(commands.Cog):
     def __init__(self, bot):

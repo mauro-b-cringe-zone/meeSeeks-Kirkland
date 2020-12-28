@@ -23,32 +23,18 @@ class AntiSpam(commands.Cog):
 
         if not str(ctx.guild.id) in guild:
             guild[str(ctx.guild.id)] = True
-            await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | verdadero", description=f"**¿Qué implica esto?**\n<:list:774983585727119391> No mas de **10** menciones\n<:list:774983585727119391> No mas de **1500** caracteres en un mensage", color=color))
+            await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | verdadero", description=f"**¿Qué implica esto?**\n<:list:774983585727119391> No mas de **10** menciones\n<:list:774983585727119391> No mas de **1500** caracteres en un mensage\n<:list:774983585727119391> Nada de palabrotas\n<:list:774983585727119391> Nada de links que comiencen con **discord.gg**", color=color))
         else:
             if guild[str(ctx.guild.id)] is True: 
                 guild[str(ctx.guild.id)] = False
                 await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | falso", description=f"**¿Qué implica esto?**\nMaubot ya no se encargara en analizar los mensages del servidor | **{ctx.guild.name}**", color=color))
             elif guild[str(ctx.guild.id)] is False: 
                 guild[str(ctx.guild.id)] = True
-                await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | verdadero", description=f"**¿Qué implica esto?**\n<:list:774983585727119391> No mas de **10** menciones\n<:list:774983585727119391> No mas de **1500** caracteres en un mensage", color=color))
+                await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | verdadero", description=f"**¿Qué implica esto?**\n<:list:774983585727119391> No mas de **10** menciones\n<:list:774983585727119391> No mas de **1500** caracteres en un mensage\n<:list:774983585727119391> Nada de palabrotas\n<:list:774983585727119391> Nada de links que comiencen con **discord.gg**", color=color))
 
         with open(str(env["JSON_DIR"] + "ext/seguridad.json"), "w") as f:
             json.dump(guild, f, indent=4)
     
-    @commands.Cog.listener()
-    async def on_message(self, msg: Message):
-        ctx = await self.bot.get_context(msg)
-        d = await Decoradores().EsEspam(ctx=ctx)
-        if d:
-            if "discord.gg" in msg:
-                await msg.delete()
-                return await ctx.send("No puedes poner invitaciones")
-            if len(msg.raw_mentions) >= 10:
-                await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 10** menciones", color=color).set_footer(text="m.seguridad | Para desactivarlo"), delete_after=30.0)
-                await msg.delete()
-            if len(msg.content) >= 1500:
-                await msg.channel.send(embed=discord.Embed(title=f"Demasiado...", description=f"{ctx.author.mention} Este servidor esta en modo antiespam asique no puedes poner **mas de 1500** caracteres", color=color).set_footer(text="m.seguridad | Para desactivarlo"), delete_after=30.0)
-                await msg.delete()
 
 def setup(bot):
     bot.add_cog(AntiSpam(bot))
