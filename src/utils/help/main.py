@@ -51,7 +51,7 @@ class Help(commands.Cog):
     async def ayuda_reaccionada(self, ctx, cog, cogs, paginasTotales, embed):
         if int(cog) == 0:
             embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
-            embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://discord.gg/mwDBgubwdP)"
+            embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://dsc.gg/maubot_servidor)"
             embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
             embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
             cogsL = ""
@@ -71,7 +71,7 @@ class Help(commands.Cog):
             embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
             cogs = [c for c in self.bot.cogs.keys()]
             paginasTotales = math.ceil(len(cogs) / 6)
-            embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://discord.gg/mwDBgubwdP)"
+            embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://dsc.gg/maubot_servidor)"
             embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
             embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
             cogsL = ""

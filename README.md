@@ -5,7 +5,7 @@
 
 
  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/23d3ec7ad1b843f89af7df0da3cb06bc)](https://www.codacy.com/gh/maubg-debug/maubot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maubg-debug/maubot&amp;utm_campaign=Badge_Grade)
- [![Maubot servidor](https://discordapp.com/api/guilds/774577061893242930/widget.png?style=shield)](https://discord.gg/mwDBgubwdP)
+ [![Maubot servidor](https://discordapp.com/api/guilds/774577061893242930/widget.png?style=shield)](https://dsc.gg/maubot_servidor)
  [![Discord.py](https://img.shields.io/badge/discord-py-blue.svg)](https://github.com/Rapptz/discord.py)
  ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/maubg-debug/maubot)
  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
@@ -95,7 +95,7 @@ Como se muestra en la descripcion <strong>Maubot</strong> tiene una gran varieda
 
 # Sugerencias
 
-* Si tienes alguna sugerencia puedes unirte a [nuestro server](https://discord.gg/mwDBgubwdP) <- O -> Si tienes que contarnos un bug ve a [su github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)
+* Si tienes alguna sugerencia puedes unirte a [nuestro server](https://dsc.gg/maubot_servidor) <- O -> Si tienes que contarnos un bug ve a [su github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)
 
 * Tambien puedes poner `m.rate_bot <descripcion>` para darle nua reseña, `m.request <descripcion>` Para alguna idea y `m.report` Para reportar algun bug que tenga maubot.
 

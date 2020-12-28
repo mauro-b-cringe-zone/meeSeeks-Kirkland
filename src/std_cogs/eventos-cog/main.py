@@ -141,7 +141,7 @@ class Servidor(commands.Cog):
                 Para una lista de commando solo tienes que poner **m.help** y te saldran tooodos los comandos. 
                 
                 ¡Y se enviara un mensaje a mi desarroyador si pones `m.rate_bot <descripcion>`, `m.report <error>`, `m.request <cosa nueva>`! Cada uno de los comandos seran respectivos a los nombres
-                {self.bot.user.name} ¿¡A que esperas!? (https://discord.gg/mwDBgubwdP)
+                {self.bot.user.name} ¿¡A que esperas!? (https://dsc.gg/maubot_servidor)
                 
                 Puedes verme en:
                 -> **[top.gg](https://top.gg/bot/730124969132163093)**
@@ -189,7 +189,7 @@ class Servidor(commands.Cog):
         embed1.add_field(name="¿Aun no te has enterado?", value=f"Puedes ver un tutorial de como usar Maubot poniendo <@730124969132163093>", inline=False)
         embed1.set_footer(text="Maubot - Puedes escribir @Maubot para mas info")
 
-        msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://discord.gg/mwDBgubwdP)**", embed=embed1)
+        msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://dsc.gg/maubot_servidor)**", embed=embed1)
 
 def setup(bot):
     bot.add_cog(Servidor(bot))

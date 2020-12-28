@@ -166,7 +166,7 @@ class App(commands.Bot):
 
             embed=discord.Embed(
                                 title="¡Ha ocurrido un error!", 
-                                description=f"Se ha reportado a [nuestro servidor](https://discord.gg/mwDBgubwdP). Tambien puedes poner `m.report <error>` \n```Error:\n{str(exception)}```",
+                                description=f"Se ha reportado a [nuestro servidor](https://dsc.gg/maubot_servidor). Tambien puedes poner `m.report <error>` \n```Error:\n{str(exception)}```",
                                 color=15750742).set_footer(
                                     text="Maubot error | Solo envia bugs a github si son importantes | m.help [seccion]"
                                 )
@@ -261,7 +261,7 @@ class Maubot(commands.Cog):
         with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
         e = discord.Embed(title="Se a cambiado el prefijo correctamente", description=f'Se a cambiado el prefijo a:      `{prefix}`\nLos prefijos de este servidor son: `{prefix}`, `m.` `m-`', color=color)
-        e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://discord.gg/mwDBgubwdP)**")
+        e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://dsc.gg/maubot_servidor)**")
         await ctx.send(embed=e)
 
     @commands.command(name="bot", usage="[info | config]", description="Mira la info del bot o la config (m._bot info | m._bot config)")
@@ -273,9 +273,9 @@ class Maubot(commands.Cog):
             em.title = 'Info de Maubot'
             em.set_author(name=ctx.author.name, icon_url="https://img.icons8.com/plasticine/100/000000/bot.png")
             try:
-                em.description = self.bot.psa + '\n[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
+                em.description = self.bot.psa + '\n[Soporta nuestro server](https://dsc.gg/maubot_servidor)'
             except AttributeError:
-                em.description = 'Un bot echo por [Maubg](https://github.com/maubg-debug). [¡Ùnete a que esperas!](https://discord.gg/mwDBgubwdP)'
+                em.description = 'Un bot echo por [Maubg](https://github.com/maubg-debug). [¡Ùnete a que esperas!](https://dsc.gg/maubot_servidor)'
             em.add_field(name="Servidores", value=f"> {len(self.bot.guilds)}")
             em.add_field(name="Usuarios online", value=f"> {str(len({m.id for m in self.bot.get_all_members() if m.status is not discord.Status.offline}))}")
             em.add_field(name='Usuarios totales', value=f"> {len(self.bot.users)}")
@@ -299,9 +299,9 @@ class Maubot(commands.Cog):
             em.title = 'Configuracion de Maubot'
             em.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
             try:
-                em.description = self.bot.psa + '[Soporta nuestro server](https://discord.gg/mwDBgubwdP)'
+                em.description = self.bot.psa + '[Soporta nuestro server](https://dsc.gg/maubot_servidor)'
             except AttributeError:
-                em.description = '[¡Unete a que esperas!](https://discord.gg/mwDBgubwdP)'
+                em.description = '[¡Unete a que esperas!](https://dsc.gg/maubot_servidor)'
             em.add_field(name="Prefijo", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix <prefijo>**")
             em.add_field(name="Niveles", value=f"Se es para activar los niveles **ej: {ctx.prefix}levels**")
             em.add_field(name="Seguridad", value=f"Maubot eliminara links, spam, etc **ej: {ctx.prefix}seguridad**")
@@ -386,7 +386,7 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def links(self, ctx):
 
-        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot)\n**Server**: (https://discord.gg/mwDBgubwdP)\n**Web**: [Link](https://maubot.maucode.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
+        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://dsc.gg/maubot)\n**Server**: (https://dsc.gg/maubot_servidor)\n**Web**: [Link](https://maubot.maucode.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
         l = """
             -> **[top.gg](https://top.gg/bot/730124969132163093)**
             -> **[blist.xyz](https://blist.xyz/bot/730124969132163093/)**
@@ -409,7 +409,7 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def invite(self, ctx):
 
-        embed = discord.Embed(description=f"**https://discord.com/oauth2/authorize?client_id=730124969132163093&permissions=8&scope=bot**", colour=color)
+        embed = discord.Embed(description=f"**https://dsc.gg/maubot**", colour=color)
         await ctx.send(embed=embed)
 
     @commands.command(description="¿Quien es el jefe del servidor?")
@@ -470,7 +470,7 @@ class Feedback(commands.Cog):
 
         try:
             reaction, user = await self.bot.wait_for("reaction_add", timeout=20, check=_check)
-            embed_done.add_field(name="Gracias por tu calificacion", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://discord.gg/mwDBgubwdP) para decirnos que tal tu experencia**")
+            embed_done.add_field(name="Gracias por tu calificacion", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://dsc.gg/maubot_servidor) para decirnos que tal tu experencia**")
 
 
         except asyncio.TimeoutError:
