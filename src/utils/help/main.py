@@ -164,7 +164,7 @@ class Help(commands.Cog):
                     if reaction.emoji == self.emojis[5]:
                         cogsR = 0
                     
-                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR if not cogsR == 0 else ''} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR if not cogsR == 0 else ''} -=-=-=-=-=", color=int(env["COLOR"]))))
 
         elif re.search(r"[a-zA-Z]", str(cog)):
             congMinusculas = [c.lower() for c in cogs]
