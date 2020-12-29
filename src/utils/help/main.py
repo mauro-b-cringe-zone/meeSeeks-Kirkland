@@ -45,13 +45,13 @@ class Help(commands.Cog):
             if cmds == 0: continue
             ListaDeComandos = ListaDeComandos[:-8]
             embed.add_field(name=f"{cog} | (`{cmds}`)", value=ListaDeComandos, inline=False)
-            cprint(f"[Log] caracteres de 'help':  {cmds}", 'yellow')
+            cprint(f"[Log] caracteres de '{cog}':  {cmds}", 'yellow')
         return embed
 
 
     async def ayuda_reaccionada(self, ctx, cog, cogs, paginasTotales, embed):
         if int(cog) == 0:
-            embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
+            embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"]))
             embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://dsc.gg/maubot_servidor)"
             embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
             embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
@@ -71,12 +71,16 @@ class Help(commands.Cog):
         cogs = [c for c in self.bot.cogs.keys()]
         paginasTotales = math.ceil(len(cogs) / 6)
 
+        def _check(r, m):
+            return (
+                # r.message == ctx.message
+                m == ctx.message.author
+            )
+
         if cog == "0":
-            msg = await ctx.send(embed=await self.ayuda_reaccionada(ctx, cog, cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR if not cogsR == 0 else ''} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+            msg = await ctx.send(embed=await self.ayuda_reaccionada(ctx, "0", cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"]))))
             for m in self.emojis: 
                 await msg.add_reaction(m)
-            def _check(r, m):
-                return m == ctx.message.author
             cogsR = int(cog)
             while True:
                 try:
@@ -112,10 +116,10 @@ class Help(commands.Cog):
                     if reaction.emoji == self.emojis[5]:
                         cogsR = 0
                     
-                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR if not cogsR == 0 else ''} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
+                    await msg.edit(embed=await self.ayuda_reaccionada(ctx, str(cogsR), cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR if not cogsR == 0 else ''} -=-=-=-=-=", color=int(env["COLOR"]))))
             return
 
-        embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
+        embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"]))
 
         if re.search(r"\d", str(cog)):
 
@@ -126,8 +130,6 @@ class Help(commands.Cog):
             for m in self.emojis: 
                 await msg.add_reaction(m)
 
-            def _check(r, m):
-                return m == ctx.author
             cogsR = int(cog)
             while True:
                 try:
