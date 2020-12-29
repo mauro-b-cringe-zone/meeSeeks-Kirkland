@@ -68,18 +68,11 @@ class Help(commands.Cog):
 
     @commands.command(description="Ayuda para los comandos", usage="[cog]")
     async def help(self, ctx, cog="0"):
+        cogs = [c for c in self.bot.cogs.keys()]
+        paginasTotales = math.ceil(len(cogs) / 6)
+
         if cog == "0":
-            embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
-            cogs = [c for c in self.bot.cogs.keys()]
-            paginasTotales = math.ceil(len(cogs) / 6)
-            embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://dsc.gg/maubot_servidor)"
-            embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
-            embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
-            cogsL = ""
-            for i in cogs:
-                cogsL += f"`{i.lower()}` **|** "
-            embedhs.add_field(name="-=-=-=-  Cogs  -=-=-=-", value=f"**-> e.x:** `{ctx.prefix}help [Cog]`\n\n{cogsL[:-6]}", inline=False)
-            msg = await ctx.send(embed=embedhs)
+            msg = await ctx.send(embed=await self.ayuda_reaccionada(ctx, cog, cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda {cogsR if not cogsR == 0 else ''} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")))
             for m in self.emojis: 
                 await msg.add_reaction(m)
             def _check(r, m):
@@ -123,10 +116,6 @@ class Help(commands.Cog):
             return
 
         embed = discord.Embed(title=f"-=-=-=-=-= Ayuda {cog} -=-=-=-=-=", color=int(env["COLOR"])).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-icon.png")
-
-        cogs = [c for c in self.bot.cogs.keys()]
-        # cprint(f"[Log] Cogs: {len(cogs)}", 'yellow')
-        paginasTotales = math.ceil(len(cogs) / 6)
 
         if re.search(r"\d", str(cog)):
 

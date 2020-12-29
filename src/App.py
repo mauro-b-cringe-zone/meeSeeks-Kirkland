@@ -14,7 +14,7 @@ from googletrans import Translator
 
 import random
 import datetime
-
+from tqdm import tqdm 
 import gc
 
 from discord import Embed, Color, File, __version__, Forbidden, AllowedMentions, gateway
@@ -199,15 +199,17 @@ class App(commands.Bot):
 
             response = logger.send()
             await self.reaction(context, embed)
- 
+
 
     def __load_cogs(self):
         """
         Carga todos los engranajes en bot.
         :return:
         """
-        for cog in self.__cogs.get():
-            self.load_extension(cog)
+        __cogs = self.__cogs.get()
+        __len_cogs = len(__cogs)
+        for index in tqdm(range(0, __len_cogs), desc="Cargando cogs...", leave=False): 
+            self.load_extension(__cogs[index])
 
     @staticmethod
     @commands.command(name="recargar-cogs")

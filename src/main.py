@@ -9,22 +9,15 @@ from pathlib import Path
 
 from consola.main import Consola
 
-from tqdm import tqdm 
 from time import sleep 
-import threading, discord
-from termcolor import cprint
-
 import discord
+from termcolor import cprint
 
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
 __repo__ = "https://github.com/maubg-debug/maubot/"
 __version__ = "1.0.0"
 __web__ = "https://maubot.maucode.com"
-
-def cargar(texto, t):
-    for i in tqdm(range(1, 100), desc=texto, leave=False): 
-        sleep(t)
 
 def preparar():
 
@@ -114,8 +107,6 @@ def preparar():
     if env.is_debug():
         Logger.warning('Modo de depuracion habilitado. Ejecute el bot sin el parametro --debug (-d) o inserte DEBUG=False en el archivo .env.')
 
-    x = threading.Thread(target=cargar, args=("Cargando cogs", .01,))
-    x.start()
 
     intents = discord.Intents.default()
 
@@ -129,11 +120,8 @@ def preparar():
               intents=intents
             )
     
-    x.join()
 
     Logger.success("Las opciones del robot estan cargadas")
-
-    cargar("Haciendo login", .01)
     try:
         app.run(token)
     except Exception as e:
