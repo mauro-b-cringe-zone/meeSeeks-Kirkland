@@ -79,15 +79,16 @@ class Mensages(commands.Cog):
 
         # print(message.author.id)
         if str(message.author.id) in userm:
-            await message.delete()
+            try:
+                return await message.delete()
+            except discord.Forbidden:
+                return
 
         if message.content == f"<@!{self.bot.user.id}>":
             await message.channel.send(embed=discord.Embed(title="Deja que me presente",
                                                            url="https://maubot.maucode.com", 
                                                            description="<:maubot:774967705831997501> Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **m.help**", 
                                                            colour=color).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-icon.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `m.help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `&rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**", inline=False))
-
-        # .set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot_white.gif").set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-icon.png")
 
         if message.content == f"<@!{self.bot.user.id}> prefijos":
                     await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
