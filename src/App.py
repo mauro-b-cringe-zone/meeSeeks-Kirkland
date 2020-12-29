@@ -15,6 +15,8 @@ from googletrans import Translator
 import random
 import datetime
 
+import gc
+
 from discord import Embed, Color, File, __version__, Forbidden, AllowedMentions, gateway
 
 
@@ -50,6 +52,8 @@ class App(commands.Bot):
         mobile_indicator()
         super().__init__(**options)
 
+        self.command_uses = 0
+
         self.__autor__ = "Maubg"
         self.__github__ = "https://github.com/maubg-debug/"
         self.__repo__ = "https://github.com/maubg-debug/maubot"
@@ -74,6 +78,10 @@ class App(commands.Bot):
 
         self.add_command(App.__reload_cogs)
         
+    async def on_command_completion(self, ctx):
+        self.command_uses += 1
+        gc.collect()
+
     async def on_ready(self):
         await self.change_presence(activity=discord.Activity(type=5, name=self.__estado))
         Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)

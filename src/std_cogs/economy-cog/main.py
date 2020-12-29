@@ -413,8 +413,6 @@ class Economia(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def use(self, ctx, obj: str = None, usr: discord.Member = None):
 
-        # return await ctx.send("Este comando esta en reparaciones, vuelve mas tarde")
-
         if obj is None: return await ctx.send("Porfavor incluye un objeto")
 
         usr = ctx.author if usr is None else usr
