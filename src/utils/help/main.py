@@ -71,14 +71,13 @@ class Help(commands.Cog):
         cogs = [c for c in self.bot.cogs.keys()]
         paginasTotales = math.ceil(len(cogs) / 6)
 
-        def _check(r, m):
-            return (
-                # r.message == ctx.message
-                m == ctx.message.author
-            )
-
         if cog == "0":
             msg = await ctx.send(embed=await self.ayuda_reaccionada(ctx, "0", cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"]))))
+            def _check(r, m):
+                return (
+                r.message.id == ctx.message.id
+                and m == ctx.message.author
+            )
             for m in self.emojis: 
                 await msg.add_reaction(m)
             cogsR = int(cog)
@@ -126,7 +125,11 @@ class Help(commands.Cog):
             embedh = await self.ayuda(ctx, cog, cogs, paginasTotales, embed)
 
             msg = await ctx.send(embed=embedh)
-
+            def _check(r, m):
+                return (
+                r.message.id == ctx.message.id
+                and m == ctx.message.author
+            )
             for m in self.emojis: 
                 await msg.add_reaction(m)
 
