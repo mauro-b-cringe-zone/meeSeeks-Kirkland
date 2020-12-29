@@ -1,3 +1,6 @@
+# ¡IMPORTANTE!
+* Instalar desde [aqui](https://github.com/maubg-debug/maubot/releases)
+
 <h1 align="center">Maubot</h1>
 
 <p align="center">Maubot | El mejor bot de la historia. Maubot es un robot con multiples funciones de todo y con una gran variedad de comandos de musica, moderacion, juegos, etc.
