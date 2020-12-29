@@ -75,7 +75,7 @@ class Help(commands.Cog):
             msg = await ctx.send(embed=await self.ayuda_reaccionada(ctx, "0", cogs, paginasTotales, discord.Embed(title=f"-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"]))))
             def _check(r, m):
                 return (
-                r.message.id == ctx.message.id
+                r.message.id == msg.id
                 and m == ctx.message.author
             )
             for m in self.emojis: 
@@ -127,7 +127,7 @@ class Help(commands.Cog):
             msg = await ctx.send(embed=embedh)
             def _check(r, m):
                 return (
-                r.message.id == ctx.message.id
+                r.message.id == msg.id
                 and m == ctx.message.author
             )
             for m in self.emojis: 
