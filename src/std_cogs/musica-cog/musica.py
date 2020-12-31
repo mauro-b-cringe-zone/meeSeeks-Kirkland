@@ -281,7 +281,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             "MAIN": {
                 "host": "maubot.maucode.com",
                 "port": 2333,
-                "rest_uri": "http://maubot.maucode.com:2333/",
+                "rest_uri": str(env["IP_MUSICA"]),
                 "password": "youshallnotpass",
                 "identifier": "MAIN",
                 "region": "europe",
