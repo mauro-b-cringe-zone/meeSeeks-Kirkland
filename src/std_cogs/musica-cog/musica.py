@@ -299,6 +299,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="connect", aliases=["join"], description="Maubot se unira a un canal de voz", usage="[canal]")
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
+
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
+
         player = self.get_player(ctx)
         perms = getattr(ctx.author.voice, "channel", channel).permissions_for(ctx.me)
         if perms.connect:
@@ -319,6 +322,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="disconnect", aliases=["leave"], description="Maubot se ira a un canal de voz")
     async def disconnect_command(self, ctx):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
         if not player.is_connected:
             return await ctx.send("No estoy conectado a ningun canal")
@@ -328,6 +332,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="resume", description="Continua la musica")
     async def resume_command(self, ctx):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
         if player.is_paused or player.is_connected:
             await player.set_pause(False)
@@ -337,6 +342,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="play", description="Si Maubot no esta conectado a un canal se unira, Maubot añadira una cancion a la cola si ya hay una por lo contrario reproducira la cancion. Si no hay cancion Maubot resumira la cancion", usage="[cancion]")
     async def play_command(self, ctx, *, query: t.Optional[str]):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
 
         if not player.is_connected:
@@ -371,6 +377,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="pause", description="Pausa la musica")
     async def pause_command(self, ctx):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
 
         if player.is_paused or not player.is_connected:
@@ -390,6 +397,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="stop", description="Eliminara la cola y no reproducira la musica")
     async def stop_command(self, ctx):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
         player.queue.empty()
         q = player.queue
@@ -405,6 +413,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="next", aliases=["skip"], description="Reproduce la siguiente cancion")
     async def next_command(self, ctx):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
 
         if not player.queue.upcoming:
@@ -426,6 +435,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="previous", description="Reproduce la cancion anterior")
     async def previous_command(self, ctx):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
 
         if not player.queue.history:
@@ -446,6 +456,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="shuffle", description="Varajea la cola")
     async def shuffle_command(self, ctx):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
         player.queue.shuffle()
         await ctx.message.add_reaction('✅')
@@ -459,6 +470,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="repeat", aliases=["loop"], description="Escribe el modo en el que se repitira la cancion", usage="[<none (Se cancela el loop)><1 (Repite la cancion 1 vez)><all (Repite la cancion asta que se diga que no)>]")
     async def repeat_command(self, ctx, mode: str):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         if mode not in ("none", "1", "all"):
             raise InvalidRepeatMode
 
@@ -471,6 +483,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
     @commands.command(name="queue", description="Mira la lista de canciones", usage="[numero maximo de canciones en la cola]")
     async def queue_command(self, ctx, show: t.Optional[int] = 10):
+        return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
 
         if player.queue.is_empty:
