@@ -143,6 +143,8 @@ class Moderation(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.has_permissions(manage_channels=True)
     async def mute(self, ctx, member : discord.Member, *, reason=None):
+
+        
         
         if member.bot is True:
             return await ctx.send(embed=discord.Embed(color=color, title="Es un robot", description=f"{ctx.author.mention} Yo no puede banear bots"))
@@ -152,15 +154,16 @@ class Moderation(commands.Cog):
             with open(env["JSON_DIR"] + "mute.json", "r") as f:
                 user = json.load(f)
 
-
+            if not str(ctx.guild.id) in user:
+                user[str(ctx.guild.id)] = {}
             if not str(member.id) in user:
-                user[str(member.id)] = {}
-                user[str(member.id)]["razon"] = reason
+                user[str(ctx.guild.id)][str(member.id)] = {}
+                user[str(ctx.guild.id)][str(member.id)]["razon"] = reason
             else:
                 return await ctx.send("Ese usuario ya estra muteado")
 
             with open(env["JSON_DIR"] + "mute.json", "w") as f:
-                json.dump(user, f)
+                json.dump(user, f, indent=4)
 
             await ctx.send(embed=discord.Embed(title="Muteado", description=f"{ctx.author.mention}, se ha muteado a {member.mention}", color=color).add_field(name="Razon:", value=reason if reason is not None else "Sin especificar"))
         else: await ctx.send(f"Tu role es mas bajo que el de {member.mention}")
@@ -175,8 +178,10 @@ class Moderation(commands.Cog):
             with open(env["JSON_DIR"] + "mute.json", 'r') as f:
                 user = json.load(f)
 
+            if str(ctx.guild.id) in user:
+                return await ctx.send("Este servidor no tiene a nadie muteado")
             if str(member.id) in user:
-                del user[str(member.id)]
+                del user[str(ctx.guild.id)][str(member.id)]
             else:
                 return await ctx.send("Ese usuario no esta muteado")
 

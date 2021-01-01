@@ -77,12 +77,12 @@ class Mensages(commands.Cog):
         with open(env["JSON_DIR"] + "mute.json", 'r') as f:
             userm = json.load(f)
 
-        # print(message.author.id)
-        if str(message.author.id) in userm:
-            try:
-                return await message.delete()
-            except discord.Forbidden:
-                return
+        if str(message.guild.id) in userm:
+            if str(message.author.id) in userm[str(message.guild.id)]:
+                try:
+                    return await message.delete()
+                except discord.Forbidden:
+                    return
 
         if message.content == f"<@!{self.bot.user.id}>":
             await message.channel.send(embed=discord.Embed(title="Deja que me presente",

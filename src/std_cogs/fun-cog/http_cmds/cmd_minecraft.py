@@ -19,21 +19,19 @@ class Mc(commands.Cog):
 
             try:
                 u = await GetUuid(user)
-                r = await http.get(f"https://mcapi.ca/player/profile/{u}", res_method="json", no_cache=True)
+                r = await http.get(f"https://sessionserver.mojang.com/session/minecraft/profile/{u}", res_method="json", no_cache=True)
                 s = f"https://crafatar.com/renders/body/{u}" + ".png"
-                # print(s)
             except aiohttp.ClientConnectorError:
                 return await ctx.send("La API parece estar inactiva...")
             except aiohttp.ContentTypeError:
                 return await ctx.send("La API devolvió un error o no devolvió JSON...")
 
         embed = discord.Embed(colour=color)
+        embed.set_author(icon_url="https://idescargar.com/wp-content/uploads/2017/07/descargar-minecraft-pocket-edition.png", name=ctx.author.name)
+        embed.add_field(name="Nombre en el juego:", value=f'[{r["name"]}](https://es.namemc.com/profile/{r["name"]})', inline=True)
+        embed.add_field(name="Skin:", value=f"[Link para la skin]({s})", inline=True)
         embed.add_field(name="ID:", value=r["id"], inline=False)
-        embed.add_field(name="UUID:", value=r["uuid_formatted"], inline=False)
-        embed.add_field(name="Nombre en el juego:", value=f'[{r["properties_decoded"]["profileName"]}](https://es.namemc.com/profile/{r["properties_decoded"]["profileName"]})', inline=False)
-        embed.add_field(name="Skin:", value=f"[Link para la skin]({s})", inline=False)
-        embed.set_thumbnail(url=r['properties_decoded']['textures']['SKIN']['url'])
-        embed.set_image(url=s)
+        embed.set_thumbnail(url=s)
         await ctx.send(embed=embed)
 
 def setup(bot):
