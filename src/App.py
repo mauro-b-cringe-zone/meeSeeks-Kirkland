@@ -15,7 +15,7 @@ from googletrans import Translator
 import random
 import datetime
 from tqdm import tqdm 
-import gc
+import gc, requests
 
 from discord import Embed, Color, File, __version__, Forbidden, AllowedMentions, gateway
 
