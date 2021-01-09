@@ -280,7 +280,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         nodes = {
             "MAIN": {
                 "host": "maubot.maucode.com",
-                "port": 2333,
+                "port": 8000,
                 "rest_uri": str(env["IP_MUSICA"]),
                 "password": "youshallnotpass",
                 "identifier": "MAIN",
