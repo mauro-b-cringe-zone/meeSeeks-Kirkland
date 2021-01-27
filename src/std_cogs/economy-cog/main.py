@@ -398,9 +398,9 @@ class Economia(commands.Cog):
 
             inv += f"{name}: {amount}\n"    
         
-        try:
+        if not inv == "":
             em.add_field(name="Objetos:", value=inv)
-        except:
+        else:
             em.add_field(name="Objetos:", value="No tienes objetos lel")
                             
         await ctx.send(embed=em)   
