@@ -178,7 +178,7 @@ class Moderation(commands.Cog):
             with open(env["JSON_DIR"] + "mute.json", 'r') as f:
                 user = json.load(f)
 
-            if str(ctx.guild.id) in user:
+            if not str(ctx.guild.id) in user:
                 return await ctx.send("Este servidor no tiene a nadie muteado")
             if str(member.id) in user:
                 del user[str(ctx.guild.id)][str(member.id)]
