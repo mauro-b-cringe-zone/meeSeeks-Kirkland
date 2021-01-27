@@ -386,7 +386,6 @@ class Economia(commands.Cog):
         try:
             bag = users[str(user.id)]["bag"]
         except:
-            cprint(f"[Log] Un error en \"economy-cog.main\": {e}", "red")
             bag = []
 
 
