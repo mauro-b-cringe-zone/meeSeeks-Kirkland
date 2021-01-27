@@ -398,8 +398,11 @@ class Economia(commands.Cog):
 
             inv += f"{name}: {amount}\n"    
         
-        em.add_field(name="Objetos:", value=inv)
-
+        try:
+            em.add_field(name="Objetos:", value=inv)
+        except:
+            em.add_field(name="Objetos:", value="No tienes objetos lel")
+                            
         await ctx.send(embed=em)   
 
     def GetUse(self, item):
