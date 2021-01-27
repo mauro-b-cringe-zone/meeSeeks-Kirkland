@@ -67,7 +67,8 @@ class Help(commands.Cog):
         return await self.ayuda(ctx, str(cog), cogs, paginasTotales, embed)
 
     @commands.command(description="Ayuda para los comandos", usage="[cog]")
-    async def help(self, ctx, cog="0"):
+    async def help(self, ctx, cog: int = 0):
+        cog = str(cog)
         cogs = [c for c in self.bot.cogs.keys()]
         paginasTotales = math.ceil(len(cogs) / 6)
 
