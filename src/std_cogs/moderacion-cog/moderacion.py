@@ -180,7 +180,7 @@ class Moderation(commands.Cog):
 
             if not str(ctx.guild.id) in user:
                 return await ctx.send("Este servidor no tiene a nadie muteado")
-            if str(member.id) in user:
+            if not str(member.id) in user:
                 del user[str(ctx.guild.id)][str(member.id)]
             else:
                 return await ctx.send("Ese usuario no esta muteado")
