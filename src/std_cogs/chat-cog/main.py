@@ -129,7 +129,7 @@ class ChatApp(commands.Cog):
         """      
         try:  
             destinatario = ctx.message.mentions[0]
-        except:
+        except IndexError:
             return await ctx.send(embed=discord.Embed(color=color, title="¿Vas a chatear tu solo?", description=f"{ctx.author.mention} | Menciona ha alguien"))
         iniciador = ctx.author
         if int(destinatario.id) == int(iniciador.id): return await ctx.send(embed=discord.Embed(title="¿Tienes amigos no?", description="No puedes crear un chat con tigo mismo", color=color)) 
@@ -149,7 +149,11 @@ class ChatApp(commands.Cog):
         """
         Cerramos el chat con el usuario con el que este conectado y le enviamos que el chat se ha terminado
         """
-        destinatario = ctx.message.mentions[0]
+        try:
+            destinatario = ctx.message.mentions[0]
+        except IndexError:
+            return await ctx.send("Porfavor `@menciona` a alguien")
+
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 
@@ -172,7 +176,11 @@ class ChatApp(commands.Cog):
         Cerramos el chat con el usuario con el que este conectado y le enviamos que el chat se ha terminado
         """
         Ev = Eventos(self.bot)
-        destinatario = ctx.message.mentions[0]
+        try:
+            destinatario = ctx.message.mentions[0]
+        except IndexError:
+            return await ctx.send("Porfavor `@menciona` a alguien")
+        
         with open(env["JSON_DIR"] + "chats.json", "r") as f:
             chats = json.load(f)
 

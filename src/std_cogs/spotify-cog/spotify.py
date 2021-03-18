@@ -55,7 +55,7 @@ async def getUser(ctx, args, user=None, allownoargs=True):
     return ctx.author
 
 def buffer_from_url(url, *args, **kwargs):
-    try: return Image.open(BytesIO(get(url, timeout=5).content))
+    try: return Image.open(BytesIO(get(url).content))
     except: return Image.new(mode='RGB', size=(500, 500), color=(0, 0, 0))
 
 def add_corners(im, rad, top_only=False, bottom_only=False):
@@ -180,7 +180,6 @@ class Spotify(commands.Cog):
             if act is None: 
                 return await ctx.send(embed=discord.Embed(title="ups...", description=f"Lo siento, pero  {source.mention} no esta escuchando espotify.", color=color))
         async with ctx.channel.typing():
-            print(act)
             if force:
                 try:
                     return await ctx.send(file=discord.File(self.custom_panel(spt=act), 'spotify.png'))

@@ -14,9 +14,16 @@ trans = Translator()
 
 async def Chequeo(texto: str):
     texto = urlencode(texto).replace('+', '%20')
-    profanidad = requests.get(f"https://profanity.totallyusefulapi.ml/{texto}").json()
-    if profanidad["profanity"] == True:
-        return profanidad
+    _texto = requests.get(f"https://www.purgomalum.com/service/json?text={texto}&add=input&fill_char=-").json()["result"]
+    profanidad = requests.get(f"https://www.purgomalum.com/service/containsprofanity?text={texto}").content.decode() == "true"
+    
+    prof = {
+        "profanity": profanidad,
+        "censored": _texto
+    }
+
+    if prof["profanity"] == True:
+        return prof
     return False
 
 async def Seguridad(bot, msg: Message):
@@ -28,7 +35,7 @@ async def Seguridad(bot, msg: Message):
             await msg.delete()
             embed = discord.Embed(title="Se ha detectado una palabrota", color=color)
             embed.set_footer(text="m.seguridad | Para desactivarlo")
-            embed.add_field(name="Frase (En español)", value=trans.translate(chequeo["censored"], dest='es').text.replace("*", "\*"))
+            embed.add_field(name="Frase (En español)", value=trans.translate(chequeo["censored"], dest='es').text)
             await ctx.send(embed=embed)
             return True
         if "discord.gg/" in msg.content:
