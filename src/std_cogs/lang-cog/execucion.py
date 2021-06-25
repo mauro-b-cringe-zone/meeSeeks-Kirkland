@@ -26,7 +26,7 @@ import random
 from discord.colour import Colour
 
 AUTH_HEADER = 'X-RapidAPI-Key'
-BASE_URL = 'https://judge0.p.rapidapi.com'
+BASE_URL = 'https://judge0-ce.p.rapidapi.com'
 PREFIX = 'm.'
 NEWLINES_LIMIT = 10 
 CHARACTERS_LIMIT = 300
