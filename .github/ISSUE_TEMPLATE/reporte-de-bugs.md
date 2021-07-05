@@ -1,6 +1,6 @@
 ---
 name: Reporte de bugs
-about: Ayudanos a mejorar Maubot
+about: Ayudanos a mejorar meeSeeks (Kirkland)
 title: BUG
 labels: bug
 assignees: ''

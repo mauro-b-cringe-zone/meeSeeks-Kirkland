@@ -10,8 +10,8 @@
 
 Tendria que qudar algo asi
 ```env
-JSON_DIR=c:\maubot\jsons\
-DB_DIR=c:\maubot\DB\
+JSON_DIR=c:\meeSeeks-Kirkland\jsons\
+DB_DIR=c:\meeSeeks-Kirkland\DB\
 ```
 
 > Tiene que terminar con un `\`

@@ -59,7 +59,7 @@ class Servidor(commands.Cog):
         else:
             if guild[str(ctx.guild.id)] is True: 
                 guild[str(ctx.guild.id)] = False
-                await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | falso", description=f"**¿Qué implica esto?**\nMaubot ya no se encargara en analizar los mensages del servidor | **{ctx.guild.name}**", color=color))
+                await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | falso", description=f"**¿Qué implica esto?**\nmeeSeeks (Kirkland) ya no se encargara en analizar los mensages del servidor | **{ctx.guild.name}**", color=color))
             elif guild[str(ctx.guild.id)] is False: 
                 guild[str(ctx.guild.id)] = True
                 await ctx.send(embed=discord.Embed(title=f"Se ha cambiado el estado a | verdadero", description=f"**¿Qué implica esto?**\n<:list:774983585727119391> No mas de **5** menciones\n<:list:774983585727119391> No mas de **1500** caracteres en un mensage\n<:list:774983585727119391> Nada de palabrotas\n<:list:774983585727119391> Nada de links que comiencen con **discord.gg**", color=color))
@@ -144,7 +144,7 @@ class Servidor(commands.Cog):
         try:
             async with aiohttp.ClientSession() as session:
                 webhook = discord.Webhook.from_url(env["WEBHOOK_URL_ENTRADA"], adapter = discord.AsyncWebhookAdapter(session))
-                await webhook.send(content = ':inbox_tray: **Añadido a un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**' + '<:maubot:774967705831997501>')
+                await webhook.send(content = ':inbox_tray: **Añadido a un servidor** `' + guild.name.strip('`') + '` (`' + str(guild.id) + '`)\n  Total: **' + str(guild.member_count) + '** | Usuarios: **' + str(guild.member_count - len(bots)) + '** | Bots: **' + str(len(bots)) + '**' + '<:mee6:861527240139735040>')
         except:
             pass
 
@@ -152,7 +152,7 @@ class Servidor(commands.Cog):
             def check(event):
                 return event.target.id == self.bot.user.id
             bot_entry = await guild.audit_logs(action=discord.AuditLogAction.bot_add).find(check)
-            msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f"""<:maubot:774967705831997501> ¡Hola! Mi nombre es **{self.bot.user.name}**, Mi dever es hacer que tu servidor como tu se diviertan los mas posible
+            msg_ent = await bot_entry.user.send(embed=discord.Embed(title="Holaaaaaa ", description=f"""<:mee6:861527240139735040> ¡Hola! Mi nombre es **{self.bot.user.name}**, Mi dever es hacer que tu servidor como tu se diviertan los mas posible
                 Estoy seguro de que tu y yo seremos los mejores socios de la historia asique, gracias por invitarme a\n-> **{guild.name}**.
 
                 **Los prefijos de los comandos son: `&`, `m.`, `m-`, `@mencion`** - `&` Es custom\n
@@ -162,7 +162,7 @@ class Servidor(commands.Cog):
                 Para una lista de commando solo tienes que poner **m.help** y te saldran tooodos los comandos. 
                 
                 ¡Y se enviara un mensaje a mi desarroyador si pones `m.rate_bot <descripcion>`, `m.report <error>`, `m.request <cosa nueva>`! Cada uno de los comandos seran respectivos a los nombres
-                {self.bot.user.name} ¿¡A que esperas!? (https://dsc.gg/maubot_servidor)
+                {self.bot.user.name} ¿¡A que esperas!? (https://dsc.gg/kirkland-server)
                 
                 Puedes verme en:
                 -> **[top.gg](https://top.gg/bot/730124969132163093)**
@@ -177,9 +177,9 @@ class Servidor(commands.Cog):
                 -> **[infinitybots](https://infinitybots.xyz/730124969132163093)**
 
 
-                -> **[Web de Maubot](https://maubot.maucode.com)**
+                -> **[Web de meeSeeks (Kirkland)](https://kirkland.maucode.com)**
                 """, colour=color))
-            await msg_ent.add_reaction("<:maubot:774967705831997501>")
+            await msg_ent.add_reaction("<:mee6:861527240139735040>")
         except: pass
     
         with open(env["JSON_DIR"] + 'prefix.json', 'r') as f:
@@ -202,15 +202,15 @@ class Servidor(commands.Cog):
 
         channel = discord.utils.get(guild.text_channels)
 
-        embed1 = discord.Embed(title="Maubot - el mejor bot de la historia", description="<:maubot:774967705831997501> Maubot es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nMaubot tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y **mas** cosas, muchas cosas mas. Si quieres saber mas tu solo pon `m.help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
-        embed1.set_author(name='Maubot', icon_url="https://img.icons8.com/nolan/64/launched-rocket.png")
+        embed1 = discord.Embed(title="meeSeeks (Kirkland) - el mejor bot de la historia", description="<:mee6:861527240139735040> meeSeeks (Kirkland) es un bot para que tu puedas hacer cosas diversas en tu servidor.\n\nmeeSeeks (Kirkland) tiene muchas funciones como: divertirte, puedes cambiar el prefijo del bot (por si quieres) y **mas** cosas, muchas cosas mas. Si quieres saber mas tu solo pon `m.help` o con el prefijo que tu le ayas puesto.\n\n", colour=color)
+        embed1.set_author(name='meeSeeks (Kirkland)', icon_url="https://img.icons8.com/nolan/64/launched-rocket.png")
         embed1.add_field(name="¿Necesitas ayuda?", value=f"Puedes poner **m.help** para conseguir una lista de los comandos mas guays del mundo desde diversion hasta musica y economia. La lista de comandos estan separadas por secciones asi que podrias poner `m.help [seccion]` para descubrir mas comandos super chulos. o si no puedes poner **<@730124969132163093>** .", inline=True)
-        embed1.add_field(name="Diversion atope", value=f"Maubot tiene muchos comando para divertirse con manipulacion de imagenes a juegos como el `conecta4`, `rps` y mucho mas. Maubot tambien tiene un sistema de economia muy avanzado para ser millonarios y dominar el mundo 🤤...", inline=True)
-        embed1.add_field(name="Legal", value=f"Escribe `&copyright` para ver el copyright de Maubot.", inline=False)
-        embed1.add_field(name="¿Aun no te has enterado?", value=f"Puedes ver un tutorial de como usar Maubot poniendo <@730124969132163093>", inline=False)
-        embed1.set_footer(text="Maubot - Puedes escribir @Maubot para mas info")
+        embed1.add_field(name="Diversion atope", value=f"meeSeeks (Kirkland) tiene muchos comando para divertirse con manipulacion de imagenes a juegos como el `conecta4`, `rps` y mucho mas. meeSeeks (Kirkland) tambien tiene un sistema de economia muy avanzado para ser millonarios y dominar el mundo 🤤...", inline=True)
+        embed1.add_field(name="Legal", value=f"Escribe `&copyright` para ver el copyright de meeSeeks (Kirkland).", inline=False)
+        embed1.add_field(name="¿Aun no te has enterado?", value=f"Puedes ver un tutorial de como usar meeSeeks (Kirkland) poniendo <@730124969132163093>", inline=False)
+        embed1.set_footer(text="meeSeeks (Kirkland) - Puedes escribir @Mee6 kirkland para mas info")
 
-        msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://dsc.gg/maubot_servidor)**", embed=embed1)
+        msg_h1 = await channel.send(content="Hola, gracias por meterme en este servidor. \nlos mensajes de abajo os explicaran algunas características sobre mi.\nSi alguien quiere apoyar mi servidor por favor dale a este link **(https://dsc.gg/kirkland-server)**", embed=embed1)
 
 def setup(bot):
     bot.add_cog(Servidor(bot))

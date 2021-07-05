@@ -56,16 +56,16 @@ class App(commands.Bot):
 
         self.__autor__ = "Maubg"
         self.__github__ = "https://github.com/maubg-debug/"
-        self.__repo__ = "https://github.com/maubg-debug/maubot"
+        self.__repo__ = "https://github.com/maubg-debug/meeSeeks-Kirkland"
         self.__version__ = "1.0.0"      
-        self.__web__ = "https://maubot.maucode.com"
+        self.__web__ = "https://kirkland.maucode.com"
 
         self.__estado = "███████╗███████╗ ██╔════╝╚════██║ █████╗░░░░███╔═╝ ██╔══╝░░██╔══╝░░ ███████╗███████╗ ╚══════╝╚══════╝"
 
         self.__cogs = cogs
         self.color = int(env.get("COLOR"))
 
-        self.help_url = "https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG"
+        self.help_url = "https://github.com/maubg-debug/meeSeeks-Kirkland/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG"
 
         try:
             self.__load_cogs()
@@ -84,8 +84,8 @@ class App(commands.Bot):
 
     async def on_ready(self):
         await self.change_presence(activity=discord.Activity(type=5, name=self.__estado))
-        Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de maubot     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
-        Logger.success(f'Maubot esta online como "{self.user}".', separador=True)
+        Logger.success(f"--------------------------------------------------------------------------------------------------\nInfo: \n1. Autor              | {self.__autor__}\n2. Github del creador | {self.__github__}\n3. Repo de meeSeeks (Kirkland)     | {self.__repo__}\n4. Version            | {self.__version__}\n5. Web                | {self.__web__}", separador=False)
+        Logger.success(f'meeSeeks (Kirkland) esta online como "{self.user}".', separador=True)
 
     async def on_message(self, message):
         await run_middleware_stack(message)
@@ -169,14 +169,14 @@ class App(commands.Bot):
 
             embed=discord.Embed(
                                 title="¡Ha ocurrido un error!", 
-                                description=f"Se ha reportado a [nuestro servidor](https://dsc.gg/maubot_servidor). Tambien puedes poner `m.report <error>` \n```Error:\n{str(exception)}```",
+                                description=f"Se ha reportado a [nuestro servidor](https://dsc.gg/kirkland-server). Tambien puedes poner `m.report <error>` \n```Error:\n{str(exception)}```",
                                 color=15750742).set_footer(
-                                    text="Maubot error | Solo envia bugs a github si son importantes | m.help [seccion]"
+                                    text="meeSeeks (Kirkland) error | Solo envia bugs a github si son importantes | m.help [seccion]"
                                 )
 
             webhook_url = env.get("WEBHOOK_URL_ERRORES")
             options = {
-                "application_name": "Maubot | Errores",
+                "application_name": "meeSeeks (Kirkland) | Errores",
                 "service_name": "Error de comando",
                 "service_environment": "Produccion",
                 "default_level": "info",
@@ -186,7 +186,7 @@ class App(commands.Bot):
 
             logger = DiscordLogger(webhook_url=webhook_url, **options)
             logger.construct(
-                title="Un error con Maubot",
+                title="Un error con meeSeeks (Kirkland)",
                 description=f"¡Un error en el comando `{context.invoked_with}`!",
                 error=exception,
                 metadata={"host": 5000},
@@ -245,7 +245,7 @@ def eliminar_prefix(guild):
     with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
         json.dump(prefixes, f, indent=4)
 
-class Maubot(commands.Cog):
+class meeSeeks(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -266,7 +266,7 @@ class Maubot(commands.Cog):
         with open(env.get("JSON_DIR") + 'prefix.json', 'w') as f:
             json.dump(prefixes, f, indent=4)
         e = discord.Embed(title="Se a cambiado el prefijo correctamente", description=f'Se a cambiado el prefijo a:      `{prefix}`\nLos prefijos de este servidor son: `{prefix}`, `m.` `m-`', color=color)
-        e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://dsc.gg/maubot_servidor)**")
+        e.add_field(name="¡Tenemos un servidor!", value="**Unete a nuestro server  ->  (https://dsc.gg/kirkland-server)**")
         await ctx.send(embed=e)
 
     @commands.command(name="bot", usage="[info | config]", description="Mira la info del bot o la config (m._bot info | m._bot config)")
@@ -275,44 +275,44 @@ class Maubot(commands.Cog):
         inf_con = inf_con.lower()
         if inf_con == 'info':
             em = discord.Embed(timestamp=datetime.datetime.utcnow(), colour=color)
-            em.title = 'Info de Maubot'
+            em.title = 'Info de meeSeeks (Kirkland)'
             em.set_author(name=ctx.author.name, icon_url="https://img.icons8.com/plasticine/100/000000/bot.png")
             try:
-                em.description = self.bot.psa + '\n[Soporta nuestro server](https://dsc.gg/maubot_servidor)'
+                em.description = self.bot.psa + '\n[Soporta nuestro server](https://dsc.gg/kirkland-server)'
             except AttributeError:
-                em.description = 'Un bot echo por [Maubg](https://github.com/maubg-debug). [¡Ùnete a que esperas!](https://dsc.gg/maubot_servidor)'
+                em.description = 'Un bot echo por [Maubg](https://github.com/maubg-debug). [¡Ùnete a que esperas!](https://dsc.gg/kirkland-server)'
             em.add_field(name="Servidores", value=f"> {len(self.bot.guilds)}")
             em.add_field(name="Usuarios online", value=f"> {str(len({m.id for m in self.bot.get_all_members() if m.status is not discord.Status.offline}))}")
             em.add_field(name='Usuarios totales', value=f"> {len(self.bot.users)}")
             em.add_field(name="Librerías", value=f"> discord.py")
             em.add_field(name="Tardanza de respuesta", value=f"> {self.bot.ws.latency * 1000:.0f} ms")        
-            em.add_field(name="Color de maubot", value=f"> {color}")       
+            em.add_field(name="Color de meeSeeks (Kirkland)", value=f"> {color}")       
             c = self.bot.get_user(700812754855919667)
-            em.add_field(name="Creador de maubot", value=f"> {c.name}#{c.discriminator}")         
-            em.add_field(name="id de maubot", value=f"> 730124969132163093")  
+            em.add_field(name="Creador de meeSeeks (Kirkland)", value=f"> {c.name}#{c.discriminator}")         
+            em.add_field(name="id de meeSeeks (Kirkland)", value=f"> 730124969132163093")  
             em.add_field(name="discriminador", value=f"> #6247")    
             em.add_field(name="prefijo", value=f"> {ctx.prefix}") 
             em.add_field(name="descripcion", value=f"{self.bot.description}") 
             em.add_field(name="Invita al bot", value=f"> [Invita al bot](https://discordapp.com/oauth2/authorize?client_id={self.bot.user.id}&permissions=8&scope=bot)", inline=True)
 
-            em.add_field(name="INFORMACÍON", value=f"```Maubot es un discord bot que puede ser utilizado para ajustar servidores, diversíon, imagenes, informacíon, y mucho mas. El creador es ({c.name}#{c.discriminator}) por si quereis contactarlo.```", inline=False)
-            em.set_footer(text="Maubot | Echo por Maubg")
+            em.add_field(name="INFORMACÍON", value=f"```meeSeeks (Kirkland) es un discord bot que puede ser utilizado para ajustar servidores, diversíon, imagenes, informacíon, y mucho mas. El creador es ({c.name}#{c.discriminator}) por si quereis contactarlo.```", inline=False)
+            em.set_footer(text="meeSeeks (Kirkland) | Echo por Maubg")
             await ctx.send(embed=em) 
 
         elif inf_con == 'config':
             em = discord.Embed(timestamp=datetime.datetime.utcnow(), colour=color)
-            em.title = 'Configuracion de Maubot'
+            em.title = 'Configuracion de meeSeeks (Kirkland)'
             em.set_footer(text=ctx.author.name, icon_url=ctx.author.avatar_url)
             try:
-                em.description = self.bot.psa + '[Soporta nuestro server](https://dsc.gg/maubot_servidor)'
+                em.description = self.bot.psa + '[Soporta nuestro server](https://dsc.gg/kirkland-server)'
             except AttributeError:
-                em.description = '[¡Unete a que esperas!](https://dsc.gg/maubot_servidor)'
+                em.description = '[¡Unete a que esperas!](https://dsc.gg/kirkland-server)'
             em.add_field(name="Prefijo", value=f"Escribe este commando y luego el prefijo que quieras **ej: {ctx.prefix}prefix <prefijo>**")
             em.add_field(name="Niveles", value=f"Se es para activar los niveles **ej: {ctx.prefix}levels**")
-            em.add_field(name="Seguridad", value=f"Maubot eliminara links, spam, etc **ej: {ctx.prefix}seguridad**")
+            em.add_field(name="Seguridad", value=f"meeSeeks (Kirkland) eliminara links, spam, etc **ej: {ctx.prefix}seguridad**")
 
 
-            em.set_footer(text="Maubot | Echo por Maubg")
+            em.set_footer(text="meeSeeks (Kirkland) | Echo por Maubg")
             await ctx.send(embed=em) 
         else:
             await ctx.send(embed=discord.Embed(title="Escoje de estas opciones", description=f"- {ctx.prefix}bot info\n- {ctx.prefix}bot config", color=color))
@@ -384,14 +384,14 @@ class Maubot(commands.Cog):
     @commands.command(description="Mira el token del bot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def token(self, ctx):
-        embed = discord.Embed(title="🔑 ¡Toma tu llave! <:bot:774580334259994625>", description=requests.get("https://maubot.maucode.com/api/token").json()["msg"], colour=color)
+        embed = discord.Embed(title="🔑 ¡Toma tu llave! <:bot:774580334259994625>", description=requests.get("https://kirkland.maucode.com/api/token").json()["msg"], colour=color)
         await ctx.send(embed=embed)
 
     @commands.command(asliases=['link', 'links'], description="Los links del bot")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def links(self, ctx):
 
-        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://dsc.gg/maubot)\n**Server**: (https://dsc.gg/maubot_servidor)\n**Web**: [Link](https://maubot.maucode.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
+        embed = discord.Embed(description=f"**Link para el bot:** [Mi link](https://dsc.gg/mee6-kirkland)\n**Server**: (https://dsc.gg/kirkland-server)\n**Web**: [Link](https://kirkland.maucode.com/)\n**Github**: [linky](https://github.com/maubg-debug/maubot)\n**Github del creador**: [link Github](https://github.com/maubg-debug/)", colour=color)
         l = """
             -> **[top.gg](https://top.gg/bot/730124969132163093)**
             -> **[blist.xyz](https://blist.xyz/bot/730124969132163093/)**
@@ -406,7 +406,7 @@ class Maubot(commands.Cog):
         """
         embed.add_field(name="Puedes verme en:", value=l)
         embed.set_author(name="INVITACIONES", icon_url="https://img.icons8.com/color/48/000000/share.png")
-        embed.set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-share-icon.png")
+        embed.set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/meeSeeks-Kirkland/main/docs/maubot-share-icon.png")
         # embed.set_image(url="https://cdn.discordapp.com/attachments/746668731060715551/746761731942121532/unknown.png")
         await ctx.send(embed=embed)
 
@@ -414,7 +414,7 @@ class Maubot(commands.Cog):
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def invite(self, ctx):
 
-        embed = discord.Embed(description=f"**https://dsc.gg/maubot**", colour=color)
+        embed = discord.Embed(description=f"**https://dsc.gg/mee6-kirkland**", colour=color)
         await ctx.send(embed=embed)
 
     @commands.command(description="¿Quien es el jefe del servidor?")
@@ -475,7 +475,7 @@ class Feedback(commands.Cog):
 
         try:
             reaction, user = await self.bot.wait_for("reaction_add", timeout=20, check=_check)
-            embed_done.add_field(name="Gracias por tu calificacion", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://dsc.gg/maubot_servidor) para decirnos que tal tu experencia**")
+            embed_done.add_field(name="Gracias por tu calificacion", value=f"estrellas: **{reaction.emoji}**\n\n**Descripcion:**\n{texto}\n **Si quieres te puedes unir a [nuestro server](https://dsc.gg/kirkland-server) para decirnos que tal tu experencia**")
 
 
         except asyncio.TimeoutError:
@@ -514,8 +514,8 @@ class Feedback(commands.Cog):
         creator = await self.bot.fetch_user(700812754855919667)
         authors_name = str(ctx.author)
         await creator.send(embed=discord.Embed(title="Nuevo bug", description=f':triangular_flag_on_post: {authors_name}: {error_report}', color=color))
-        await ctx.send(embed=discord.Embed(title="Gracias", description=f''':triangular_flag_on_post: Gracias por tu ayuda, ¡El error ha sido informado! Pero tambien lo puedes sugerir en [Github](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)''', color=color))
+        await ctx.send(embed=discord.Embed(title="Gracias", description=f''':triangular_flag_on_post: Gracias por tu ayuda, ¡El error ha sido informado! Pero tambien lo puedes sugerir en [Github](https://github.com/maubg-debug/meeSeeks-Kirkland/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)''', color=color))
 
 def setup(app):
-    app.add_cog(Maubot(app))
+    app.add_cog(meeSeeks(app))
     app.add_cog(Feedback(app))

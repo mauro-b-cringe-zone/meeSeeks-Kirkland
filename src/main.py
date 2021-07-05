@@ -15,9 +15,9 @@ from termcolor import cprint
 
 __autor__ = "Maubg"
 __github__ = "https://github.com/maubg-debug/"
-__repo__ = "https://github.com/maubg-debug/maubot/"
+__repo__ = "https://github.com/maubg-debug/meeSeeks-Kirkland/"
 __version__ = "1.0.0"
-__web__ = "https://maubot.maucode.com"
+__web__ = "https://kirkland.maucode.com"
 
 def preparar():
 
@@ -45,13 +45,13 @@ def preparar():
     #       COMPRUEBE LA VERSION 3.X DE PYTHON
     # ---------------------------------------------------------------------------------------------------------------------- #
     if not is_min_python_3_6:
-        Logger.error('Maubot fue desarrollado para Python 3. Utilice la version 3.6 o superior.')
+        Logger.error('meeSeeks (Kirkland) fue desarrollado para Python 3. Utilice la version 3.6 o superior.')
         sys.exit(1)
 
     # ---------------------------------------------------------------------------------------------------------------------- #
     #       LIBERACION DEL BOT
     # ---------------------------------------------------------------------------------------------------------------------- #
-    env.set('VERSION_MAUBOT', "0.1")
+    env.set('VERSION_MEESEEKS', "0.1")
 
     # ---------------------------------------------------------------------------------------------------------------------- #
     #       Base de datos INIT
@@ -115,7 +115,7 @@ def preparar():
 
     app = App(cogs, 
               command_prefix=prefix.get_prefix, 
-              description="Maubot | El mejor bot de la historia", 
+              description="meeSeeks (Kirkland) | El mejor bot de la historia", 
               help_command=None, 
               intents=intents
             )
@@ -143,7 +143,7 @@ if __name__ == "__main__":
         cprint("\nPuedes poner help para ver la lista de comando\n", "green")
         while True:
             try:
-                comando = input("Maubot -> ")
+                comando = input("meeSeeks (Kirkland) -> ")
             except KeyboardInterrupt:
                 cprint("\n\nSi quieres salir del programa deverias de poner \"exit()\"\n", "yellow")
                 continue

@@ -4,7 +4,7 @@
         "bot": 730124969132163093
     },
     "emojis": {
-        "maubot": "<:maubot:774967705831997501>",
+        "mee6": "<:mee6:861527240139735040>",
         "estados": {
             "online": "<:online:774982837354496021>",
             "offline": "<:offline:774982964592640030>",
@@ -42,5 +42,5 @@
     },
     "servidor": 774577061893242930,
     "inicio": "python ./src/main.py --cmd run",
-    "web": "http://maubot.maucode.com"
+    "web": "http://kirkland.maucode.com"
 }

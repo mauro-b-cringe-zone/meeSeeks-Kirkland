@@ -80,12 +80,12 @@ class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(description="Un url-shortener en maubot")
+    @commands.command(description="Un url-shortener en meeSeeks (Kirkland)")
     @commands.cooldown(1, 5, commands.BucketType.user)       
     async def url(self, ctx: commands.Context, *, url: str):
         url = EncontrarUrl(url)[0]
-        codigo = requests.get(f"https://maubot.maucode.com/api/redir/crear?url={url}").json()
-        await ctx.send(embed=discord.Embed(color=color, title=f"Se te ha creado una url | {codigo['codigo']}", description=f"Puedes visitarlo dandole al link \n-> **https://maubot.maucode.com/api/redir?codigo={codigo['codigo']}**"))
+        codigo = requests.get(f"https://kirkland.maucode.com/api/redir/crear?url={url}").json()
+        await ctx.send(embed=discord.Embed(color=color, title=f"Se te ha creado una url | {codigo['codigo']}", description=f"Puedes visitarlo dandole al link \n-> **https://kirkland.maucode.com/api/redir?codigo={codigo['codigo']}**"))
 
     @commands.command(description="Mira la tardanza de respuesta")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -118,7 +118,7 @@ class General(commands.Cog):
         embed.set_footer(text=f"Tiempo total estimado transcurrido: {round(sum(times))}ms")
         await msg.edit(content=f":ping_pong: **{round((round(sum(times)) + round(self.bot.latency * 1000))/4)}ms**", embed=embed)
 
-    @commands.command(aliases='useless,uselesssites,uselessweb,uselesswebsites,uselesswebsite'.split(","), description="https://maubot.maucode.com/")
+    @commands.command(aliases='useless,uselesssites,uselessweb,uselesswebsites,uselesswebsite'.split(","), description="https://kirkland.maucode.com/")
     @commands.cooldown(1, 3, commands.BucketType.user)
     async def uselesswebs(self, ctx):
         try:
@@ -156,7 +156,7 @@ class General(commands.Cog):
 
         statuses = Counter(member.status for member in ctx.guild.members)
 
-        embed = discord.Embed(title=f"Informacion del servidor __{ctx.guild.name}__", description=f"**ID:** {ctx.guild.id}\n**Creado:** {created}\n**Creador:** {ctx.guild.owner}\n**Region**: {region}\n**Caracteristicas:** {features}\n\n**Contador de miembros**\nMiembros: **{len(ctx.guild.members)}**\nHumanos: **{len(list(filter(lambda m: not m.bot, ctx.guild.members)))}**\nBots: **{len(list(filter(lambda m: m.bot, ctx.guild.members)))}**\n\n**Estados de los miembros**\n<:online:774982837354496021> {statuses[Status.online]:,}  <:idle:774983296533790730> {statuses[Status.idle]:,}  <:dnd:774983232541163541> {statuses[Status.dnd]:,}  <:offline:774982964592640030> {statuses[Status.offline]:,}\n\n**Canales:**\nCanales de texto: **{len(ctx.guild.text_channels)}**\nCanales de voz: **{len(ctx.guild.voice_channels)}**\nCategorias: **{len(ctx.guild.categories)}**\n\n**Mas info:**\nRoles: **{len(ctx.guild.roles)}**\nInvitaciones: **{len(await ctx.guild.invites())}**\n\nUnete al mio **( https://dsc.gg/maubot_servidor )**\nInvitame a otro servidor **( [Link para el bot](https://dsc.gg/maubot) )**", colour=color)
+        embed = discord.Embed(title=f"Informacion del servidor __{ctx.guild.name}__", description=f"**ID:** {ctx.guild.id}\n**Creado:** {created}\n**Creador:** {ctx.guild.owner}\n**Region**: {region}\n**Caracteristicas:** {features}\n\n**Contador de miembros**\nMiembros: **{len(ctx.guild.members)}**\nHumanos: **{len(list(filter(lambda m: not m.bot, ctx.guild.members)))}**\nBots: **{len(list(filter(lambda m: m.bot, ctx.guild.members)))}**\n\n**Estados de los miembros**\n<:online:774982837354496021> {statuses[Status.online]:,}  <:idle:774983296533790730> {statuses[Status.idle]:,}  <:dnd:774983232541163541> {statuses[Status.dnd]:,}  <:offline:774982964592640030> {statuses[Status.offline]:,}\n\n**Canales:**\nCanales de texto: **{len(ctx.guild.text_channels)}**\nCanales de voz: **{len(ctx.guild.voice_channels)}**\nCategorias: **{len(ctx.guild.categories)}**\n\n**Mas info:**\nRoles: **{len(ctx.guild.roles)}**\nInvitaciones: **{len(await ctx.guild.invites())}**\n\nUnete al mio **( https://dsc.gg/kirkland-server )**\nInvitame a otro servidor **( [Link para el bot](https://dsc.gg/mee6-kirkland) )**", colour=color)
 
         embed.set_thumbnail(url=ctx.guild.icon_url)
         # embed.set_footer(text=f"Propuesto por {ctx.author.name}", icon_url=ctx.author.icon_url)
@@ -366,7 +366,7 @@ class General(commands.Cog):
     async def copyright(self, ctx):
         embed = discord.Embed(colour=color)
         embed.set_author(name="Copyright", icon_url="https://img.icons8.com/color/48/000000/creative-commons--v1.png")
-        embed.description = "> Maubot esta bajo la licencia de [GNU](https://github.com/maubg-debug/maubot/blob/main/LICENSE.md)"
+        embed.description = "> meeSeeks (Kirkland) esta bajo la licencia de [GNU](https://github.com/maubg-debug/meeSeeks-Kirkland/blob/main/LICENSE.md)"
 
         await ctx.send(embed=embed)
 

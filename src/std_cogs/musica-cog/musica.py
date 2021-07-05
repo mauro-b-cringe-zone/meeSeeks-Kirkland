@@ -279,7 +279,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
 
         nodes = {
             "MAIN": {
-                "host": "maubot.maucode.com",
+                "host": "meeSeeks-Kirkland.maucode.com",
                 "port": 8000,
                 "rest_uri": str(env["IP_MUSICA"]),
                 "password": "youshallnotpass",
@@ -297,7 +297,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         elif isinstance(obj, discord.Guild):
             return self.wavelink.get_player(obj.id, cls=Player)
 
-    @commands.command(name="connect", aliases=["join"], description="Maubot se unira a un canal de voz", usage="[canal]")
+    @commands.command(name="connect", aliases=["join"], description="meeSeeks (Kirkland) se unira a un canal de voz", usage="[canal]")
     async def connect_command(self, ctx, *, channel: t.Optional[discord.VoiceChannel]):
 
         return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
@@ -320,7 +320,7 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         elif isinstance(exc, NoVoiceChannel):
             await ctx.send("No se ha encontrado ningun canal de voz.")
 
-    @commands.command(name="disconnect", aliases=["leave"], description="Maubot se ira a un canal de voz")
+    @commands.command(name="disconnect", aliases=["leave"], description="meeSeeks (Kirkland) se ira a un canal de voz")
     async def disconnect_command(self, ctx):
         return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
@@ -338,9 +338,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
             await player.set_pause(False)
             await ctx.send(embed=discord.Embed(title="Reproducción reanudada.", color=color))
         else:
-            await ctx.send("Maubot no esta parado")
+            await ctx.send("meeSeeks (Kirkland) no esta parado")
 
-    @commands.command(name="play", description="Si Maubot no esta conectado a un canal se unira, Maubot añadira una cancion a la cola si ya hay una por lo contrario reproducira la cancion. Si no hay cancion Maubot resumira la cancion", usage="[cancion]")
+    @commands.command(name="play", description="Si meeSeeks (Kirkland) no esta conectado a un canal se unira, meeSeeks (Kirkland) añadira una cancion a la cola si ya hay una por lo contrario reproducira la cancion. Si no hay cancion meeSeeks (Kirkland) resumira la cancion", usage="[cancion]")
     async def play_command(self, ctx, *, query: t.Optional[str]):
         return await ctx.send("El sistema de musica esta desactivado por ahora ya que estamos resolviendo errores")
         player = self.get_player(ctx)
@@ -401,9 +401,9 @@ class Music(commands.Cog, wavelink.WavelinkMixin):
         player = self.get_player(ctx)
         player.queue.empty()
         q = player.queue
-        if not player.is_connected: return await ctx.send("Maubot no esta conectado a un canal de voz")
+        if not player.is_connected: return await ctx.send("meeSeeks (Kirkland) no esta conectado a un canal de voz")
         if q.is_empty and not player.is_playing:
-            return await ctx.send("Maubot ya esta parado")
+            return await ctx.send("meeSeeks (Kirkland) ya esta parado")
         await player.stop()
         await ctx.message.add_reaction('⏹')
 

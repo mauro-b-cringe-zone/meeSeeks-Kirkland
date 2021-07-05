@@ -20,9 +20,9 @@ class Help(commands.Cog):
             return await ctx.send(embed=discord.Embed(color=int(env["COLOR"]), description=f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]"))
 
         embed.set_footer(
-            text=f"Puedes poner @Maubot#6247 para mas info | Pagina {cog} de {paginasTotales}"
+            text=f"Puedes poner @Mee6 kirkland#6247 para mas info | Pagina {cog} de {paginasTotales}"
         )
-        embed.description = f"**Prefijos:** `{json.load(open(env['JSON_DIR'] + 'prefix.json'))[str(ctx.guild.id)]}, m., m-`\nMaubot tiene una pagina web, si quieres visitarla dale **[aqui](https://maubot.maucode.com)**\n-=-=-=-=-=-=-=-=-=-="
+        embed.description = f"**Prefijos:** `{json.load(open(env['JSON_DIR'] + 'prefix.json'))[str(ctx.guild.id)]}, m., m-`\nmeeSeeks (Kirkland) tiene una pagina web, si quieres visitarla dale **[aqui](https://kirkland.maucode.com)**\n-=-=-=-=-=-=-=-=-=-="
 
         CogsNecesitados = []
         for i in range(4):
@@ -52,7 +52,7 @@ class Help(commands.Cog):
     async def ayuda_reaccionada(self, ctx, cog, cogs, paginasTotales, embed):
         if int(cog) == 0:
             embedhs = discord.Embed(title="-=-=-=-=-= Ayuda -=-=-=-=-=", color=int(env["COLOR"]))
-            embedhs.description = "Si tienes alguna duda con maubot puedes verla [aqui](https://dsc.gg/maubot_servidor)"
+            embedhs.description = "Si tienes alguna duda con meeSeeks (Kirkland) puedes verla [aqui](https://dsc.gg/kirkland-server)"
             embedhs.add_field(name="-=-=-=-  Buscar por paginas  -=-=-=-", value=f"En el comando de ayuda puedes buscar con las paginas poniendo `m.help <numero de pagina>` | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.randint(2, 7)}**", inline=False)
             embedhs.add_field(name="-=-=-=-  Buscar por cogs  -=-=-=-", value=f"Si no te gustan los numeros puedes buscar por los nombres de los cogs que tendras que ir viendo entre las paginas para ver mas informacion como uso | Puedes escoger de {paginasTotales} paginas\n**eg. m.help {random.choice(cogs).lower()}**")                
             cogsL = ""
@@ -173,7 +173,7 @@ class Help(commands.Cog):
                 return await ctx.send(embed=discord.Embed(color=int(env["COLOR"]), description=f"Argumento invalido: `{cog}`. Porfavor escoje de {paginasTotales} paginas.\nO tambien lo que puedes hacer es que puedes pone {ctx.prefix}help [categoria]"))
 
             embed.set_footer(
-                text=f"Puedes poner @Maubot#6247 para mas info | Cog {congMinusculas.index(cog.lower())+1} de {len(congMinusculas)}"
+                text=f"Puedes poner @Mee6 kirkland#6247 para mas info | Cog {congMinusculas.index(cog.lower())+1} de {len(congMinusculas)}"
             )
 
             textoDeAyuda = ""

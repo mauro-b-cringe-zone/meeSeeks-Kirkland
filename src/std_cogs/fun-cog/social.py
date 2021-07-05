@@ -66,7 +66,7 @@ class Social(commands.Cog):
             return await ctx.send(f'Porfavor pon a alguien!\nejemplo: {ctx.prefix}hack <@'+str(ctx.message.author.id)+'>')
         if tohack==None: 
             tohack = ctx.message.mentions[0]
-        console = 'maubot@HACKERMAN:/$ '
+        console = 'meeSeeks (Kirkland)@HACKERMAN:/$ '
         if len(ctx.message.mentions)>0 or foundArgs:
             main = await ctx.send('Abriendo consola...\n```bash\nCargando...```')
             flow = hackflow(tohack)

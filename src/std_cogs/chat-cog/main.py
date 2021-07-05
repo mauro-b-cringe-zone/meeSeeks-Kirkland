@@ -42,7 +42,7 @@ class Eventos():
             　a. Si pone un mensage de que no
             　　se pueden enviar mesages es que ha funcionado.
 
-            　b. Si no porfavor anuncialo **[aqui](https://github.com/maubg-debug/maubot/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)**
+            　b. Si no porfavor anuncialo **[aqui](https://github.com/maubg-debug/meeSeeks-Kirkland/issues/new?assignees=&labels=bug&template=reporte-de-bugs.md&title=BUG)**
         """
         await ctx.send(embed=embed)
 
@@ -198,13 +198,13 @@ class ChatApp(commands.Cog):
         with open(env["JSON_DIR"] + "chats.json", "w") as f:
             json.dump(chats, f)
 
-    @commands.command(description="Habla con Maubot", usage="<Texto>")
+    @commands.command(description="Habla con meeSeeks (Kirkland)", usage="<Texto>")
     async def chatbot(self, ctx, *, message):
         message = trans.translate(message, dest="en").text
         key = env["CHAT_AI_BOT"]
         url = requests.get(f"http://api.brainshop.ai/get?bid=154295&key={key}&uid=154295&msg={message}").json()["cnt"]
         result = trans.translate(url, dest="es").text
-        embed=discord.Embed(color=color, title="Maubot | AI", description=result)
+        embed=discord.Embed(color=color, title="meeSeeks (Kirkland) | AI", description=result)
         await ctx.send(embed=embed)
 
 def setup(bot):

@@ -86,14 +86,14 @@ class Mensages(commands.Cog):
 
         if message.content == f"<@!{self.bot.user.id}>":
             await message.channel.send(embed=discord.Embed(title="Deja que me presente",
-                                                           url="https://maubot.maucode.com", 
-                                                           description="<:maubot:774967705831997501> Hola, mi nombre es Maubot. Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **m.help**", 
-                                                           colour=color).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-icon.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `m.help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `&rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**", inline=False))
+                                                           url="https://kirkland.maucode.com", 
+                                                           description="<:mee6:861527240139735040> Hola, mi nombre es meeSeeks (Kirkland). Si quieres conocer todos mis comandos, usa la ayuda de comandos, es bastante fácil usar todos mis comandos y dominarlos. Si quieres usar todos mis comandos, mis prefijos son (**<@!730124969132163093> prefijos**) Y para ver mis commandos solo pon **m.help**", 
+                                                           colour=color).set_thumbnail(url="https://raw.githubusercontent.com/maubg-debug/meeSeeks-Kirkland/main/docs/maubot-icon.png").add_field(name="Mis comandos", value="¿No saves que hacer? Puedes poner `m.help [Seccion]` y veras todos mis comandos disponibles. Si tienes cosas que decir siempre puedes poner `&rate_bot <Reseña>` y te responderemos **lo mas rapido** posible").add_field(name="¿Para que sirvo?", value="Mi dever en tu servidor es hacer que la gente se divierta con mis memes, que la gente le guste la musica y mi sistema de dinero, que el servidor sea bonito y **¡Mucho mas!**", inline=False))
 
         if message.content == f"<@!{self.bot.user.id}> prefijos":
                     await message.channel.send(embed=discord.Embed(title="Mis prefijos", 
-                                                description="<:maubot:774967705831997501> Mis prefijos son `& (O custom m.prefix [prefijo])`, `m-`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
-                                                colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/maubot/main/docs/maubot-help-prefix.png"))
+                                                description="<:mee6:861527240139735040> Mis prefijos son `& (O custom m.prefix [prefijo])`, `m-`, `m.` - O tambien puedes poner <@!730124969132163093> ", 
+                                                colour=color).set_image(url="https://raw.githubusercontent.com/maubg-debug/meeSeeks-Kirklandaubot/main/docs/maubot-help-prefix.png"))
 
 
         with open(env["JSON_DIR"] + "userslvl.json", "r") as f:

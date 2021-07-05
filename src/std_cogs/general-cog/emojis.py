@@ -73,7 +73,7 @@ class Emoji(commands.Cog):
                 continue
             response = requests.get(url, stream=True)
             if response.status_code == 404:
-                await ctx.send("El emoji {} no lo encontre. Abre un error en <https://github.com/maubg-debug/maubot/issues> con el nombre no existente del emoji".format(emoji))
+                await ctx.send("El emoji {} no lo encontre. Abre un error en <https://github.com/maubg-debug/meeSeeks-Kirkland/issues> con el nombre no existente del emoji".format(emoji))
                 continue
 
             img = io.BytesIO()

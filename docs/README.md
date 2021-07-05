@@ -22,7 +22,7 @@ b) Completa los valores
 
 ---
 #### 5. archivo.env
-Todo esta en el [.example.env](https://github.com/maubg-debug/maubot/blob/main/.example.env)
+Todo esta en el [.example.env](https://github.com/maubg-debug/meeSeeks-Kirkland/blob/main/.example.env)
 ```txt
 # https://discord.com/developers/applications
 TOKEN = 
@@ -30,10 +30,10 @@ TOKEN =
 # https://openweathermap.org/api
 WEATHER_KEY =
 
-# https://github.com/maubg-debug/maubot/blob/main/docs/README.md#4-archivoenv 
+# https://github.com/maubg-debug/meeSeeks-Kirkland/blob/main/docs/README.md#4-archivoenv 
 COMP_KEY =
 
-# https://github.com/maubg-debug/maubot/blob/main/docs/README.md#instrucciones-para-el-color-del-env 
+# https://github.com/maubg-debug/maubmeeSeeks-Kirklandot/blob/main/docs/README.md#instrucciones-para-el-color-del-env 
 COLOR = 
 
 # Esto ya esta rellenado
@@ -46,7 +46,7 @@ DEBUG=
 # https://brainshop.ai/
 CHAT_AI_BOT = 
 
-# Las instrucciones se pueden ver aqui https://github.com/maubg-debug/maubot/tree/main/data#instalacion-de-data
+# Las instrucciones se pueden ver aqui https://github.com/maubg-debug/meeSeeks-Kirkland/tree/main/data#instalacion-de-data
 JSON_DIR=Tu direccion para los json
 DB_DIR=Tu direccion para la DB
 

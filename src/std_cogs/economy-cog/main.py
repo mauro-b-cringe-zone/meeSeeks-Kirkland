@@ -483,7 +483,7 @@ class Economia(commands.Cog):
         total = sorted(total, reverse=True)
 
         embed = discord.Embed(title=f"Top {x} personas mas ricas", description=f"Esto esta decidido a el dinero de el banco y la cartera puedes poner `{ctx.prefix}balance` para ver tus {C_NAMES}", colour=color)
-        embed.add_field(name=f"#1 | Maubot (yo)", value=f"**∞** {C_NAMES}", inline=False)
+        embed.add_field(name=f"#1 | meeSeeks (Kirkland) (yo)", value=f"**∞** {C_NAMES}", inline=False)
         index = 2
         for amt in total:
             try:

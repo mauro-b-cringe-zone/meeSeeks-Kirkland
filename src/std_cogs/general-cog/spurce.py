@@ -10,13 +10,13 @@ class Source(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.url_base = "https://github.com/maubg-debug/maubot/"
+        self.url_base = "https://github.com/maubg-debug/meeSeeks-Kirkland/"
         self.logo = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
 
     @commands.command(description="Mira el codigo fuente de un comando", usage="[comando]", aliases="command,src".split(","))
     async def source(self, ctx, comando=None):
         if comando is None:
-            return await ctx.send(embed=discord.Embed(title="Codigo fuente de Maubot", description=f"Puedes mirarlo dandole al **[link]({self.url_base})**", color=color).set_thumbnail(url=self.logo))
+            return await ctx.send(embed=discord.Embed(title="Codigo fuente de meeSeeks (Kirkland)", description=f"Puedes mirarlo dandole al **[link]({self.url_base})**", color=color).set_thumbnail(url=self.logo))
         try:
             cmd = self.bot.get_command(comando)
             root = cmd.module.replace(".", "/") + ".py"

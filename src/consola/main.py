@@ -41,7 +41,7 @@ class Consola():
             os.system(f"python3")
 
     def instrucciones(self, dir):
-        cprint(f"\nTutorial de como usar Maubot\n\n1. Ve ha 'https://asciinema.org/a/P8nJyagpVvdjVmj1nPnKHCyHy' y sigue las instrucciones\n2. Rellena todo lo que necesites en {dir}.example.env rellenalo y camviale el nombre a .env\n3. ve ha {dir}\launcher.py \n4. Pon en la consola python launcher.py y despues pon 'run' \n", "green")
+        cprint(f"\nTutorial de como usar meeSeeks (Kirkland)\n\n1. Ve ha 'https://asciinema.org/a/P8nJyagpVvdjVmj1nPnKHCyHy' y sigue las instrucciones\n2. Rellena todo lo que necesites en {dir}.example.env rellenalo y camviale el nombre a .env\n3. ve ha {dir}\launcher.py \n4. Pon en la consola python launcher.py y despues pon 'run' \n", "green")
 
     def procesar_comandos(self, directorio):
         if self.comando == "":
@@ -84,7 +84,7 @@ class Consola():
             self.instrucciones(directorio)
 
         elif self.comando == self.comandos[6][1] or self.comando == self.comandos[6][0]:
-            cprint("\nAyuda:\n-> exit() - Se sale del programa\n-> pip <modulo> - Instalar un modulo con pip\n-> cls (clear) - Limpiar la consola\n-> run (empezar) - Correr maubot\n-> instalar - Instalar lo necesario para maubot (RECOMENDABLE SI ES LA PRIMERA VEZ QUE USAS MAUBOT)\n-> help (ayuda) - Enseña este mensage\n-> instrucciones - Te esñara como utilizar maubot\n-> env - Empezar el 'virtual enviroment'\n", "green")
+            cprint("\nAyuda:\n-> exit() - Se sale del programa\n-> pip <modulo> - Instalar un modulo con pip\n-> cls (clear) - Limpiar la consola\n-> run (empezar) - Correr meeSeeks (Kirkland)\n-> instalar - Instalar lo necesario para meeSeeks (Kirkland) (RECOMENDABLE SI ES LA PRIMERA VEZ QUE USAS MEESEEKS)\n-> help (ayuda) - Enseña este mensage\n-> instrucciones - Te esñara como utilizar meeSeeks (Kirkland)\n-> env - Empezar el 'virtual enviroment'\n", "green")
         
         elif self.comando == self.comandos[8]:
             CrearEnv(directorio).inizializar()

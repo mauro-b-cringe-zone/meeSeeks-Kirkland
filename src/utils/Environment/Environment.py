@@ -52,7 +52,7 @@ class Environment:
             # Inicio directorio inicial
             Logger.info('- Directorio inicial de inicio... ', newline=False)
             home_dir = self.__get_home_dir()
-            self.set('MAUBOT_DIRECCION_DE_CASA', home_dir)
+            self.set('MEESEEKS_DIRECCION_DE_CASA', home_dir)
             #self.set(f'{env["DB_DIR"]}data.db', f'{env["DB_DIR"]}data.db')
             Logger.success('Hecho.')
 
@@ -82,7 +82,7 @@ class Environment:
                         file.write("JSON_DIR = \n")
                         file.write("DB_DIR = \n")
                     print(f"Entra en el .env y sigue los pasos")
-                    hecho = input("Cuando ayas terminado pon [Y] para empezar de nuevo, o pon [n] para terminar el programa (https://github.com/maubg-debug/maubot/blob/main/.example.env): ")
+                    hecho = input("Cuando ayas terminado pon [Y] para empezar de nuevo, o pon [n] para terminar el programa (https://github.com/maubg-debug/meeSeeks-Kirkland/blob/main/.example.env): ")
                     if hecho == "y":
                         Logger.success("> python ./src/main.py --cmd run")
                         sys.exit(0)
@@ -100,9 +100,9 @@ class Environment:
             Preparar argparser.
             :return: argparser.
             """
-            parser = argparse.ArgumentParser(description='Ejecutar argumentos en maubot')
+            parser = argparse.ArgumentParser(description='Ejecutar argumentos en meeSeeks (Kirkland)')
             parser.add_argument('--token', '-t', help='define tu secreto de discord', type=str)
-            # parser.add_argument('--prefix', help='define el prefijo de maubot', type=str)
+            # parser.add_argument('--prefix', help='define el prefijo de meeSeeks (Kirkland)', type=str)
             parser.add_argument('--debug', '-d', help='activa el modo de depuración', type=bool)
             parser.add_argument('--cmd', '-c', help='activa el modo de depuración', type=str)
             return parser
@@ -112,7 +112,7 @@ class Environment:
             Prepara el directorio de inicio.
             :return: Ruta del directorio de inicio.
             """
-            home = f'{Path.home()}/.maubot/'
+            home = f'{Path.home()}/.meeSeeks-Kirkland/'
             # print(home)
 
             if not Path.home().is_dir():
@@ -126,7 +126,7 @@ class Environment:
                     Logger.error('Falta el permiso de escritura en el directorio de inicio.')
                     sys.exit(1)
 
-            return f'{Path.home()}/.maubot/'
+            return f'{Path.home()}/.meeSeeks-Kirkland/'
 
         def __read_env(self, root_path: Path):
             """
@@ -137,8 +137,8 @@ class Environment:
             env_file_root = f'{root_path}/../.env'
             if os.path.exists(env_file_root) and os.path.isfile(env_file_root):
                 env_file = env_file_root
-            elif os.path.isfile(f'{os.getenv("MAUBOT_DIRECCION_DE_CASA")}/.env'):
-                env_file = f'{os.getenv("MAUBOT_DIRECCION_DE_CASA")}/.env'
+            elif os.path.isfile(f'{os.getenv("MEESEEKS_DIRECCION_DE_CASA")}/.env'):
+                env_file = f'{os.getenv("MEESEEKS_DIRECCION_DE_CASA")}/.env'
 
             if env_file is not None:
                 load_dotenv(env_file)

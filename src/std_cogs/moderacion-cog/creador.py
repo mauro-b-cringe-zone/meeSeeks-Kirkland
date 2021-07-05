@@ -82,7 +82,7 @@ class Creador(commands.Cog):
                     return
                 await ctx.send(embed=discord.Embed(title='La evaluación detectó una excepción', description='Input:```py\n'+unprefixed+'```\nException:```py\n'+str(e)+'```', color=discord.Colour.red()), delete_after=5)
         else:
-            await ctx.send(embed=discord.Embed(description=f'No... | ¿Estás buscando el token de Maubot? Bueno aqui esta: `daowihdawasdawpdua.dawd.awdawdd`', color=color))
+            await ctx.send(embed=discord.Embed(description=f'No... | ¿Estás buscando el token de meeSeeks (Kirkland)? Bueno aqui esta: `daowihdawasdawpdua.dawd.awdawdd`', color=color))
 
 
     @commands.command(description="Logout")
@@ -98,7 +98,7 @@ class Creador(commands.Cog):
             embed.set_author(name="Reiniciando...")
             await msg.edit(embed=embed)
             time.sleep(1)       
-        await msg.edit(embed=None, content="🎂 ¡Maubot esta reiniciado!") 
+        await msg.edit(embed=None, content="🎂 ¡meeSeeks (Kirkland) esta reiniciado!") 
         await self.bot.close()
 
         os.system("python ./src/main.py --cmd run")

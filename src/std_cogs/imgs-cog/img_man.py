@@ -199,7 +199,7 @@ class Img(commands.Cog):
                 await ctx.send(embed=embed, file=file)
 
 
-    @commands.command(description="Maubot no era el impostor", usage="<usuario>")
+    @commands.command(description="meeSeeks (Kirkland) no era el impostor", usage="<usuario>")
     @commands.cooldown(1, 5, commands.BucketType.user)
     async def amongus(self, ctx):
         async with ctx.message.channel.typing():
@@ -418,7 +418,7 @@ class ImgSecundario(commands.Cog):
     @commands.command(asliases=['ft'], description="Mira la tienda de fortnite")
     @commands.cooldown(1, 21600, commands.BucketType.user)
     async def fortnite(self, ctx):
-        await ctx.send(embed=discord.Embed(title="Ve ha la web oficial de Epic Games para una skin gratis", url="https://maubot.maucode.com", color=color).set_image(url='https://api.nitestats.com/v1/shop/image?footer=%20Consigue%20APIs%20gratis%20Codigo-en:%20https://maubot.maucode.com&background=00000014.png&header=Tienda%20de%20fortnite'))
+        await ctx.send(embed=discord.Embed(title="Ve ha la web oficial de Epic Games para una skin gratis", url="https://kirkland.maucode.com", color=color).set_image(url='https://api.nitestats.com/v1/shop/image?footer=%20Consigue%20APIs%20gratis%20Codigo-en:%20https://kirkland.maucode.com&background=00000014.png&header=Tienda%20de%20fortnite'))
 
     @commands.command(description="Mira el avatar de alguien descontrolarse", usage="[usuario]")
     @commands.cooldown(1, 5, commands.BucketType.user)
@@ -533,7 +533,7 @@ class ImgSecundario(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def captcha(self, ctx, *args):
         async with ctx.channel.typing():
-            capt = 'Maubot' if len(list(args))==0 else '+'.join(list(args))
+            capt = 'meeSeeks (Kirkland)' if len(list(args))==0 else '+'.join(list(args))
             file = discord.File(BytesIO(requests.get("https://api.alexflipnote.dev/captcha?text=" + capt, headers={"Authorization": env["API_FLEX"]}).content), filename="captcha.png")
             await ctx.send(embed=discord.Embed(title="Captcha", color=color).set_image(url="attachment://captcha.png"), file=file)
 
