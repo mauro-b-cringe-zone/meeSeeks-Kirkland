@@ -60,7 +60,7 @@ class App(commands.Bot):
         self.__version__ = "1.0.0"      
         self.__web__ = "https://kirkland.maucode.com"
 
-        self.__estado = "███████╗███████╗ ██╔════╝╚════██║ █████╗░░░░███╔═╝ ██╔══╝░░██╔══╝░░ ███████╗███████╗ ╚══════╝╚══════╝"
+        self.__estado = "¿Que es lo que quieres?"
 
         self.__cogs = cogs
         self.color = int(env.get("COLOR"))
