@@ -10,8 +10,6 @@ import requests
 import random
 from os import environ as env
 
-from uselessapi import UselessAPI
-
 color =   int(env["COLOR"]) 
 
 def randomhash():
@@ -536,38 +534,6 @@ class ImgSecundario(commands.Cog):
             capt = 'meeSeeks (Kirkland)' if len(list(args))==0 else '+'.join(list(args))
             file = discord.File(BytesIO(requests.get("https://api.alexflipnote.dev/captcha?text=" + capt, headers={"Authorization": env["API_FLEX"]}).content), filename="captcha.png")
             await ctx.send(embed=discord.Embed(title="Captcha", color=color).set_image(url="attachment://captcha.png"), file=file)
-
-    @commands.command(description="QUEMALO")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def burn(self, ctx, member: discord.Member = None):
-        if member is None:
-            member = ctx.author
-        api = UselessAPI()
-        async with ctx.channel.typing():
-            img = member.avatar_url_as(static_format='png')
-            img = api.burn(image=img)
-            await ctx.send(embed=discord.Embed(title="¿Qué es esto?", color=color).set_image(url=img.full_response.url))
-
-    @commands.command(description="Me das muscho miedo")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    async def door(self, ctx, member: discord.Member = None):
-        if member is None:
-            member = ctx.author
-        api = UselessAPI()
-        async with ctx.channel.typing():
-            img = member.avatar_url_as(static_format='png')
-            img = api.door(image=img)
-            await ctx.send(embed=discord.Embed(title="Me das miedo", color=color).set_image(url=img.full_response.url))
-
-
-    @commands.command(description="Mira a un usuario desde un pimplode", usage="[Usuario]")
-    async def pimplode(self, ctx, member: discord.Member = None):
-        if member is None:
-            member = ctx.author
-        async with ctx.typing():
-            img = member.avatar_url_as(static_format='png')
-            img = UselessAPI().implode(image=img)
-            await ctx.send(embed=discord.Embed(title="hmmm...", color=color).set_image(url=img.full_response.url))
 
 def setup(bot):
     bot.add_cog(Img(bot))
